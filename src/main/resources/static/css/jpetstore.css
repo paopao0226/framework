@@ -1,0 +1,401 @@
+body {
+    margin: 0ex 10ex 0ex 10ex;
+    padding: 0ex;
+    font-family: helvetica, tahoma, arial, verdana, sans-serif;
+    font-size: 2ex;
+    color: #333;
+    background-color: #c8c8c8;
+}
+
+pre {
+    font-family: "Courier New", Courier, mono;
+
+    font-style: normal;
+    background-color: #FFFFFF;
+    white-space: pre
+}
+
+h1 {
+    margin: 1ex 0ex 1ex 0ex;
+    padding: 0ex;
+
+    line-height: 3ex;
+    font-weight: 900;
+    color: #666;
+}
+
+h2 {
+    margin: 2ex 0ex 1ex 0ex;
+    padding: 0ex;
+
+    line-height: 2ex;
+    font-weight: 700;
+    color: #444;
+}
+
+h3 {
+    margin: 1ex 0ex 1ex 0ex;
+    padding: 0ex;
+
+    line-height: 1.6ex;
+    font-weight: 700;
+    color: #222;
+}
+
+p {
+    font-family: helvetica, tahoma, arial, verdana, sans-serif;
+
+    margin: 0ex 0ex 0ex 0ex;
+    padding: 2ex;
+}
+
+img {
+    border: 0;
+}
+
+li {
+    font-family: helvetica, tahoma, arial, verdana, sans-serif;
+
+    margin: 0ex 0ex 0ex 0ex;
+    padding: 0ex;
+}
+
+table {
+    border-width: 0;
+    empty-cells: show;
+}
+
+td, th {
+    empty-cells: show;
+    padding: .3ex .3ex;
+    vertical-align: top;
+    text-align: left;
+    border-width: 0;
+    border-spacing: 0;
+    background-color: #ececec
+}
+
+th {
+    font-weight: bold;
+    background-color: #e2e2e2;
+}
+
+a, a:visited, a:link {
+    color: #039;
+
+    text-decoration: none;
+    font-family: helvetica, tahoma, arial, verdana, sans-serif;
+}
+
+a:hover {
+    color: #69f;
+}
+
+a.Button, a.Button:link, a.Button:visited {
+    padding: .3ex;
+    color: #fff;
+    background-color: #005e21;
+    text-decoration: none;
+    font-family: helvetica, tahoma, arial, verdana, sans-serif;
+    font-size: 1.5ex;
+}
+
+a.Button:hover {
+    color: #000;
+    background-color: #54c07a;
+}
+
+#Logo {
+    width: 33%;
+    height: 9ex;
+    margin: 0ex 0ex 0ex 0ex;
+    padding: 0ex 0ex 0ex 0ex;
+    border-width: 0ex 0ex .3ex 0px;
+    border-style: solid;
+    border-color: #ccc;
+    float: left;
+    background-color: #888888;
+    color: #fff;
+    line-height: 9ex;
+    voice-family: "\"}\"";
+    voice-family: inherit;
+    height: 9ex;
+}
+
+body>#Logo {
+    height: 9ex;
+}
+
+#Menu {
+    width: 33%;
+    height: 9ex;
+    margin: 0ex 0ex 0ex 0ex;
+    padding: 0ex 0ex 0ex 0ex;
+    border-width: 0ex 0ex .3ex 0px;
+    border-style: solid;
+    border-color: #ccc;
+    float: left;
+    background-color: #888888;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: helvetica, tahoma, arial, verdana, sans-serif;
+    text-align: center;
+    line-height: 9ex;
+    voice-family: "\"}\"";
+    voice-family: inherit;
+    height: 9ex;
+}
+
+#Menu, #Menu a, #Menu a:link, #Menu a:visited, #Menu a:hover {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: helvetica, tahoma, arial, verdana, sans-serif;
+}
+
+body>#Menu {
+    height: 9ex;
+}
+
+{
+}
+
+#Search {
+    width: 33%;
+    height: 9ex;
+    margin: 0ex 0ex 0ex 0ex;
+    padding: 0ex 0ex 0ex 0ex;
+    border-width: 0ex 0ex .3ex 0px;
+    border-style: solid;
+    border-color: #ccc;
+    float: left;
+    text-align: center;
+    background-color: #888888;
+    color: #ffffff;
+    line-height: 9ex;
+    voice-family: "\"}\"";
+    voice-family: inherit;
+    height: 9ex;
+}
+
+body>#Search {
+    height: 9ex;
+}
+
+#Search input {
+    border-width: .1ex .1ex .1ex .1ex;
+    border-style: solid;
+    border-color: #aaa;
+    background-color: #666;
+    color: #ffffff;
+}
+
+#QuickLinks {
+    text-align: center;
+    background-color: #FFF;
+    width: 99%;
+}
+
+#PoweredBy {
+    width: 30%;
+    height: 9ex;
+    margin: 0ex 0ex 0ex 0ex;
+    padding: 0ex 0ex 0ex 0ex;
+    border-width: .3ex 0ex .3ex 0px;
+    border-style: solid;
+    border-color: #ccc;
+    float: left;
+    background-color: #888888;
+    color: #fff;
+    line-height: 9ex;
+    voice-family: "\"}\"";
+    voice-family: inherit;
+    height: 9ex;
+}
+
+body>#PoweredBy {
+    height: 9ex;
+}
+
+#Banner {
+    width: 69%;
+    height: 9ex;
+    margin: 0ex 0ex 0ex 0ex;
+    padding: 0ex 0ex 0ex 0ex;
+    border-width: .3ex 0ex .3ex 0px;
+    border-style: solid;
+    border-color: #ccc;
+    float: left;
+    background-color: #888888;
+    color: #fff;
+    line-height: 9ex;
+    voice-family: "\"}\"";
+    voice-family: inherit;
+    height: 9ex;
+}
+
+body>#Banner {
+    height: 9ex;
+}
+
+#Content {
+    margin: 0;
+    padding: 0ex 0ex 0ex 0ex;
+    width: 99%;
+    color: #333;
+    background-color: #FFF;
+    border-width: 0;
+}
+
+#Separator {
+    clear:both;
+    margin: 0;
+    height:0;
+}
+
+#Main {
+    margin: 0;
+    padding: 1ex;
+    color: #333;
+    background-color: #FFF;
+    border-width: 1ex 0ex 2ex 0px;
+    border-style: solid;
+    border-color: #fff;
+}
+
+#Sidebar {
+    float: left;
+    background:inherit;
+    width: 30%;
+}
+
+#MainImage {
+    float: left;
+    background:inherit;
+    text-align:center;
+    width: 50%;
+}
+
+#Catalog {
+    padding: 1ex;
+    background:inherit;
+    text-align:center;
+}
+
+#Catalog input[type="submit"]{
+    padding: .3ex;
+    color: #fff;
+    background-color: #005e21;
+    text-decoration: none;
+    font-family: helvetica, tahoma, arial, verdana, sans-serif;
+    font-size: 1.5ex;
+    border-width:0;
+}
+
+#Catalog input[type="submit"]:hover {
+    color: #000;
+    background-color: #54c07a;
+    cursor:pointer;
+}
+
+#Catalog table{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#BackLink{
+    padding: 1ex;
+    float: right;
+    border-width: .1ex 0ex .1ex 0px;
+    border-style: solid;
+    border-color: #000;
+}
+
+#Cart{
+    width: 69.99%;
+    float: left;
+    background-color:#fff;
+}
+
+#MyList{
+    width: 30%;
+    float: left;
+    background-color:#ccc;
+    text-align:left;
+}
+
+
+.ac_results {
+    padding: 0px;
+    border: 1px solid WindowFrame;
+    background-color: Window;
+    overflow: hidden;
+}
+
+.ac_results ul {
+    width: 100%;
+    list-style-position: outside;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ac_results iframe {
+    display:none;/*sorry for IE5*/
+    display/**/:block;/*sorry for IE5*/
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:-1;
+    filter:mask();
+    width:3000px;
+    height:3000px;
+}
+
+.ac_results li {
+    margin: 0px;
+    padding: 2px 5px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    font: menu;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+.ac_loading {
+    background : Window url('./indicator.gif') right center no-repeat;
+}
+
+.ac_over {
+    background-color: Highlight;
+    color: HighlightText;
+}
+
+#birds{
+    position: absolute;
+    top: 20px;
+    width: 100px;
+    max-height: 250px;           /* 设置最大高度，当高度达到此值时出现滚动条 */
+    z-index: 10;
+    background-color: #E0E5E5;
+    overflow: auto;              /* 自动添加滚动条 */
+    box-shadow:0px 0px 10px #000;   /* 外阴影 */
+    display: none;   /* 默认隐藏 */
+}
+
+#inform{
+    position: fixed;
+    left:1000px;
+    width: 350px;
+    max-height: 350px;           /* 设置最大高度，当高度达到此值时出现滚动条 */
+    z-index: 10;
+    background-color: #E0E5E5;
+    word-wrap: break-word;
+    box-shadow:0px 0px 10px #000;   /* 外阴影 */
+    display: none;   /* 默认隐藏 */
+}
+#inform hr{
+    border:1px;
+    width: 325px;
+    margin-bottom: 0px;
+}
