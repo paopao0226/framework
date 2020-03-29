@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mypetstore</title>
+    <link rel="stylesheet" href="../css/jpetstore.css" type="text/css" media="screen">
+</head>
+<body>
+<div th:replace="common/top"></div>
+<div th:text="${loginMessage}"></div>
+    <div id="Catalog">
+    <form action="/account/sign" method="post">
+        <p>Please enter your username and password.</p>
+        <p>Username:
+            <input type="name" name="username"/>
+            <br/>
+            Password:
+            <input type="password" name="password"/>
+        </p>
+        <label for="verifi">Verificalion Code:</label>
+        <input type="text" name="verifi" id="verifi">
+        <img src="bufferImage" alt="change" id="validateCodeImg" onclick="changeImg()">
+        <a href=" " onclick="changeImg()">Change</a >
+        <input type="submit" name="signon" value="Login"/>
+
+    </form>
+    Need a user name and password?
+    <a href="/account/newAccountForm">Register Now!</a>
+</div>
+<div th:replace="common/bottom"></div>
+</body>
+</html>

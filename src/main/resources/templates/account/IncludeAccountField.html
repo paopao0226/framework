@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>IncludeAccountField</title>
+    <link rel="stylesheet" href="../css/jpetstore.css" type="text/css" media="screen">
+</head>
+<body>
+<h3>Account Information</h3>
+
+<table id="table-3">
+    <tr>
+        <td>First name:</td>
+        <td><input type="text" name="account.firstName" value="${sessionScope.myAccount.firstName}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Last name:</td>
+        <td><input type="text" name="account.lastName" value="${sessionScope.myAccount.lastName}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td><input type="text" size="40" name="account.email" value="${sessionScope.myAccount.email}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Phone:</td>
+        <td><input type="text" name="account.phone" value="${sessionScope.myAccount.phone}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Address 1:</td>
+        <td><input type="text" size="40" name="account.address1" value="${sessionScope.myAccount.address1}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Address 2:</td>
+        <td><input type="text" size="40" name="account.address2" value="${sessionScope.myAccount.address2}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>City:</td>
+        <td><input type="text" name="account.city" value="${sessionScope.myAccount.city}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>State:</td>
+        <td><input type="text" size="4" name="account.state" value="${sessionScope.myAccount.state}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Zip:</td>
+        <td><input type="text" size="10" name="account.zip" value="${sessionScope.myAccount.zip}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Country:</td>
+        <td><input type="text" size="10" name="account.country" value="${sessionScope.myAccount.country}"/>
+        </td>
+    </tr>
+</table>
+
+<h3>Profile Information</h3>
+
+<table>
+    <tr>
+        <td>Language Preference:</td>
+        <td>
+            <select name="account.language" >
+                <c:forEach var="lang" items="${sessionScope.languageList}">
+                    <c:choose>
+                        <c:when test="${lang == sessionScope.myAccount.languagePreference}">
+                            <option selected="selected">${lang}</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option>${lang}</option>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Favourite Category:</td>
+        <td>
+            <select name="account.favorite">
+                <c:forEach var="cate" items="${sessionScope.categoryList}">
+                    <c:choose>
+                        <c:when test="${cate == sessionScope.myAccount.favouriteCategoryId}">
+                            <option selected="selected">${cate}</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option>${cate}</option>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Enable MyList</td>
+        <td>
+            <c:choose>
+                <c:when test="${sessionScope.myAccount.listOption == true}">
+                    <input type="checkbox" name="account.listOption" checked="checked"/>
+                </c:when>
+                <c:otherwise>
+                    <input type="checkbox" name="account.listOption"/>
+                </c:otherwise>
+            </c:choose>
+        </td>
+    </tr>
+    <tr>
+        <td>Enable MyBanner</td>
+        <td>
+            <c:choose>
+                <c:when test="${sessionScope.myAccount.bannerOption == true}">
+                    <input type="checkbox" name="account.bannerOption" checked="checked"/>
+                </c:when>
+                <c:otherwise>
+                    <input type="checkbox" name="account.bannerOption"/>
+                </c:otherwise>
+            </c:choose>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NewAccount?</title>
+    <link rel="stylesheet" href="../css/jpetstore.css" type="text/css" media="screen">
+</head>
+<body>
+<div th:replace="common/top"></div>
+<div th:text="${registerMessage}"></div>
+<div id="Catalog">
+    <form action="/account/newAccount" method="post">
+        <fieldset>
+            <h3>User Information</h3>
+            <table id="table-3">
+                <tr>
+                    <td>User ID:</td>
+                    <td><input type="text" name="username" th:text="${username}" id="username" onblur="checkUsername()"/>
+                </tr>
+                <tr>
+                    <label id="isExistInfo"></label>
+                </tr>
+                <tr>
+                    <td>New password:</td>
+                    <td><input type="text" name="password" th:text="${password}" id="password"/>
+                </tr>
+                <tr>
+                    <td>Repeat password:</td>
+                    <td><input type="text" name="repeatedPassword" th:text="${password}" id="confirmPassword"/>
+                </tr>
+            </table>
+            <div th:replace="account/IncludeAccountField"></div>
+            <label for="verifi">Verificalion Code:</label>
+            <input type="text" name="verifi" id="verifi">
+            <img src="bufferImage" alt="change" id="validateCodeImg" onclick="changeImg()">
+            <a href="javascript:void(0)" onclick="changeImg()">Change</a>
+            <input type="submit" name="newAccount" value="Save Account Information"/>
+        </fieldset>
+    </form>
+</div>
+<div th:replace="common/bottom"></div>
+</body>
+<!--<script>-->
+<!--    var xhr;-->
+<!--    function checkUsername(){-->
+<!--        var username = document.getElementById('username').value;-->
+<!--        xhr = new XMLHttpRequest();-->
+<!--        xhr.open("GET","usernameIsExist?username=" + username,true);-->
+<!--        xhr.onreadystatechange = process;-->
+<!--        xhr.send(null);-->
+<!--    }-->
+<!--    function process(){-->
+<!--        if(xhr.readyState == 4){-->
+<!--            if (xhr.status == 200){-->
+<!--                var responseInfo = xhr.responseText;-->
+<!--                var msg = document.getElementById('isExistInfo');-->
+
+<!--                if(responseInfo == 'Exist'){-->
+<!--                    msg.classList.add("errormsg");-->
+<!--                    msg.innerText = 'Invaild Username';-->
+<!--                }else if(responseInfo == 'Not Exist'){-->
+<!--                    msg.classList.add("okmsg");-->
+<!--                    msg.innerText = 'Vaild Username';-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+</html>
