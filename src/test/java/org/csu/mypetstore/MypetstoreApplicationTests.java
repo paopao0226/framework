@@ -62,6 +62,14 @@ class MypetstoreApplicationTests {
 //        System.out.println(product.getDescriptionText());
 //    }
 
+    @Test
+    void testSearch() {
+        List<Product> productList = catalogService.searchProductList("A");
+        System.out.println(productList.size());
+        for (int i = 0; i < productList.size(); i++) {
+            System.out.println(productList.get(i).getName());
+        }
+    }
 
 
 }

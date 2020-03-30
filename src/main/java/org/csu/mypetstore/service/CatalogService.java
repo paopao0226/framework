@@ -35,6 +35,10 @@ public class CatalogService {
         return productMapper.getProduct(productId);
     }
 
+    public List<Product> searchProductList(String keywords) {
+        return productMapper.searchProductList( "%" + keywords + "%");
+    }
+
     public int getInventoryQuantity(String itemId) {
         return itemMapper.getInventoryQuantity(itemId);
     }
@@ -46,4 +50,5 @@ public class CatalogService {
     public Item getItem(String itemId) {
         return itemMapper.getItem(itemId);
     }
+
 }

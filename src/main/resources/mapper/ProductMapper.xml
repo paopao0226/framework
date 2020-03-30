@@ -23,5 +23,15 @@
         where productId=#{productId}
     </select>
 
+    <select id="searchProductList" parameterType="String" resultType="Product">
+        select
+            productId,
+            name,
+            descn as description,
+            category as categoryId
+        from product
+        where name like #{value}
+    </select>
+
 
 </mapper>
