@@ -87,6 +87,4 @@ public class LineItem implements Serializable {
             total = null;
         }
     }
-
 }
-

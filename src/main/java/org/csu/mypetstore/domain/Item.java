@@ -21,6 +21,10 @@ public class Item implements Serializable {
     private Product product;
     private int quantity;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public String getItemId() {
         return itemId;
     }
@@ -29,36 +33,12 @@ public class Item implements Serializable {
         this.itemId = itemId;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     public String getProductId() {
         return productId;
     }
 
     public void setProductId(String productId) {
         this.productId = productId;
-    }
-
-    public int getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(int supplierId) {
-        this.supplierId = supplierId;
     }
 
     public BigDecimal getListPrice() {
@@ -75,6 +55,14 @@ public class Item implements Serializable {
 
     public void setUnitCost(BigDecimal unitCost) {
         this.unitCost = unitCost;
+    }
+
+    public int getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(int supplierId) {
+        this.supplierId = supplierId;
     }
 
     public String getStatus() {
@@ -125,9 +113,19 @@ public class Item implements Serializable {
         this.attribute5 = attribute5;
     }
 
-    public String toString() {
-        return "(" + getItemId() + "-" + getProductId() + ")";
+    public Product getProduct() {
+        return product;
     }
 
-}
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+}

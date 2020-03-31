@@ -9,9 +9,8 @@ body {
 
 pre {
     font-family: "Courier New", Courier, mono;
-
     font-style: normal;
-    background-color: #FFFFFF;
+background-color: #FFFFFF;
     white-space: pre
 }
 
@@ -30,7 +29,7 @@ h2 {
 
     line-height: 2ex;
     font-weight: 700;
-    color: #444;
+    color: #7b8b87;
 }
 
 h3 {
@@ -60,10 +59,10 @@ li {
     padding: 0ex;
 }
 
-table {
-    border-width: 0;
-    empty-cells: show;
-}
+/*table {*/
+/*  border-width: 0;*/
+/*  empty-cells: show;*/
+/*}*/
 
 td, th {
     empty-cells: show;
@@ -107,43 +106,44 @@ a.Button:hover {
 
 #Logo {
     width: 33%;
-    height: 9ex;
+    height: 15ex;
     margin: 0ex 0ex 0ex 0ex;
     padding: 0ex 0ex 0ex 0ex;
     border-width: 0ex 0ex .3ex 0px;
     border-style: solid;
     border-color: #ccc;
     float: left;
-    background-color: #000;
+    /*background-color: #000;*/
+    background-image: url("../images/top2.gif");
+    background-size: cover;
     color: #fff;
     line-height: 9ex;
     voice-family: "\"}\"";
     voice-family: inherit;
-    height: 9ex;
 }
 
 body>#Logo {
     height: 9ex;
 }
-
 #Menu {
     width: 33%;
-    height: 9ex;
+    height: 15ex;
     margin: 0ex 0ex 0ex 0ex;
     padding: 0ex 0ex 0ex 0ex;
     border-width: 0ex 0ex .3ex 0px;
     border-style: solid;
     border-color: #ccc;
     float: left;
-    background-color: #000;
+    /*background-color: #000;*/
+    background-image: url("../images/top1.gif");
+    background-size: cover;
     color: #eaac00;
     text-decoration: none;
     font-family: helvetica, tahoma, arial, verdana, sans-serif;
     text-align: center;
-    line-height: 9ex;
+    line-height: 15ex;
     voice-family: "\"}\"";
     voice-family: inherit;
-    height: 9ex;
 }
 
 #Menu, #Menu a, #Menu a:link, #Menu a:visited, #Menu a:hover {
@@ -161,7 +161,7 @@ body>#Menu {
 
 #Search {
     width: 33%;
-    height: 9ex;
+    height: 15ex;
     margin: 0ex 0ex 0ex 0ex;
     padding: 0ex 0ex 0ex 0ex;
     border-width: 0ex 0ex .3ex 0px;
@@ -169,12 +169,13 @@ body>#Menu {
     border-color: #ccc;
     float: left;
     text-align: center;
-    background-color: #000;
+    /*background-color: #000;*/
+    background-image: url("../images/top3.gif");
+    background-size: cover;
     color: #eaac00;
-    line-height: 9ex;
+    line-height: 15ex;
     voice-family: "\"}\"";
     voice-family: inherit;
-    height: 9ex;
 }
 
 body>#Search {
@@ -182,10 +183,12 @@ body>#Search {
 }
 
 #Search input {
+    width: 60px;
     border-width: .1ex .1ex .1ex .1ex;
     border-style: solid;
+    margin: 3px;
     border-color: #aaa;
-    background-color: #666;
+    /*background-color: #666;*/
     color: #eaac00;
 }
 
@@ -202,14 +205,15 @@ body>#Search {
     padding: 0ex 0ex 0ex 0ex;
     border-width: .3ex 0ex .3ex 0px;
     border-style: solid;
-    border-color: #ccc;
+    /*border-color: #ccc;*/
+    background-image: url("../images/bottom.gif");
+    background-size: cover;
     float: left;
     background-color: #000;
     color: #fff;
     line-height: 9ex;
     voice-family: "\"}\"";
     voice-family: inherit;
-    height: 9ex;
 }
 
 body>#PoweredBy {
@@ -223,7 +227,9 @@ body>#PoweredBy {
     padding: 0ex 0ex 0ex 0ex;
     border-width: .3ex 0ex .3ex 0px;
     border-style: solid;
-    border-color: #ccc;
+    /*border-color: #ccc;*/
+    background-image: url("../images/bottom.gif");
+    background-size: cover;
     float: left;
     background-color: #000;
     color: #fff;
@@ -299,6 +305,11 @@ body>#Banner {
 #Catalog table{
     margin-left:auto;
     margin-right:auto;
+    border-width: 0;
+    empty-cells: show;
+    border-collapse: collapse;
+    margin: 0 auto;
+    text-align: center;
 }
 
 #BackLink{
@@ -321,3 +332,77 @@ body>#Banner {
     background-color:#ccc;
     text-align:left;
 }
+#SelectDaily a{
+    text-align:center;
+}
+.okmsg
+{
+    color:green;
+}
+.errormsg
+{
+    color:red;
+}
+.showRemains{
+    display: none;
+    width:90%;
+    border: 1px solid pink;
+}
+
+/*table*/
+/*{*/
+/*  !*margin-left:auto;*!*/
+/*  !*margin-right:auto;*!*/
+/*  border-width: 0;*/
+/*  empty-cells: show;*/
+/*  border-collapse: collapse;*/
+/*  margin: 0 auto;*/
+/*  text-align: center;*/
+/*}*/
+/*table td, table th*/
+/*{*/
+/*  border: 1px solid #cad9ea;*/
+/*  color: #566;*/
+/*  height: 30px;*/
+/*}*/
+/*table thead th*/
+/*{*/
+/*  background-color: #CCE8EB;*/
+/*  width: 100px;*/
+/*}*/
+/*table tr:nth-child(odd)*/
+/*{*/
+/*  background: #67ffee;*/
+/*}*/
+/*table tr:nth-child(even)*/
+/*{*/
+/*  background: #f8f8fa;*/
+/*}*/
+
+table thead, table tr {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgb(235, 242, 224);
+}
+table {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(235, 242, 224);
+}
+
+/* Padding and font style */
+table td, table th {
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: Verdana;
+    color: rgb(149, 170, 109);
+}
+
+/* Alternating background colors */
+table tr:nth-child(even) {
+    background: rgb(230, 238, 214)
+}
+table tr:nth-child(odd) {
+    background: #FFF
+}
+

@@ -27,6 +27,10 @@ public class Account implements Serializable {
     private boolean bannerOption;
     private String bannerName;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -55,7 +59,6 @@ public class Account implements Serializable {
         return firstName;
     }
 
-    //  @Validate(required=true, on={"newAccount", "editAccount"})
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -64,7 +67,6 @@ public class Account implements Serializable {
         return lastName;
     }
 
-    //  @Validate(required=true, on={"newAccount", "editAccount"})
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -172,6 +174,4 @@ public class Account implements Serializable {
     public void setBannerName(String bannerName) {
         this.bannerName = bannerName;
     }
-
 }
-

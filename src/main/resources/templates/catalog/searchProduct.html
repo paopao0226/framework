@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<div th:replace="common/top">
+
+</div>
+
+<div id="BackLink">
+    <a href="/catalog/viewMain">Return to Main Menu</a>
+</div>
+
+<div id="Catalog">
+    <table id="table-3">
+        <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>Product ID</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+
+        <tr th:each="product:${productList}">
+            <td>
+                <label><img th:src="${product.descriptionImage}">Product Image</label>
+                <label th:text="${product.getDescriptionText()}">Product Description</label>
+            </td>
+            <td>
+                <a th:href="@{/catalog/viewProduct?productId=}+${product.productId}" th:text="${product.productId}">Product Id</a>
+            </td>
+            <td th:text="${product.name}">Product Name</td>
+        </tr>
+
+        <tr>
+            <td></td>
+        </tr>
+
+    </table>
+
+</div>
+
+<div th:replace="common/bottom">
+
+</div>
+
+</body>
+</html>
+
+</body>
+</html>
