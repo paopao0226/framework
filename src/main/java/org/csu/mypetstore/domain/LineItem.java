@@ -15,8 +15,15 @@ public class LineItem implements Serializable {
     private Item item;
     private BigDecimal total;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public LineItem() {
+    }
+
+    public LineItem(int lineNumber, CartItem cartItem) {
+        this.lineNumber = lineNumber;
+        this.quantity = cartItem.getQuantity();
+        this.itemId = cartItem.getItem().getItemId();
+        this.unitPrice = cartItem.getItem().getListPrice();
+        this.setItem(cartItem.getItem());
     }
 
     public int getOrderId() {
@@ -35,14 +42,6 @@ public class LineItem implements Serializable {
         this.lineNumber = lineNumber;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public String getItemId() {
         return itemId;
     }
@@ -55,8 +54,12 @@ public class LineItem implements Serializable {
         return unitPrice;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setUnitPrice(BigDecimal unitprice) {
+        this.unitPrice = unitprice;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
     }
 
     public Item getItem() {
@@ -65,13 +68,23 @@ public class LineItem implements Serializable {
 
     public void setItem(Item item) {
         this.item = item;
+        calculateTotal();
     }
 
-    public BigDecimal getTotal() {
-        return total;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setTotal(BigDecimal total) {
-        this.total = total;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+        calculateTotal();
+    }
+
+    private void calculateTotal() {
+        if (item != null && item.getListPrice() != null) {
+            total = item.getListPrice().multiply(new BigDecimal(quantity));
+        } else {
+            total = null;
+        }
     }
 }
