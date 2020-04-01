@@ -45,8 +45,8 @@ public class AccountController {
     private Account loginAccout = new Account();
     //验证码
     private String verifiCode = null;
-    //判断验证码是否实现匹配
-    private boolean verifyIsFinished = true;
+//    //判断验证码是否实现匹配
+//    private boolean verifyIsFinished = true;
     @GetMapping("/signon")
     public String signon(Model model) {
         List<String> languageList = new ArrayList<>();
@@ -68,7 +68,7 @@ public class AccountController {
         //这块缺验证码的验证
         Account account = accountService.getAccount(username,password);
         if(!verifiCode.equals(verifi)){
-            verifyIsFinished = false;
+//            verifyIsFinished = false;
             System.out.println(verifi +" " + verifiCode);
             String value = "<ui><li>Failed Verification</li></ui>";
             model.addAttribute("loginMessage",value);
@@ -81,7 +81,7 @@ public class AccountController {
         }
         else {
             boolean isLogin = true;
-            verifyIsFinished = true;
+//            verifyIsFinished = true;
             loginAccout = account;
             model.addAttribute("loginMessage","");
             model.addAttribute("isLogin",isLogin);
@@ -102,7 +102,7 @@ public class AccountController {
     public String newAcount(String password,String repeatedPassword,String verifi,Account account,Model model) {
         //这里缺验证码的验证功能
         if(!verifiCode.equals(verifi)){
-            verifyIsFinished = false;
+//            verifyIsFinished = false;
             System.out.println(verifi +" " + verifiCode);
             String value = "<ui><li>Failed Verification</li></ui>";
             model.addAttribute("registerMessage",value);
@@ -221,12 +221,12 @@ public class AccountController {
             graphics.drawLine(x1, y1, x2, y2);
         }
         //在图片上放上随机字符
-        if(verifyIsFinished) {
+//        if(verifyIsFinished) {
             verifiCode = drawRandomNum((Graphics2D) graphics, createTypeFlag);
-        }
-        else{
-            String temp = createRandomChar((Graphics2D) graphics, verifiCode);
-        }
+//        }
+//        else{
+//            String temp = createRandomChar((Graphics2D) graphics, verifiCode);
+//        }
         //设置响应头通知浏览器以图片的形式打开
         response.setContentType("image/jpeg");
         //设置响应头控制浏览器不要缓存
@@ -276,12 +276,12 @@ public class AccountController {
         for (int i = 0; i < wordsNumberInt; i++) {
             // 设置字体旋转角度
             int degree = new Random().nextInt() % 30;
-            if(verifyIsFinished) {
+//            if(verifyIsFinished) {
                 ch = baseChar.charAt(new Random().nextInt(baseChar.length())) + "";
-            }
-            else {
-                ch = baseChar.charAt(i) + "";
-            }
+//            }
+//            else {
+//                ch = baseChar.charAt(i) + "";
+//            }
             sb.append(ch);
             // 正向角度
             g.rotate(degree * Math.PI / 180, x, 20);
