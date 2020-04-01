@@ -10,7 +10,7 @@ body {
 pre {
     font-family: "Courier New", Courier, mono;
     font-style: normal;
-    background-color: #FFFFFF;
+background-color: #FFFFFF;
     white-space: pre
 }
 
@@ -335,14 +335,14 @@ body>#Banner {
 #SelectDaily a{
     text-align:center;
 }
-.okmsg
-{
-    color:green;
-}
-.errormsg
-{
-    color:red;
-}
+/*.okmsg*/
+/*{*/
+/*    color:green;*/
+/*}*/
+/*.errormsg*/
+/*{*/
+/*    color:red;*/
+/*}*/
 .showRemains{
     display: none;
     width:90%;

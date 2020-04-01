@@ -7,7 +7,7 @@
 </head>
 <body>
 <div th:replace="common/top"></div>
-<div th:text="${loginMessage}"></div>
+<div th:utext="${loginMessage}"></div>
     <div id="Catalog">
     <form action="/account/sign" method="post">
         <p>Please enter your username and password.</p>
@@ -20,7 +20,9 @@
         <label for="verifi">Verificalion Code:</label>
         <input type="text" name="verifi" id="verifi">
         <img src="bufferImage" alt="change" id="validateCodeImg" onclick="changeImg()">
-        <a href=" " onclick="changeImg()">Change</a >
+<!--        <img id="validateCodeImg" src="account/bufferImage"/>-->
+<!--        <img src="/account/bufferImage" alt="change" id="validateCodeImg" onclick="changeImg()">-->
+        <a onclick="changeImg()">Change</a>
         <input type="submit" name="signon" value="Login"/>
 
     </form>
@@ -29,4 +31,11 @@
 </div>
 <div th:replace="common/bottom"></div>
 </body>
+<script>
+    function changeImg() {
+        document.getElementById("validateCodeImg").src="bufferImage?"+Math.random();//在末尾加Math.random()的作用：<br>如果两次请求地址一样，服务器只会处理第一次请求，第二次请求返回内容和第一次一样。或者说如果地址相同，第一次请求时，将自动缓存，导致第二次不会重复请求了。Math.random()是调用javascript语法中的数学函数，能够产生随机数。<br>末尾加Math.random()使每次请求地址不相同，服务器每次都去做不同的响应。也可以使用new date()时间戳的形式作为参数传递。
+        //在末尾加Math.random()的作用：<br>如果两次请求地址一样，服务器只会处理第一次请求，第二次请求返回内容和第一次一样。或者说如果地址相同，第一次请求时，
+        //将自动缓存，导致第二次不会重复请求了。Math.random()是调用javascript语法中的数学函数，能够产生随机数。<br>末尾加Math.random()使每次请求地址不相同，服务器每次都去做不同的响应。也可以使用new date()时间戳的形式作为参数传递。
+    }
+</script>
 </html>

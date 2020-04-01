@@ -11,117 +11,86 @@
 <table id="table-3">
     <tr>
         <td>First name:</td>
-        <td><input type="text" name="account.firstName" value="${sessionScope.myAccount.firstName}"/>
+        <td><input type="text" name="firstName" th:value="${myAccount?.getFirstName()}"/>
         </td>
     </tr>
     <tr>
         <td>Last name:</td>
-        <td><input type="text" name="account.lastName" value="${sessionScope.myAccount.lastName}"/>
+        <td><input type="text" name="lastName" th:value="${myAccount?.getLastName()}"/>
         </td>
     </tr>
     <tr>
         <td>Email:</td>
-        <td><input type="text" size="40" name="account.email" value="${sessionScope.myAccount.email}"/>
+        <td><input type="text" size="40" name="email" th:value="${myAccount?.getEmail()}"/>
         </td>
     </tr>
     <tr>
         <td>Phone:</td>
-        <td><input type="text" name="account.phone" value="${sessionScope.myAccount.phone}"/>
+        <td><input type="text" name="phone" th:value="${myAccount?.getPhone()}"/>
         </td>
     </tr>
     <tr>
         <td>Address 1:</td>
-        <td><input type="text" size="40" name="account.address1" value="${sessionScope.myAccount.address1}"/>
+        <td><input type="text" size="40" name="address1" th:value="${myAccount?.getAddress1()}"/>
         </td>
     </tr>
     <tr>
         <td>Address 2:</td>
-        <td><input type="text" size="40" name="account.address2" value="${sessionScope.myAccount.address2}"/>
+        <td><input type="text" size="40" name="address2" th:value="${myAccount?.getAddress2()}"/>
         </td>
     </tr>
     <tr>
         <td>City:</td>
-        <td><input type="text" name="account.city" value="${sessionScope.myAccount.city}"/>
+        <td><input type="text" name="city" th:value="${myAccount?.getCity()}"/>
         </td>
     </tr>
     <tr>
         <td>State:</td>
-        <td><input type="text" size="4" name="account.state" value="${sessionScope.myAccount.state}"/>
+        <td><input type="text" size="4" name="state" th:value="${myAccount?.getState()}"/>
         </td>
     </tr>
     <tr>
         <td>Zip:</td>
-        <td><input type="text" size="10" name="account.zip" value="${sessionScope.myAccount.zip}"/>
+        <td><input type="text" size="10" name="zip" th:value="${myAccount?.getZip()}"/>
         </td>
     </tr>
     <tr>
         <td>Country:</td>
-        <td><input type="text" size="10" name="account.country" value="${sessionScope.myAccount.country}"/>
+        <td><input type="text" size="10" name="country" th:value="${myAccount?.getCountry()}"/>
         </td>
     </tr>
 </table>
-
 <h3>Profile Information</h3>
 
 <table>
     <tr>
         <td>Language Preference:</td>
         <td>
-            <select name="account.language" >
-                <c:forEach var="lang" items="${sessionScope.languageList}">
-                    <c:choose>
-                        <c:when test="${lang == sessionScope.myAccount.languagePreference}">
-                            <option selected="selected">${lang}</option>
-                        </c:when>
-                        <c:otherwise>
-                            <option>${lang}</option>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
+            <select name="languagePreference">
+                <option th:each="lang:${languageList}" th:selected="*{lang} == ${mylanguagePreference}" th:text="${lang}"></option>
             </select>
         </td>
     </tr>
     <tr>
         <td>Favourite Category:</td>
         <td>
-            <select name="account.favorite">
-                <c:forEach var="cate" items="${sessionScope.categoryList}">
-                    <c:choose>
-                        <c:when test="${cate == sessionScope.myAccount.favouriteCategoryId}">
-                            <option selected="selected">${cate}</option>
-                        </c:when>
-                        <c:otherwise>
-                            <option>${cate}</option>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
+            <select name="favouriteCategoryId">
+                <option th:each="cate:${categoryList}" th:selected="*{cate} == ${myfavouriteCategoryId}" th:text="${cate}">${cate}</option>
             </select>
         </td>
     </tr>
     <tr>
         <td>Enable MyList</td>
         <td>
-            <c:choose>
-                <c:when test="${sessionScope.myAccount.listOption == true}">
-                    <input type="checkbox" name="account.listOption" checked="checked"/>
-                </c:when>
-                <c:otherwise>
-                    <input type="checkbox" name="account.listOption"/>
-                </c:otherwise>
-            </c:choose>
+            <input type="checkbox" name="listOption" th:checked="${myListOpt eq true}"/>
+            <input type="checkbox" name="listOption" th:checked="${myListOpt eq false}"/>
         </td>
     </tr>
     <tr>
         <td>Enable MyBanner</td>
         <td>
-            <c:choose>
-                <c:when test="${sessionScope.myAccount.bannerOption == true}">
-                    <input type="checkbox" name="account.bannerOption" checked="checked"/>
-                </c:when>
-                <c:otherwise>
-                    <input type="checkbox" name="account.bannerOption"/>
-                </c:otherwise>
-            </c:choose>
+            <input type="checkbox" name="bannerOption" th:checked="${myBannerOpt eq true}"/>
+            <input type="checkbox" name="bannerOption" th:checked="${myBannerOpt eq false}"/>
         </td>
     </tr>
 

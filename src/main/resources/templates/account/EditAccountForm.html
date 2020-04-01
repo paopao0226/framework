@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>EditAccountForm</title>
+    <link rel="stylesheet" href="../css/jpetstore.css" type="text/css" media="screen">
 </head>
 <body>
+<div th:replace="common/top"></div>
+<div th:utext="${editMessage}"></div>
+<div id="Catalog">
+    <form action="/account/editAccount" method="post">
+    <h3>User Information</h3>
+    <table id="table-3">
+        <tr>
+            <td>User ID:</td>
+            <td th:text="${myAccount?.getUsername()}"></td>
+        </tr>
+        <tr>
+            <td>New password:</td>
+            <td><input type="text" name="password" th:value="${password}"/>
+        </tr>
+        <tr>
+            <td>Repeat password:</td>
+            <td><input type="text" name="repeatedPassword" th:value="${password}"/>
+        </tr>
+    </table>
+    <div th:replace="account/IncludeAccountField"></div>
+    <input type="submit" name="editAccount" value="Save Account Information"/>
+</form>
+    <a href="ViewOrderList?userName=${sessionScope.myAccount.username}">My Orders</a>
+    <br/>
+    <a href="/daily/selectDailyRecord">My DailyRecord</a>
 
+<!--    <%&#45;&#45;	<stripes:link&#45;&#45;%>-->
+<!--    <%&#45;&#45;	beanclass="org.mybatis.jpetstore.web.actions.OrderActionBean"&#45;&#45;%>-->
+<!--    <%&#45;&#45;	event="listOrders">My Orders</stripes:link>&#45;&#45;%>-->
+</div>
+<div th:replace="common/bottom"></div>
 </body>
 </html>

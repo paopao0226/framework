@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mabatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.csu.mypetstore.persistence.ItemMapper">
+    <select id="getInventoryQuantity" parameterType="String" resultType="int">
+        select QTY as quantity from inventory where itemid = #{itemId}
+    </select>
+
+    <select id="getItemListByProduct" parameterType="String" resultType="Item">
+        select
+            I.ITEMID,
+            LISTPRICE,
+            UNITCOST,
+            SUPPLIER AS supplierId,
+            I.PRODUCTID as "product.productId",
+            NAME as "product.name",
+            DESCN as "product.description",
+            CATEGORY as "product.categoryId",
+            STATUS,
+            ATTR1 AS attribute1,
+            ATTR2 AS attribute2,
+            ATTR3 AS attribute3,
+            ATTR4 AS attribute4,
+            ATTR5 AS attribute5
+            FROM ITEM I, PRODUCT P
+            WHERE P.PRODUCTID = I.PRODUCTID AND I.PRODUCTID = #{productId}
+    </select>
+
+    <select id="getItem" parameterType="String" resultType="Item">
+        SELECT
+            I.ITEMID,
+            LISTPRICE,
+            UNITCOST,
+            SUPPLIER AS supplierId,
+            I.PRODUCTID AS "product.productId",
+            NAME AS "product.name",
+            DESCN AS "product.description",
+            CATEGORY AS "product.categoryId",
+            STATUS,
+            ATTR1 AS attribute1,
+            ATTR2 AS attribute2,
+            ATTR3 AS attribute3,
+            ATTR4 AS attribute4,
+            ATTR5 AS attribute5,
+            QTY AS quantity
+        FROM ITEM I, INVENTORY V, PRODUCT P
+        WHERE P.PRODUCTID = I.PRODUCTID
+        AND I.ITEMID = V.ITEMID
+        AND I.ITEMID = #{value}
+    </select>
+</mapper>

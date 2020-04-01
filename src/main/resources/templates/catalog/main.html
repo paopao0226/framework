@@ -10,17 +10,12 @@
     <div th:replace="common/top"></div>
     <div id="Welcome">
         <div id="WelcomeContent">
-            <c:choose>
-                <c:when test="${sessionScope.myAccount != null}">
-                    Welcome to ${sessionScope.myAccount.username}!
-                </c:when>
-                <c:otherwise>
-                    Welcome to MyPetStore!
-                </c:otherwise>
-            </c:choose>
+            <div th:switch="${myAccount ne null}">
+                <span th:case="true" th:text="'Welcome to ' + ${myAccount?.getUsername()}"></span>
+                <span th:case="false" th:text="'Welcome to MyPetStore'"></span>
+            </div>
         </div>
     </div>
-
     <div id="Main">
         <div id="Sidebar">
             <div id="SidebarContent">
@@ -54,4 +49,71 @@
     </div>
     <div th:replace="common/bottom"></div>
 </body>
+<script src="../js/jquery-3.4.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".category").hover(function (){
+            //获取id
+            var categoryIdList = this.id.split("+");
+            var categoryId = categoryIdList[0];
+            if(categoryIdList[1] == 1) {
+                //获取相对坐标
+                var axisTop = this.offsetTop;
+                var axisLeft = this.offsetLeft;
+            }
+            else if(categoryIdList[1] > 1){
+                var axis = getMapAreaBox(this);
+                var axisTop = axis.top;
+                var axisLeft = axis.left;
+            }
+            var productInfo = "";
+            $.ajax({
+                type:"GET",
+                url:"showMainImage",
+                data:{categoryId:categ  oryId},
+                success:function (data) {
+                    var dataString = data.split(",");
+                    productInfo = "<label id='productImageId' style='top:" + (axisTop - 20) + "px;left:" + (axisLeft + 20) + "px;position: absolute;" +
+                        "background-color: white;width: 250px;border-color: #222222;font-size: small'>";
+                    productInfo += "The " + categoryId + " category includes ";
+                    for (var i = 0; i < dataString.length; i++) {
+                        if (i == 0) productInfo += dataString[i];
+                        else productInfo += "," + dataString[i];
+                    }
+                    productInfo += "</label>";
+                    $("body").append(productInfo);
+                    $("#productImageId").show();
+                }
+            })
+        },function () {
+            $("#productImageId").remove();
+        })
+    })
+    var getMapAreaBox = function (area) {
+        // parse
+        var ret = { left: 0, top: 0, width: 0, height: 0 };
+        var coords = area.coords.split(',');
+        for (var len = coords.length, i = 0; i < len; i++) { coords[i] = parseInt(coords[i], 10); }
+        // generate
+        ret.left = Math.min(coords[0], coords[2]);
+        ret.top = Math.min(coords[1], coords[3]);
+        ret.width = Math.abs(coords[2] - coords[0]);
+        ret.height = Math.abs(coords[3] - coords[1]);
+        // fix
+        var map = area.closest('map');
+        if (map.length > 0) {
+            var img = $('img[usemap~="#' + map.attr('name') + '"]');
+            if (img.length === 0) { img = $('img[usemap~="#' + map.attr('id') + '"]'); }
+            var pos = img.offset();
+            if (pos) {
+                ret.top += pos.top;
+                ret.left += pos.left;
+            }
+        }
+        ret.top += 200;
+        ret.left += 450;
+        // ret
+        return ret;
+    };
+</script>
 </html>

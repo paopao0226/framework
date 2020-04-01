@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<div th:replace="common/top">
+
+</div>
+
+<div id="BackLink">
+    <a th:href="@{/catalog/viewProduct?productId=}+${product.productId}">Return to <label th:text="${product.productId}"></label>Product Id</a>
+</div>
+
+<div id="Catalog">
+
+    <table id="table-3">
+        <tr>
+            <td>
+                <label><img th:src="${product.descriptionImage}">Product Image</label>
+                <label th:text="${product.getDescriptionText()}">Product Description</label>
+            </td>
+        </tr>
+        <tr>
+            <td><b th:text="${item.itemId}">Item Id}</b></td>
+        </tr>
+        <tr>
+            <td><b><font size="4" th:text="${item.attribute1}">Item Attribute1</font></b></td>
+        </tr>
+        <tr>
+            <td th:text="${product.name}">Product Name}</td>
+        </tr>
+        <tr>
+            <td>
+                <label th:if="${item.quantity <= 0}">Back ordered.</label>
+                <label th:if="${item.quantity > 0}" th:text="${item.quantity} + ' in stock.'">Quantity in stock.</label>
+            </td>
+        </tr>
+        <tr>
+            <td th:text="'$'+${#numbers.formatDecimal(item.listPrice,1,2)}">Item List Price</td>
+        </tr>
+
+        <tr>
+            <td>
+                <a class="Button" href="#">Add to Cart</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+<div th:replace="common/bottom">
+
+</div>
+
+</body>
+</html>
+
+</body>
+</html>
+
+
+

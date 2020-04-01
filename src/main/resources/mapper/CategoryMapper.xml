@@ -11,5 +11,4 @@
         FROM CATEGORY
         WHERE CATID = #{categoryId}
     </select>
-
 </mapper>

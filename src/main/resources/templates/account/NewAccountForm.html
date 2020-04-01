@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <title>NewAccount?</title>
     <link rel="stylesheet" href="../css/jpetstore.css" type="text/css" media="screen">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
 </head>
 <body>
 <div th:replace="common/top"></div>
-<div th:text="${registerMessage}"></div>
+<div th:utext="${registerMessage}"></div>
 <div id="Catalog">
     <form action="/account/newAccount" method="post">
         <fieldset>
@@ -15,55 +18,61 @@
             <table id="table-3">
                 <tr>
                     <td>User ID:</td>
-                    <td><input type="text" name="username" th:text="${username}" id="username" onblur="checkUsername()"/>
+                    <td><input type="text" name="username" id="username" onblur="checkUsername()"/>
                 </tr>
                 <tr>
                     <label id="isExistInfo"></label>
                 </tr>
                 <tr>
                     <td>New password:</td>
-                    <td><input type="text" name="password" th:text="${password}" id="password"/>
+                    <td><input type="text" name="password" id="password"/>
                 </tr>
                 <tr>
                     <td>Repeat password:</td>
-                    <td><input type="text" name="repeatedPassword" th:text="${password}" id="confirmPassword"/>
+                    <td><input type="text" name="repeatedPassword" id="confirmPassword"/>
                 </tr>
             </table>
             <div th:replace="account/IncludeAccountField"></div>
             <label for="verifi">Verificalion Code:</label>
             <input type="text" name="verifi" id="verifi">
             <img src="bufferImage" alt="change" id="validateCodeImg" onclick="changeImg()">
-            <a href="javascript:void(0)" onclick="changeImg()">Change</a>
+            <a onclick="changeImg()">Change</a>
             <input type="submit" name="newAccount" value="Save Account Information"/>
         </fieldset>
     </form>
 </div>
 <div th:replace="common/bottom"></div>
 </body>
-<!--<script>-->
-<!--    var xhr;-->
-<!--    function checkUsername(){-->
-<!--        var username = document.getElementById('username').value;-->
-<!--        xhr = new XMLHttpRequest();-->
-<!--        xhr.open("GET","usernameIsExist?username=" + username,true);-->
-<!--        xhr.onreadystatechange = process;-->
-<!--        xhr.send(null);-->
-<!--    }-->
-<!--    function process(){-->
-<!--        if(xhr.readyState == 4){-->
-<!--            if (xhr.status == 200){-->
-<!--                var responseInfo = xhr.responseText;-->
-<!--                var msg = document.getElementById('isExistInfo');-->
-
-<!--                if(responseInfo == 'Exist'){-->
-<!--                    msg.classList.add("errormsg");-->
-<!--                    msg.innerText = 'Invaild Username';-->
-<!--                }else if(responseInfo == 'Not Exist'){-->
-<!--                    msg.classList.add("okmsg");-->
-<!--                    msg.innerText = 'Vaild Username';-->
-<!--                }-->
-<!--            }-->
-<!--        }-->
-<!--    }-->
-<!--</script>-->
+<script>
+    var xhr;
+    function checkUsername(){
+        var username = document.getElementById('username').value;
+        xhr = new XMLHttpRequest();
+        xhr.open("GET","/account/usernameIsExist?username=" + username,true);
+        xhr.onreadystatechange = process;
+        xhr.send(null);
+    }
+    function process(){
+        if(xhr.readyState == 4){
+            if (xhr.status == 200){
+                var responseInfo = xhr.responseText;
+                var msg = document.getElementById('isExistInfo');
+                if(responseInfo == 'Exist'){
+                    msg.classList.add("errormsg");
+                    msg.innerText = 'Invaild Username';
+                    msg.style.color = "red";
+                }else if(responseInfo == 'Not Exist'){
+                    msg.classList.add("okmsg");
+                    msg.innerText = 'Vaild Username';
+                    msg.style.color = "green";
+                }
+            }
+        }
+    }
+    function changeImg() {
+        document.getElementById("validateCodeImg").src="bufferImage?"+Math.random();//在末尾加Math.random()的作用：<br>如果两次请求地址一样，服务器只会处理第一次请求，第二次请求返回内容和第一次一样。或者说如果地址相同，第一次请求时，将自动缓存，导致第二次不会重复请求了。Math.random()是调用javascript语法中的数学函数，能够产生随机数。<br>末尾加Math.random()使每次请求地址不相同，服务器每次都去做不同的响应。也可以使用new date()时间戳的形式作为参数传递。
+        //在末尾加Math.random()的作用：<br>如果两次请求地址一样，服务器只会处理第一次请求，第二次请求返回内容和第一次一样。或者说如果地址相同，第一次请求时，
+        //将自动缓存，导致第二次不会重复请求了。Math.random()是调用javascript语法中的数学函数，能够产生随机数。<br>末尾加Math.random()使每次请求地址不相同，服务器每次都去做不同的响应。也可以使用new date()时间戳的形式作为参数传递。
+    }
+</script>
 </html>

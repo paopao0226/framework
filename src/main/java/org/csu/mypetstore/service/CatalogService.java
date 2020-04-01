@@ -1,6 +1,7 @@
 package org.csu.mypetstore.service;
 
 import org.csu.mypetstore.domain.Category;
+import org.csu.mypetstore.domain.Item;
 import org.csu.mypetstore.domain.Product;
 import org.csu.mypetstore.persistence.CategoryMapper;
 import org.csu.mypetstore.persistence.ProductMapper;
@@ -26,4 +27,15 @@ public class CatalogService{
     public List<Product> getProductListByCategory(String categoryId){
         return productMapper.getProductListByCategory(categoryId);
     }
+//    public int getInventoryQuantity(String itemId) {
+//        return itemMapper.getInventoryQuantity(itemId);
+//    }
+//
+//    public List<Item> getItemListByProduct(String productId) {
+//        return itemMapper.getItemListByProduct(productId);
+//    }
+//
+//    public Item getItem(String itemId) {
+//        return itemMapper.getItem(itemId);
+//    }
 }
