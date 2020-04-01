@@ -11,53 +11,53 @@
     <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
     <meta http-equiv="Pragma" content="no-cache" />
     <link rel="stylesheet" href="../css/jpetstore.css" type="text/css" media="screen">
-</head>
+  </head>
 <body>
-<header th:fragment="header">
-    <div id="Header">
-        <div id="Menu">
-            <div id="MenuContent">
-                <a href="viewCart"><img align="middle" name="img_cart"
-                                        src="../images/cart.gif" /></a>
-                <img align="middle" src="../images/separator.gif" />
-                <a th:if="${isLogin} eq false" href="/account/signon">Sign In</a>
-                <a th:if="${isLogin} eq true" href="/account/signout">Sign Out</a>
-                <img align="middle" src="../images/separator.gif" />
-                <a th:if="${isLogin} eq true" href="/account/editAccountForm">My Account</a> <img align="middle" src="../images/separator.gif" />
-                <a href="../help.html">?</a>
+    <header th:fragment="header">
+        <div id="Header">
+            <div id="Logo">
+                <div id="LogoContent">
+                    <a href="/catalog/viewMain"><img src="../images/Logo.jpg" alt=""/></a>
+                </div>
+            </div>
+
+            <div id="Menu">
+                <div id="MenuContent">
+                    <a href="viewCart"><img align="middle" name="img_cart"
+                                            src="../images/cart.gif" /></a>
+                    <img align="middle" src="../images/separator.gif" />
+                    <a th:if="${isLogin} eq false" href="/account/signon">Sign In</a>
+                    <a th:if="${isLogin} eq true" href="/account/signout">Sign Out</a>
+                    <img align="middle" src="../images/separator.gif" />
+                    <a th:if="${isLogin} eq true" href="/account/editAccountForm">My Account</a> <img align="middle" src="../images/separator.gif" />
+                    <a href="../help.html">?</a>
+                </div>
+            </div>
+
+            <div id="Search">
+                <div id="SearchContent">
+                    <form action="search" method="post">
+                        <input type="text" id="keyword" name="keyword" size="14" />
+                        <script>
+                            $("#keyword").autocomplete("getdata.jsp");
+                        </script>
+                        <input type="submit" name="searchProducts" value="Search" />
+                    </form>
+                </div>
+            </div>
+
+            <div id="QuickLinks">
+                <a href="viewCategory?categoryId=FISH"><img src="../images/sm_fish.gif" alt=""/></a>
+                <img src="../images/separator.gif" alt=""/>
+                <a href="viewCategory?categoryId=DOGS"><img src="../images/sm_dogs.gif" alt=""/></a>
+                <img src="../images/separator.gif" alt=""/>
+                <a href="viewCategory?categoryId=REPTILES"><img src="../images/sm_reptiles.gif" alt=""/></a>
+                <img src="../images/separator.gif" alt=""/>
+                <a href="viewCategory?categoryId=CATS"><img src="../images/sm_cats.gif" alt=""/></a>
+                <img src="../images/separator.gif" alt=""/>
+                <a href="viewCategory?categoryId=BIRDS"><img src="../images/sm_birds.gif" alt=""/></a>
             </div>
         </div>
-
-        <div id="Logo" background-size >
-            <div id="LogoContent">
-                <a href="main"></a>
-<!--                <img src="../images/top1.gif" width="100%" height="100%"/>-->
-            </div>
-        </div>
-
-        <div id="Search">
-            <div id="SearchContent">
-                <form action="search" method="post">
-                    <input type="text" name="keyword" size="14" id="searchText" onkeyup="showRemainInfo()" list="tips"/>
-                    <datalist id="tips"></datalist>
-                    <input type="submit" name="searchProducts" value="Search" />
-                </form>
-            </div>
-        </div>
-
-        <div id="QuickLinks">
-            <a href="viewCategory?categoryId=FISH"><img
-                    src="../images/fishLink.gif" /></a> <img src="../images/separator.gif" />
-            <a href="viewCategory?categoryId=DOGS"><img
-                    src="../images/dogsLink.gif" /></a> <img src="../images/separator.gif" />
-            <a href="viewCategory?categoryId=REPTILES"><img
-                    src="../images/reptitlesLink.gif" /></a> <img
-                src="../images/separator.gif" /> <a href="viewCategory?categoryId=CATS"><img
-                src="../images/catLink.gif" /></a> <img src="../images/separator.gif" />
-            <a href="viewCategory?categoryId=BIRDS"><img
-                    src="../images/birdsLink.gif" /></a>
-        </div>
-    </div>
-</header>
+    </header>
 </body>
 </html>
