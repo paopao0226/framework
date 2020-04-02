@@ -27,14 +27,13 @@
                 <tr>
                     <td>Card Number:</td>
                     <td>
-                        <input type="text" name="creditCard"/>* Use a fake
-                        number!
+                        <input type="text" name="creditCard"/>
                     </td>
                 </tr>
                 <tr>
                     <td>Expiry Date (MM/YYYY):</td>
                     <td>
-                        <input type="text" name="expiryDate"/>
+                        <input type="text" name="expiryDate" th:value="${#dates.format(new java.util.Date().getTime(),'MM/YYYY')}"/>
                     </td>
                 </tr>
                 <tr>
@@ -44,49 +43,49 @@
                 <tr>
                     <td>First name:</td>
                     <td>
-                        <input type="text" name="billToFirstName"/>
+                        <input type="text" name="billToFirstName" th:value="${myAccount?.getFirstName()}"/>
                     </td>
                 </tr>
                 <tr>
                     <td>Last name:</td>
                     <td>
-                        <input type="text" name="billToLastName"/>
+                        <input type="text" name="billToLastName" th:value="${myAccount?.getLastName()}"/>
                     </td>
                 </tr>
                 <tr>
                     <td>Address 1:</td>
                     <td>
-                        <input type="text" size="40" name="billAddress1"/>
+                        <input type="text" size="40" name="billAddress1" th:value="${myAccount?.getAddress1()}"/>
                     </td>
                 </tr>
                 <tr>
                     <td>Address 2:</td>
                     <td>
-                        <input type="text" size="40" name="billAddress2"/>
+                        <input type="text" size="40" name="billAddress2" th:value="${myAccount?.getAddress2()}"/>
                     </td>
                 </tr>
                 <tr>
                     <td>City:</td>
                     <td>
-                        <input type="text" name="billCity"/>
+                        <input type="text" name="billCity" th:value="${myAccount?.getCity()}"/>
                     </td>
                 </tr>
                 <tr>
                     <td>State:</td>
                     <td>
-                        <input type="text" size="4" name="billState"/>
+                        <input type="text" size="4" name="billState" th:value="${myAccount?.getState()}"/>
                     </td>
                 </tr>
                 <tr>
                     <td>Zip:</td>
                     <td>
-                        <input type="text" size="10" name="billZip"/>
+                        <input type="text" size="10" name="billZip" th:value="${myAccount?.getZip()}"/>
                     </td>
                 </tr>
                 <tr>
                     <td>Country:</td>
                     <td>
-                        <input type="text" size="15" name="billCountry"/>
+                        <input type="text" size="15" name="billCountry" th:value="${myAccount?.getCountry()}"/>
                     </td>
                 </tr>
                 <tr>
@@ -102,7 +101,7 @@
         </form>
     </div>
 </div>
-<script>
+<script th:inline="javascript">
     function produceShippingForm(checkbox) {
         var tableOfShipping = document.getElementById("tableOfShipping");
         if(checkbox.checked){
@@ -113,49 +112,49 @@
                 "\t<tr>\n" +
                 "\t\t<td>First name:</td>\n" +
                 "\t\t<td>\n" +
-                "\t\t\t<input type=\"text\" name=\"shipToFirstName\" />\n" +
+                "\t\t\t<input type=\"text\" name=\"shipToFirstName\"/>\n" +
                 "\t\t</td>\n" +
                 "\t</tr>\n" +
                 "\t<tr>\n" +
                 "\t\t<td>Last name:</td>\n" +
                 "\t\t<td>\n" +
-                "\t\t\t<input type=\"text\" name=\"shipToLastName\" />\n" +
+                "\t\t\t<input type=\"text\" name=\"shipToLastName\" th:value=\"${myAccount?.getLastName()}\"/>\n" +
                 "\t\t</td>\n" +
                 "\t</tr>\n" +
                 "\t<tr>\n" +
                 "\t\t<td>Address 1:</td>\n" +
                 "\t\t<td>\n" +
-                "\t\t\t<input type=\"text\" size=\"40\" name=\"shipAddress1\" />\n" +
+                "\t\t\t<input type=\"text\" size=\"40\" name=\"shipAddress1\" th:value=\"${myAccount?.getAddress1()}\"/>\n" +
                 "\t\t</td>\n" +
                 "\t</tr>\n" +
                 "\t<tr>\n" +
                 "\t\t<td>Address 2:</td>\n" +
                 "\t\t<td>\n" +
-                "\t\t\t<input type=\"text\" size=\"40\" name=\"shipAddress2\" />\n" +
+                "\t\t\t<input type=\"text\" size=\"40\" name=\"shipAddress2\" th:value=\"${myAccount?.getAddress2()}\"/>\n" +
                 "\t\t</td>\n" +
                 "\t</tr>\n" +
                 "\t<tr>\n" +
                 "\t\t<td>City:</td>\n" +
                 "\t\t<td>\n" +
-                "\t\t\t<input type=\"text\" name=\"shipCity\" />\n" +
+                "\t\t\t<input type=\"text\" name=\"shipCity\" th:value=\"${myAccount?.getCity()}\"/>\n" +
                 "\t\t</td>\n" +
                 "\t</tr>\n" +
                 "\t<tr>\n" +
                 "\t\t<td>State:</td>\n" +
                 "\t\t<td>\n" +
-                "\t\t\t<input type=\"text\" size=\"4\" name=\"shipState\" />\n" +
+                "\t\t\t<input type=\"text\" size=\"4\" name=\"shipState\" th:value=\"${myAccount?.getState()}\"/>\n" +
                 "\t\t</td>\n" +
                 "\t</tr>\n" +
                 "\t<tr>\n" +
                 "\t\t<td>Zip:</td>\n" +
                 "\t\t<td>\n" +
-                "\t\t\t<input type=\"text\" size=\"10\" name=\"shipZip\" />\n" +
+                "\t\t\t<input type=\"text\" size=\"10\" name=\"shipZip\" th:value=\"${myAccount?.getZip()}\"/>\n" +
                 "\t\t</td>\n" +
                 "\t</tr>\n" +
                 "\t<tr>\n" +
                 "\t\t<td>Country:</td>\n" +
                 "\t\t<td>\n" +
-                "\t\t\t<input type=\"text\" size=\"15\" name=\"shipCountry\" />\n" +
+                "\t\t\t<input type=\"text\" size=\"15\" name=\"shipCountry\" th:value=\"${myAccount?.getCountry()}\"/>\n" +
                 "\t\t</td>\n" +
                 "\t</tr>\n" +
                 "</table>"

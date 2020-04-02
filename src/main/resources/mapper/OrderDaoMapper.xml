@@ -6,9 +6,15 @@
         INSERT INTO ORDERS (userid,orderdate,shipaddr1,shipaddr2,shipcity,shipstate,shipzip,shipcountry,
             billaddr1,billaddr2,billcity,billstate,billzip,billcountry,courier,totalprice,billtofirstname,billtolastname,shiptofirstname,
             shiptolastname,creditcard,exprdate,cardtype,locale)
-            VALUES('ywj',#{orderDate},#{shipAddress1},#{shipAddress2},#{shipCity},#{shipState},#{shipZip},#{shipCountry},
+            VALUES(#{username},#{orderDate},#{shipAddress1},#{shipAddress2},#{shipCity},#{shipState},#{shipZip},#{shipCountry},
             #{billAddress1},#{billAddress1},#{billCity},#{billState},#{billZip},#{billCountry},
             #{courier},#{totalPrice},#{billToFirstName},#{billToLastName},#{shipToFirstName},#{shipToLastName},
             #{creditCard},#{expiryDate},#{cardType},#{locale})
     </insert>
+    <select id="getOrdersByUsername" parameterType="string" resultType="Order">
+            SELECT * FROM ORDERS WHERE userid = #{username}
+    </select>
+    <select id="getOrder" parameterType="int" resultType="Order">
+        SELECT * FROM ORDERS WHERE orderid = #{orderId}
+    </select>
 </mapper>

@@ -1,6 +1,8 @@
 package org.csu.mypetstore;
 
+import org.csu.mypetstore.controller.AccountController;
 import org.csu.mypetstore.controller.CatalogController;
+import org.csu.mypetstore.domain.Account;
 import org.csu.mypetstore.domain.Category;
 import org.csu.mypetstore.domain.Item;
 import org.csu.mypetstore.domain.Product;
@@ -57,6 +59,7 @@ class MypetstoreApplicationTests {
         for (int i = 0; i < productList.size(); i++) {
             System.out.println(productList.get(i).getName());
         }
+    }
 //    @Test
 //    void test(){
 //        CatalogController catalogController = new CatalogController();
@@ -67,7 +70,10 @@ class MypetstoreApplicationTests {
 //        System.out.println(product.getDescriptionImage());
 //        System.out.println(product.getDescriptionText());
 //    }
+        @Test
+    public void temp(){
+            AccountController controller = new AccountController();
+            System.out.println(controller.KL("acc"));
+        }
 
-
-    }
 }

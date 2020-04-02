@@ -7,6 +7,7 @@
 </head>
 <body>
 <div th:replace="common/top"></div>
+    <div id="Content">
 <div th:utext="${editMessage}"></div>
 <div id="Catalog">
     <form action="/account/editAccount" method="post">
@@ -28,7 +29,7 @@
     <div th:replace="account/IncludeAccountField"></div>
     <input type="submit" name="editAccount" value="Save Account Information"/>
 </form>
-    <a href="ViewOrderList?userName=${sessionScope.myAccount.username}">My Orders</a>
+    <a th:href="@{'/cart/viewOrderList?username=' + ${myAccount?.getUsername()}}">My Orders</a>
     <br/>
     <a href="/daily/selectDailyRecord">My DailyRecord</a>
 
@@ -36,6 +37,7 @@
 <!--    <%&#45;&#45;	beanclass="org.mybatis.jpetstore.web.actions.OrderActionBean"&#45;&#45;%>-->
 <!--    <%&#45;&#45;	event="listOrders">My Orders</stripes:link>&#45;&#45;%>-->
 </div>
+    </div>
 <div th:replace="common/bottom"></div>
 </body>
 </html>

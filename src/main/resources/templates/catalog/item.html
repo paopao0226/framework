@@ -44,8 +44,10 @@
 
         <tr>
             <td>
-                <a class="Button" th:href="@{'/cart/addItemToCart?userName=ywj&itemId='+${item.itemId}+'&quantity=1'}">Add to Cart</a>
+                <!--这里有修改-->
+                <a th:if="${isLogin eq true}" class="Button" th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to Cart</a>
 <!--                String userName, String itemId, String quantity-->
+                <a th:if="${isLogin eq false}" class="Button" th:href="@{'/cart/addItemToCart?itemId='+${item.itemId}+'&quantity=1'}">Add to Cart</a>
             </td>
         </tr>
     </table>

@@ -1,15 +1,14 @@
 package org.csu.mypetstore.controller;
 
-import org.csu.mypetstore.domain.Account;
-import org.csu.mypetstore.domain.Category;
-import org.csu.mypetstore.domain.Item;
-import org.csu.mypetstore.domain.Product;
+import org.csu.mypetstore.domain.*;
 import org.csu.mypetstore.service.CatalogService;
+import org.csu.mypetstore.service.DailyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Controller
@@ -19,6 +18,8 @@ public class CatalogController {
 
     @Autowired
     private CatalogService catalogService;
+    @Autowired
+    private DailyService dailyService;
 
     @GetMapping("viewMain")
     public String viewMain(Model model) {
@@ -54,14 +55,28 @@ public class CatalogController {
         }
         return "catalog/product";
     }
-
+    //这里添加了Username便于进行日志的记录
     @GetMapping("viewItem")
-    public String viewItem(String itemId, Model model){
+    public String viewItem(String itemId, Model model,String userId){
         Item item = catalogService.getItem(itemId);
         Product product = item.getProduct();
         processProductDescription(product);
         model.addAttribute("item",item);
         model.addAttribute("product",product);
+        //记录日志
+        boolean isLogin = (boolean) model.getAttribute("isLogin");
+        if(isLogin) {
+                java.util.Date date = new java.util.Date();
+                Timestamp time =  new Timestamp(date.getTime());
+                String kind = "browse";
+                String items = itemId;
+                Daily daily = new Daily();
+                daily.setUserId(userId);
+                daily.setDatetime(time);
+                daily.setKind(kind);
+                daily.setItems(items);
+                dailyService.insertDaily(daily);
+        }
         return "catalog/item";
     }
 

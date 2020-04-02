@@ -8,28 +8,24 @@
 <body>
     <header th:fragment="header">
         <div id="Header">
+
             <div id="Menu">
                 <div id="MenuContent">
-                    <a href="/cart/viewCart"><img align="middle" name="img_cart" src="../images/cart.gif" alt=""/></a>
+                    <a th:href="@{'/cart/viewCart?username=' + ${myAccount?.getUsername()}}"><img align="middle" name="img_cart" src="../images/cart.gif" alt=""/></a>
                     <img align="middle" src="../images/separator.gif" alt=""/>
-                    <c:if test="${sessionScope.isLogin==null}">
-                        <a href="viewSignon" name="checkIfSignon" id="signin">Sign In</a>
-                    </c:if>
-                    <c:if test="${sessionScope.isLogin!=null}">
-                        <a href="signOut">Sign Out</a>
-                    </c:if>
-                    <img align="middle" src="../images/separator.gif" alt=""/>
-                    <a href="viewMyAccount">My Account</a>
+                        <a th:if="${isLogin eq false}" href="/account/signon" name="checkIfSignon" id="signin">Sign In</a>
+                        <a th:if="${isLogin eq true}" href="/account/signout">Sign Out</a>
+                    <img th:if="${isLogin eq true}" align="middle" src="../images/separator.gif" alt=""/>
+                    <a th:if="${isLogin eq true}" href="/account/editAccountForm">My Account</a>
                     <img align="middle" src="../images/separator.gif" alt=""/>
                     <a href="viewLog">Log</a>
                 </div>
             </div>
             <div id="Logo">
                 <div id="LogoContent">
-                    <a href="main"><img src="../images/Logo.jpg" alt=""/></a>
+                    <a href="/catalog/viewMain"><img src="../images/Logo.jpg" alt=""/></a>
                 </div>
             </div>
-
             <div id="Search">
                 <div id="SearchContent">
                     <form action="/catalog/searchProducts" method="post">
@@ -43,15 +39,15 @@
             </div>
 
             <div id="QuickLinks">
-                <a href="/catalog/viewCategory?categoryId=FISH"><img src="../images/sm_fish.gif" alt=""/></a>
+                <a href="viewCategory?categoryId=FISH"><img src="../images/sm_fish.gif" alt=""/></a>
                 <img src="../images/separator.gif" alt=""/>
-                <a href="/catalog/viewCategory?categoryId=DOGS"><img src="../images/sm_dogs.gif" alt=""/></a>
+                <a href="viewCategory?categoryId=DOGS"><img src="../images/sm_dogs.gif" alt=""/></a>
                 <img src="../images/separator.gif" alt=""/>
-                <a href="/catalog/viewCategory?categoryId=REPTILES"><img src="../images/sm_reptiles.gif" alt=""/></a>
+                <a href="viewCategory?categoryId=REPTILES"><img src="../images/sm_reptiles.gif" alt=""/></a>
                 <img src="../images/separator.gif" alt=""/>
-                <a href="/catalog/viewCategory?categoryId=CATS"><img src="../images/sm_cats.gif" alt=""/></a>
+                <a href="viewCategory?categoryId=CATS"><img src="../images/sm_cats.gif" alt=""/></a>
                 <img src="../images/separator.gif" alt=""/>
-                <a href="/catalog/viewCategory?categoryId=BIRDS"><img src="../images/sm_birds.gif" alt=""/></a>
+                <a href="viewCategory?categoryId=BIRDS"><img src="../images/sm_birds.gif" alt=""/></a>
             </div>
         </div>
     </header>

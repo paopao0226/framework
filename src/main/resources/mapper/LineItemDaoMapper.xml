@@ -14,7 +14,7 @@
         <result column="quantity" property="quantity"></result>
         <result column="unitprice" property="unitPrice"></result>
     </resultMap>
-    <select id="getLineItemsByOrderId" resultMap="queryLineItem">
+    <select id="getLineItemsByOrderId" parameterType="int" resultMap="queryLineItem">
         SELECT * FROM lineitem WHERE orderid = #{orderId}
     </select>
 </mapper>

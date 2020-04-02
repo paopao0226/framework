@@ -33,13 +33,15 @@
             </thead>
 
             <tr th:each="item:${itemList}">
+                <!--这里重新设置了url，方便记录日志-->
                 <td>
-                    <a th:href="@{/catalog/viewItem?itemId=}+${item.itemId}" th:text="${item.itemId}">Item Id</a>
+                    <a th:if="${isLogin eq true}" th:href="@{'/catalog/viewItem?itemId=' + ${item.itemId} + '&userId=' + ${myAccount?.getUsername()}}" th:text="${item.itemId}">Item Id</a>
+                    <a th:if="${isLogin eq false}" th:href="@{'/catalog/viewItem?itemId=' + ${item.itemId}}" th:text="${item.itemId}">Item Id</a>
                 </td>
                 <td th:text="${item.productId}">Product Id</td>
                 <td th:text="${item.attribute1}">Item Attribute1</td>
                 <td th:text="'$' + ${#numbers.formatDecimal(item.listPrice,1 ,2)}">Item List Price</td>
-                <td><a th:href="@{'/cart/addItemToCart?userName=ywj&itemId='+${item.itemId}+'&quantity=1'}">Add to
+                <td><a th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to
                     Cart</a></td>
             </tr>
         </table>

@@ -147,9 +147,10 @@
                             <th>Price</th>
                             <th>Total Cost</th>
                         </tr>
-                            <tr th:each="lineItem:${order.lineItems}">
+                            <!--因为order没有查全这里也没法显示全-->
+                            <tr th:each="lineItem:${order.getLineItems()}">
                                 <td>
-                                    <a href="/ViewItem?${lineItem.item.productId}" name="itemId"
+                                    <a th:href="@{'/catalog/viewItem?itemId=' + ${lineItem.item.itemId}}" name="itemId"
                                        th:text="${lineItem.item.itemId}">${lineItem.item.itemId}</a>
                                 </td>
                                 <td th:if="${lineItem.item} != null" th:text="${lineItem.item.attribute1}">

@@ -47,8 +47,9 @@ public class AccountController {
     private String verifiCode = null;
 //    //判断验证码是否实现匹配
 //    private boolean verifyIsFinished = true;
-    @GetMapping("/signon")
+    @GetMapping("/signon")//从main到sign
     public String signon(Model model) {
+        //注册与编辑用户时两个列表的初始化
         List<String> languageList = new ArrayList<>();
         List<String> categoryList = new ArrayList<>();
         languageList.add("english");
@@ -62,10 +63,11 @@ public class AccountController {
         model.addAttribute("categoryList",categoryList);
         return "account/SignonForm";
     }
-    @PostMapping("/sign")
+    @PostMapping("/sign")//登录
     public String sign(String username, String password, String verifi, Model model){
+        //将输入的密码进行加密，并在之后与数据库中的加密密码进行比对
         password = KL(password);
-        //这块缺验证码的验证
+        //验证码的验证
         Account account = accountService.getAccount(username,password);
         if(!verifiCode.equals(verifi)){
 //            verifyIsFinished = false;
@@ -74,16 +76,19 @@ public class AccountController {
             model.addAttribute("loginMessage",value);
             return "account/signonForm";
         }
+        //密码匹配
         else if(account == null){
             String value = "<ui><li>Invalid username or password. Sign on failed</li></ui>";
             model.addAttribute("loginMessage",value);
             return "account/signonForm";
         }
         else {
+            //设置相关参数
             boolean isLogin = true;
 //            verifyIsFinished = true;
             loginAccout = account;
             model.addAttribute("loginMessage","");
+            //把下面的一些参数存到session里面，便于之后的取出
             model.addAttribute("isLogin",isLogin);
             model.addAttribute("myAccount",account);
             model.addAttribute("mylanguagePreference",account.getLanguagePreference());
@@ -98,9 +103,9 @@ public class AccountController {
     public String newAccountForm(Model model){
         return "account/NewAccountForm";
     }
-    @PostMapping("/newAccount")
+    @PostMapping("/newAccount")//注册
     public String newAcount(String password,String repeatedPassword,String verifi,Account account,Model model) {
-        //这里缺验证码的验证功能
+        //验证码的验证功能
         if(!verifiCode.equals(verifi)){
 //            verifyIsFinished = false;
             System.out.println(verifi +" " + verifiCode);
@@ -110,12 +115,14 @@ public class AccountController {
         }
         System.out.println(password);
         System.out.println(account.getFirstName().getClass());
+        //密码匹配
         if (!password.equals(repeatedPassword)) {
             String value = "<ui><li>Register failed,Please check the password and repeatPassword</li></ui>";
             model.addAttribute("registerMessage", value);
             return "account/NewAccountForm";
         }
         else {
+            //判断输入信息是否有误或者有缺
             if (account.getFirstName().equals("") || account.getLastName().equals("") || account.getAddress1().equals("")
                     || account.getCity().equals("") || account.getState().equals("") || account.getZip().equals("")
                     || account.getCountry().equals("") || account.getPhone().equals("") ) {
@@ -134,11 +141,11 @@ public class AccountController {
             }
         }
     }
-    @GetMapping("/editAccountForm")
+    @GetMapping("/editAccountForm")//从main到编辑界面
     public String editAccountForm(Model model){
         return "account/EditAccountForm";
     }
-    @PostMapping("/editAccount")
+    @PostMapping("/editAccount")//编辑
     public String editAccount(String password,String repeatedPassword,Account account,Model model){
         if(!password.equals(repeatedPassword)){
             String value = "<ui><li>Edit failed,Please check the password and repeatPassword</li></ui>";
@@ -165,19 +172,20 @@ public class AccountController {
             }
         }
     }
-    @GetMapping("/signout")
+    @GetMapping("/signout")//登出，将session中有关用户的信息全部初始化
     public String signout(Model model){
+        Account account = new Account();
         model.addAttribute("loginMessage","");
         model.addAttribute("isLogin",false);
-        model.addAttribute("myAccount",null);
-        model.addAttribute("mylanguagePreference",null);
-        model.addAttribute("myfavouriteCategoryId",null);
-        model.addAttribute("myListOpt",null);
-        model.addAttribute("myBannerOpt",null);
-        model.addAttribute("password",null);
+        model.addAttribute("myAccount",account);
+        model.addAttribute("mylanguagePreference","");
+        model.addAttribute("myfavouriteCategoryId","");
+        model.addAttribute("myListOpt","");
+        model.addAttribute("myBannerOpt","");
+        model.addAttribute("password","");
         return "catalog/main";
     }
-    @GetMapping("/bufferImage")
+    @GetMapping("/bufferImage")//验证码
     public void buffer(HttpServletResponse response, Model model) {
         //使用Kaptcha生成验证码
         // 生成验证码
@@ -292,7 +300,7 @@ public class AccountController {
         }
         return sb.toString();
     }
-    @GetMapping("usernameIsExist")
+    @GetMapping("usernameIsExist")//判断是否存在用户，用于注册时在界面进行用户名是否存在的提示
     public void usernameIsExist(HttpServletResponse response, @RequestParam("username") String username){
         boolean result = accountService.usernameIsExist(username);
         response.setContentType("text/plain");
@@ -312,6 +320,7 @@ public class AccountController {
         out.flush();
         out.close();
     }
+    //md5密码加密函数
     public String KL(String password){
         String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
         System.out.println(password + " " + md5Password);

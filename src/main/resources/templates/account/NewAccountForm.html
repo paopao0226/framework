@@ -10,7 +10,9 @@
 </head>
 <body>
 <div th:replace="common/top"></div>
+<div id="Content">
 <div th:utext="${registerMessage}"></div>
+
 <div id="Catalog">
     <form action="/account/newAccount" method="post">
         <fieldset>
@@ -40,6 +42,7 @@
             <input type="submit" name="newAccount" value="Save Account Information"/>
         </fieldset>
     </form>
+</div>
 </div>
 <div th:replace="common/bottom"></div>
 </body>
