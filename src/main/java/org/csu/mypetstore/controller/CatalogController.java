@@ -8,14 +8,13 @@ import org.csu.mypetstore.service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/catalog/")
+@RequestMapping("/catalog")
+@SessionAttributes(value = {"isLogin","myAccount"})
 public class CatalogController {
 
     @Autowired
@@ -35,7 +34,6 @@ public class CatalogController {
     }
     @GetMapping("viewCategory")
     public String viewCategory(String categoryId, Model model) {
-
         if (categoryId != null) {
             Category category = catalogService.getCategory(categoryId);
             List<Product> productList = catalogService.getProductListByCategory(categoryId);

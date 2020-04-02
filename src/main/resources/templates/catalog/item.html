@@ -44,7 +44,8 @@
 
         <tr>
             <td>
-                <a class="Button" href="/cart/addItemToCart">Add to Cart</a>
+                <a class="Button" th:href="@{'/cart/addItemToCart?username=' + ${myAccount?.getUsername()} + '&itemId=' + ${item?.getItemId()} + '&quantity=1'}">Add to Cart</a>
+<!--                (username=${myAccount?.getUsername()},itemId=${item.getItemId()},quantity=1)}-->
             </td>
         </tr>
     </table>

@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@SessionAttributes(value = {"cart","order"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
+@SessionAttributes(value = {"cart","order","isLogin","myAccount"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
 @RequestMapping("/cart/")
 public class CartController {
 
@@ -111,8 +111,9 @@ public class CartController {
     }
 
     @GetMapping("addItemToCart")
-    public void addItemToCart(String userName, String itemId, String quantity){
-        cartService.addItemToCart(userName,itemId,Integer.parseInt(quantity));
+    public String addItemToCart(@RequestParam("username") String username,@RequestParam("itemId") String itemId,@RequestParam("quantity") String quantity){
+        cartService.addItemToCart(username,itemId,Integer.parseInt(quantity));
+        return "cart/cart";
     }
 }
 
