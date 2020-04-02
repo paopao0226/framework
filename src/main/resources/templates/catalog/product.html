@@ -10,42 +10,46 @@
 
 </div>
 
-<div id="BackLink">
-    <a th:href="@{/catalog/viewCategory?categoryId=}+${product.categoryId}">Return to <label th:text="${product.categoryId}">Product Id</label></a>
+<
+<div id="Content">
+    <div id="BackLink">
+        <a th:href="@{/catalog/viewCategory?categoryId=}+${product.categoryId}">Return to <label
+                th:text="${product.categoryId}">Product Id</label></a>
+    </div>
+
+    <div id="Catalog">
+
+        <h2 th:text="${product.name}">Product的name属性</h2>
+
+        <table id="table-3">
+            <thead>
+            <tr>
+                <th>Item ID</th>
+                <th>Product ID</th>
+                <th>Description</th>
+                <th>List Price</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+
+            <tr th:each="item:${itemList}">
+                <td>
+                    <a th:href="@{/catalog/viewItem?itemId=}+${item.itemId}" th:text="${item.itemId}">Item Id</a>
+                </td>
+                <td th:text="${item.productId}">Product Id</td>
+                <td th:text="${item.attribute1}">Item Attribute1</td>
+                <td th:text="'$' + ${#numbers.formatDecimal(item.listPrice,1 ,2)}">Item List Price</td>
+                <td><a th:href="@{'/cart/addItemToCart?userName=ywj&itemId='+${item.itemId}+'&quantity=1'}">Add to
+                    Cart</a></td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div th:replace="common/bottom">
+
+    </div>
 </div>
-
-<div id="Catalog">
-
-    <h2 th:text="${product.name}">Product的name属性</h2>
-
-    <table id="table-3">
-        <thead>
-        <tr>
-            <th>Item ID</th>
-            <th>Product ID</th>
-            <th>Description</th>
-            <th>List Price</th>
-            <th>&nbsp;</th>
-        </tr>
-        </thead>
-
-        <tr th:each="item:${itemList}">
-            <td>
-                <a th:href="@{/catalog/viewItem?itemId=}+${item.itemId}" th:text="${item.itemId}">Item Id</a>
-            </td>
-            <td th:text="${item.productId}">Product Id</td>
-            <td th:text="${item.attribute1}">Item Attribute1</td>
-            <td th:text="'$' + ${#numbers.formatDecimal(item.listPrice,1 ,2)}">Item List Price</td>
-            <td><a href="#">Add to Cart</a></td>
-        </tr>
-    </table>
-
-</div>
-
-<div th:replace="common/bottom">
-
-</div>
-
 </body>
 </html>
 

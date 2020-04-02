@@ -111,8 +111,18 @@ public class CartController {
     }
 
     @GetMapping("addItemToCart")
-    public void addItemToCart(String userName, String itemId, String quantity){
+    public String addItemToCart(String userName, String itemId, String quantity, Model model){
+        System.out.println("------------------------------");
+        System.out.println("yes");
         cartService.addItemToCart(userName,itemId,Integer.parseInt(quantity));
+        if((Cart)model.getAttribute("cart") != null)
+            ((Cart)model.getAttribute("cart")).setItemList(cartService.getCarByUsername(userName).getItemList());
+        else{
+            Cart cart = cartService.getCarByUsername(userName);
+            //在model中添加cart对象
+            model.addAttribute("cart",cart);
+        }
+        return "cart/cart";
     }
 }
 

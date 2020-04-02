@@ -8,12 +8,6 @@
 <body>
     <header th:fragment="header">
         <div id="Header">
-            <div id="Logo">
-                <div id="LogoContent">
-                    <a href="main"><img src="../images/Logo.jpg" alt=""/></a>
-                </div>
-            </div>
-
             <div id="Menu">
                 <div id="MenuContent">
                     <a href="/cart/viewCart"><img align="middle" name="img_cart" src="../images/cart.gif" alt=""/></a>
@@ -30,6 +24,11 @@
                     <a href="viewLog">Log</a>
                 </div>
             </div>
+            <div id="Logo">
+                <div id="LogoContent">
+                    <a href="main"><img src="../images/Logo.jpg" alt=""/></a>
+                </div>
+            </div>
 
             <div id="Search">
                 <div id="SearchContent">
@@ -44,15 +43,15 @@
             </div>
 
             <div id="QuickLinks">
-                <a href="viewCategory?categoryId=FISH"><img src="../images/sm_fish.gif" alt=""/></a>
+                <a href="/catalog/viewCategory?categoryId=FISH"><img src="../images/sm_fish.gif" alt=""/></a>
                 <img src="../images/separator.gif" alt=""/>
-                <a href="viewCategory?categoryId=DOGS"><img src="../images/sm_dogs.gif" alt=""/></a>
+                <a href="/catalog/viewCategory?categoryId=DOGS"><img src="../images/sm_dogs.gif" alt=""/></a>
                 <img src="../images/separator.gif" alt=""/>
-                <a href="viewCategory?categoryId=REPTILES"><img src="../images/sm_reptiles.gif" alt=""/></a>
+                <a href="/catalog/viewCategory?categoryId=REPTILES"><img src="../images/sm_reptiles.gif" alt=""/></a>
                 <img src="../images/separator.gif" alt=""/>
-                <a href="viewCategory?categoryId=CATS"><img src="../images/sm_cats.gif" alt=""/></a>
+                <a href="/catalog/viewCategory?categoryId=CATS"><img src="../images/sm_cats.gif" alt=""/></a>
                 <img src="../images/separator.gif" alt=""/>
-                <a href="viewCategory?categoryId=BIRDS"><img src="../images/sm_birds.gif" alt=""/></a>
+                <a href="/catalog/viewCategory?categoryId=BIRDS"><img src="../images/sm_birds.gif" alt=""/></a>
             </div>
         </div>
     </header>

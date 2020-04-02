@@ -9,32 +9,34 @@
 <div th:replace="common/top">
 
 </div>
+<div id="Content">
+    <div id="BackLink">
+        <a href="/catalog/viewMain">Return to Main Menu</a>
+    </div>
 
-<div id="BackLink">
-    <a href="/catalog/viewMain">Return to Main Menu</a>
-</div>
+    <div id="Catalog">
 
-<div id="Catalog">
+        <h2 th:text="${category.name}">Category的name属性</h2>
 
-    <h2 th:text="${category.name}">Category的name属性</h2>
+        <table>
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+            </tr>
 
-    <table>
-        <tr>
-            <th>Product ID</th>
-            <th>Name</th>
-        </tr>
+            <tr th:each="product:${productList}">
+                <td><a th:href="@{/catalog/viewProduct?productId=}+${product.productId}" th:text="${product.productId}">Product
+                    ID</a></td>
+                <td th:text="${product.name}">Product Name</td>
+            </tr>
 
-        <tr th:each="product:${productList}">
-            <td><a th:href="@{/catalog/viewProduct?productId=}+${product.productId}" th:text="${product.productId}">Product ID</a></td>
-            <td th:text="${product.name}">Product Name</td>
-        </tr>
+        </table>
 
-    </table>
+    </div>
 
-</div>
+    <div th:replace="common/bottom">
 
-<div th:replace="common/bottom">
-
+    </div>
 </div>
 
 </body>
