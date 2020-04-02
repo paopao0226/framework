@@ -15,9 +15,10 @@
     <div id="Catalog">
 
         <h2>Shopping Cart</h2>
+        <p id="msgOfQuantity" align="center"></p>
         <form action="/cart/updateCartQuantities" method="post">
             <table>
-                <tr id="msgOfQuantity"></tr>
+<!--                <tr id="msgOfQuantity" align="center"></tr>-->
                 <tr>
                     <th><b>Item ID</b></th>
                     <th><b>Product ID</b></th>
@@ -43,7 +44,9 @@
                     <td>
                         <input th:id="'inputQuantityOf'+ ${cartItem.item.itemId}" th:name="${cartItem.item.itemId}"
                                th:value="${cartItem.quantity}"
-                               th:onchange="UpdateQuantity([[${cartItem.item.itemId}]],[['ywj']])"/>
+                               th:onchange="UpdateQuantity([[${cartItem.item.itemId}]],[['ywj']])"
+                               th:onfocus="getPreQuantity([[${cartItem.item.itemId}]])"
+                        />
                     </td>
                     <td th:id="'listPriceOf' + ${cartItem.item.itemId}"
                         th:text="'$'+${#numbers.formatDecimal(cartItem.item.listPrice,1,2)}"th:value="${cartItem.item.listPrice}"></td>
@@ -70,6 +73,12 @@
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script>
+            var preQuantity;
+            function getPreQuantity(parameter1) {
+                preQuantity = document.getElementById("inputQuantityOf" + parameter1).value;
+                console.log(preQuantity)
+            }
+
             function UpdateQuantity(parameter1, parameter2) {
                 var inputQuantity = document.getElementById("inputQuantityOf" + parameter1).value;
                 var msg = document.getElementById('msgOfQuantity');
@@ -78,9 +87,9 @@
                 $.ajax({
                     contentType: "application/json; charset=utf-8",
                     type: "get",
-                    url: "/cart/changeInputQuantity?inputQuantity=" + inputQuantity + "&userName=" + parameter2 + "&itemName=" + parameter1,
+                    url: "/cart/changeInputQuantity?inputQuantity=" + inputQuantity + "&userName=" + parameter2 + "&itemName=" + parameter1 + "&preQuantity="+preQuantity,
                     success: function (result) {
-                        if(result != null){
+                        if(result.split(" ").length == 1){
                             console.log("response:" + result)
                             var fmtNumber = null;
                             total.innerHTML = null;
@@ -90,10 +99,14 @@
                             totalAll.innerHTML = null;
                             totalAll.innerText = "$" + result;
                         }
+                        else if(result == null){
+                            //不需要进行操作
+                        }
                         else {
                             total.innerText = "0";
-                            msg.innerText = 'Updating quantity failure...Please check your input';
+                            msg.innerText = result;
                         }
+
                     },
                     error: function (e) {
                         total.innerText = "0";

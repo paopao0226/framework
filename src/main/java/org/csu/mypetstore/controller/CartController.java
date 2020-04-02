@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@SessionAttributes(value = {"cart","order"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
+@SessionAttributes(value = {"cart","order","msg"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
 @RequestMapping("/cart/")
 public class CartController {
 
@@ -85,19 +85,34 @@ public class CartController {
 
     @GetMapping("changeInputQuantity")//前端修改购物车item的quantity的时候，负责处理ajax请求的servlet
     @ResponseBody//这个注释说明了方法的返回值是response的body里面的数据，从而不会被thymeleaf当作网页解析
-    public String changeInputQuantity(String inputQuantity, String userName, String itemName, Model model) throws IOException {
-        boolean flag = cartService.updateQuantity(itemName,userName,Integer.parseInt(inputQuantity));
-        if(flag){
-            //更新model中的cart
-            Cart cart;
-            cart = cartService.getCarByUsername(userName);
-            BigDecimal totalPrice = cart.getSubTotal();
-            ((Cart)model.getAttribute("cart")).setItemList(cart.getItemList());
-            return String.valueOf(totalPrice);
+    public String changeInputQuantity(String inputQuantity, String userName, String itemName, String preQuantity, Model model) throws IOException {
+        if(Integer.parseInt(preQuantity) !=  Integer.parseInt(inputQuantity)) {//需要进行库存和购物车的更新
+            //进行购物车还有库存的更新，并且返回未更新前库存的剩余数量,方便当库存不足时，发送库存信息
+            int remainQuantity = cartService.updateQuantity(itemName,userName,Integer.parseInt(inputQuantity),Integer.parseInt(preQuantity));
+            if(Integer.parseInt(preQuantity) <  Integer.parseInt(inputQuantity)){//如何需要从库存拿东西到购物车
+                if(remainQuantity >= Integer.parseInt(inputQuantity) -  Integer.parseInt(preQuantity)){//如果库存足够
+                    // 更新model中的cart
+                    Cart cart;
+                    cart = cartService.getCarByUsername(userName);
+                    BigDecimal totalPrice = cart.getSubTotal();
+                    ((Cart)model.getAttribute("cart")).setItemList(cart.getItemList());
+                     return String.valueOf(totalPrice);
+                }
+                else//如果库存不足
+                    return "Add failure caused by no enough remaining quantity and the remain numbers : " + remainQuantity;
+            }
+            else {//如果需要把购物车的东西放入库存
+                // 更新model中的cart
+                Cart cart;
+                cart = cartService.getCarByUsername(userName);
+                BigDecimal totalPrice = cart.getSubTotal();
+                ((Cart)model.getAttribute("cart")).setItemList(cart.getItemList());
+                return String.valueOf(totalPrice);
+            }
         }
-        else {
+        else//如果前后数量一样，根本不需要更新，就返回null
             return null;
-        }
+
     }
 
     @GetMapping("deleteCartItem")//在购物车点击remove item后访问的servlet
@@ -112,17 +127,21 @@ public class CartController {
 
     @GetMapping("addItemToCart")
     public String addItemToCart(String userName, String itemId, String quantity, Model model){
-        System.out.println("------------------------------");
-        System.out.println("yes");
-        cartService.addItemToCart(userName,itemId,Integer.parseInt(quantity));
-        if((Cart)model.getAttribute("cart") != null)
-            ((Cart)model.getAttribute("cart")).setItemList(cartService.getCarByUsername(userName).getItemList());
-        else{
-            Cart cart = cartService.getCarByUsername(userName);
-            //在model中添加cart对象
-            model.addAttribute("cart",cart);
+        int remainQuantity = cartService.addItemToCart(userName,itemId,Integer.parseInt(quantity));
+        if(remainQuantity >= Integer.parseInt(quantity)){
+            if((Cart)model.getAttribute("cart") != null)
+                ((Cart)model.getAttribute("cart")).setItemList(cartService.getCarByUsername(userName).getItemList());
+            else{
+                Cart cart = cartService.getCarByUsername(userName);
+                //在model中添加cart对象
+                model.addAttribute("cart",cart);
+            }
+            return "cart/cart";
         }
-        return "cart/cart";
+        else{
+            model.addAttribute("msg","Add failure caused by no enough remaining quantity and the remain numbers : " + remainQuantity);
+            return "common/error";
+        }
     }
 }
 
