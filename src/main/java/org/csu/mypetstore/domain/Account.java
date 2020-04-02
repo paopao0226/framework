@@ -2,6 +2,8 @@ package org.csu.mypetstore.domain;
 
 import java.io.Serializable;
 
+//import net.sourceforge.stripes.validation.Validate;
+
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 8751282105532159742L;

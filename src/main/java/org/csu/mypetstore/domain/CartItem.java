@@ -4,16 +4,34 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class CartItem implements Serializable {
-
     private static final long serialVersionUID = 6620528781626504362L;
 
+    private String itemId;
     private Item item;
     private int quantity;
     private boolean inStock;
     private BigDecimal total;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+
+
+    public boolean isInStock() {
+        return inStock;
+    }
+
+    public void setInStock(boolean inStock) {
+        this.inStock = inStock;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
     }
 
     public Item getItem() {
@@ -32,22 +50,6 @@ public class CartItem implements Serializable {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
         calculateTotal();
-    }
-
-    public boolean isInStock() {
-        return inStock;
-    }
-
-    public void setInStock(boolean inStock) {
-        this.inStock = inStock;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
     }
 
     public void incrementQuantity() {

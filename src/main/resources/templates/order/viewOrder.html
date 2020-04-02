@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+
+    <div id="BackLink">
+        <a href="main">Return to Main Menu</a>
+    </div>
+
+    <div id="Catalog">
+
+        <table id="table-3">
+            <tr>
+                <th align="center" colspan="2" th:text="'Order' + ${order.orderId}">Order #${sessionScope.order.orderId}
+<!--                    <fmt:formatDate value="${sessionScope.order.orderDate}"-->
+<!--                                    pattern="yyyy/MM/dd hh:mm:ss"/>-->
+                </th>
+            </tr>
+            <tr>
+                <th colspan="2">Payment Details</th>
+            </tr>
+            <tr>
+                <td>Card Type:</td>
+                <td th:text="${order.cardType}">
+                </td>
+            </tr>
+            <tr>
+                <td>Card Number:</td>
+                <td th:text="${order.creditCard}">
+                    * Fake
+                    number!
+                </td>
+            </tr>
+            <tr>
+                <td>Expiry Date (MM/YYYY):</td>
+                <td th:text="${order.expiryDate}">
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">Billing Address</th>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td th:text="${order.billToFirstName}">
+                </td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td th:text="${order.billToLastName}">
+                </td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td th:text="${order.billAddress1}">
+                </td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td th:text="${order.billAddress2}">
+                </td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td th:text="${order.billCity}">
+                </td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td th:text="${order.billState}">
+                </td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td th:text="${order.billZip}">
+                </td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td th:text="${order.billCountry}">
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">Shipping Address</th>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td th:text="${order.shipToFirstName}">
+                </td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td th:text="${order.shipToLastName}">
+                </td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td th:text="${order.shipAddress1}">
+                </td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td th:text="${order.shipAddress2}">
+                </td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td th:text="${order.shipCity}">
+                </td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td th:text="${order.shipState}">
+                </td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td th:text="${order.shipZip}">
+                </td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td th:text="${order.shipCountry}">
+                </td>
+            </tr>
+            <tr>
+                <td>Courier:</td>
+                <td th:text="${order.courier}">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" th:text="${order.status}">Status:
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total Cost</th>
+                        </tr>
+                            <tr th:each="lineItem:${order.lineItems}">
+                                <td>
+                                    <a href="/ViewItem?${lineItem.item.productId}" name="itemId"
+                                       th:text="${lineItem.item.itemId}">${lineItem.item.itemId}</a>
+                                </td>
+                                <td th:if="${lineItem.item} != null" th:text="${lineItem.item.attribute1}">
+                                        <i th:if="${lineItem.item} == null">{description unavailable}</i>
+                                </td>
+                                <td th:text="${lineItem.quantity}">${lineItem.quantity}</td>
+                                <td th:text="${lineItem.unitPrice}">
+<!--                                    <fmt:formatNumber value="${lineItem.unitPrice}"-->
+<!--                                                      pattern="$#,##0.00"/>-->
+                                </td>
+                                <td th:text="${lineItem.total}">
+<!--                                    <fmt:formatNumber value="${lineItem.total}"-->
+<!--                                                      pattern="$#,##0.00"/>-->
+                                </td>
+                            </tr>
+                        <tr>
+                            <th colspan="5" th:text=" 'Total' + ${order.totalPrice}">Total:
+<!--                                <fmt:formatNumber-->
+<!--                                        value="${sessionScope.order.totalPrice}" pattern="$#,##0.00"/>-->
+                            </th>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+<footer th:replace="common/bottom"></footer>
+</body>
+</html>

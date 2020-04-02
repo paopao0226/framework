@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.csu.mypetstore.persistence.OrderDao">
+    <insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="orderId">
+        INSERT INTO ORDERS (userid,orderdate,shipaddr1,shipaddr2,shipcity,shipstate,shipzip,shipcountry,
+            billaddr1,billaddr2,billcity,billstate,billzip,billcountry,courier,totalprice,billtofirstname,billtolastname,shiptofirstname,
+            shiptolastname,creditcard,exprdate,cardtype,locale)
+            VALUES('ywj',#{orderDate},#{shipAddress1},#{shipAddress2},#{shipCity},#{shipState},#{shipZip},#{shipCountry},
+            #{billAddress1},#{billAddress1},#{billCity},#{billState},#{billZip},#{billCountry},
+            #{courier},#{totalPrice},#{billToFirstName},#{billToLastName},#{shipToFirstName},#{shipToLastName},
+            #{creditCard},#{expiryDate},#{cardType},#{locale})
+    </insert>
+</mapper>

@@ -1,26 +1,34 @@
 package org.csu.mypetstore.domain;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
+
+@Component
 public class Cart implements Serializable {
 
     private static final long serialVersionUID = 8329559983943337176L;
+    private  Map<String, CartItem> itemMap = Collections.synchronizedMap(new HashMap<String, CartItem>());
+    private  List<CartItem> itemList = new ArrayList<CartItem>();
 
-    private final Map<String, CartItem> itemMap = Collections.synchronizedMap(new HashMap<String, CartItem>());
-    private final List<CartItem> itemList = new ArrayList<CartItem>();
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public void setItemMap(Map<String, CartItem> itemMap) {
+        this.itemMap = itemMap;
     }
 
-    public Map<String, CartItem> getItemMap() {
-        return itemMap;
+    public void setItemList(List<CartItem> itemList) {
+        this.itemList = itemList;
     }
 
-    public List<CartItem> getItemList() {
-        return itemList;
+    public Cart(List<CartItem> itemList) {
+        this.itemList = itemList;
     }
 
     public Iterator<CartItem> getCartItems() {
@@ -28,6 +36,14 @@ public class Cart implements Serializable {
     }
 
     public List<CartItem> getCartItemList() {
+        return itemList;
+    }
+
+    public Map<String, CartItem> getItemMap() {
+        return itemMap;
+    }
+
+    public List<CartItem> getItemList() {
         return itemList;
     }
 
@@ -95,4 +111,5 @@ public class Cart implements Serializable {
         }
         return subTotal;
     }
+
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class Order implements Serializable {
@@ -25,7 +26,7 @@ public class Order implements Serializable {
     private String billState;
     private String billZip;
     private String billCountry;
-    private String courier;
+    private String courier = "UPS";
     private BigDecimal totalPrice;
     private String billToFirstName;
     private String billToLastName;
@@ -33,14 +34,19 @@ public class Order implements Serializable {
     private String shipToLastName;
     private String creditCard;
     private String expiryDate;
-    private String cardType;
-    private String locale;
-    private String status;
-    private List<LineItem> lineItems = new ArrayList<LineItem>();
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public List<LineItem> getLineItems() {
+        return lineItems;
     }
+
+    public void setLineItems(List<LineItem> lineItems) {
+        this.lineItems = lineItems;
+    }
+
+    private String cardType;
+    private String locale = "CA";
+    private String status = "P";
+    private List<LineItem> lineItems = new ArrayList<LineItem>();
 
     public int getOrderId() {
         return orderId;
@@ -167,7 +173,7 @@ public class Order implements Serializable {
     }
 
     public void setCourier(String courier) {
-        this.courier = courier;
+        this.courier = "UPS";
     }
 
     public BigDecimal getTotalPrice() {
@@ -198,8 +204,8 @@ public class Order implements Serializable {
         return shipToFirstName;
     }
 
-    public void setShipToFirstName(String shipToFirstName) {
-        this.shipToFirstName = shipToFirstName;
+    public void setShipToFirstName(String shipFoFirstName) {
+        this.shipToFirstName = shipFoFirstName;
     }
 
     public String getShipToLastName() {
@@ -239,7 +245,7 @@ public class Order implements Serializable {
     }
 
     public void setLocale(String locale) {
-        this.locale = locale;
+        this.locale = "CA";
     }
 
     public String getStatus() {
@@ -247,26 +253,64 @@ public class Order implements Serializable {
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.status = "P";
     }
 
-    public List<LineItem> getLineItems() {
-        return lineItems;
-    }
+//    public void setLineItems(List<LineItem> lineItems) {
+//        this.lineItems = lineItems;
+//    }
 
-    public void setLineItems(List<LineItem> lineItems) {
-        this.lineItems = lineItems;
-    }
+//    public List<LineItem> getLineItems() {
+//        return lineItems;
+//    }
 
     public void initOrder(Account account, Cart cart) {
 
+        username = account.getUsername();
+        orderDate = new Date();
+
+        shipToFirstName = account.getFirstName();
+        shipToLastName = account.getLastName();
+        shipAddress1 = account.getAddress1();
+        shipAddress2 = account.getAddress2();
+        shipCity = account.getCity();
+        shipState = account.getState();
+        shipZip = account.getZip();
+        shipCountry = account.getCountry();
+
+        billToFirstName = account.getFirstName();
+        billToLastName = account.getLastName();
+        billAddress1 = account.getAddress1();
+        billAddress2 = account.getAddress2();
+        billCity = account.getCity();
+        billState = account.getState();
+        billZip = account.getZip();
+        billCountry = account.getCountry();
+
+        totalPrice = cart.getSubTotal();
+
+        this.creditCard = creditCard;
+        expiryDate = "2020";
+        this.cardType = cardType;
+        courier = "UPS";
+        locale = "CA";
+        status = "P";
+
+//        Iterator<CartItem> i = cart.getAllCartItems();
+//        while (i.hasNext()) {
+//            CartItem cartItem = (CartItem) i.next();
+//            addLineItem(cartItem);
+//        }
+
     }
 
-    public void addLineItem(CartItem cartItem) {
+//    public void addLineItem(CartItem cartItem) {
+//        LineItem lineItem = new LineItem(lineItems.size() + 1, cartItem);
+//        addLineItem(lineItem);
+//    }
+//
+//    public void addLineItem(LineItem lineItem) {
+//        lineItems.add(lineItem);
+//    }
 
-    }
-
-    public void addLineItem(LineItem lineItem) {
-
-    }
 }
