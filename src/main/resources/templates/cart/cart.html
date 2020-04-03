@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Mypetstore</title>
-    <link rel="stylesheet" href="../css/jpetstore.css" type="text/css" media="screen">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
 </head>
 <body>
 <header th:replace="common/top"></header>
@@ -13,7 +13,9 @@
     </div>
 
     <div id="Catalog">
+
         <h2>Shopping Cart</h2>
+        <p id="msgOfQuantity" align="center"></p>
         <form action="/cart/updateCartQuantities" method="post">
             <table>
                 <tr id="msgOfQuantity"></tr>
@@ -27,47 +29,57 @@
                     <th><b>Total Cost</b></th>
                     <th>&nbsp;</th>
                 </tr>
-                <tr th:if="${cart?.numberOfItems eq 0}">
+                <tr th:if="${cart.numberOfItems == 0}">
                     <td colspan="8"><b>Your cart is empty.</b></td>
                 </tr>
-                <tr th:each="cartItem:${cart?.itemList}">
+
+                <tr th:each="cartItem:${cart.itemList}">
                     <td>
-                        <a th:href="'/catalog/viewItem?itemId='+${cartItem?.getItem().getItemId()}"
-                           th:text="${cartItem?.getItem().getItemId()}"></a>
+                        <a th:href="'/catalog/viewItem?itemId='+${cartItem.getItem().getItemId()}"
+                           th:text="${cartItem.getItem().getItemId()}"></a>
                     </td>
-                    <td th:text="${cartItem?.item.product.productId}"></td>
-                    <td th:text="${cartItem?.item.attribute1}+${cartItem?.item.product.name}"></td>
-                    <td th:text="${cartItem?.inStock}"></td>
+                    <td th:text="${cartItem.item.product.productId}"></td>
+                    <td th:text="${cartItem.item.attribute1}+${cartItem.item.product.name}"></td>
+                    <td th:text="${cartItem.inStock}"></td>
                     <td>
-                        <input th:id="'inputQuantityOf'+ ${cartItem?.item.itemId}" th:name="${cartItem?.item.itemId}"
-                               th:value="${cartItem?.quantity}"
-                               th:onchange="UpdateQuantity([[${cartItem?.item.itemId}]],[['ywj']])"/>
+                        <input th:id="'inputQuantityOf'+ ${cartItem.item.itemId}" th:name="${cartItem.item.itemId}"
+                               th:value="${cartItem.quantity}"
+                               <!--这块需要改-->
+                               th:onchange="UpdateQuantity([[${cartItem.item.itemId}]],[['ywj']])"
+                                th:onfocus="getPreQuantity([[${cartItem.item.itemId}]])"
+                               />
                     </td>
-                    <td th:id="'listPriceOf' + ${cartItem?.item.itemId}"
-                        th:text="'$'+${#numbers.formatDecimal(cartItem?.item.listPrice,1,2)}"th:value="${cartItem?.item.listPrice}"></td>
-                    <td th:id="'totalPriceOf' + ${cartItem?.item.itemId}"
-                        th:text="'$'+${#numbers.formatDecimal(cartItem?.total,1,2)}"></td>
+                    <td th:id="'listPriceOf' + ${cartItem.item.itemId}"
+                        th:text="'$'+${#numbers.formatDecimal(cartItem.item.listPrice,1,2)}"th:value="${cartItem.item.listPrice}"></td>
+                    <td th:id="'totalPriceOf' + ${cartItem.item.itemId}"
+                        th:text="'$'+${#numbers.formatDecimal(cartItem.total,1,2)}"></td>
                     <td>
-                        <a class="Button" th:href="'/cart/deleteCartItem?userName='+ 'ywj' + '&itemId=' + ${cartItem?.item.itemId}">Remove</a>
+                        <a class="Button" th:href="'/cart/deleteCartItem?userName='+ 'ywj' + '&itemId=' + ${cartItem.item.itemId}">Remove</a>
                     </td>
                 </tr>
 
                 <tr>
                     <td colspan="7">
-                        <label th:id="subTotal" th:text="'Sub Total:$'+${#numbers.formatDecimal(cart?.subTotal,1,2)}"></label>
-<!--                        <input type="submit" onclick="" value="Update Cart">-->
+                        <label th:id="subTotal" th:text="'Sub Total:$'+${#numbers.formatDecimal(cart.subTotal,1,2)}"></label>
+                        <input type="submit" value="Update Cart">
                     </td>
                     <td>&nbsp;</td>
                 </tr>
             </table>
         </form>
 
-        <a class="Button" th:if="${cart?.numberOfItems > 0}" href="/cart/newOrder">
+        <a class="Button" th:if="${cart.numberOfItems > 0}" href="/cart/newOrder">
             Proceed to Checkout
         </a>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script>
+            var preQuantity;
+            function getPreQuantity(parameter1) {
+                preQuantity = document.getElementById("inputQuantityOf" + parameter1).value;
+                console.log(preQuantity)
+            }
+
             function UpdateQuantity(parameter1, parameter2) {
                 var inputQuantity = document.getElementById("inputQuantityOf" + parameter1).value;
                 var msg = document.getElementById('msgOfQuantity');
@@ -88,6 +100,9 @@
                             totalAll.innerHTML = null;
                             totalAll.innerText = "$" + result;
                         }
+                        else if(result == null){
+                            //不需要进行操作
+                        }
                         else {
                             total.innerText = "0";
                             msg.innerText = 'Updating quantity failure...Please check your input';
@@ -101,6 +116,7 @@
             }
         </script>
         <!-- TODO MyList -->
+
     </div>
 </div>
 <footer th:replace="common/bottom"></footer>

@@ -17,13 +17,11 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Controller
-//这里添加了三个新的session对象
-@SessionAttributes(value = {"cart","order","isLogin","myAccount","orderList"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
+@SessionAttributes(value = {"cart","order","isLogin","myAccount","orderList","msg"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
 @RequestMapping("/cart/")
 public class CartController {
 
@@ -42,7 +40,6 @@ public class CartController {
 
     @GetMapping("viewCart")//点击购物车图标后访问的servlet
     public String getCart(String username, Model model){//方法里面的参数username可以自动匹配url的参数
-        //如果没有登录
         Cart cart = cartService.getCarByUsername(username);
         //在model中添加cart对象
         model.addAttribute("cart",cart);
@@ -60,19 +57,9 @@ public class CartController {
         model.addAttribute("order",order);
         return "order/confirmOrder";
     }
-    @GetMapping("viewOrderList")//点击我的订单显示订单信息
-    public String viewOrderList(String username,Model model){
-        boolean isLogin = (boolean) model.getAttribute("isLogin");
-        if(!isLogin) return "account/SignonForm";
-        System.out.println(username);
-        List<Order> orderList = new ArrayList<>();
-        orderList = orderService.getOrdersByUsername(username);
-        System.out.println(orderList.size());
-        model.addAttribute("orderList",orderList);
-        return "order/viewOrderList";
-    }
+
     @GetMapping("viewOrder")//confirm订单后访问的servlet
-    public String viewOrder(String orderId, Model model,String username){
+    public String viewOrder(Model model){
         //使用if-else语句实现order点击来源的判断
         //这个来源是购物车order
         if(orderId.equals("-1")) {
@@ -122,15 +109,30 @@ public class CartController {
 
     @GetMapping("changeInputQuantity")//前端修改购物车item的quantity的时候，负责处理ajax请求的servlet
     @ResponseBody//这个注释说明了方法的返回值是response的body里面的数据，从而不会被thymeleaf当作网页解析
-    public String changeInputQuantity(String inputQuantity, String userName, String itemName, Model model) throws IOException {
-        boolean flag = cartService.updateQuantity(itemName,userName,Integer.parseInt(inputQuantity));
-        if(flag){
-            //更新model中的cart
-            Cart cart;
-            cart = cartService.getCarByUsername(userName);
-            BigDecimal totalPrice = cart.getSubTotal();
-            ((Cart)model.getAttribute("cart")).setItemList(cart.getItemList());
-            return String.valueOf(totalPrice);
+    public String changeInputQuantity(String inputQuantity, String userName, String itemName, String preQuantity, Model model) throws IOException {
+        if(Integer.parseInt(preQuantity) !=  Integer.parseInt(inputQuantity)) {//需要进行库存和购物车的更新
+            //进行购物车还有库存的更新，并且返回未更新前库存的剩余数量,方便当库存不足时，发送库存信息
+            int remainQuantity = cartService.updateQuantity(itemName,userName,Integer.parseInt(inputQuantity),Integer.parseInt(preQuantity));
+            if(Integer.parseInt(preQuantity) <  Integer.parseInt(inputQuantity)){//如何需要从库存拿东西到购物车
+                if(remainQuantity >= Integer.parseInt(inputQuantity) -  Integer.parseInt(preQuantity)){//如果库存足够
+                    // 更新model中的cart
+                    Cart cart;
+                    cart = cartService.getCarByUsername(userName);
+                    BigDecimal totalPrice = cart.getSubTotal();
+                    ((Cart)model.getAttribute("cart")).setItemList(cart.getItemList());
+                     return String.valueOf(totalPrice);
+                }
+                else//如果库存不足
+                    return "Add failure caused by no enough remaining quantity and the remain numbers : " + remainQuantity;
+            }
+            else {//如果需要把购物车的东西放入库存
+                // 更新model中的cart
+                Cart cart;
+                cart = cartService.getCarByUsername(userName);
+                BigDecimal totalPrice = cart.getSubTotal();
+                ((Cart)model.getAttribute("cart")).setItemList(cart.getItemList());
+                return String.valueOf(totalPrice);
+            }
         }
         else {
             return null;
@@ -154,15 +156,20 @@ public class CartController {
         if(!isLogin){
             return "catalog/main";
         }
-        System.out.println("------------------------------");
-        System.out.println("yes");
-        cartService.addItemToCart(userName,itemId,Integer.parseInt(quantity));
-        if((Cart)model.getAttribute("cart") != null)
-            ((Cart)model.getAttribute("cart")).setItemList(cartService.getCarByUsername(userName).getItemList());
+        int remainQuantity = cartService.addItemToCart(userName,itemId,Integer.parseInt(quantity));
+        if(remainQuantity >= Integer.parseInt(quantity)){
+            if((Cart)model.getAttribute("cart") != null)
+                ((Cart)model.getAttribute("cart")).setItemList(cartService.getCarByUsername(userName).getItemList());
+            else{
+                Cart cart = cartService.getCarByUsername(userName);
+                //在model中添加cart对象
+                model.addAttribute("cart",cart);
+            }
+            return "cart/cart";
+        }
         else{
-            Cart cart = cartService.getCarByUsername(userName);
-            //在model中添加cart对象
-            model.addAttribute("cart",cart);
+            model.addAttribute("msg","Add failure caused by no enough remaining quantity and the remain numbers : " + remainQuantity);
+            return "common/error";
         }
         //记录日志
         if(isLogin) {
