@@ -18,7 +18,8 @@
         <p id="msgOfQuantity" align="center"></p>
         <form action="/cart/updateCartQuantities" method="post">
             <table>
-                <tr id="msgOfQuantity"></tr>
+                <!--id好像冲突了-->
+<!--            <tr id="msgOfQuantity"></tr>-->
                 <tr>
                     <th><b>Item ID</b></th>
                     <th><b>Product ID</b></th>
@@ -44,8 +45,7 @@
                     <td>
                         <input th:id="'inputQuantityOf'+ ${cartItem.item.itemId}" th:name="${cartItem.item.itemId}"
                                th:value="${cartItem.quantity}"
-                               <!--这块需要改-->
-                               th:onchange="UpdateQuantity([[${cartItem.item.itemId}]],[['ywj']])"
+                               th:onchange="UpdateQuantity([[${cartItem.item.itemId}]],[[${myAccount?.getUsername()}]])"
                                 th:onfocus="getPreQuantity([[${cartItem.item.itemId}]])"
                                />
                     </td>
@@ -54,14 +54,15 @@
                     <td th:id="'totalPriceOf' + ${cartItem.item.itemId}"
                         th:text="'$'+${#numbers.formatDecimal(cartItem.total,1,2)}"></td>
                     <td>
-                        <a class="Button" th:href="'/cart/deleteCartItem?userName='+ 'ywj' + '&itemId=' + ${cartItem.item.itemId}">Remove</a>
+                        <a class="Button" th:href="'/cart/deleteCartItem?userName='+ ${myAccount?.getUsername()} + '&itemId=' + ${cartItem.item.itemId}">Remove</a>
                     </td>
                 </tr>
 
                 <tr>
                     <td colspan="7">
                         <label th:id="subTotal" th:text="'Sub Total:$'+${#numbers.formatDecimal(cart.subTotal,1,2)}"></label>
-                        <input type="submit" value="Update Cart">
+                        <!--这块删掉-->
+<!--                        <input type="submit" value="Update Cart">-->
                     </td>
                     <td>&nbsp;</td>
                 </tr>
@@ -79,7 +80,6 @@
                 preQuantity = document.getElementById("inputQuantityOf" + parameter1).value;
                 console.log(preQuantity)
             }
-
             function UpdateQuantity(parameter1, parameter2) {
                 var inputQuantity = document.getElementById("inputQuantityOf" + parameter1).value;
                 var msg = document.getElementById('msgOfQuantity');
@@ -88,9 +88,9 @@
                 $.ajax({
                     contentType: "application/json; charset=utf-8",
                     type: "get",
-                    url: "/cart/changeInputQuantity?inputQuantity=" + inputQuantity + "&userName=" + parameter2 + "&itemName=" + parameter1,
+                    url: "/cart/changeInputQuantity?inputQuantity=" + inputQuantity + "&userName=" + parameter2 + "&itemName=" + parameter1 + "&preQuantity="+preQuantity,
                     success: function (result) {
-                        if(result != null){
+                        if(result.split(" ").length == 1){
                             console.log("response:" + result)
                             var fmtNumber = null;
                             total.innerHTML = null;
@@ -105,7 +105,7 @@
                         }
                         else {
                             total.innerText = "0";
-                            msg.innerText = 'Updating quantity failure...Please check your input';
+                            msg.innerText = result;
                         }
                     },
                     error: function (e) {

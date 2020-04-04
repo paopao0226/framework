@@ -17,19 +17,21 @@
             <td>User ID:</td>
             <td th:text="${myAccount?.getUsername()}"></td>
         </tr>
+        <!--下面都删除了password的默认显示，因为已经加密不能再提醒了-->
         <tr>
+
             <td>New password:</td>
-            <td><input type="text" name="password" th:value="${password}"/>
+            <td><input type="text" name="password"/>
         </tr>
         <tr>
             <td>Repeat password:</td>
-            <td><input type="text" name="repeatedPassword" th:value="${password}"/>
+            <td><input type="text" name="repeatedPassword"/>
         </tr>
     </table>
     <div th:replace="account/IncludeAccountField"></div>
     <input type="submit" name="editAccount" value="Save Account Information"/>
 </form>
-    <a th:href="@{'/cart/viewOrderList?username=' + ${myAccount?.getUsername()}}">My Orders</a>
+    <a th:href="@{'/cart/viewOrderList?username=' + ${myAccount?.getUsername()}}    ">My Orders</a>
     <br/>
     <a href="/daily/selectDailyRecord">My DailyRecord</a>
 

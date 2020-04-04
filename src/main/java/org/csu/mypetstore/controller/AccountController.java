@@ -1,6 +1,5 @@
 package org.csu.mypetstore.controller;
 
-import com.google.code.kaptcha.Producer;
 import org.csu.mypetstore.domain.Account;
 import org.csu.mypetstore.service.AccountService;
 import org.csu.mypetstore.service.CatalogService;

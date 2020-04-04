@@ -5,8 +5,11 @@ import org.csu.mypetstore.service.CartService;
 import org.csu.mypetstore.service.DailyService;
 import org.csu.mypetstore.service.LineItemService;
 import org.csu.mypetstore.service.OrderService;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,7 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -59,7 +63,7 @@ public class CartController {
     }
 
     @GetMapping("viewOrder")//confirm订单后访问的servlet
-    public String viewOrder(Model model){
+    public String viewOrder(Model model,String username,String orderId){
         //使用if-else语句实现order点击来源的判断
         //这个来源是购物车order
         if(orderId.equals("-1")) {
@@ -85,18 +89,6 @@ public class CartController {
             //确认提交订单后清空购物车
             cartService.deleteAllCartItemByUsername(username);
             ((Cart) model.getAttribute("cart")).setItemList(null);
-            List<Order> list = orderService.getOrdersByUsername(username);
-            //记录日志
-            int orderID = list.get(list.size()-1).getOrderId();
-            java.sql.Timestamp time =  new Timestamp(date.getTime());
-            String kind = "order";
-            Daily daily = new Daily();
-            daily.setUserId(username);
-            daily.setDatetime(time);
-            daily.setKind(kind);
-            daily.setOrderId(orderID);
-            dailyService.insertDaily(daily);
-
         }
         else {
             Order order = orderService.getOrder(Integer.parseInt(orderId));
@@ -151,6 +143,7 @@ public class CartController {
 
     @GetMapping("addItemToCart")
     public String addItemToCart(String userName, String itemId, String quantity, Model model){
+        //获取是否登录参数
         boolean isLogin = (boolean) model.getAttribute("isLogin");
         //如果没有登录则转回main
         if(!isLogin){
@@ -171,20 +164,14 @@ public class CartController {
             model.addAttribute("msg","Add failure caused by no enough remaining quantity and the remain numbers : " + remainQuantity);
             return "common/error";
         }
-        //记录日志
-        if(isLogin) {
-            java.util.Date date = new java.util.Date();
-            java.sql.Timestamp time =  new Timestamp(date.getTime());
-            String kind = "cart";
-            String items = itemId;
-            Daily daily = new Daily();
-            daily.setUserId(userName);
-            daily.setDatetime(time);
-            daily.setKind(kind);
-            daily.setItems(items);
-            dailyService.insertDaily(daily);
-        }
-        return "cart/cart";
+    }
+    //viewOrderList方法：用来查看order信息
+    @GetMapping("viewOrderList")
+    public String viewOrderList(String username,Model model){
+        List<Order> orderList = new ArrayList<>();
+        orderList = orderService.getOrdersByUsername(username);
+        model.addAttribute("orderList",orderList);
+        return "order/viewOrderList";
     }
 }
 

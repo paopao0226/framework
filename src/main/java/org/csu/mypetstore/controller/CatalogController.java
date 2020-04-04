@@ -3,34 +3,47 @@ package org.csu.mypetstore.controller;
 import org.csu.mypetstore.domain.*;
 import org.csu.mypetstore.service.CatalogService;
 import org.csu.mypetstore.service.DailyService;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
-
 @Controller
+@Component
 @RequestMapping("/catalog")
 @SessionAttributes(value = {"isLogin","myAccount"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:applicationContext.xml")
 public class CatalogController {
 
     @Autowired
     private CatalogService catalogService;
     @Autowired
     private DailyService dailyService;
+    //这里用来判断是否已经进入系统，用来进行isLogin初始化时的判断
+    private boolean isEnter = false;
 
     @GetMapping("viewMain")
     public String viewMain(Model model) {
         System.out.println("main");
         Account account = new Account();
         System.out.println(account);
-        model.addAttribute("isLogin",false);
+        //转回main时判断是否登录，在进入系统时初始化登录
+        if(!isEnter) {
+            model.addAttribute("isLogin", false);
+        }
         return "catalog/main";
     }
     @GetMapping("/signon")
     public String signon() {
+        //这里添了一句话
+        isEnter = true;
         return "account/SignonForm";
     }
     @GetMapping("viewCategory")
@@ -55,6 +68,9 @@ public class CatalogController {
         }
         return "catalog/product";
     }
+    public void add(){
+        System.out.println("成功记录");
+    }
     //这里添加了Username便于进行日志的记录
     @GetMapping("viewItem")
     public String viewItem(String itemId, Model model,String userId){
@@ -64,19 +80,6 @@ public class CatalogController {
         model.addAttribute("item",item);
         model.addAttribute("product",product);
         //记录日志
-        boolean isLogin = (boolean) model.getAttribute("isLogin");
-        if(isLogin) {
-                java.util.Date date = new java.util.Date();
-                Timestamp time =  new Timestamp(date.getTime());
-                String kind = "browse";
-                String items = itemId;
-                Daily daily = new Daily();
-                daily.setUserId(userId);
-                daily.setDatetime(time);
-                daily.setKind(kind);
-                daily.setItems(items);
-                dailyService.insertDaily(daily);
-        }
         return "catalog/item";
     }
 
