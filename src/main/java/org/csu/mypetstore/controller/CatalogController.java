@@ -27,21 +27,21 @@ public class CatalogController {
     @Autowired
     private DailyService dailyService;
     //这里用来判断是否已经进入系统，用来进行isLogin初始化时的判断
-    private boolean isEnter = false;
+    private boolean isEnter;
 
     @GetMapping("viewMain")
-    public String viewMain(Model model) {
+    public String viewMain(Model model,String isEnter) {
         System.out.println("main");
         Account account = new Account();
         System.out.println(account);
         //转回main时判断是否登录，在进入系统时初始化登录
-        if(!isEnter) {
+        if(isEnter.equals("0")) {
             model.addAttribute("isLogin", false);
         }
         return "catalog/main";
     }
     @GetMapping("/signon")
-    public String signon() {
+    public String signon(Model model) {
         //这里添了一句话
         isEnter = true;
         return "account/SignonForm";
