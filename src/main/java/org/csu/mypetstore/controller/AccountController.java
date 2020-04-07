@@ -1,6 +1,10 @@
 package org.csu.mypetstore.controller;
 
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.aliyuncs.exceptions.ClientException;
 import org.csu.mypetstore.domain.Account;
+import org.csu.mypetstore.domain.CodeUtil;
+import org.csu.mypetstore.domain.SmsTool;
 import org.csu.mypetstore.service.AccountService;
 import org.csu.mypetstore.service.CatalogService;
 import org.mybatis.spring.annotation.MapperScan;
@@ -11,6 +15,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.awt.*;
@@ -19,9 +24,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 @Controller
 @RequestMapping("/account")
@@ -324,6 +328,27 @@ public class AccountController {
         String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
         System.out.println(password + " " + md5Password);
         return md5Password;
+    }
+    //验证码
+    @GetMapping("/smsXxs")
+    @ResponseBody
+    public Map<String,Object> smsXxs(String phone, HttpServletRequest request) throws ClientException {
+        System.out.println("完成");
+        Map<String,Object> map = new HashMap<>();
+        // 验证码（指定长度的随机数）
+        String code = CodeUtil.generateVerifyCode(6);
+        String TemplateParam = "{\"code\":\""+code+"\"}";
+        // 短信模板id
+        String TemplateCode = "SMS_152440521";
+        SendSmsResponse response = SmsTool.sendSms(phone,TemplateParam,TemplateCode);
+        map.put("verifyCode",code);
+        map.put("phone",phone);
+        request.getSession().setAttribute("CodePhone",map);
+        if( response.getCode().equals("OK")) {
+            map.put("isOk","OK");
+        }
+        System.out.println("a");
+        return map;
     }
 }
 
