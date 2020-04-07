@@ -12,9 +12,32 @@
             #{creditCard},#{expiryDate},#{cardType},#{locale})
     </insert>
     <select id="getOrdersByUsername" parameterType="string" resultType="Order">
-            SELECT * FROM ORDERS WHERE userid = #{username}
+        SELECT orderid AS orderId, orderdate AS  orderDate, shipaddr1 AS shipAddress1, shipaddr2 AS shipAddress2, shipcity AS shipCity,
+            billaddr1 AS billAddress1, billaddr2 AS billAddress2, billcity AS billCity, totalprice AS totalPrice
+                FROM ORDERS WHERE userid = #{userName}
     </select>
     <select id="getOrder" parameterType="int" resultType="Order">
-        SELECT * FROM ORDERS WHERE orderid = #{orderId}
+        SELECT orderid AS orderId, orderdate AS  orderDate, shipaddr1 AS shipAddress1, shipaddr2 AS shipAddress2, shipcity AS shipCity,
+            shipstate AS shipState, shipzip AS shipZip, shipcountry AS shipCountry, billaddr1 AS billAddress1, billaddr2 AS billAddress2,
+            billcity AS billCity, billstate AS billState, billzip AS billZip, billcountry AS billCountry, courier AS courier, totalprice AS totalPrice,
+            billtofirstname AS billToFirstName, billtolastname AS billToLastName, shiptofirstname AS shipToFirstName, shiptolastname AS shipToLastName,
+            creditcard AS creditCard, exprdate AS expiryDate
+                FROM ORDERS WHERE orderid = #{orderId}
     </select>
+    
+    <update id="updateOrder" parameterType="Order">
+        UPDATE orders SET shipaddr1 = #{shipAddress1}, shipaddr2 = #{shipAddress2}, shipcity = #{shipCity},
+            shipstate= #{shipState}, shipzip=  #{shipZip}, shipcountry = #{shipCountry}, billaddr1 = #{billAddress1},
+            billaddr2 = #{billAddress2}, billtofirstname = #{billToFirstName}, billtolastname = #{billToLastName},
+            shiptofirstname = #{shipToFirstName}, shiptolastname = #{shipToLastName}, billcity = #{billCity},
+            billstate = #{billState}, billzip = #{billZip}, billcountry = #{billCountry}
+                WHERE orderid = #{orderId}
+
+    </update>
+    
+    <delete id="deleteOrder">
+         DELETE FROM orders
+            WHERE orderid = #{orderId}
+    </delete>
+
 </mapper>

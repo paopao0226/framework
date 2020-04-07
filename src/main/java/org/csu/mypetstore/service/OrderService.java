@@ -17,10 +17,20 @@ public class OrderService  {
     public List<Order> getOrdersByUsername(String username) {
         return orderDao.getOrdersByUsername(username);
     }
+
     public Order getOrder(int orderId){
         return orderDao.getOrder(orderId);
     }
+
     public int insertOrder(Order order){
         return orderDao.insertOrder(order);
+    }
+
+    public int updateOrder(Order order){
+        return orderDao.updateOrder(order);
+    }
+
+    public int deleteOrder(int orderId){
+        return orderDao.deleteOrder(orderId);
     }
 }
