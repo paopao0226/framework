@@ -5,6 +5,7 @@ import org.csu.mypetstore.persistence.OrderDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,5 +33,13 @@ public class OrderService  {
 
     public int deleteOrder(int orderId){
         return orderDao.deleteOrder(orderId);
+    }
+
+    public int insertOrderState(int orderid, int lineNum, Date timeStamp, int status){
+        return orderDao.insertOrderState(orderid,lineNum,timeStamp,status);
+    }
+
+    public int updateOrderState(int state,int orderId){
+        return orderDao.updateOrderState(state,orderId);
     }
 }

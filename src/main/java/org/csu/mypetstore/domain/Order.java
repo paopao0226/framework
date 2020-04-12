@@ -45,7 +45,7 @@ public class Order implements Serializable {
 
     private String cardType;
     private String locale = "CA";
-    private String status = "P";
+    private String status = "0";
     private List<LineItem> lineItems = new ArrayList<LineItem>();
 
     public int getOrderId() {
@@ -253,7 +253,7 @@ public class Order implements Serializable {
     }
 
     public void setStatus(String status) {
-        this.status = "P";
+        this.status = status;
     }
 
 //    public void setLineItems(List<LineItem> lineItems) {
@@ -294,7 +294,7 @@ public class Order implements Serializable {
         this.cardType = cardType;
         courier = "UPS";
         locale = "CA";
-        status = "P";
+        status = "0";
 
 //        Iterator<CartItem> i = cart.getAllCartItems();
 //        while (i.hasNext()) {

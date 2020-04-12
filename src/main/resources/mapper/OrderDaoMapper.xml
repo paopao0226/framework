@@ -12,9 +12,10 @@
             #{creditCard},#{expiryDate},#{cardType},#{locale})
     </insert>
     <select id="getOrdersByUsername" parameterType="string" resultType="Order">
-        SELECT orderid AS orderId, orderdate AS  orderDate, shipaddr1 AS shipAddress1, shipaddr2 AS shipAddress2, shipcity AS shipCity,
-            billaddr1 AS billAddress1, billaddr2 AS billAddress2, billcity AS billCity, totalprice AS totalPrice
-                FROM ORDERS WHERE userid = #{userName}
+        SELECT orders.orderid AS orderId, orderdate AS  orderDate, shipaddr1 AS shipAddress1, shipaddr2 AS shipAddress2, shipcity AS shipCity,
+            billaddr1 AS billAddress1, billaddr2 AS billAddress2, billcity AS billCity, totalprice AS totalPrice, status
+                FROM orders JOIN orderstatus on orders.orderid=orderstatus.orderid
+                WHERE userid = #{userName}
     </select>
     <select id="getOrder" parameterType="int" resultType="Order">
         SELECT orderid AS orderId, orderdate AS  orderDate, shipaddr1 AS shipAddress1, shipaddr2 AS shipAddress2, shipcity AS shipCity,
@@ -39,5 +40,15 @@
          DELETE FROM orders
             WHERE orderid = #{orderId}
     </delete>
+
+    <insert id="insertOrderState">
+        INSERT INTO orderstatus (orderid, linenum, timestamp, status)
+            VALUES (#{orderid}, #{lineNum}, #{timeStamp}, #{status})
+    </insert>
+
+    <update id="updateOrderState">
+        UPDATE orderstatus SET status = #{state}
+            WHERE orderid = #{orderId}
+    </update>
 
 </mapper>

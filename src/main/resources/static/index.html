@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <title>Mypetstore</title>
     <link rel="StyleSheet" href="css/jpetstore.css" type="text/css" media="screen"/>
@@ -9,6 +9,10 @@
 <div id="Content">
     <h2>Welcome to MyPetStore</h2>
     <p><a href="/catalog/viewMain">Enter the store</a></p>
+<!--    <a class="Button" href="/order/pay" name="pay" value="true"> Pay</a>-->
+    <form action="/alipay/pay" method="post">
+        <button type="submit">pay</button>
+    </form>
     <p><sub>Copyright Zed Wang</sub></p>
 </div>
 </body>

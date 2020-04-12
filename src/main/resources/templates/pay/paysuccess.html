@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+
+    <div id="BackLink">
+        <a href="main">Return to Main Menu</a>
+    </div>
+
+    <div id="Catalog">
+        恭喜您！本次交易成功，支付宝订单号请自行保存，以下为本次交易详细信息：
+        <table id="table-3">
+            <tr>
+                <td th:text="本次交易商城订单号"></td>
+                <td th:text="${out_trade_no}"></td>
+            </tr>
+            <tr>
+                <td th:text="本次支付宝订单号"></td>
+                <td th:text="${trade_no}"></td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<footer th:replace="common/bottom"></footer>
+</body>
+</html>

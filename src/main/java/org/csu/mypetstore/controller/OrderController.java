@@ -1,5 +1,14 @@
 package org.csu.mypetstore.controller;
 
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.domain.AlipayTradePagePayModel;
+import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.alipay.api.request.AlipayTradePrecreateRequest;
+import com.alipay.api.response.AlipayTradePagePayResponse;
+import com.alipay.api.response.AlipayTradePrecreateResponse;
+import org.csu.mypetstore.domain.AlipayConfig;
 import org.csu.mypetstore.domain.Cart;
 import org.csu.mypetstore.domain.Order;
 import org.csu.mypetstore.service.CartService;
@@ -8,15 +17,20 @@ import org.csu.mypetstore.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import static com.alipay.api.AlipayConstants.*;
+import static org.apache.catalina.manager.Constants.CHARSET;
 
 @Controller
 @SessionAttributes(value = {"cart","order","isLogin","myAccount","orderList","msg","orderOfUpdate"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
@@ -65,6 +79,8 @@ public class OrderController {
             for (int i = 0; i < cart.getItemList().size(); i++) {
                 lineItemService.insertLineItem(order.getOrderId(), i + 1, cart.getItemList().get(i).getItemId(), cart.getItemList().get(i).getQuantity(), cart.getItemList().get(i).getItem().getUnitCost());
             }
+            //增加一个order状态,0代表暂未支付
+            orderService.insertOrderState(order.getOrderId(),cart.getItemList().size(),order.getOrderDate(),0);
             // 当往数据库插入order以后，再将调用lineItemService层的方法来设置order的LineItemList
             order.setLineItems(lineItemService.getLineItemsByOrderId(order.getOrderId()));
             BigDecimal totalPrice = cart.getSubTotal();
@@ -81,6 +97,7 @@ public class OrderController {
         return "order/viewOrder";
     }
 
+    //查看当前用户的orderHistory
     @GetMapping("viewOrderList")
     public String viewOrderList(String userName,Model model){
         //通过userName在数据库中拿出orderList
@@ -90,14 +107,16 @@ public class OrderController {
         return "order/orderList";
     }
 
+    //查看orderHistroy中特定的一个order以便进行操作
     @GetMapping("viewUpdateOrder")
-    public String viewUpdateOrder(String userName,String orderId,Model model){//进入updateOrder的页面
+    public String viewUpdateOrder(String userName,String orderId,Model model) throws AlipayApiException {//进入updateOrder的页面
         //从数据库中拿出当前的order并且将其放入model中，方便前端进行阅览
         Order orderOfUpdate = orderService.getOrder(Integer.parseInt(orderId));
         model.addAttribute("orderOfUpdate",orderOfUpdate);
         return "order/updateOrder";
     }
 
+    //点击修改订单按钮后访问的方法
     @PostMapping("updateOrder")
     public String updateOrder(Order order,Model model){
         order.setOrderId(((Order)model.getAttribute("orderOfUpdate")).getOrderId());
@@ -127,4 +146,5 @@ public class OrderController {
             return  "order/orderList";
         }
     }
+
 }

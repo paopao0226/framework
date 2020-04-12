@@ -26,6 +26,7 @@
                     <th><b>billAddress2</b></th>
                     <th><b>billCity</b></th>
                     <th><b>totalPrice</b></th>
+                    <th><b>status</b></th>
                     <th><b></b></th>
                     <th><b></b></th>
                 </tr>
@@ -43,6 +44,7 @@
                     <td th:text="${order.getBillAddress2()}"></td>
                     <td th:text="${order.getBillCity()}"></td>
                     <td th:text="${order.getTotalPrice()}"></td>
+                    <td th:text="${order.getStatus()}"></td>
                     <td>
                         <a class="Button" th:href="'/order/viewUpdateOrder?userName='+ ${myAccount?.getUsername()} + '&orderId=' + ${order.getOrderId()}">Update</a>
                     </td>

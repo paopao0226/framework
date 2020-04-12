@@ -157,7 +157,7 @@
                                         <i th:if="${lineItem.item} == null">{description unavailable}</i>
                                 </td>
                                 <td th:text="${lineItem.quantity}">${lineItem.quantity}</td>
-                                <td th:text="${lineItem.unitPrice}">
+                                <td th:text="${lineItem.getUnitPrice()}">
 <!--                                    <fmt:formatNumber value="${lineItem.unitPrice}"-->
 <!--                                                      pattern="$#,##0.00"/>-->
                                 </td>
@@ -177,6 +177,11 @@
             </tr>
 
         </table>
+        <div>
+            <form action="/alipay/pay" method="post">
+                <button type="submit">pay</button>
+            </form>
+        </div>
 
     </div>
 
