@@ -28,8 +28,8 @@
                     <th><b>totalPrice</b></th>
                     <th><b>status</b></th>
                     <th><b></b></th>
-                    <th><b></b></th>
-                </tr>
+<!--                    <th><b></b></th>-->
+                </tr>s
                 <tr th:if="${orderList.size() == 0}">
                     <td colspan="8"><b>Your orders is empty.</b></td>
                 </tr>
@@ -44,12 +44,18 @@
                     <td th:text="${order.getBillAddress2()}"></td>
                     <td th:text="${order.getBillCity()}"></td>
                     <td th:text="${order.getTotalPrice()}"></td>
-                    <td th:text="${order.getStatus()}"></td>
+                    <td th:if="${order.getStatus()} eq '0'" th:text="未付款"></td>
+                    <td th:if="${order.getStatus()} eq '1'" th:text="已付款"></td>
                     <td>
                         <a class="Button" th:href="'/order/viewUpdateOrder?userName='+ ${myAccount?.getUsername()} + '&orderId=' + ${order.getOrderId()}">Update</a>
                     </td>
+<!--                    <td>-->
+<!--                        <a class="Button" th:href="'/order/deleteOrder' + '?orderId=' + ${order.getOrderId()} + '&userName='+ ${myAccount?.getUsername()}">Remove</a>-->
+<!--                    </td>-->
                     <td>
-                        <a class="Button" th:href="'/order/deleteOrder' + '?orderId=' + ${order.getOrderId()} + '&userName='+ ${myAccount?.getUsername()}">Remove</a>
+                            <form th:action="'/alipay/pay?orderId='${order.getOrderId()}" method="post">
+                                <button type="submit">pay</button>
+                            </form>
                     </td>
                 </tr>
             </table>

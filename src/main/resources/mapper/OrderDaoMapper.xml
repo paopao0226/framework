@@ -37,8 +37,8 @@
     </update>
     
     <delete id="deleteOrder">
-         DELETE FROM orders
-            WHERE orderid = #{orderId}
+         DELETE FROM orders JOIN orderstatus ON order.orderid = orderstatus.orderid
+            WHERE orders.orderid = #{orderId}
     </delete>
 
     <insert id="insertOrderState">
@@ -50,5 +50,25 @@
         UPDATE orderstatus SET status = #{state}
             WHERE orderid = #{orderId}
     </update>
+
+    <select id="getAllOrders" resultType="Order">
+                SELECT orders.orderid AS orderId, orders.userid AS username, orderdate AS  orderDate, shipaddr1 AS shipAddress1, shipaddr2 AS shipAddress2, shipcity AS shipCity,
+            billaddr1 AS billAddress1, billaddr2 AS billAddress2, billcity AS billCity, totalprice AS totalPrice, status
+                FROM orders JOIN orderstatus on orders.orderid=orderstatus.orderid
+    </select>
+
+    <select id="getOrdersByOrderId" resultType="Order">
+            SELECT orders.orderid AS orderId, orders.userid AS username, orderdate AS  orderDate, shipaddr1 AS shipAddress1, shipaddr2 AS shipAddress2, shipcity AS shipCity,
+                billaddr1 AS billAddress1, billaddr2 AS billAddress2, billcity AS billCity, totalprice AS totalPrice, status
+                    FROM orders JOIN orderstatus on orders.orderid=orderstatus.orderid
+                        WHERE orders.orderid = #{orderId}
+    </select>
+
+    <select id="getOrderByKeyword" resultType="Order">
+        SELECT orders.orderid AS orderId, orders.userid AS username, orderdate AS  orderDate, shipaddr1 AS shipAddress1, shipaddr2 AS shipAddress2, shipcity AS shipCity,
+                billaddr1 AS billAddress1, billaddr2 AS billAddress2, billcity AS billCity, totalprice AS totalPrice, status
+                    FROM orders JOIN orderstatus on orders.orderid=orderstatus.orderid
+                        WHERE orders.orderid LIKE #{keyword} OR  orders.userid LIKE #{keyword}
+    </select>
 
 </mapper>

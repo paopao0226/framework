@@ -77,7 +77,7 @@ public class OrderController {
             orderService.insertOrder(order);
             //当往数据库插入一条order以后，再通过返回的orderId将相应的lineItem也插入数据库
             for (int i = 0; i < cart.getItemList().size(); i++) {
-                lineItemService.insertLineItem(order.getOrderId(), i + 1, cart.getItemList().get(i).getItemId(), cart.getItemList().get(i).getQuantity(), cart.getItemList().get(i).getItem().getUnitCost());
+                lineItemService.insertLineItem(order.getOrderId(), i + 1, cart.getItemList().get(i).getItemId(), cart.getItemList().get(i).getQuantity(), cart.getItemList().get(i).getItem().getListPrice());
             }
             //增加一个order状态,0代表暂未支付
             orderService.insertOrderState(order.getOrderId(),cart.getItemList().size(),order.getOrderDate(),0);

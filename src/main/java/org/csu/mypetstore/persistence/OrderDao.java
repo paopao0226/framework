@@ -25,4 +25,10 @@ public interface OrderDao  {
     int insertOrderState(int orderid, int lineNum, Date timeStamp, int status);
 
     int updateOrderState(int state,int orderId);
+
+    List<Order> getAllOrders();
+
+    Order getOrdersByOrderId(String orderId);
+
+    List<Order> getOrderByKeyword(String keyword);
 }

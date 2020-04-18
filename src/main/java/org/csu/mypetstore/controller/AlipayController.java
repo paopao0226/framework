@@ -95,7 +95,7 @@ public class AlipayController {
 
     @PostMapping("pay")
     @ResponseBody
-    public String pay(HttpServletRequest request, HttpServletResponse response, Model model) throws AlipayApiException, IOException {
+    public String pay(HttpServletRequest request, HttpServletResponse response, Model model,String orderId) throws AlipayApiException, IOException {
         //获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.APP_ID, AlipayConfig.APP_PRIVATE_KEY, "json", AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.sign_type);
         //设置请求参数
@@ -103,7 +103,8 @@ public class AlipayController {
         alipayRequest.setReturnUrl(AlipayConfig.return_url);
         alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
         AlipayTradePagePayModel alipayTradePagePayModel = new AlipayTradePagePayModel();
-        Order order = (Order)model.getAttribute("order");
+//        Order order = (Order)model.getAttribute("order");
+        Order order = orderService.getOrdersByOrderId(orderId);
         alipayTradePagePayModel.setOutTradeNo(String.valueOf(order.getOrderId()));
         alipayTradePagePayModel.setSubject("宠物商店线上交易");
         alipayTradePagePayModel.setTotalAmount(String.valueOf(order.getTotalPrice()));

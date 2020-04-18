@@ -19,6 +19,10 @@ public class OrderService  {
         return orderDao.getOrdersByUsername(username);
     }
 
+    public Order getOrdersByOrderId(String orderId) {
+        return orderDao.getOrdersByOrderId(orderId);
+    }
+
     public Order getOrder(int orderId){
         return orderDao.getOrder(orderId);
     }
@@ -41,5 +45,13 @@ public class OrderService  {
 
     public int updateOrderState(int state,int orderId){
         return orderDao.updateOrderState(state,orderId);
+    }
+
+    public List<Order> getAllOrders() {
+        return orderDao.getAllOrders();
+    }
+
+    public List<Order> getOrdersByKeyword(String keyword){
+        return orderDao.getOrderByKeyword(keyword);
     }
 }
