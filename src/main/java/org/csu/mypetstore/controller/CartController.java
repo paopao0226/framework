@@ -50,54 +50,7 @@ public class CartController {
         return "cart/cart";
     }
 
-    @GetMapping("newOrder")//点击购物车下方的checkOut访问的servlet
-    public String newOrder(){//方法里面的参数username可以自动匹配url的参数
-        return "order/newOrder";
-    }
 
-    @PostMapping("confirmOrder")//点击填写好订单提交后访问的servlet
-    public String confirmOrder(Order order,Model model){//方法里面的参数username可以自动匹配url的参数
-        //在model中添加order对象
-        model.addAttribute("order",order);
-        return "order/confirmOrder";
-    }
-
-    @GetMapping("viewOrder")//confirm订单后访问的servlet
-    public String viewOrder(Model model,String username,String orderId){
-        //使用if-else语句实现order点击来源的判断
-        //这个来源是购物车order
-        if(orderId.equals("-1")) {
-            Cart cart = (Cart) model.getAttribute("cart");
-            Order order = (Order) model.getAttribute("order");
-            order.setUsername(username);
-            SimpleDateFormat sdf = new SimpleDateFormat();//date格式设置
-            sdf.applyPattern("yyyy-MM-dd");
-            Date date = new Date();
-            //给Order的当前时间属性赋值，防止后面数据库插入操作时报错NUll
-            order.setOrderDate(date);
-            //将购物车中的SubTotal属性赋给order的TotalPrice属性
-            order.setTotalPrice(((Cart) model.getAttribute("cart")).getSubTotal());
-            //数据库插入一条order
-            orderService.insertOrder(order);
-            //当往数据库插入一条order以后，再通过返回的orderId将相应的lineItem也插入数据库
-            for (int i = 0; i < cart.getItemList().size(); i++) {
-                lineItemService.insertLineItem(order.getOrderId(), i + 1, cart.getItemList().get(i).getItemId(), cart.getItemList().get(i).getQuantity(), cart.getItemList().get(i).getItem().getUnitCost());
-            }
-            // 当往数据库插入order以后，再将调用lineItemService层的方法来设置order的LineItemList
-            order.setLineItems(lineItemService.getLineItemsByOrderId(order.getOrderId()));
-            BigDecimal totalPrice = cart.getSubTotal();
-            //确认提交订单后清空购物车
-            cartService.deleteAllCartItemByUsername(username);
-            ((Cart) model.getAttribute("cart")).setItemList(null);
-        }
-        else {
-            Order order = orderService.getOrder(Integer.parseInt(orderId));
-            //这里只读出了一部分的信息，我也不知道为啥
-            order.setLineItems(lineItemService.getLineItemsByOrderId(Integer.parseInt(orderId)));
-            model.addAttribute("order",order);
-        }
-        return "order/viewOrder";
-    }
 
     @GetMapping("changeInputQuantity")//前端修改购物车item的quantity的时候，负责处理ajax请求的servlet
     @ResponseBody//这个注释说明了方法的返回值是response的body里面的数据，从而不会被thymeleaf当作网页解析

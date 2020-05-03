@@ -3,6 +3,7 @@ package org.csu.mypetstore.persistence;
 import org.csu.mypetstore.domain.Order;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -16,4 +17,18 @@ public interface OrderDao  {
     int insertOrder(Order order);
 
     void insertOrderStatus(Order order);
+
+    int updateOrder(Order order);
+
+    int deleteOrder(int orderId);
+
+    int insertOrderState(int orderid, int lineNum, Date timeStamp, int status);
+
+    int updateOrderState(int state,int orderId);
+
+    List<Order> getAllOrders();
+
+    Order getOrdersByOrderId(String orderId);
+
+    List<Order> getOrderByKeyword(String keyword);
 }

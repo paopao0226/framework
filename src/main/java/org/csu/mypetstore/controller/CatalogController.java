@@ -19,7 +19,6 @@ import java.util.List;
 @RequestMapping("/catalog")
 @SessionAttributes(value = {"isLogin","myAccount"})
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext.xml")
 public class CatalogController {
 
     @Autowired

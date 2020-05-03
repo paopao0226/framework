@@ -69,9 +69,18 @@
             </table>
         </form>
 
-        <a class="Button" th:if="${cart.numberOfItems > 0}" href="/cart/newOrder">
-            Proceed to Checkout
-        </a>
+        <div>
+            <a class="Button" th:if="${myAccount?.getUsername() != null}" th:href="'/order/viewOrderList' + '?userName=' + ${myAccount?.getUsername()}" th:align="left">
+                Order History
+            </a>
+        </div>
+
+        <div>
+            <a class="Button" th:if="${cart.numberOfItems > 0}" th:href="'/order/newOrder'" th:align="right">
+                Proceed to Checkout
+            </a>
+        </div>
+
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script>
