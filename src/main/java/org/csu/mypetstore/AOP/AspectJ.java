@@ -75,7 +75,7 @@ public class AspectJ {
         }
     }
 
-    @Before(value = "execution(public * org.csu.mypetstore.controller.CartController.viewOrder(..))")
+    @Before(value = "execution(public * org.csu.mypetstore.controller.OrderController.viewOrder(..))")
     public void beforeOrder(JoinPoint joinPoint){
         //1.这里获取到所有的参数值的数组
         Object[] args = joinPoint.getArgs();

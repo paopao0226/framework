@@ -6,14 +6,14 @@ public class Account implements Serializable {
 
     private static final long serialVersionUID = 8751282105532159742L;
 
-    private String username;
+    private String userId;
     private String password;
     private String email;
     private String firstName;
     private String lastName;
     private String status;
-    private String address1;
-    private String address2;
+    private String addr1;
+    private String addr2;
     private String city;
     private String state;
     private String zip;
@@ -30,11 +30,11 @@ public class Account implements Serializable {
     }
 
     public String getUsername() {
-        return username;
+        return userId;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.userId = username;
     }
 
     public String getPassword() {
@@ -78,19 +78,19 @@ public class Account implements Serializable {
     }
 
     public String getAddress1() {
-        return address1;
+        return addr1;
     }
 
     public void setAddress1(String address1) {
-        this.address1 = address1;
+        this.addr1 = address1;
     }
 
     public String getAddress2() {
-        return address2;
+        return addr2;
     }
 
     public void setAddress2(String address2) {
-        this.address2 = address2;
+        this.addr2 = address2;
     }
 
     public String getCity() {

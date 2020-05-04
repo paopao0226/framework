@@ -337,18 +337,21 @@ public class AccountController {
         Map<String,Object> map = new HashMap<>();
         // 验证码（指定长度的随机数）
         String code = CodeUtil.generateVerifyCode(6);
-        String TemplateParam = "{\"code\":\""+code+"\"}";
-        // 短信模板id
-        String TemplateCode = "SMS_152440521";
-        SendSmsResponse response = SmsTool.sendSms(phone,TemplateParam,TemplateCode);
+        System.out.println(code);
+        SendSmsResponse response = SmsTool.sendSms(phone,code);
+        System.out.println("短信接口返回的数据----------------");
+        System.out.println("Code=" + response.getCode());
+        System.out.println("Message=" + response.getMessage());
+        System.out.println("RequestId=" + response.getRequestId());
+        System.out.println("BizId=" + response.getBizId());
+        System.out.println(response);
         map.put("verifyCode",code);
         map.put("phone",phone);
-        request.getSession().setAttribute("CodePhone",map);
         if( response.getCode().equals("OK")) {
             map.put("isOk","OK");
         }
-        System.out.println("a");
         return map;
     }
+
 }
 

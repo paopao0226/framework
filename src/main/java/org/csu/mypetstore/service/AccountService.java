@@ -5,6 +5,8 @@ import org.csu.mypetstore.persistence.AccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("accountService")
 public class AccountService {
     @Autowired
@@ -19,6 +21,17 @@ public class AccountService {
         account.setPassword(password);
         System.out.println(username + " " + password);
         return accountMapper.getAccountByUsernameAndPassword(account);
+    }
+    public List<Account> getAllAccount(){
+        return accountMapper.getAllAccount();
+    }
+    public List<Account> searchAccount(String keyword) {
+        return accountMapper.searchAccount(keyword);
+    }
+    public void deleteAccount(String username){
+        accountMapper.deleteAccount(username);
+        accountMapper.deleteProfile(username);
+        accountMapper.deleteSignon(username);
     }
     public void insertAccount(Account account){
         accountMapper.insertAccount(account);

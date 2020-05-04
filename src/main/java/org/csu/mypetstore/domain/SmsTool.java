@@ -22,10 +22,10 @@ public class SmsTool {
     //产品域名,开发者无需替换
     static final String domain = "dysmsapi.aliyuncs.com";
     // 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
-    static final String accessKeyId = "LTAI4FrKgURv43s2XN8FYZUV";
-    static final String accessKeySecret = "gpZx10anDC8t410cGtWTmDjD2LEIHU";
+    static final String accessKeyId = "LTAI4FqjtAn5CFYuV4mvQSNV";
+    static final String accessKeySecret = "IHnyFWnpUiZuNthY4hd5mLHGhKxNKg";
 
-    public static SendSmsResponse sendSms(String phone , String code, String TemplateCode) throws ClientException {
+    public static SendSmsResponse sendSms(String phone , String code) throws ClientException {
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
         System.setProperty("sun.net.client.defaultReadTimeout", "10000");
@@ -33,19 +33,17 @@ public class SmsTool {
         IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
         IAcsClient acsClient = new DefaultAcsClient(profile);
-
+        System.out.println("invoking");
         //组装请求对象-具体描述见控制台-文档部分内容
         SendSmsRequest request = new SendSmsRequest();
         //必填:待发送手机号
         request.setPhoneNumbers(phone);
         //必填:短信签名-可在短信控制台中找到
-        request.setSignName("签名");
+        request.setSignName("MyPetStore");
         //必填:短信模板-可在短信控制台中找到
-//        request.setTemplateCode("SMS_152440521");
-        request.setTemplateCode(TemplateCode);
+        request.setTemplateCode("SMS_187271607");
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
-        request.setTemplateParam(code);
-
+        request.setTemplateParam("{\"code\":\"" + code + "\"}");
         //选填-上行短信扩展码(无特殊需求用户请忽略此字段)
         //request.setSmsUpExtendCode("90997");
 
@@ -58,6 +56,11 @@ public class SmsTool {
             sendSmsResponse = acsClient.getAcsResponse(request);
         } catch (ClientException e) {
             e.printStackTrace();
+        }
+        if(sendSmsResponse.getCode()!= null && sendSmsResponse.getCode().equals("OK")){
+            System.out.println("短信发送成功！");
+        }else {
+            System.out.println("短信发送失败！");
         }
         return sendSmsResponse;
     }
