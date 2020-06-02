@@ -112,10 +112,9 @@
                 <td th:text="${order.shipCountry}">
                 </td>
             </tr>
-
         </table>
     </div>
-    <a class="Button" th:href="@{'/cart/viewOrder?username=' + ${myAccount?.getUsername()} + '&orderId=-1'}" name="confirmed" value="true"> Confirm</a>
+    <a class="Button" th:href="@{'/order/viewOrder?username=' + ${myAccount?.getUsername()} + '&orderId=-1'}" name="confirmed" value="true"> Confirm</a>
 </div>
 <footer th:replace="common/bottom"></footer>
 </body>

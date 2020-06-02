@@ -177,6 +177,8 @@ body>#Menu {
     voice-family: "\"}\"";
     voice-family: inherit;
 }
+#SearchOrders {
+}
 
 body>#Search {
     height: 9ex;

@@ -78,4 +78,26 @@
         UPDATE SIGNON SET PASSWORD = #{password}
         WHERE USERNAME = #{username}
     </update>
+    <select id="getAllAccount" resultType="Account">
+        SELECT * FROM ACCOUNT
+    </select>
+    <select id="searchAccount" parameterType="string" resultType="Account">
+        select *
+        from account
+        where userid like #{value} or email like #{value} or firstname like #{value}
+            or lastname like #{value} or addr1 like #{value} or addr2 like #{value}
+            or city like #{value} or country like #{value} or phone like #{value}
+    </select>
+    <delete id="deleteAccount" parameterType="string">
+        delete from ACCOUNT
+        where ACCOUNT.USERID = #{value}
+    </delete>
+    <delete id="deleteProfile" parameterType="string">
+        delete from PROFILE
+        where PROFILE.USERID = #{value}
+    </delete>
+    <delete id="deleteSignon" parameterType="string">
+        delete from SIGNON
+        where SIGNON.USERNAME = #{value}
+    </delete>
 </mapper>

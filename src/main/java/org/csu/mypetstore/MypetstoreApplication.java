@@ -9,12 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @SpringBootApplication
 @MapperScan("org.csu.mypetstore.persistence")
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext.xml")
 public class MypetstoreApplication {
-//	public MypetstoreApplication(CatalogController 	t){
-//		t.signon();
-//	}
 	public static void main(String[] args) {
 		SpringApplication.run(MypetstoreApplication.class, args);
 	}

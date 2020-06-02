@@ -1,5 +1,6 @@
 package org.csu.mypetstore;
 
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import org.csu.mypetstore.controller.AccountController;
 import org.csu.mypetstore.domain.Category;
 import org.csu.mypetstore.domain.Item;
@@ -15,16 +16,25 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+import static org.csu.mypetstore.domain.SmsTool.sendSms;
+
 
 @SpringBootTest
 @MapperScan("org.csu.mypetstore.persistence")
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration("classpath:applicationContext.xml")
+@ContextConfiguration("classpath:applicationContext.xml")
 class MypetstoreApplicationTests {
 
+    private static int newcode;
     @Autowired
     CatalogService catalogService;
-
+    //以下为测试代码，随机生成验证码
+    public static int getNewcode() {
+        return newcode;
+    }
+    public static void setNewcode(){
+        newcode = (int)(Math.random()*9999)+100;  //每次调用生成一次四位数的随机数
+    }
 
     @Test
     void contextLoads() {
@@ -74,11 +84,21 @@ class MypetstoreApplicationTests {
 //        System.out.println(product.getDescriptionImage());
 //        System.out.println(product.getDescriptionText());
 //    }
-    @Test
+        @Test
     public void temp(){
-        AccountController controller = new AccountController();
-        System.out.println(controller.KL("acc"));
+            AccountController controller = new AccountController();
+            System.out.println(controller.KL("acc"));
+        }
+        @Test
+        public static void main(String[] args) throws Exception {
+            setNewcode();
+            String code = Integer.toString(getNewcode());
+            System.out.println(code);
+            SendSmsResponse sendSms =sendSms("15333251606",code);//填写你需要测试的手机号码
+            System.out.println("短信接口返回的数据----------------");
+            System.out.println("Code=" + sendSms.getCode());
+            System.out.println("Message=" + sendSms.getMessage());
+            System.out.println("RequestId=" + sendSms.getRequestId());
+            System.out.println("BizId=" + sendSms.getBizId());
     }
-
-
 }

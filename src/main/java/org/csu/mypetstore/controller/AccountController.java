@@ -1,6 +1,10 @@
 package org.csu.mypetstore.controller;
 
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.aliyuncs.exceptions.ClientException;
 import org.csu.mypetstore.domain.Account;
+import org.csu.mypetstore.domain.CodeUtil;
+import org.csu.mypetstore.domain.SmsTool;
 import org.csu.mypetstore.service.AccountService;
 import org.csu.mypetstore.service.CatalogService;
 import org.mybatis.spring.annotation.MapperScan;
@@ -11,6 +15,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.awt.*;
@@ -19,9 +24,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 @Controller
 @RequestMapping("/account")
@@ -325,5 +329,29 @@ public class AccountController {
         System.out.println(password + " " + md5Password);
         return md5Password;
     }
+    //验证码
+    @GetMapping("/smsXxs")
+    @ResponseBody
+    public Map<String,Object> smsXxs(String phone, HttpServletRequest request) throws ClientException {
+        System.out.println("完成");
+        Map<String,Object> map = new HashMap<>();
+        // 验证码（指定长度的随机数）
+        String code = CodeUtil.generateVerifyCode(6);
+        System.out.println(code);
+        SendSmsResponse response = SmsTool.sendSms(phone,code);
+        System.out.println("短信接口返回的数据----------------");
+        System.out.println("Code=" + response.getCode());
+        System.out.println("Message=" + response.getMessage());
+        System.out.println("RequestId=" + response.getRequestId());
+        System.out.println("BizId=" + response.getBizId());
+        System.out.println(response);
+        map.put("verifyCode",code);
+        map.put("phone",phone);
+        if( response.getCode().equals("OK")) {
+            map.put("isOk","OK");
+        }
+        return map;
+    }
+
 }
 

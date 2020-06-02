@@ -25,6 +25,12 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>3.3.2</version>
          </dependency>
+        <!-- 支付宝依赖包 -->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>4.8.73.ALL</version>
+        </dependency>
         <!--验证码依赖包-->
 <!--        <dependency>-->
 <!--            <groupId>com.github.penggle</groupId>-->

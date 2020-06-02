@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+    <div id="Catalog">
+        <div>
+            <h2>Order Manager</h2>
+        </div>
+        <div id="SearchOrders">
+            <div id="SearchContent">
+                <form action="/cms/searchOrders" method="post">
+                    <input type="text" id="keyword" name="keyword" size="20" onkeyup="searchOrdersByKeyword()" list="tips"/>
+                    <datalist id="tips"></datalist>
+                    <input type="submit" name="searchProducts" value="Search"/>
+                </form>
+            </div>
+        </div>
+        <table>
+            <tr>
+                <th><b>Order ID</b></th>
+                <th><b>Order Date</b></th>
+                <th><b>shipAddress1</b></th>
+                <th><b>shipAddress2</b></th>
+                <th><b>shipCity</b></th>
+                <th><b>billAddress1</b></th>
+                <th><b>billAddress2</b></th>
+                <th><b>billCity</b></th>
+                <th><b>totalPrice</b></th>
+                <th><b>status</b></th>
+                <th><b></b></th>
+                <th><b></b></th>
+            </tr>
+            <tr th:each="order:${AllOrderList}">
+                <td th:text="${order.getOrderId()}"></td>
+                <td th:text="${order.getOrderDate()}"></td>
+                <td th:text="${order.getShipAddress1()}"></td>
+                <td th:text="${order.getShipAddress2()}"></td>
+                <td th:text="${order.getShipCity()}"></td>
+                <td th:text="${order.getBillAddress1()}"></td>
+                <td th:text="${order.getBillAddress2()}"></td>
+                <td th:text="${order.getBillCity()}"></td>
+                <td th:text="${order.getTotalPrice()}"></td>
+                <td th:text="${order.getStatus()}"></td>
+                <td>
+                    <a class="Button"
+                       th:href="'/cms/viewUpdateOrder?userName='+ ${order.username} + '&orderId=' + ${order.getOrderId()}">Update</a>
+                </td>
+                <td>
+                    <a class="Button"
+                       th:href="'/cms/deleteOrder' + '?orderId=' + ${order.getOrderId()} + '&userName='+ ${order.username}">Remove</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<footer th:replace="common/anotherbottom"></footer>
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    var tips = document.getElementById("tips");
+    function textOn(div) {
+        document.getElementById("keyword").value(div.innerText);
+        tips.style.display = "none";
+    }
+    function changeBackColorOut(div) {
+        tips.style.backgroundColor = "white";
+    }
+    function changeBackColorOver(div) {
+        tips.style.backgroundColor = "#CCCCCC";
+    }
+
+    function searchOrdersByKeyword() {
+        var keyword = document.getElementById("keyword").value;
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            type: "get",
+            url: "/cms/ajaxSearchOrders?keyword=" + keyword,
+            success: function (result) {
+                resultSet = result.split(",")
+                var html = "";
+                for(var i=0;i < resultSet.length;i++){
+                    //每个div有鼠标移出，移入事件
+                    html += "<option onclick = 'textOn(this)' onmouseout = 'changeBackColorOut(this)' onmouseover = 'changeBackColorOver(this)'>" + resultSet[i] + "</option>";
+                }
+                tips.innerHTML = html;
+            }
+        });
+    }
+</script>
