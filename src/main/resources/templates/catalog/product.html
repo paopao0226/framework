@@ -10,11 +10,12 @@
 
 </div>
 
-<
+
 <div id="Content">
     <div id="BackLink">
-        <a th:href="@{/catalog/viewCategory?categoryId=}+${product.categoryId}">Return to <label
-                th:text="${product.categoryId}">Product Id</label></a>
+        <a th:href="@{/catalog/viewCategory?categoryId=}+${product.categoryId}">
+            Return to<label th:text="${product.categoryId}">Product Id</label>
+        </a>
     </div>
 
     <div id="Catalog">
@@ -53,8 +54,5 @@
 
     </div>
 </div>
-</body>
-</html>
-
 </body>
 </html>

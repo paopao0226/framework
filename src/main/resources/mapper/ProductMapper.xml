@@ -22,6 +22,7 @@
         from product
         where productId=#{productId}
     </select>
+
     <select id="searchProductList" parameterType="String" resultType="Product">
         select
             productId,
@@ -31,6 +32,4 @@
         from product
         where name like #{value}
     </select>
-
-
 </mapper>

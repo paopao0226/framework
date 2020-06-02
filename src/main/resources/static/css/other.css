@@ -1,0 +1,40 @@
+div.wrap{
+    width: 115px;
+    margin: 20px auto 0 auto;
+}
+.auto-inp{
+    width: 115px;
+    height: 18px;
+    padding-left: .5em;
+    border-radius: 2px;
+    border: 1px solid #FFFFFF;
+    color: #000000;
+    outline: none;
+}
+.auto{
+    width: 115px;
+    border: 1px solid #FFFFFF;
+    border-top: none;
+    position: absolute;
+}
+.auto_out{
+    width: 115px;
+    height: 18px;
+    line-height: 18px;
+    padding-left: .5em;
+    font-size: 10px;
+
+    color: #eaac00;
+    background: #FFFFFF;
+    overflow: hidden;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+.auto_out.on{
+    background: #FFFFFF;
+    cursor: pointer;
+}
+.hidden{
+    display: none;
+}

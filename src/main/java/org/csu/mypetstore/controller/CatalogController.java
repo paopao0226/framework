@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/catalog")
 @SessionAttributes(value = {"isLogin","myAccount"})
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext.xml")
+//@ContextConfiguration("classpath:applicationContext.xml")
 public class CatalogController {
 
     @Autowired
@@ -35,9 +35,9 @@ public class CatalogController {
         Account account = new Account();
         System.out.println(account);
         //转回main时判断是否登录，在进入系统时初始化登录
-        if(isEnter.equals("0")) {
-            model.addAttribute("isLogin", false);
-        }
+//        if(isEnter.equals("0")) {
+//            model.addAttribute("isLogin", false);
+//        }
         return "catalog/main";
     }
     @GetMapping("/signon")
@@ -95,22 +95,21 @@ public class CatalogController {
 //        }
 //        return "catalog/item";
 //    }
-@PostMapping("searchProducts")
-public String searchProducts(String keyword, Model model) {
+    @PostMapping("searchProducts")
+    public String searchProducts(String keyword, Model model) {
 
-    if (keyword == null || keyword.length() < 1) {
-        String msg = "Please enter a keyword to search for, then press the search button.";
-        model.addAttribute("msg", msg);
-        return "common/error";
-    } else {
-        List<Product> productList = catalogService.searchProductList(keyword.toLowerCase());
-        processProductDescription(productList);
-        model.addAttribute("productList", productList);
-        return "catalog/searchProduct";
+        if (keyword == null || keyword.length() < 1) {
+            String msg = "Please enter a keyword to search for, then press the search button.";
+            model.addAttribute("msg", msg);
+            return "common/error";
+        } else {
+            List<Product> productList = catalogService.searchProductList(keyword.toLowerCase());
+            processProductDescription(productList);
+            model.addAttribute("productList", productList);
+            return "catalog/searchProduct";
+        }
     }
 
-
-}
     private void processProductDescription(Product product){
         System.out.println(product.getDescription());
         String [] temp = product.getDescription().split("\"");
@@ -124,6 +123,4 @@ public String searchProducts(String keyword, Model model) {
             processProductDescription(product);
         }
     }
-
-
 }

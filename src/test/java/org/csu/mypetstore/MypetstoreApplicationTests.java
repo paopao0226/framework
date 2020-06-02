@@ -19,7 +19,7 @@ import java.util.List;
 @SpringBootTest
 @MapperScan("org.csu.mypetstore.persistence")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext.xml")
+//@ContextConfiguration("classpath:applicationContext.xml")
 class MypetstoreApplicationTests {
 
     @Autowired
@@ -74,9 +74,11 @@ class MypetstoreApplicationTests {
 //        System.out.println(product.getDescriptionImage());
 //        System.out.println(product.getDescriptionText());
 //    }
-        @Test
+    @Test
     public void temp(){
-            AccountController controller = new AccountController();
-            System.out.println(controller.KL("acc"));
-        }
+        AccountController controller = new AccountController();
+        System.out.println(controller.KL("acc"));
+    }
+
+
 }
