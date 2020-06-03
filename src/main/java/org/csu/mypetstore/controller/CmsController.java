@@ -28,7 +28,7 @@ public class CmsController {
         return "cms/main";
     }
 
-    @GetMapping("ViewManageOrder")
+    @GetMapping("ViewManageOrder")//进入订单管理页面对应的方法
     public String manageOrder(Model model){
         List<Order> AllOrderList = orderService.getAllOrders();
         model.addAttribute("AllOrderList",AllOrderList);
@@ -36,7 +36,7 @@ public class CmsController {
     }
 
     @GetMapping("viewUpdateOrder")
-    public String viewUpdateOrder(String userName,String orderId,Model model){
+    public String viewUpdateOrder(String userName,String orderId,Model model){//点击update后的方法
         //从数据库中拿出当前的order并且将其放入model中，方便前端进行阅览
         Order orderOfUpdate = orderService.getOrder(Integer.parseInt(orderId));
         model.addAttribute("orderOfUpdate",orderOfUpdate);
@@ -79,38 +79,33 @@ public class CmsController {
     }
 
     @PostMapping("searchOrders")
-    public String searchOrders(String keyword,Model model){
-        //判断keyword指的是订单号还是用户名，这边默认用户名必须包含字母,所以如果keyword为纯数字的话指的就是订单号
-        Pattern pattern = Pattern.compile("[0-9]{1,}");
-        Matcher matcher = pattern.matcher((CharSequence)keyword);
-        boolean result=matcher.matches();
-        if (result == true) {
-            List<Order> AllOrderList = new ArrayList<>();
-            AllOrderList.add(orderService.getOrdersByOrderId(keyword));
-            model.addAttribute("AllOrderList",AllOrderList);
-        }else{
-            List<Order> AllOrderList = orderService.getOrdersByUsername(keyword);
-            model.addAttribute("AllOrderList",AllOrderList);
-        }
+    public String searchOrders(String key,Model model){//搜索订单对应的方法
+        //获取input框的关键词，在数据库搜索出相似的订单
+        List<Order> AllOrderList = orderService.getOrdersByKeyword('%'+ key+ '%');
+        model.addAttribute("AllOrderList",AllOrderList);
         return "cms/manageOrder";
     }
 
     @GetMapping("ajaxSearchOrders")
     @ResponseBody
-    public String ajaxSearchOrders(String keyword){
-        System.out.println("----------------服务器接受到请求------------------");
+    public String ajaxSearchOrders( String keyword){//在搜索订单的输入框输入关键词时对应的异步对象的方法
+        System.out.println("----------------服务器接受到请求------------------" + keyword);
+        //获取input框的关键词，在数据库搜索出相似的订单
         List<Order> searchOrderList = orderService.getOrdersByKeyword('%'+ keyword+ '%');
         StringBuffer result = new StringBuffer();
-        for(int i = 0 ; i < searchOrderList.size();i++){
+        for(int i = 0 ; i < searchOrderList.size();i++){//将与关键词匹配的order输入缓存
             if(i == searchOrderList.size() -1){
                 result.append(((Order)searchOrderList.get(i)).getOrderId() + ",");
                 result.append(((Order)searchOrderList.get(i)).getUsername());
             }
-            result.append(((Order)searchOrderList.get(i)).getOrderId() + ",");
-            result.append(((Order)searchOrderList.get(i)).getUsername() + ",");
-            System.out.println("----------------searchOrderList.size(------------------");
-            System.out.println(searchOrderList.size());
-        }
+            else {
+                result.append(((Order)searchOrderList.get(i)).getOrderId() + ",");
+                result.append(((Order)searchOrderList.get(i)).getUsername() + ",");
+            }
+            System.out.println(((Order)searchOrderList.get(i)).getOrderId() + "," + ((Order)searchOrderList.get(i)).getUsername());
+    }
+        System.out.println("----------------searchOrderList.size------------------");
+        System.out.println(searchOrderList.size());
         return result.toString();
     }
 }

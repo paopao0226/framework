@@ -37,7 +37,7 @@
     </update>
     
     <delete id="deleteOrder">
-         DELETE FROM orders JOIN orderstatus ON order.orderid = orderstatus.orderid
+         DELETE orders, orderstatus FROM orders JOIN orderstatus ON orders.orderid = orderstatus.orderid
             WHERE orders.orderid = #{orderId}
     </delete>
 

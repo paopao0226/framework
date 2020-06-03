@@ -95,7 +95,7 @@ public class AlipayController {
 
     @PostMapping("pay")
     @ResponseBody
-    public String pay(HttpServletRequest request, HttpServletResponse response, Model model,String orderId) throws AlipayApiException, IOException {
+    public String pay(Model model,String orderId) throws AlipayApiException, IOException {
         //获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.APP_ID, AlipayConfig.APP_PRIVATE_KEY, "json", AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.sign_type);
         //设置请求参数

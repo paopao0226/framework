@@ -8,6 +8,7 @@ import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.request.AlipayTradePrecreateRequest;
 import com.alipay.api.response.AlipayTradePagePayResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
+import org.csu.mypetstore.domain.Account;
 import org.csu.mypetstore.domain.AlipayConfig;
 import org.csu.mypetstore.domain.Cart;
 import org.csu.mypetstore.domain.Order;
@@ -126,8 +127,15 @@ public class OrderController {
             model.addAttribute("msg","update failed,please check again");
             return "common/error";
         }
-        else
+        else{
+            Account account = (Account) model.getAttribute("myAccount");
+            //通过userName在数据库中拿出orderList
+            List<Order> orderList = orderService.getOrdersByUsername(account.getUsername());
+            //将orderlist放入model，并且把作用域设置为session
+            model.addAttribute("orderList",orderList);
             return "order/orderList";
+        }
+
     }
 
     @GetMapping("deleteOrder")
