@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+    <div id="Catalog">
+        <div>
+            <h2>Item Manager</h2>
+        </div>
+        <!--        <div id="SearchProducts">-->
+        <!--            <div id="SearchContent">-->
+        <!--                <form action="/cms/searchProducts" method="post">-->
+        <!--                    <input type="text" id="keyword" name="keyword" size="20" onkeyup="searchProductsByKeyword()" list="tips"/>-->
+        <!--                    <datalist id="tips"></datalist>-->
+        <!--                    <input type="submit" name="searchProducts" value="Search"/>-->
+        <!--                </form>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <h2 th:text="${product.name}+' '+${product.productId}">Product Name</h2>
+
+        <table id="table-3">
+            <thead>
+            <tr>
+                <th>Item ID</th>
+                <th>Description</th>
+                <th>List Price</th>
+                <th>&nbsp;</th>
+                <th> </th>
+            </tr>
+            </thead>
+
+            <tr th:each="item:${itemList}">
+<!--                    <a th:href="@{'/cms/viewManageItem?&itemId=' + ${item.itemId}}" th:text="${item.itemId}">Item Id</a>-->
+                <td th:text="${item.itemId}">Item Id</td>
+
+                <td th:text="${item.attribute1}">Item Attribute1</td>
+                <td th:text="'$' + ${#numbers.formatDecimal(item.listPrice,1 ,2)}">Item List Price</td>
+                <td><a class="Button" th:href="@{'/cms/ViewUpdateItem?updateItemId='+${item.itemId}}">Update</a></td>
+                <td><a class="Button" th:href="@{'/cms/DeleteItem?deleteItemId='+${item.itemId}+'&productId='+${product.productId}}">Delete</a></td>
+            </tr>
+        </table>
+        <br>
+        <a class="Button" th:href="@{'/cms/ViewAddItem?productId='+${product.productId}}">Add New Item</a>
+
+    </div>
+</div>
+<footer th:replace="common/anotherbottom"></footer>
+</body>
+</html>

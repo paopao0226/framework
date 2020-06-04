@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+    <div id="Catalog">
+        <div>
+            <h2>Category Manager</h2>
+        </div>
+        <div id="SearchProducts">
+            <div id="SearchContent">
+                <form action="/cms/searchProducts" method="post">
+<!--                    <input type="text" id="productKeyword" name="keyword" size="20" onkeyup="searchProductsByKeyword()" list="tips"/>-->
+<!--                    <datalist id="tips"></datalist>-->
+                    <input type="text" id="productKeyword" name="productKeyword" size="20" />
+                    <input type="submit" name="searchProducts" value="Search Product"/>
+                </form>
+                <form action="/cms/searchItems" method="post">
+<!--                    <input type="text" id="itemKeyword" name="keyword" size="20" onkeyup="searchProductsByKeyword()" list="tips"/>-->
+<!--                    <datalist id="tips"></datalist>-->
+                    <input type="text" id="itemKeyword" name="itemKeyword" size="20" />
+                    <input type="submit" name="searchItems" value="Search Item   "/>
+                </form>
+            </div>
+        </div>
+
+        <form>
+            <table>
+                <tr>
+                    <th>Category ID</th>
+                    <th>Name</th>
+                </tr>
+
+                <tr th:each="category:${AllCategoryList}">
+                    <!--                <td><a th:href="" th:text="${product.getProductId()}">Product ID</a></td>-->
+                    <td><a th:href="@{/cms/ViewManageProduct?categoryId=}+${category.getCategoryId()}" th:text="${category.getCategoryId()}">Category ID</a></td>
+<!--                    th:href="@{/catalog/viewProduct?productId=}+${product.productId}"-->
+                    <td th:text="${category.getName()}">Category Name</td>
+                </tr>
+
+
+
+            </table>
+        </form>
+
+    </div>
+</div>
+<footer th:replace="common/anotherbottom"></footer>
+</body>
+</html>

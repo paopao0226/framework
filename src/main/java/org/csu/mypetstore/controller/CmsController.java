@@ -2,24 +2,26 @@ package org.csu.mypetstore.controller;
 
 import com.alipay.api.AlipayApiException;
 import org.bouncycastle.math.raw.Mod;
-import org.csu.mypetstore.domain.Account;
-import org.csu.mypetstore.domain.Order;
-import org.csu.mypetstore.domain.Product;
+import org.csu.mypetstore.domain.*;
 import org.csu.mypetstore.service.AccountService;
+import org.csu.mypetstore.service.CatalogService;
 import org.csu.mypetstore.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Controller
-@SessionAttributes(value = {"cart","order","isLogin","myAccount","controlAccount","orderList","msg","orderOfUpdate","AllOrderList","AllAccountList","languageList","categoryList","mylanguagePreference","myfavouriteCategoryId","myListOpt","myBannerOpt"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
+@Component
+@SessionAttributes(value = {"product","cart","order","isLogin","myAccount","controlAccount","orderList","msg","orderOfUpdate","productOfUpdate","itemOfUpdate","AllOrderList","AllAccountList","languageList","categoryList","mylanguagePreference","myfavouriteCategoryId","myListOpt","myBannerOpt"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
 @RequestMapping("/cms/")
 public class CmsController {
 
@@ -28,6 +30,8 @@ public class CmsController {
     OrderService orderService;
     @Autowired
     AccountService accountService;
+    @Autowired
+    CatalogService catalogService;
     //暂时保存查看的用户名
     String username;
 
@@ -218,6 +222,7 @@ public class CmsController {
             }
         }
     }
+
     @GetMapping("viewEntry")
     public String viewEntry(){
         return "index";
@@ -253,6 +258,296 @@ public class CmsController {
         String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
         System.out.println(password + " " + md5Password);
         return md5Password;
+    }
+
+    @GetMapping("ViewManageCategory")
+    public String manageCategory(Model model){
+        List<Category> AllCategoryList = catalogService.getAllCategorys();
+        model.addAttribute("AllCategoryList", AllCategoryList);
+
+        return "cms/manageCategory";
+    }
+
+    @GetMapping("ViewManageProduct")
+    public String manageProduct(String categoryId, Model model){
+        if (categoryId != null) {
+            Category category = catalogService.getCategory(categoryId);
+            List<Product> productList = catalogService.getProductListByCategory(categoryId);
+            model.addAttribute("category", category);
+            model.addAttribute("productList", productList);
+        }
+        return "cms/manageProduct";
+    }
+
+    @GetMapping("ViewManageItem")
+    public String manageItem(String productId, Model model){
+        if (productId != null) {
+            Product product = catalogService.getProduct(productId);
+            List<Item> itemList = catalogService.getItemListByProduct(productId);
+
+            model.addAttribute("product", product);
+            model.addAttribute("itemList", itemList);
+        }
+        return "cms/manageItem";
+    }
+
+    @GetMapping("DeleteProduct")
+    public String deleteProduct(String deleteProductId, String productKeyword, String categoryId, Model model){
+        if (deleteProductId != null) {
+            if (categoryId != null) {
+                catalogService.deleteItemByProductId(deleteProductId);
+                catalogService.deleteProduct(deleteProductId);
+                List<Item> itemList = catalogService.getItemListByProduct(deleteProductId);
+                String tempItemId;
+                for(int i = 0; i < itemList.size(); i++){
+                    tempItemId = itemList.get(i).getItemId();
+                    catalogService.deleteInventory(tempItemId);
+                }
+                Category category = catalogService.getCategory(categoryId);
+                List<Product> productList = catalogService.getProductListByCategory(categoryId);
+                model.addAttribute("category", category);
+                model.addAttribute("productList", productList);
+                return "cms/manageProduct";
+            }
+            if (productKeyword != null) {
+                catalogService.deleteItemByProductId(deleteProductId);
+                catalogService.deleteProduct(deleteProductId);
+                List<Item> itemList = catalogService.getItemListByProduct(deleteProductId);
+                String tempItemId;
+                for(int i = 0; i < itemList.size(); i++){
+                    tempItemId = itemList.get(i).getItemId();
+                    catalogService.deleteInventory(tempItemId);
+                }
+                List<Product> productList = catalogService.searchProductList(productKeyword.toLowerCase());
+                processProductDescription(productList);
+                model.addAttribute("productList", productList);
+                model.addAttribute("productKeyword", productKeyword);
+                return "cms/searchProduct";
+            }
+        }
+        return "cms/manageProduct";
+    }
+
+    @GetMapping("ViewUpdateProduct")
+    public String viewUpdateProduct(String updateProductId, Model model){
+        if (updateProductId != null) {
+            Product productOfUpdate = catalogService.getProduct(updateProductId);
+            model.addAttribute("productOfUpdate", productOfUpdate);
+        }
+        return "cms/updateProduct";
+    }
+
+    @PostMapping("UpdateProduct")
+    public String updateProduct(String categoryType, String productName,Model model){
+        Product product = (Product)model.getAttribute("productOfUpdate");
+        product.setCategoryId(categoryType);
+        product.setName(productName);
+
+        int flag = catalogService.updateProduct(product);
+        if(flag == 0){
+            model.addAttribute("msg","Update failed,please check again");
+            return "common/error";
+        }
+        else {
+            Category category = catalogService.getCategory(categoryType);
+            List<Product> productList = catalogService.getProductListByCategory(categoryType);
+            model.addAttribute("category", category);
+            model.addAttribute("productList", productList);
+            return "cms/manageProduct";
+        }
+    }
+
+    @GetMapping("ViewAddProduct")
+    public String viewAddProduct(String categoryId, Model model){
+        if (categoryId != null) {
+            Category category = catalogService.getCategory(categoryId);
+            model.addAttribute("category", category);
+        }
+        return "cms/addProduct";
+    }
+
+    @PostMapping("addProduct")
+    public String addProduct(String productId, String categoryType, String productName, Model model){
+        Product product = new Product();
+        product.setProductId(productId);
+        product.setCategoryId(categoryType);
+        product.setName(productName);
+
+        int flag = catalogService.addProduct(product);
+        if(flag == 0){
+            model.addAttribute("msg","Add failed,please check again");
+            return "common/error";
+        }
+        else {
+            Category category = catalogService.getCategory(categoryType);
+            List<Product> productList = catalogService.getProductListByCategory(categoryType);
+            model.addAttribute("category", category);
+            model.addAttribute("productList", productList);
+            return "cms/manageProduct";
+        }
+    }
+
+    @GetMapping("DeleteItem")
+    public String deleteItem(String deleteItemId, String productId,String itemKeyword, Model model){
+        if (deleteItemId != null) {
+            if (productId != null) {
+                catalogService.deleteItem(deleteItemId);
+                catalogService.deleteInventory(deleteItemId);
+                Product product = catalogService.getProduct(productId);
+                List<Item> itemList = catalogService.getItemListByProduct(productId);
+                model.addAttribute("product", product);
+                model.addAttribute("itemList", itemList);
+                return "cms/manageItem";
+            }
+            if (itemKeyword != null) {
+                catalogService.deleteItem(deleteItemId);
+                catalogService.deleteInventory(deleteItemId);
+                List<Item> itemList = catalogService.searchItemList(itemKeyword.toLowerCase());
+                model.addAttribute("itemList", itemList);
+                model.addAttribute("itemKeyword", itemKeyword);
+                return "cms/searchItem";
+            }
+        }
+        return "cms/manageItem";
+    }
+
+    @GetMapping("ViewUpdateItem")
+    public String viewUpdateItem(String updateItemId, Model model){
+        if (updateItemId != null) {
+            Item itemOfUpdate = catalogService.getItem(updateItemId);
+            model.addAttribute("itemOfUpdate", itemOfUpdate);
+        }
+        return "cms/updateItem";
+    }
+
+    @PostMapping("UpdateItem")
+    public String updateItem(String itemListPrice, String itemUnitCost,
+                             String itemSupplier, String itemStatus,
+                             String itemAttribute1, String itemAttribute2,
+                             String itemAttribute3, String itemAttribute4,
+                             String itemAttribute5, Model model){
+        Item item = (Item)model.getAttribute("itemOfUpdate");
+        BigDecimal tempItemListPrice = new BigDecimal(itemListPrice);
+        BigDecimal tempItemUnitCost = new BigDecimal(itemUnitCost);
+
+        item.setListPrice(tempItemListPrice);
+        item.setUnitCost(tempItemUnitCost);
+        item.setSupplierId(Integer.parseInt(itemSupplier));
+        item.setStatus(itemStatus);
+        item.setAttribute1(itemAttribute1);
+        item.setAttribute2(itemAttribute2);
+        item.setAttribute3(itemAttribute3);
+        item.setAttribute4(itemAttribute4);
+        item.setAttribute5(itemAttribute5);
+
+        int flag = catalogService.updateItem(item);
+        if(flag == 0){
+            model.addAttribute("msg","Update failed,please check again");
+            return "common/error";
+        }
+        else {
+            String productId = item.getProductId();
+            Product product = catalogService.getProduct(productId);
+            List<Item> itemList = catalogService.getItemListByProduct(productId);
+            model.addAttribute("product", product);
+            model.addAttribute("itemList", itemList);
+            return "cms/manageItem";
+        }
+    }
+
+    @GetMapping("ViewAddItem")
+    public String viewAddItem(String productId, Model model){
+        if (productId != null) {
+            Product product = catalogService.getProduct(productId);
+            model.addAttribute("product", product);
+        }
+        return "cms/addItem";
+    }
+
+    @PostMapping("addItem")
+    public String addItem(String itemId, String itemListPrice, String itemUnitCost,
+                          String itemSupplier, String itemStatus,
+                          String itemAttribute1, String itemAttribute2,
+                          String itemAttribute3, String itemAttribute4,
+                          String itemAttribute5, Model model){
+        Item item = new Item();
+        item.setItemId(itemId);
+
+        Product tempProduct = (Product)model.getAttribute("product");
+        String tempProductId = tempProduct.getProductId();
+
+        item.setProductId(tempProductId);
+        System.out.println("hahahhaa" + tempProductId);
+        BigDecimal tempItemListPrice = new BigDecimal(itemListPrice);
+        BigDecimal tempItemUnitCost = new BigDecimal(itemUnitCost);
+
+        item.setListPrice(tempItemListPrice);
+        item.setUnitCost(tempItemUnitCost);
+        item.setSupplierId(Integer.parseInt(itemSupplier));
+        item.setStatus(itemStatus);
+        item.setAttribute1(itemAttribute1);
+        item.setAttribute2(itemAttribute2);
+        item.setAttribute3(itemAttribute3);
+        item.setAttribute4(itemAttribute4);
+        item.setAttribute5(itemAttribute5);
+
+        int flag = catalogService.addItem(item);
+        if(flag == 0){
+            model.addAttribute("msg","Add failed,please check again");
+            return "common/error";
+        }
+        else {
+            Product product = catalogService.getProduct(tempProductId);
+            List<Item> itemList = catalogService.getItemListByProduct(tempProductId);
+            model.addAttribute("product", product);
+            model.addAttribute("itemList", itemList);
+            return "cms/manageItem";
+        }
+    }
+
+    @PostMapping("searchProducts")
+    public String searchProducts(String productKeyword,Model model){
+
+        if (productKeyword == null || productKeyword.length() < 1) {
+            String msg = "Please enter a keyword to search for, then press the search button.";
+            model.addAttribute("msg", msg);
+            return "common/error";
+        } else {
+            List<Product> productList = catalogService.searchProductList(productKeyword.toLowerCase());
+            processProductDescription(productList);
+            model.addAttribute("productList", productList);
+            model.addAttribute("productKeyword", productKeyword);
+            return "cms/searchProduct";
+        }
+    }
+
+    @PostMapping("searchItems")
+    public String searchItems(String itemKeyword,Model model){
+
+        if (itemKeyword == null || itemKeyword.length() < 1) {
+            String msg = "Please enter a keyword to search for, then press the search button.";
+            model.addAttribute("msg", msg);
+            return "common/error";
+        } else {
+            List<Item> itemList = catalogService.searchItemList(itemKeyword.toLowerCase());
+            model.addAttribute("itemList", itemList);
+            model.addAttribute("itemKeyword", itemKeyword);
+            return "cms/searchItem";
+        }
+    }
+
+    private void processProductDescription(Product product){
+        System.out.println(product.getDescription());
+        String [] temp = product.getDescription().split("\"");
+        product.setDescriptionImage(temp[1]);
+        product.setDescriptionText(temp[2].substring(1));
+        System.out.println(product.getDescriptionText());
+        System.out.println(product.getDescriptionImage());
+    }
+    private void processProductDescription(List<Product> productList){
+        for(Product product : productList) {
+            processProductDescription(product);
+        }
     }
 }
 

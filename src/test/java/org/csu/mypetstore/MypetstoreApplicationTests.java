@@ -26,8 +26,10 @@ import static org.csu.mypetstore.domain.SmsTool.sendSms;
 class MypetstoreApplicationTests {
 
     private static int newcode;
+
     @Autowired
     CatalogService catalogService;
+
     //以下为测试代码，随机生成验证码
     public static int getNewcode() {
         return newcode;
@@ -74,31 +76,67 @@ class MypetstoreApplicationTests {
             System.out.println(productList.get(i).getName());
         }
     }
-//    @Test
-//    void test(){
-//        CatalogController catalogController = new CatalogController();
-//        Product product = new Product();
-//        product.setDescription("<image src=\"images/bird2.gif\">Great companion for up to 75 years");
-//        System.out.println(product.getDescription());
-//        catalogController.processProductDescription(product);
-//        System.out.println(product.getDescriptionImage());
-//        System.out.println(product.getDescriptionText());
-//    }
-        @Test
+
+    @Test
     public void temp(){
-            AccountController controller = new AccountController();
-            System.out.println(controller.KL("acc"));
+        AccountController controller = new AccountController();
+        System.out.println(controller.KL("acc"));
+    }
+
+    @Test
+    public static void main(String[] args) throws Exception {
+        setNewcode();
+        String code = Integer.toString(getNewcode());
+        System.out.println(code);
+        SendSmsResponse sendSms =sendSms("15333251606",code);//填写你需要测试的手机号码
+        System.out.println("短信接口返回的数据----------------");
+        System.out.println("Code=" + sendSms.getCode());
+        System.out.println("Message=" + sendSms.getMessage());
+        System.out.println("RequestId=" + sendSms.getRequestId());
+        System.out.println("BizId=" + sendSms.getBizId());
+    }
+
+    @Test
+    public void testGetAllProducts(){
+        List<Product> productList = catalogService.getAllProducts();
+        for(int i = 0; i < productList.size(); i++){
+            System.out.println(productList.get(i).getProductId());
+            System.out.println(productList.get(i).getName());
+            System.out.println(productList.get(i).getDescription());
         }
-        @Test
-        public static void main(String[] args) throws Exception {
-            setNewcode();
-            String code = Integer.toString(getNewcode());
-            System.out.println(code);
-            SendSmsResponse sendSms =sendSms("15333251606",code);//填写你需要测试的手机号码
-            System.out.println("短信接口返回的数据----------------");
-            System.out.println("Code=" + sendSms.getCode());
-            System.out.println("Message=" + sendSms.getMessage());
-            System.out.println("RequestId=" + sendSms.getRequestId());
-            System.out.println("BizId=" + sendSms.getBizId());
+    }
+
+    @Test
+    public void testGetAllCategorys(){
+        List<Category> categoryList = catalogService.getAllCategorys();
+        for(int i = 0; i < categoryList.size(); i++){
+            System.out.println(categoryList.get(i).getCategoryId());
+            System.out.println(categoryList.get(i).getName());
+            System.out.println(categoryList.get(i).getDescription());
+        }
+    }
+
+    @Test
+    public void testUpdateProduct(){
+        Product product = new Product();
+        product.setName("test1");
+        product.setCategoryId("FISH");
+        product.setProductId("testP");
+        int flag = catalogService.updateProduct(product);
+        System.out.println(flag);
+    }
+
+    @Test
+    public void testSearchItem(){
+        List<Item> itemList = catalogService.searchItemList("a");
+        for(int i = 0; i < itemList.size(); i++){
+            System.out.println(itemList.get(i).getItemId());
+        }
+
+    }
+    @Test
+    public void testInventory(){
+        catalogService.deleteInventory("testI");
+
     }
 }

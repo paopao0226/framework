@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+    <div id="Catalog">
+        <form action="/cms/addItem" method="post">
+            <table id="table-3">
+                <tr>
+                    <th colspan=2>Item Details</th>
+                </tr>
+                <tr>
+                    <td>Item Id:</td>
+                    <td><input type="text" name="itemId" /></td>
+                </tr>
+                <tr>
+                    <td>Product Id:</td>
+                    <td th:text="${product.getProductId()}">Product Id</td>
+                </tr>
+                <tr>
+                    <td>List Price:</td>
+                    <td><input type="text" name="itemListPrice" /></td>
+                </tr>
+                <tr>
+                    <td>Unit Cost:</td>
+                    <td><input type="text" name="itemUnitCost" /></td>
+                </tr>
+                <tr>
+                    <td>Supplier:</td>
+                    <td><input type="text" name="itemSupplier" /></td>
+                </tr>
+                <tr>
+                    <td>Status:</td>
+                    <td><input type="text" name="itemStatus" /></td>
+                </tr>
+                <tr>
+                    <td>Attribute1:</td>
+                    <td><input type="text" name="itemAttribute1" /></td>
+                </tr>
+                <tr>
+                    <td>Attribute2:</td>
+                    <td><input type="text" name="itemAttribute2" /></td>
+                </tr>
+                <tr>
+                    <td>Attribute3:</td>
+                    <td><input type="text" name="itemAttribute3" /></td>
+                </tr>
+                <tr>
+                    <td>Attribute4:</td>
+                    <td><input type="text" name="itemAttribute4" /></td>
+                </tr>
+                <tr>
+                    <td>Attribute5:</td>
+                    <td><input type="text" name="itemAttribute5" /></td>
+                </tr>
+            </table>
+            <input type="submit" name="addItem" value="Add New Item"/>
+        </form>
+    </div>
+</div>
+
+<footer th:replace="common/anotherbottom"></footer>
+</body>
+</html>

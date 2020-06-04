@@ -12,4 +12,8 @@
             SET qty = #{quantity}
             WHERE itemid = #{itemId}
     </update>
+
+    <delete id="deleteInventory" parameterType="String">
+        delete from inventory where itemid = #{value}
+    </delete>
 </mapper>

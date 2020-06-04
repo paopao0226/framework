@@ -30,6 +30,29 @@
             descn as description,
             category as categoryId
         from product
-        where name like #{value}
+        where name like #{value} or productId like #{value} or descn like  #{value}
     </select>
+
+    <select id="getAllProducts" resultType="Product">
+        select
+            productId,
+            name,
+            descn as description,
+            category as categoryId
+        from product
+    </select>
+
+    <select id="deleteProduct" parameterType="String">
+        delete from product where productid = #{value}
+    </select>
+
+    <update id="updateProduct" parameterType="Product">
+        UPDATE product SET category = #{categoryId}, product.name = #{name}
+        WHERE productid = #{productId}
+    </update>
+
+    <insert id="addProduct" parameterType="Product">
+        insert into product(productid, category, name)
+        values (#{productId}, #{categoryId}, #{name})
+    </insert>
 </mapper>
