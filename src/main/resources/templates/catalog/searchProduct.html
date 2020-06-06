@@ -6,19 +6,14 @@
     <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
 </head>
 <body>
-<div th:replace="common/top">
 
-</div>
-
-<div id="BackLink">
-    <a href="/catalog/viewMain">Return to Main Menu</a>
-</div>
-
+<div th:replace="common/top"></div>
 <div id="Catalog">
     <table id="table-3">
         <thead>
         <tr>
-            <th>&nbsp;</th>
+            <th>Image</th>
+            <th>Description</th>
             <th>Product ID</th>
             <th>Name</th>
         </tr>
@@ -26,8 +21,10 @@
 
         <tr th:each="product:${productList}">
             <td>
-                <label><img th:src="${product.descriptionImage}">Product Image</label>
-                <label th:text="${product.getDescriptionText()}">Product Description</label>
+                <label><img id="searchImage" th:src="${product.descriptionImage}"></label>
+            </td>
+            <td>
+                <label style="font-size: 15px" th:text="${product.getDescriptionText()}"></label>
             </td>
             <td>
                 <a th:href="@{/catalog/viewProduct?productId=}+${product.productId}" th:text="${product.productId}">Product Id</a>
@@ -35,20 +32,10 @@
             <td th:text="${product.name}">Product Name</td>
         </tr>
 
-<!--        <tr>-->
-<!--            <td></td>-->
-<!--        </tr>-->
-
     </table>
 
 </div>
 
-<div th:replace="common/bottom">
-
-</div>
-
-</body>
-</html>
-
+<div th:replace="common/bottom"></div>
 </body>
 </html>

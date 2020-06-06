@@ -1,56 +1,149 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Item</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Font family -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:400,500,700&display=swap" rel="stylesheet">
+
+    <!-- Libary -->
+    <link rel="stylesheet" href="../vendors/owlcarousel/assets/owl.carouselv2.2.css">
+    <link rel="stylesheet" href="../vendors/owlcarousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../vendors/slick/slick.css">
+    <link rel="stylesheet" href="../vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="../css/animate.min.css">
+    <link rel="stylesheet" href="../vendors/rangeslider/css/ion.rangeSlider.min.css"/>
+    <link rel="stylesheet" href="../vendors/rangeslider/css/theme.scss.css">
+    <link rel="stylesheet" href="../vendors/rangeslider/css/layout.min.css">
+
+    <!-- Font -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="../fonts/linearicons/style.css">
+    <link rel="stylesheet" href="../fonts/linea/styles.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
 </head>
 <body>
-<div th:replace="common/top">
-
-</div>
-
-<div id="BackLink">
-    <a th:href="@{/catalog/viewProduct?productId=}+${product.productId}">Return to <label th:text="${product.productId}"></label>Product Id</a>
-</div>
-
+<div th:replace="common/top"></div>
 <div id="Catalog">
+    <!-- 新加图片效果 -->
+    <section class="slide-wrapper banner-title-item-header">
+        <div class="slide-bg">
+            <div class="overlay">
+                <div class="st2-banner-content-child-page">
+                    <h2 class="banner-child-page-title" th:text="${item.itemId}"></h2>
+                    <div class="back-link align-items-center">
+                        <ul class="back-link-breadcrumb">
+                            <li class="breadcrumb-items"><a class="breadcrumb-item-link" href="/catalog/viewMain?isEnter=1">Home</a></li>
+                            <li class="breadcrumb-items"><a class="breadcrumb-item-link">Item</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Quick view -->
+        <div class="product-quick-view-overlay"></div>
+        <div class="product-quick-view-box">
+            <section class="product-detail-v1 product-quick-view-box-inner">
+                <div class="container">
+                    <div class="product-detail-v1-wrapper">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <div class="product-detail-v3-image">
+                                    <div class="product-detail-v3-order row">
+                                        <div class="order2-prodetail-v3 col-md-9 col-pd-quickview">
+                                            <div class="slider slide-quickview-single">
+                                                <div class="product-detail-v3-image">
+                                                    <img th:src="${product.descriptionImage}"  alt="Product" class="img-fluid">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <div class="product-detail-v1-info">
+                                        <h1 class="product-detail-v1-title mb-0" th:text="${item.itemId}"></h1><br>
+                                        <h4 class="mb-0" th:text="${product.getDescriptionText()}"></h4>
+                                        <div class="product-detail-v1-attr">
+                                            <table>
+                                                <tr>
+                                                    <td>Info:</td>
+                                                    <td th:text="${item.attribute1}"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kind:</td>
+                                                    <td th:text="${product.name}"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Remained:</td>
+                                                    <td th:text="${item.quantity}"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Price:$</td>
+                                                    <td th:text="${#numbers.formatDecimal(item.listPrice,1,2)}"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="product-detail-v1-action">
+                                            <div class="add-product">
+                                                <a class="Button" th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to Cart</a>
+                                                <!--                                                    <button type="submit" th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to cart</button>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
-    <table id="table-3">
-        <tr>
-            <td>
-                <label><img th:src="${product.descriptionImage}">Product Image</label>
-                <label th:text="${product.getDescriptionText()}">Product Description</label>
-            </td>
-        </tr>
-        <tr>
-            <td><b th:text="${item.itemId}">Item Id}</b></td>
-        </tr>
-        <tr>
-            <td><b><font size="4" th:text="${item.attribute1}">Item Attribute1</font></b></td>
-        </tr>
-        <tr>
-            <td th:text="${product.name}">Product Name}</td>
-        </tr>
-        <tr>
-            <td>
-                <label th:if="${item.quantity <= 0}">Back ordered.</label>
-                <label th:if="${item.quantity > 0}" th:text="${item.quantity} + ' in stock.'">Quantity in stock.</label>
-            </td>
-        </tr>
-        <tr>
-            <td th:text="'$'+${#numbers.formatDecimal(item.listPrice,1,2)}">Item List Price</td>
-        </tr>
+<!--    <table id="table-3">-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <label><img th:src="${product.descriptionImage}">Product Image</label>-->
+<!--                <label th:text="${product.getDescriptionText()}">Product Description</label>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><b th:text="${item.itemId}">Item Id</b></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><b><font size="4" th:text="${item.attribute1}">Item Attribute1</font></b></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td th:text="${product.name}">Product Name</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <label th:if="${item.quantity <= 0}">Back ordered.</label>-->
+<!--                <label th:if="${item.quantity > 0}" th:text="${item.quantity} + ' in stock.'">Quantity in stock.</label>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td th:text="'$'+${#numbers.formatDecimal(item.listPrice,1,2)}">Item List Price</td>-->
+<!--        </tr>-->
 
-        <tr>
-            <td>
-                <!--这里加入了username的设置，不要改-->
-                <a class="Button" th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to Cart</a>
-<!--                String userName, String itemId, String quantity-->
-<!--                <a th:if="${isLogin eq false}" class="Button" th:href="@{'/cart/addItemToCart?itemId='+${item.itemId}+'&quantity=1'}">Add to Cart</a>-->
-            </td>
-        </tr>
-    </table>
+<!--        <tr>-->
+<!--            <td>-->
+<!--                &lt;!&ndash;这里加入了username的设置，不要改&ndash;&gt;-->
+<!--                <a class="Button" th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to Cart</a>-->
+<!--&lt;!&ndash;                String userName, String itemId, String quantity&ndash;&gt;-->
+<!--&lt;!&ndash;                <a th:if="${isLogin eq false}" class="Button" th:href="@{'/cart/addItemToCart?itemId='+${item.itemId}+'&quantity=1'}">Add to Cart</a>&ndash;&gt;-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
 
 </div>
 
@@ -61,8 +154,6 @@
 </body>
 </html>
 
-</body>
-</html>
 
 
 

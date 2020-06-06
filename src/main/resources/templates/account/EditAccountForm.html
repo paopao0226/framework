@@ -6,20 +6,19 @@
     <link rel="stylesheet" href="../css/jpetstore.css" type="text/css" media="screen">
 </head>
 <body>
-<div th:replace="common/top"></div>
-    <div id="Content">
-<div th:utext="${editMessage}"></div>
+<div id="Content">
+    <div th:replace="common/top"></div>
 <div id="Catalog">
+    <div style="color: red" th:utext="${editMessage}"></div>
     <form action="/account/editAccount" method="post">
-    <h3>User Information</h3>
     <table id="table-3">
+        <h3>User Information</h3>
         <tr>
             <td>User ID:</td>
             <td th:text="${myAccount?.getUsername()}"></td>
         </tr>
         <!--下面都删除了password的默认显示，因为已经加密不能再提醒了-->
         <tr>
-
             <td>New password:</td>
             <td><input type="text" name="password"/>
         </tr>
@@ -27,19 +26,28 @@
             <td>Repeat password:</td>
             <td><input type="text" name="repeatedPassword"/>
         </tr>
+        <div th:replace="account/IncludeAccountField"></div>
     </table>
-    <div th:replace="account/IncludeAccountField"></div>
-    <input type="submit" name="editAccount" value="Save Account Information"/>
+        <section class="instagram">
+            <button type="submit">
+                <div class="instagram-btn">
+                    <h4 class="icon-itgr mb-0">
+                        <i class="ti-instagram"></i>Save Account Information
+                        <br/>
+                        <a style="color: #1c7430" class="ti-instagram" th:href="@{'/cart/viewOrderList?username=' + ${myAccount?.getUsername()}}">My Orders</a>
+                        <br/>
+                        <a style="color: #1c7430" class="ti-instagram" href="/daily/selectDailyRecord">My DailyRecord</a>
+                    </h4>
+                </div>
+            </button>
+        </section>
+<!--    <input type="submit" name="editAccount" value="Save Account Information"/>-->
 </form>
-    <a th:href="@{'/cart/viewOrderList?username=' + ${myAccount?.getUsername()}}    ">My Orders</a>
-    <br/>
-    <a href="/daily/selectDailyRecord">My DailyRecord</a>
-
 <!--    <%&#45;&#45;	<stripes:link&#45;&#45;%>-->
 <!--    <%&#45;&#45;	beanclass="org.mybatis.jpetstore.web.actions.OrderActionBean"&#45;&#45;%>-->
 <!--    <%&#45;&#45;	event="listOrders">My Orders</stripes:link>&#45;&#45;%>-->
 </div>
-    </div>
+</div>
 <div th:replace="common/bottom"></div>
 </body>
 </html>

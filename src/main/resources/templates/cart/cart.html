@@ -8,16 +8,12 @@
 <body>
 <header th:replace="common/top"></header>
 <div id="Content">
-    <div id="BackLink">
-        <a href="/catalog/index">Return to Main Menu</a>
-    </div>
-
     <div id="Catalog">
 
         <h2>Shopping Cart</h2>
         <p id="msgOfQuantity" align="center"></p>
         <form action="/cart/updateCartQuantities" method="post">
-            <table>
+            <table id="table-3">
                 <!--id好像冲突了-->
 <!--            <tr id="msgOfQuantity"></tr>-->
                 <tr>
@@ -69,17 +65,21 @@
             </table>
         </form>
 
-        <div>
-            <a class="Button" th:if="${myAccount?.getUsername() != null}" th:href="'/order/viewOrderList' + '?userName=' + ${myAccount?.getUsername()}" th:align="left">
-                Order History
-            </a>
-        </div>
-
-        <div>
-            <a class="Button" th:if="${cart.numberOfItems > 0}" th:href="'/order/newOrder'" th:align="right">
-                Proceed to Checkout
-            </a>
-        </div>
+        <section class="instagram">
+            <button type="submit">
+                <div class="instagram-btn">
+                    <h4 class="icon-itgr mb-0">
+                        <a style="color: #1c7430" class="ti-instagram" th:if="${myAccount?.getUsername() != null}" th:href="'/order/viewOrderList' + '?userName=' + ${myAccount?.getUsername()}" th:align="left">
+                            Order History
+                        </a>
+                        <br/>
+                        <a style="color: #1c7430" class="ti-instagram" th:if="${cart.numberOfItems > 0}" th:href="'/order/newOrder'" th:align="right">
+                            Proceed to Checkout
+                        </a>
+                    </h4>
+                </div>
+            </button>
+        </section>
 
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

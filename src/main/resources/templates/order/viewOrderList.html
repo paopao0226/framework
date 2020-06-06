@@ -8,23 +8,19 @@
 <body>
 <div th:replace="common/top"></div>
 <div id="Content">
-<h2>My Orders</h2>
-<table id="table-3">
-    <thead>	<tr>
-        <th>Order ID</th>
-        <th>Date</th>
-        <th>Total Price</th>
-    </tr></thead>
-        <tr th:each="order:${orderList}">
-            <td>
-                <a th:href="@{'/cart/viewOrder?orderId=' + ${order.getOrderId()} + '&username='}" name="orderId" th:text="${order.getOrderId()}"></a>
-            </td>
-                <td th:text="${order.getOrderDate().getYear() + 1900 + '/' + (order.getOrderDate().getMonth() + 1) + '/' + order.getOrderDate().getDate()}">
-            </td>
-            <td th:text="${order.getTotalPrice()}">
-            </td>
+    <table id="table-3">
+        <h2 style="text-align: center">My Orders</h2>
+        <tr>
+            <td>Order ID</td>
+            <td>Date</td>
+            <td>Total Price</td>
         </tr>
-</table>
+        <tr th:each="order:${orderList}">
+            <td><a th:href="@{'/cart/viewOrder?orderId=' + ${order.getOrderId()} + '&username='}" name="orderId" th:text="${order.getOrderId()}"></a></td>
+            <td th:text="${order.getOrderDate().getYear() + 1900 + '/' + (order.getOrderDate().getMonth() + 1) + '/' + order.getOrderDate().getDate()}"></td>
+            <td th:text="${order.getTotalPrice()}"></td>
+        </tr>
+    </table>
 </div>
 <div th:replace="common/bottom"></div>
 </body>

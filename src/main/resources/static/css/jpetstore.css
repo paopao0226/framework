@@ -156,9 +156,6 @@ body>#Menu {
     height: 9ex;
 }
 
-{
-}
-
 #Search {
     width: 33%;
     height: 15ex;
@@ -381,30 +378,86 @@ body>#Banner {
 /*  background: #f8f8fa;*/
 /*}*/
 
-table thead, table tr {
-    border-top-width: 1px;
-    border-top-style: solid;
-    border-top-color: rgb(235, 242, 224);
-}
-table {
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: rgb(235, 242, 224);
-}
+/*table thead, table tr {*/
+/*    border-top-width: 15px;*/
+/*    border-top-style: solid;*/
+/*    border-top-color: #FFFFFF;*/
+/*}*/
+/*table {*/
+/*    border-bottom-width: 15px;*/
+/*    border-bottom-style: solid;*/
+/*    border-bottom-color: #000000;*/
+/*}*/
 
+/*!* Padding and font style *!*/
+/*table td, table th {*/
+/*    padding: 10px 20px;*/
+/*    font-size: 24px;*/
+/*    font-family: "Playfair Display", serif;*/
+/*    !*color: rgb(149, 170, 109);*!*/
+/*}*/
+
+/*!* Alternating background colors *!*/
+/*table tr:nth-child(even) {*/
+/*    background: #FFFFFF;*/
+/*}*/
+/*table tr:nth-child(odd) {*/
+/*    background: #FFF;*/
+/*}*/
+/* Border styles */
+table thead, table tr {
+    border-top-width: 3px;
+    border-top-style: solid;
+    border-top-color: #FFFFFF;
+}
+table{
+    margin: auto;
+}
+#tableH2{
+    margin: auto;
+}
+/*table {*/
+/*    border-bottom-width: 15px;*/
+/*    border-bottom-color:#000000;*/
+/*}*/
 /* Padding and font style */
 table td, table th {
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 28px;
     font-family: Verdana;
-    color: rgb(149, 170, 109);
+    background-color: #FFFFFF;
+    color: #000000;
 }
-
+#table-3 td,#table-3 th {
+    padding: 5px 10px;
+    font-size: 20px;
+    font-family: Verdana;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+#table-4 td,#table-4 th {
+    padding: 5px 10px;
+    font-size: 20px;
+    font-family: Verdana;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+#table-2 td,#table-2 th {
+    padding: 5px 10px;
+    font-size: 18px;
+    font-family: Verdana;
+    background-color: #FFFFFF;
+    color: #000000;
+}
 /* Alternating background colors */
 table tr:nth-child(even) {
-    background: rgb(230, 238, 214)
+    background: #ffffff;
 }
 table tr:nth-child(odd) {
-    background: #FFF
+    background: #FFF;
+}
+#searchImage{
+    width: 100px;
+    height: 125px;
 }
 

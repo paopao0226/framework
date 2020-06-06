@@ -3,24 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <title>Item</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Font family -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:400,500,700&display=swap" rel="stylesheet">
+
+    <!-- Libary -->
+    <link rel="stylesheet" href="../vendors/owlcarousel/assets/owl.carouselv2.2.css">
+    <link rel="stylesheet" href="../vendors/owlcarousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../vendors/slick/slick.css">
+    <link rel="stylesheet" href="../vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="../css/animate.min.css">
+    <link rel="stylesheet" href="../vendors/rangeslider/css/ion.rangeSlider.min.css"/>
+    <link rel="stylesheet" href="../vendors/rangeslider/css/theme.scss.css">
+    <link rel="stylesheet" href="../vendors/rangeslider/css/layout.min.css">
+
+    <!-- Font -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="../fonts/linearicons/style.css">
+    <link rel="stylesheet" href="../fonts/linea/styles.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
     <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
 </head>
 <body>
-<div th:replace="common/top">
-
-</div>
-
-<
 <div id="Content">
-    <div id="BackLink">
-        <a th:href="@{/catalog/viewCategory?categoryId=}+${product.categoryId}">Return to <label
-                th:text="${product.categoryId}">Product Id</label></a>
-    </div>
-
+    <!--改正了头部与尾部的位置-->
+    <div th:replace="common/top"></div>
     <div id="Catalog">
-
-        <h2 th:text="${product.name}">Product的name属性</h2>
-
+        <!-- 新加图片效果 -->
+        <section class="slide-wrapper banner-title-project-header">
+            <div class="slide-bg">
+                <div class="overlay">
+                    <div class="st2-banner-content-child-page">
+                        <h2 class="banner-child-page-title" th:text="${product.name}"></h2>
+                        <div class="back-link align-items-center">
+                            <ul class="back-link-breadcrumb">
+                                <li class="breadcrumb-items"><a class="breadcrumb-item-link" href="/catalog/viewMain?isEnter=1">Home</a></li>
+                                <li class="breadcrumb-items"><a class="breadcrumb-item-link">Product</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <table id="table-3">
             <thead>
             <tr>
@@ -39,22 +71,18 @@
                     <!--这里用来判断是否登录，传回userId用来记日志，不要改-->
                     <a th:href="@{'/catalog/viewItem?userId=' + ${myAccount?.getUsername()} + '&itemId=' + ${item.itemId}}" th:text="${item.itemId}">Item Id</a>
                 </td>
-                <td th:text="${item.productId}">Product Id</td>
+                <!--这儿改了一下，之前我这没显示出来-->
+                <td th:text="${product.productId}">Product Id</td>
                 <td th:text="${item.attribute1}">Item Attribute1</td>
                 <td th:text="'$' + ${#numbers.formatDecimal(item.listPrice,1 ,2)}">Item List Price</td>
                 <td><a th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to
                     Cart</a></td>
             </tr>
         </table>
-
     </div>
-
+    <!--改正了头部与尾部的位置-->
     <div th:replace="common/bottom">
-
     </div>
 </div>
-</body>
-</html>
-
 </body>
 </html>

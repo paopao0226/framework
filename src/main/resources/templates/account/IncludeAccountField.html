@@ -7,8 +7,9 @@
 </head>
 <body>
 
-<h3>Account Information</h3>
 <table id="table-3">
+    <br>
+    <h3>Account Information</h3>
     <tr>
         <td>First name:</td>
         <td><input type="text" name="firstName" th:value="${myAccount?.getFirstName()}"/>
@@ -21,7 +22,7 @@
     </tr>
     <tr>
         <td>Email:</td>
-        <td><input type="text" size="40" name="email" th:value="${myAccount?.getEmail()}"/>
+        <td><input type="text" name="email" th:value="${myAccount?.getEmail()}"/>
         </td>
     </tr>
     <tr>
@@ -31,12 +32,12 @@
     </tr>
     <tr>
         <td>Address 1:</td>
-        <td><input type="text" size="40" name="address1" th:value="${myAccount?.getAddress1()}"/>
+        <td><input type="text" name="address1" th:value="${myAccount?.getAddress1()}"/>
         </td>
     </tr>
     <tr>
         <td>Address 2:</td>
-        <td><input type="text" size="40" name="address2" th:value="${myAccount?.getAddress2()}"/>
+        <td><input type="text" name="address2" th:value="${myAccount?.getAddress2()}"/>
         </td>
     </tr>
     <tr>
@@ -46,23 +47,24 @@
     </tr>
     <tr>
         <td>State:</td>
-        <td><input type="text" size="4" name="state" th:value="${myAccount?.getState()}"/>
+        <td><input type="text"name="state" th:value="${myAccount?.getState()}"/>
         </td>
     </tr>
     <tr>
         <td>Zip:</td>
-        <td><input type="text" size="10" name="zip" th:value="${myAccount?.getZip()}"/>
+        <td><input type="text" name="zip" th:value="${myAccount?.getZip()}"/>
         </td>
     </tr>
     <tr>
         <td>Country:</td>
-        <td><input type="text" size="10" name="country" th:value="${myAccount?.getCountry()}"/>
+        <td><input type="text" name="country" th:value="${myAccount?.getCountry()}"/>
         </td>
     </tr>
 </table>
+<br>
 <h3>Profile Information</h3>
 
-<table>
+<table id="table-4">
     <tr>
         <td>Language Preference:</td>
         <td>

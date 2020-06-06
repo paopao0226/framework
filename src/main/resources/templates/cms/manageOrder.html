@@ -6,8 +6,8 @@
     <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
 </head>
 <body>
-<header th:replace="common/top"></header>
 <div id="Content">
+    <header th:replace="common/top"></header>
     <div id="Catalog">
         <div>
             <h2>Order Manager</h2>
@@ -21,7 +21,7 @@
                 </form>
             </div>
         </div>
-        <table>
+        <table id="table-2">
             <tr>
                 <th><b>Order ID</b></th>
                 <th><b>Order Date</b></th>
@@ -59,7 +59,8 @@
         </table>
     </div>
 </div>
-<footer th:replace="common/anotherbottom"></footer>
+<!--CMS的这里都改回了Bottom-->
+<footer th:replace="common/bottom"></footer>
 </body>
 </html>
 
