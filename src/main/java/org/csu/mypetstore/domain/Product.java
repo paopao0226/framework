@@ -1,6 +1,12 @@
 package org.csu.mypetstore.domain;
 
 
+import org.csu.mypetstore.service.CatalogService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+
 public class Product {
 
     private String productId;
@@ -58,4 +64,5 @@ public class Product {
     public void setDescriptionText(String descriptionText) {
         this.descriptionText = descriptionText;
     }
+
 }

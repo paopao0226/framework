@@ -4,11 +4,13 @@ import org.csu.mypetstore.domain.Category;
 import org.csu.mypetstore.domain.Item;
 import org.csu.mypetstore.domain.Product;
 import org.csu.mypetstore.persistence.CategoryMapper;
+import org.csu.mypetstore.persistence.InventoryDao;
 import org.csu.mypetstore.persistence.ItemMapper;
 import org.csu.mypetstore.persistence.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +24,9 @@ public class CatalogService {
 
     @Autowired
     private ItemMapper itemMapper;
+
+    @Autowired
+    private InventoryDao inventoryDao;
 
     public Category getCategory(String categoryId) {
         return categoryMapper.getCategory(categoryId);
@@ -51,4 +56,29 @@ public class CatalogService {
         return itemMapper.getItem(itemId);
     }
 
+    public List<Category> getAllCategorys() { return categoryMapper.getAllCategory(); }
+
+    public List<Product> getAllProducts() { return productMapper.getAllProducts(); }
+
+    public void deleteItemByProductId(String productId) { itemMapper.deleteItemByProductId(productId); }
+
+    public void deleteProduct(String productId) { productMapper.deleteProduct(productId); }
+
+    public int updateProduct(Product product){ return productMapper.updateProduct(product); }
+
+    public int addProduct(Product product){
+        return productMapper.addProduct(product);
+    }
+
+    public void deleteItem(String itemId) { itemMapper.deleteItem(itemId); }
+
+    public void deleteInventory(String itemId) { inventoryDao.deleteInventory(itemId); }
+
+    public int updateItem(Item item) { return itemMapper.updateItem(item); }
+
+    public int addItem(Item item) { return itemMapper.addItem(item); }
+
+    public List<Item> searchItemList(String keywords) {
+        return itemMapper.searchItemList( "%" + keywords + "%");
+    }
 }

@@ -53,9 +53,12 @@
 <!--                        <a class="Button" th:href="'/order/deleteOrder' + '?orderId=' + ${order.getOrderId()} + '&userName='+ ${myAccount?.getUsername()}">Remove</a>-->
 <!--                    </td>-->
                     <td>
-                            <form th:action="'/alipay/pay?orderId='${order.getOrderId()}" method="post">
-                                <button type="submit">pay</button>
-                            </form>
+<!--                            <form th:action="'/alipay/pay?orderId='${order.getOrderId()}" method="post">-->
+<!--                                <button type="submit">pay</button>-->
+<!--                            </form>-->
+                        <form action="#" th:action="@{/alipay/pay(orderId=${order.getOrderId()})}" method="post">
+                            <button type="submit">pay</button>
+                        </form>
                     </td>
                 </tr>
             </table>

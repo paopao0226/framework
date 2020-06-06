@@ -15,8 +15,8 @@
         <div id="SearchOrders">
             <div id="SearchContent">
                 <form action="/cms/searchOrders" method="post">
-                    <input type="text" id="keyword" name="keyword" size="20" onkeyup="searchOrdersByKeyword()" list="tips"/>
-                    <datalist id="tips"></datalist>
+                    <input type="text" id="key"  name="key" size="20" onkeyup="searchOrdersByKey()" list="datalist"/>
+                    <datalist id="datalist"></datalist>
                     <input type="submit" name="searchProducts" value="Search"/>
                 </form>
             </div>
@@ -64,34 +64,38 @@
 </body>
 </html>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js">
+
+</script>
 <script>
-    var tips = document.getElementById("tips");
+    var datalist = document.getElementById("datalist");
     function textOn(div) {
-        document.getElementById("keyword").value(div.innerText);
-        tips.style.display = "none";
+        document.getElementById("key").value(div.innerText);
+        datalist.style.display = "none";
     }
     function changeBackColorOut(div) {
-        tips.style.backgroundColor = "white";
+        datalist.style.backgroundColor = "white";
     }
     function changeBackColorOver(div) {
-        tips.style.backgroundColor = "#CCCCCC";
+        datalist.style.backgroundColor = "#CCCCCC";
     }
 
-    function searchOrdersByKeyword() {
-        var keyword = document.getElementById("keyword").value;
+    function searchOrdersByKey() {
+        key = $("#key").val();
         $.ajax({
             contentType: "application/json; charset=utf-8",
             type: "get",
-            url: "/cms/ajaxSearchOrders?keyword=" + keyword,
+            url: "/cms/ajaxSearchOrders?keyword=" + key,
             success: function (result) {
-                resultSet = result.split(",")
+                console.log(result);
+                resultSet = result.split(",");
                 var html = "";
-                for(var i=0;i < resultSet.length;i++){
+                for(var i=0;i < resultSet.length;i+=2){
                     //每个div有鼠标移出，移入事件
                     html += "<option onclick = 'textOn(this)' onmouseout = 'changeBackColorOut(this)' onmouseover = 'changeBackColorOver(this)'>" + resultSet[i] + "</option>";
+                    console.log(resultSet[i]);
                 }
-                tips.innerHTML = html;
+                datalist.innerHTML = html;
             }
         });
     }

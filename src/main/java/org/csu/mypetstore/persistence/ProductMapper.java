@@ -13,4 +13,12 @@ public interface ProductMapper {
     Product getProduct(String productId);
     //关键词模糊查询
     List<Product> searchProductList(String keywords);
+    //获取所有的产品
+    List<Product> getAllProducts();
+    //删除产品
+    void deleteProduct(String productId);
+
+    int updateProduct(Product product);
+
+    int addProduct(Product product);
 }

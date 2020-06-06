@@ -33,11 +33,10 @@
             shiptofirstname = #{shipToFirstName}, shiptolastname = #{shipToLastName}, billcity = #{billCity},
             billstate = #{billState}, billzip = #{billZip}, billcountry = #{billCountry}
                 WHERE orderid = #{orderId}
-
     </update>
     
     <delete id="deleteOrder">
-         DELETE FROM orders JOIN orderstatus ON order.orderid = orderstatus.orderid
+         DELETE orders, orderstatus FROM orders JOIN orderstatus ON orders.orderid = orderstatus.orderid
             WHERE orders.orderid = #{orderId}
     </delete>
 

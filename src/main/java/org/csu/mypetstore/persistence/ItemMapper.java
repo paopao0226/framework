@@ -14,4 +14,14 @@ public interface ItemMapper {
     List<Item> getItemListByProduct(String productId);
 
     Item getItem(String itemId);
+
+    void deleteItemByProductId(String productId);
+
+    void deleteItem(String itemId);
+
+    int updateItem(Item item);
+
+    int addItem(Item item);
+
+    List<Item> searchItemList(String keywords);
 }
