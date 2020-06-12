@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+    <div id="Catalog">
+        <form action="/cms/orders/onlyOne" method="post">
+            <table id="table-3">
+                <tr>
+                    <th colspan=2>Payment Details</th>
+                </tr>
+                <tr>
+                    <td>Card Type:</td>
+                    <td>
+                        <select name="cardType" id="cardType">
+                            <option>"Visa"</option>
+                            <option>"MasterCard"</option>
+                            <option>"American Express"</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Card Number:</td>
+                    <td>
+                        <input type="text" name="creditCard" th:value="${orderOfUpdate.getCreditCard()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Expiry Date (MM/YYYY):</td>
+                    <td>
+                        <input type="text" name="expiryDate"
+                               th:value="${orderOfUpdate.getExpiryDate()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan=2>Billing Address</th>
+                </tr>
+
+                <tr>
+                    <td>First name:</td>
+                    <td>
+                        <input type="text" name="billToFirstName" th:value="${orderOfUpdate.getBillToFirstName()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Last name:</td>
+                    <td>
+                        <input type="text" name="billToLastName" th:value="${orderOfUpdate.getBillToLastName()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address 1:</td>
+                    <td>
+                        <input type="text" size="40" name="billAddress1" th:value="${orderOfUpdate.getBillAddress1()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address 2:</td>
+                    <td>
+                        <input type="text" size="40" name="billAddress2" th:value="${orderOfUpdate.getBillAddress2()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>City:</td>
+                    <td>
+                        <input type="text" name="billCity" th:value="${orderOfUpdate.getBillCity()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>State:</td>
+                    <td>
+                        <input type="text" size="4" name="billState" th:value="${orderOfUpdate.getBillState()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Zip:</td>
+                    <td>
+                        <input type="text" size="10" name="billZip" th:value="${orderOfUpdate.getBillZip()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Country:</td>
+                    <td>
+                        <input type="text" size="15" name="billCountry" th:value="${orderOfUpdate.getBillCountry()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Shipping Address</th>
+                </tr>
+                <tr>
+                    <td>First name:</td>
+                    <td>
+                        <input type="text" name="shipToFirstName" th:value="${orderOfUpdate.getShipAddress1()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Last name:</td>
+                    <td>
+                        <input type="text" name="shipToLastName" th:value="${orderOfUpdate.getShipToLastName()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address 1:</td>
+                    <td>
+                        <input type="text" size="40" name="shipAddress1" th:value="${orderOfUpdate.getShipAddress1()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address 2:</td>
+                    <td>
+                        <input type="text" size="40" name="shipAddress2" th:value="${orderOfUpdate.getShipAddress2()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>City:</td>
+                    <td>
+                        <input type="text" name="shipCity" th:value="${orderOfUpdate.getShipCity()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>State:</td>
+                    <td>
+                        <input type="text" size="4" name="shipState" th:value="${orderOfUpdate.getShipState()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Zip:</td>
+                    <td>
+                        <input type="text" size="10" name="shipZip" th:value="${orderOfUpdate.getShipZip()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Country:</td>
+                    <td>
+                        <input type="text" size="15" name="shipCountry" th:value="${orderOfUpdate.getShipCountry()}"/>
+                    </td>
+                </tr>
+            </table>
+            <input style="text-align: center; font-size: 25px;color:#000000;background: #FFFFFF" type="submit" name="updateOrder" value="Update Order"/>
+        </form>
+    </div>
+</div>
+<script>
+    if(sessionStorage.getItem("orderOfUpdate").cardType == "Visa"){
+        document.getElementById("cardType")[0].selected = true;
+    }
+    if(sessionStorage.getItem("orderOfUpdate").cardType == "MasterCard"){
+        document.getElementById("cardType")[1].selected = true;
+    }
+    if(sessionStorage.getItem("orderOfUpdate").cardType == "American Express"){
+        document.getElementById("cardType")[2].selected = true;
+    }
+</script>
+<!--CMS的这里都改回了Bottom-->
+<footer th:replace="common/bottom"></footer>
+</body>
+</html>

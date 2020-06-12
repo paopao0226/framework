@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--    <bean id="accountDAO" class="org.csu.spring.demo.ioc.persistance.AccountDAOImpl"/>-->
+    <!--    <bean id="demoProxy" class="org.csu.spring.demo.ioc.proxy.SpringAOPProxyDemo"/>-->
+    <!--    &lt;!&ndash;这里相当于Class中的Proxy取代理函数&ndash;&gt;-->
+    <!--    <bean id="demoAfterProxy" class="org.springframework.aop.framework.ProxyFactoryBean">-->
+    <!--        <property name="target" ref="accountDAO"/>-->
+    <!--        <property name="interceptorNames" value="demoProxy"/>-->
+    <!--        <property name="proxyInterfaces" value="org.csu.spring.demo.ioc.persistance.AccountDAO"/>-->
+    <!--    </bean>-->
+    <!--自动代理-->
+
+
+    <aop:aspectj-autoproxy expose-proxy="true"/>
+    <context:component-scan base-package="org.csu.mypetstore"/>
+    <bean class="org.csu.mypetstore.AOP.AspectJ"/>
+</beans>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ShowDaily</title>
+    <link rel="stylesheet" href="../css/jpetstore.css" type="text/css" media="screen">
+</head>
+<body>
+<div th:replace="common/top"></div>
+<div id="Content">
+<div id="Catalog">
+    <h2 th:text="${topic}"></h2>
+    <table id="table-3">
+        <thead>
+        <th>Username</th>
+        <th>Time</th>
+        <th>Kind</th>
+        <th>Items/Order</th>
+        </tr>
+        </thead>
+        <tr th:each="item:${list}">
+            <td th:text="${item.getUserId()}">
+            </td>
+            <td th:text="${item.getDatetime()}">
+            </td>
+            <td th:text="${item.getKind()}">
+            </td>
+            <td th:if="${item.items eq null}" th:text="${item.getOrderId()}"></td>
+            <td th:if="${item.items ne null}" th:text="${item.getOrderId()}"></td>
+        </tr>
+    </table>
+</div>
+</div>
+<div th:replace="common/bottom"></div>
+</body>
+</html>

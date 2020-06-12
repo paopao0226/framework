@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>IncludeAccountField</title>
+    <link rel="stylesheet" href="../css/jpetstore.css" type="text/css" media="screen">
+</head>
+<body>
+
+<h3>Account Information</h3>
+<table id="table-3">
+    <tr>
+        <td>First name:</td>
+        <td><input type="text" name="firstName" th:value="${controlAccount?.getFirstName()}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Last name:</td>
+        <td><input type="text" name="lastName" th:value="${controlAccount?.getLastName()}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td><input type="text" size="40" name="email" th:value="${controlAccount?.getEmail()}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Phone:</td>
+        <td><input type="text" name="phone" th:value="${controlAccount?.getPhone()}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Address 1:</td>
+        <td><input type="text" size="40" name="address1" th:value="${controlAccount?.getAddress1()}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Address 2:</td>
+        <td><input type="text" size="40" name="address2" th:value="${controlAccount?.getAddress2()}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>City:</td>
+        <td><input type="text" name="city" th:value="${controlAccount?.getCity()}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>State:</td>
+        <td><input type="text" size="4" name="state" th:value="${controlAccount?.getState()}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Zip:</td>
+        <td><input type="text" size="10" name="zip" th:value="${controlAccount?.getZip()}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Country:</td>
+        <td><input type="text" size="10" name="country" th:value="${controlAccount?.getCountry()}"/>
+        </td>
+    </tr>
+</table>
+<h3>Profile Information</h3>
+
+<table>
+    <tr>
+        <td>Language Preference:</td>
+        <td>
+            <select name="languagePreference">
+                <option th:each="lang:${languageList}" th:selected="*{lang} == ${mylanguagePreference}" th:text="${lang}"></option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Favourite Category:</td>
+        <td>
+            <select name="favouriteCategoryId">
+                <option th:each="cate:${categoryList}" th:selected="*{cate} == ${myfavouriteCategoryId}" th:text="${cate}">${cate}</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Enable MyList</td>
+        <td>
+            <input type="checkbox" name="listOption" th:checked="${myListOpt eq true}"/>
+            <input type="checkbox" name="listOption" th:checked="${myListOpt eq false}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Enable MyBanner</td>
+        <td>
+            <input type="checkbox" name="bannerOption" th:checked="${myBannerOpt eq true}"/>
+            <input type="checkbox" name="bannerOption" th:checked="${myBannerOpt eq false}"/>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>

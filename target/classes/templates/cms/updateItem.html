@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+    <div id="Catalog">
+        <form action="/cms/UpdateItem" method="post">
+            <table id="table-2">
+                <tr>
+                    <th colspan=2>Item Details</th>
+                </tr>
+                <tr>
+                    <td>Item Id:</td>
+                    <td th:text="${itemOfUpdate.getItemId()}">Item Id</td>
+                </tr>
+                <tr>
+                    <td>Product Id:</td>
+                    <td th:text="${itemOfUpdate.getProductId()}">Product Id</td>
+                </tr>
+                <tr>
+                    <td>List Price:</td>
+                    <td><input type="text" name="itemListPrice" th:value="${itemOfUpdate.getListPrice()}"/></td>
+                </tr>
+                <tr>
+                    <td>Unit Cost:</td>
+                    <td><input type="text" name="itemUnitCost" th:value="${itemOfUpdate.getUnitCost()}"/></td>
+                </tr>
+                <tr>
+                    <td>Supplier:</td>
+                    <td><input type="text" name="itemSupplier" th:value="${itemOfUpdate.getSupplierId()}"/></td>
+                </tr>
+                <tr>
+                    <td>Status:</td>
+                    <td><input type="text" name="itemStatus" th:value="${itemOfUpdate.getStatus()}"/></td>
+                </tr>
+                <tr>
+                    <td>Attribute1:</td>
+                    <td><input type="text" name="itemAttribute1" th:value="${itemOfUpdate.getAttribute1()}"/></td>
+                </tr>
+                <tr>
+                    <td>Attribute2:</td>
+                    <td><input type="text" name="itemAttribute2" th:value="${itemOfUpdate.getAttribute2()}"/></td>
+                </tr>
+                <tr>
+                    <td>Attribute3:</td>
+                    <td><input type="text" name="itemAttribute3" th:value="${itemOfUpdate.getAttribute3()}"/></td>
+                </tr>
+                <tr>
+                    <td>Attribute4:</td>
+                    <td><input type="text" name="itemAttribute4" th:value="${itemOfUpdate.getAttribute4()}"/></td>
+                </tr>
+                <tr>
+                    <td>Attribute5:</td>
+                    <td><input type="text" name="itemAttribute5" th:value="${itemOfUpdate.getAttribute5()}"/></td>
+                </tr>
+            </table>
+            <input type="submit" name="updateItem" value="update"/>
+        </form>
+    </div>
+</div>
+
+<footer th:replace="common/bottom"></footer>
+</body>
+</html>

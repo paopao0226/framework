@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SelectDaily</title>
+    <link rel="stylesheet" href="../css/jpetstore.css" type="text/css" media="screen">
+</head>
+<body>
+<div th:replace="common/top"></div>
+    <div id="Content">
+    <div id="SelectDaily">
+    <br/>
+    <a th:href="@{/daily/showDailyRecord(kind=browse,username=${myAccount.getUsername()})}"><h4>My Browser Daily Record</h4></a>
+    <br/>
+    <a th:href="@{/daily/showDailyRecord(kind=cart,username=${myAccount.getUsername()})}"><h4>My Items Add To Cart Daily Record</h4></a>
+    <br/>
+    <a th:href="@{/daily/showDailyRecord(kind=order,username=${myAccount.getUsername()})}"><h4>My Order Daily Record</h4></a>
+    <br/>
+    <a th:href="@{/daily/showDailyRecord(kind=all,username=${myAccount.getUsername()})}"><h4>My Whole Daily Record</h4></a>
+    </div>
+</div>
+<div th:replace="common/bottom"></div>
+</body>
+</html>

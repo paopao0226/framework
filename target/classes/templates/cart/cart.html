@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+    <div id="Catalog">
+
+        <h2>Shopping Cart</h2>
+        <p id="msgOfQuantity" align="center"></p>
+        <form action="/carts/updateCartQuantities" method="post">
+            <table id="table-3">
+                <!--id好像冲突了-->
+<!--            <tr id="msgOfQuantity"></tr>-->
+                <tr>
+                    <th><b>Item ID</b></th>
+                    <th><b>Product ID</b></th>
+                    <th><b>Description</b></th>
+                    <th><b>In Stock?</b></th>
+                    <th><b>Quantity</b></th>
+                    <th><b>List Price</b></th>
+                    <th><b>Total Cost</b></th>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr th:if="${cart.numberOfItems == 0}">
+                    <td colspan="8"><b>Your cart is empty.</b></td>
+                </tr>
+
+                <tr th:each="cartItem:${cart.itemList}">
+                    <td>
+                        <a th:href="'/catalog/viewItem?itemId='+${cartItem.getItem().getItemId()}"
+                           th:text="${cartItem.getItem().getItemId()}"></a>
+                    </td>
+                    <td th:text="${cartItem.item.product.productId}"></td>
+                    <td th:text="${cartItem.item.attribute1}+${cartItem.item.product.name}"></td>
+                    <td th:text="${cartItem.inStock}"></td>
+                    <td>
+                        <input th:id="'inputQuantityOf'+ ${cartItem.item.itemId}" th:name="${cartItem.item.itemId}"
+                               th:value="${cartItem.quantity}"
+                               th:onchange="UpdateQuantity([[${cartItem.item.itemId}]],[[${myAccount?.getUsername()}]])"
+                                th:onfocus="getPreQuantity([[${cartItem.item.itemId}]])"
+                               />
+                    </td>
+                    <td th:id="'listPriceOf' + ${cartItem.item.itemId}"
+                        th:text="'$'+${#numbers.formatDecimal(cartItem.item.listPrice,1,2)}"th:value="${cartItem.item.listPrice}"></td>
+                    <td th:id="'totalPriceOf' + ${cartItem.item.itemId}"
+                        th:text="'$'+${#numbers.formatDecimal(cartItem.total,1,2)}"></td>
+                    <td>
+<!--                        <a class="Button" th:href="'/cart/deleteCartItem?userName='+ ${myAccount?.getUsername()} + '&itemId=' + ${cartItem.item.itemId}">Remove</a>-->
+                        <a class="Button" th:onclick="deleteCartItem([[${myAccount?.getUsername()}]],[[${cartItem.item.itemId}]])">Remove</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="7">
+                        <label th:id="subTotal" th:text="'Sub Total:$'+${#numbers.formatDecimal(cart.subTotal,1,2)}"></label>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <section class="instagram">
+            <button type="submit">
+                <div class="instagram-btn">
+                    <h4 class="icon-itgr mb-0">
+                        <a style="color: #1c7430" class="ti-instagram" th:if="${myAccount?.getUsername() != null}" th:href="'/orders/all/users/' + ${myAccount?.getUsername()}" th:align="left">
+                            Order History
+                        </a>
+<!--                        <a style="color: #1c7430" class="ti-instagram" th:if="${myAccount?.getUsername() != null}" th:href="'/order/viewOrderList' + '?userName=' + ${myAccount?.getUsername()}" th:align="left">-->
+<!--                            Order History-->
+<!--                        </a>-->
+                        <br/>
+<!--                        <a style="color: #1c7430" class="ti-instagram" th:if="${cart.numberOfItems > 0}" th:href="'/order/newOrder'" th:align="right">-->
+<!--                            Proceed to Checkout-->
+<!--                        </a>-->
+                        <a style="color: #1c7430" class="ti-instagram" th:if="${cart.numberOfItems > 0}" th:href="'/orders/null'" th:align="right">
+                            Proceed to Checkout
+                        </a>
+                    </h4>
+                </div>
+            </button>
+        </section>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+            var preQuantity;
+            function getPreQuantity(parameter1) {
+                preQuantity = document.getElementById("inputQuantityOf" + parameter1).value;
+                console.log(preQuantity)
+            }
+            function UpdateQuantity(parameter1, parameter2) {
+                var inputQuantity = document.getElementById("inputQuantityOf" + parameter1).value;
+                var msg = document.getElementById('msgOfQuantity');
+                var listPrice = document.getElementById("listPriceOf" + parameter1).getAttribute("value");
+                var total = document.getElementById("totalPriceOf" + parameter1);
+                $.ajax({
+                    contentType: "application/json; charset=utf-8",
+                    type: "PUT",
+                    // url: "/cart/changeInputQuantity?inputQuantity=" + inputQuantity + "&userName=" + parameter2 + "&itemName=" + parameter1 + "&preQuantity="+preQuantity,
+                    url: "/carts/users/" + parameter2 + "/items/" + parameter1 + "/inputQuantity/" + inputQuantity + "/preQuantity/" + preQuantity,
+                    success: function (result) {
+                        if(result.split(" ").length == 1){
+                            console.log("response:" + result)
+                            var fmtNumber = null;
+                            total.innerHTML = null;
+                            total.innerText = "$" + (String)(listPrice * inputQuantity);
+                            msg.innerText = 'Updating quantity successfully!';
+                            var totalAll = document.getElementById("subTotal");
+                            totalAll.innerHTML = null;
+                            totalAll.innerText = "$" + result;
+                        }
+                        else if(result == null){
+                            //不需要进行操作
+                        }
+                        else {
+                            total.innerText = "0";
+                            msg.innerText = result;
+                        }
+                    },
+                    error: function (e) {
+                        total.innerText = "0";
+                        msg.innerText = 'Updating quantity failure...Please check your input';
+                    }
+                });
+            }
+        </script>
+        <!-- TODO MyList -->
+        <script>
+            function deleteCartItem(userName , itemId) {
+                console.log("Come in!!!!");
+                $.ajax({
+                        type: "DELETE",
+                        // rest风格
+                        url: "/carts/users/" + userName + "/items/" + itemId,
+                        async : true,
+                        dataType:"html",//返回整合HTML
+                        // dataType: "json",//返回json格式设置
+                        contentType:'application/json; charset=utf-8',
+                        success: function (data) {
+                            console.log(data);
+                            $("body").html(data);//刷新整个body页面的html
+                        }
+                    }
+                )
+            }
+        </script>
+
+    </div>
+</div>
+<footer th:replace="common/bottom"></footer>
+</body>
+</html>

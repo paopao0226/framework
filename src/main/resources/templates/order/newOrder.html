@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+    <div id="Catalog">
+        <form action="/orders/sessions" method="post">
+            <table id="table-3">
+                <tr>
+                    <th colspan=2>Payment Details</th>
+                </tr>
+                <tr>
+                    <td>Card Type:</td>
+                    <td>
+                        <select name="cardType">
+                            <option>"Visa"</option>
+                            <option>"MasterCard"</option>
+                            <option>"American Express"</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Card Number:</td>
+                    <td>
+                        <input type="text" name="creditCard"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Expiry Date (MM/YYYY):</td>
+                    <td>
+                        <input type="text" name="expiryDate" th:value="${#dates.format(new java.util.Date().getTime(),'MM/YYYY')}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan=2>Billing Address</th>
+                </tr>
+
+                <tr>
+                    <td>First name:</td>
+                    <td>
+                        <input type="text" name="billToFirstName" th:value="${myAccount?.getFirstName()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Last name:</td>
+                    <td>
+                        <input type="text" name="billToLastName" th:value="${myAccount?.getLastName()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address 1:</td>
+                    <td>
+                        <input type="text" size="40" name="billAddress1" th:value="${myAccount?.getAddress1()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address 2:</td>
+                    <td>
+                        <input type="text" size="40" name="billAddress2" th:value="${myAccount?.getAddress2()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>City:</td>
+                    <td>
+                        <input type="text" name="billCity" th:value="${myAccount?.getCity()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>State:</td>
+                    <td>
+                        <input type="text" size="4" name="billState" th:value="${myAccount?.getState()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Zip:</td>
+                    <td>
+                        <input type="text" size="10" name="billZip" th:value="${myAccount?.getZip()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Country:</td>
+                    <td>
+                        <input type="text" size="15" name="billCountry" th:value="${myAccount?.getCountry()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan=2>
+                        Ship to different address...
+                        <input type="checkbox" size="15" name="shipping" id="shipping" onclick="produceShippingForm(this)"/>
+                    </td>
+                </tr>
+            </table>
+            <div id="tableOfShipping">
+            </div>
+            <input style="text-align: center; font-size: 25px;color:#000000;background: #FFFFFF" type="submit" name="newOrder" value="Continue"/>
+        </form>
+    </div>
+</div>
+<script th:inline="javascript">
+    function produceShippingForm(checkbox) {
+        var tableOfShipping = document.getElementById("tableOfShipping");
+        if(checkbox.checked){
+            tableOfShipping.innerHTML = "<table id='table-3'>\n" +
+                "\t<tr>\n" +
+                "\t\t<th colspan=2>Shipping Address</th>\n" +
+                "\t</tr>\n" +
+                "\t<tr>\n" +
+                "\t\t<td>First name:</td>\n" +
+                "\t\t<td>\n" +
+                "\t\t\t<input type=\"text\" name=\"shipToFirstName\"/>\n" +
+                "\t\t</td>\n" +
+                "\t</tr>\n" +
+                "\t<tr>\n" +
+                "\t\t<td>Last name:</td>\n" +
+                "\t\t<td>\n" +
+                "\t\t\t<input type=\"text\" name=\"shipToLastName\" th:value=\"${myAccount?.getLastName()}\"/>\n" +
+                "\t\t</td>\n" +
+                "\t</tr>\n" +
+                "\t<tr>\n" +
+                "\t\t<td>Address 1:</td>\n" +
+                "\t\t<td>\n" +
+                "\t\t\t<input type=\"text\" size=\"40\" name=\"shipAddress1\" th:value=\"${myAccount?.getAddress1()}\"/>\n" +
+                "\t\t</td>\n" +
+                "\t</tr>\n" +
+                "\t<tr>\n" +
+                "\t\t<td>Address 2:</td>\n" +
+                "\t\t<td>\n" +
+                "\t\t\t<input type=\"text\" size=\"40\" name=\"shipAddress2\" th:value=\"${myAccount?.getAddress2()}\"/>\n" +
+                "\t\t</td>\n" +
+                "\t</tr>\n" +
+                "\t<tr>\n" +
+                "\t\t<td>City:</td>\n" +
+                "\t\t<td>\n" +
+                "\t\t\t<input type=\"text\" name=\"shipCity\" th:value=\"${myAccount?.getCity()}\"/>\n" +
+                "\t\t</td>\n" +
+                "\t</tr>\n" +
+                "\t<tr>\n" +
+                "\t\t<td>State:</td>\n" +
+                "\t\t<td>\n" +
+                "\t\t\t<input type=\"text\" size=\"4\" name=\"shipState\" th:value=\"${myAccount?.getState()}\"/>\n" +
+                "\t\t</td>\n" +
+                "\t</tr>\n" +
+                "\t<tr>\n" +
+                "\t\t<td>Zip:</td>\n" +
+                "\t\t<td>\n" +
+                "\t\t\t<input type=\"text\" size=\"10\" name=\"shipZip\" th:value=\"${myAccount?.getZip()}\"/>\n" +
+                "\t\t</td>\n" +
+                "\t</tr>\n" +
+                "\t<tr>\n" +
+                "\t\t<td>Country:</td>\n" +
+                "\t\t<td>\n" +
+                "\t\t\t<input type=\"text\" size=\"15\" name=\"shipCountry\" th:value=\"${myAccount?.getCountry()}\"/>\n" +
+                "\t\t</td>\n" +
+                "\t</tr>\n" +
+                "</table>"
+        }
+        else {
+            tableOfShipping.innerHTML = null;
+        }
+
+    }
+</script>
+<footer th:replace="common/bottom"></footer>
+</body>
+</html>

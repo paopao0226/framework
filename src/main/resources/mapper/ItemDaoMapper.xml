@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.csu.mypetstore.persistence.ItemDao">
+    <resultMap id="queryItem" type="Item">
+            <id property="itemId" column="itemid"></id>
+            <result property="productId" column="productid"></result>
+            <result property="listPrice" column="listprice"></result>
+            <result property="unitCost" column="unitcost"></result>
+            <result property="supplierId" column="supplier"></result>
+            <result property="status" column="status"></result>
+            <result property="attribute1" column="attr1"></result>
+            <!--            <result property="quantity" column="quantity"/>-->
+            <association property="product" javaType="Product">
+                <id property="productId" column="productid"></id>
+                <result property="categoryId" column="category"></result>
+                <result property="name" column="name"></result>
+                <result property="description" column="descn"></result>
+            </association>
+    </resultMap>
+    <select id="getItemByItemid" resultMap="queryItem">
+        SELECT  i.itemid, i.productid, i.listprice, i.unitcost, i.supplier, i.status, i.attr1, p.productid, p.category, p.name, p.descn
+            FROM item i
+                JOIN product p ON i.productid=p.productid
+                    WHERE i.itemid = #{itemId}
+    </select>
+</mapper>

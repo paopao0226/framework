@@ -1,0 +1,21 @@
+
+.irs .irs-handle {
+    width: 13px;
+    height: 13px;
+    top: 8px;
+}
+.irs--flat {
+    height: 27px;
+}
+.irs--flat .irs-line {
+    top: 13px;
+}
+.irs--flat .irs-line {
+    top: 13px;
+}
+.irs-from, .irs-to, .irs-single{
+    top: 25px;
+}
+.irs--flat .irs-bar{
+    top: 13px;
+}

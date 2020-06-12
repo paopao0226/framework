@@ -1,0 +1,87 @@
+/**
+ * author: Tu
+ * 
+ * Custom Owl Carousel
+ **/
+
+ /* ============================= CLIENT SAY ================================*/
+
+.active-clientsaylist .owl-controls .owl-nav .owl-prev, .active-clientsaylist .owl-controls .owl-nav .owl-next{ transform: rotate(-90deg);}
+.active-clientsaylist .owl-controls{
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 100%;
+}
+.active-clientsaylist .owl-nav {position: relative; }
+.active-clientsaylist .owl-nav [class*='owl-'] {
+  color: #241305;
+  font-size: 24px;
+  margin: 5px;
+  padding: 4px 7px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 3px; 
+}
+.active-clientsaylist .owl-nav [class*='owl-']:hover {
+  /*background: #869791;*/
+  color: #748a53;
+  text-decoration: none; 
+}
+.active-clientsaylist .owl-nav .owl-prev{
+  position: absolute;
+  left: 10px;
+}
+.active-clientsaylist .owl-nav .owl-next{
+  position: absolute;
+  right: 10px;
+}
+.active-clientsaylist .owl-nav .disabled {
+  opacity: 0.5;
+  cursor: default; 
+}
+.active-clientsaylist .owl-nav.disabled + .owl-dots { margin-top: 10px;}
+.active-clientsaylist .owl-dots {
+  text-align: center;
+  -webkit-tap-highlight-color: transparent; 
+}
+.active-clientsaylist .owl-dots .owl-dot {
+  display: inline-block;
+  zoom: 1;
+  *display: inline; 
+}
+.active-clientsaylist .owl-dots .owl-dot span {
+  width: 10px;
+  height: 10px;
+  margin: 5px 7px;
+  background: #D6D6D6;
+  display: block;
+  -webkit-backface-visibility: visible;
+  transition: opacity 200ms ease;
+  border-radius: 30px; 
+}
+.active-clientsaylist .owl-dots .owl-dot.active span, .active-clientsaylist .owl-dots .owl-dot:hover span {
+  background: #869791; 
+}
+
+ /* ============================= PRODUCT RELATED ================================*/
+
+.active-pro-dealof-theweek .owl-controls{ text-align: center; padding-top: 20px;}
+.active-pro-dealof-theweek .owl-nav [class*='owl-'] {
+  color: #241305;
+  font-size: 18px;
+  display: inline-block;
+  cursor: pointer;
+}
+.active-pro-dealof-theweek .owl-nav .owl-prev ::after{
+  content: '';
+  color: #748a53;
+  border: solid 1px;
+  font-size: 20px;
+  margin: 0 15px;
+}
+.active-pro-dealof-theweek .owl-nav [class*='owl-']:hover {
+  /*background: #869791;*/
+  color: #748a53;
+  text-decoration: none; 
+}

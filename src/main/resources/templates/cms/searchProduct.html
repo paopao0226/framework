@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+    <div id="Catalog">
+        <div>
+            <h2>Search Result</h2>
+        </div>
+        <!--        <div id="SearchProducts">-->
+        <!--            <div id="SearchContent">-->
+        <!--                <form action="/cms/searchProducts" method="post">-->
+        <!--                    <input type="text" id="keyword" name="keyword" size="20" onkeyup="searchProductsByKeyword()" list="tips"/>-->
+        <!--                    <datalist id="tips"></datalist>-->
+        <!--                    <input type="submit" name="searchProducts" value="Search"/>-->
+        <!--                </form>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <h2 th:text="'Keyword: '+${productKeyword}">Product Keyword</h2>
+
+        <table id="table-2">
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th> </th>
+                <th> </th>
+            </tr>
+
+            <tr th:each="product:${productList}">
+                <td><a th:href="@{/cms/ViewManageItem?productId=}+${product.productId}" th:text="${product.productId}">Product
+                    ID</a></td>
+                <td th:text="${product.name}">Product Name</td>
+                <!--                <td><input type="submit" value="Update"></td>-->
+                <!--                <td><input type="submit" value="Delete"></td>-->
+                <td><a class="Button" th:href="@{'/cms/ViewUpdateProduct?updateProductId='+${product.productId}}">Update</a></td>
+                <td><a class="Button" th:href="@{'/cms/DeleteProduct?deleteProductId='+${product.productId}+'&productKeyword='+${productKeyword}}">Delete</a></td>
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+<footer th:replace="common/bottom"></footer>
+</body>
+</html>

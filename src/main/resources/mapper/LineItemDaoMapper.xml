@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.csu.mypetstore.persistence.LineItemDao">
+    <insert id="insertLineItem" >
+        INSERT INTO lineitem (orderid,linenum,itemid,quantity,unitprice)
+        VALUES (#{orderId},#{lineNum},#{itemId},#{quantity},#{unitPrice})
+    </insert>
+
+    <resultMap id="queryLineItem" type="LineItem">
+        <id column="orderid" property="orderId"></id>
+        <result column="linenumber" property="lineNumber"></result>
+        <result column="itemid" property="itemId"></result>
+        <result column="quantity" property="quantity"></result>
+        <result column="unitprice" property="unitPrice"></result>
+    </resultMap>
+    <select id="getLineItemsByOrderId" parameterType="int" resultMap="queryLineItem">
+        SELECT * FROM lineitem WHERE orderid = #{orderId}
+    </select>
+</mapper>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+
+    <div id="Catalog">
+        <h4>Please confirm the information below and then
+            press continue...</h4>
+
+        <table id="table-3">
+            <tr>
+                    <br/>
+                    <font size="3"><b>
+                        <th:formatDate
+                                value="${sessionScope.order.orderDate}" pattern="yyyy/MM/dd hh:mm:ss"/>
+                    </b></font>
+                </th>
+            </tr>
+
+            <tr>
+                <th colspan="2">Billing Address</th>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td th:text="${order.billToFirstName}">
+                </td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td th:text="${order.billToLastName}">
+                </td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td th:text="${order.billAddress1}">
+                </td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td th:text="${order.billAddress2}">
+                </td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td th:text="${order.billCity}">
+                </td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td th:text="${order.billState}">
+                </td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td th:text="${order.billZip}">
+                </td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td th:text="${order.billCountry}">
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">Shipping Address</th>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td th:text="${order.shipToFirstName}">
+                </td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td th:text="${order.shipToLastName}">
+                </td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td th:text="${order.shipAddress1}">
+                </td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td th:text="${order.shipAddress2}">
+                </td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td th:text="${order.shipCity}">
+                </td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td th:text="${order.shipState}">
+                </td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td th:text="${order.shipZip}">
+                </td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td th:text="${order.shipCountry}">
+                </td>
+            </tr>
+        </table>
+<!--        <a style="text-align: center; font-size: 25px" th:href="@{'/order/viewOrder?username=' + ${myAccount?.getUsername()} + '&orderId=-1'}" name="confirmed" value="true">Confirm</a>-->
+        <a style="text-align: center; font-size: 25px" th:onclick="confirm([[${myAccount?.getUsername()}]],[[-1]])" name="confirmed" value="true">Confirm</a>
+
+    </div>
+</div>
+<footer th:replace="common/bottom"></footer>
+</body>
+</html>
+<script>
+    function confirm(username,orderId) {
+        console.log("Come in!!!!");
+        $.ajax({
+                type: "post",
+                // rest风格
+                url: "/orders/" + orderId + "/users/" + username,
+                async : true,
+                dataType:"html",//返回整合HTML
+                // dataType: "json",//返回json格式设置
+                contentType:'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $("body").html(data);//刷新整个body页面的html
+                }
+            }
+        )
+    }
+</script>
+
+
+
+
+
