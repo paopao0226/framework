@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 
 import static com.alipay.api.AlipayConstants.*;
-import static org.apache.catalina.manager.Constants.CHARSET;
+//import static org.apache.catalina.manager.Constants.CHARSET;
 
 @Controller
 @SessionAttributes(value = {"cart","order","isLogin","myAccount","orderList","msg","orderOfUpdate"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象

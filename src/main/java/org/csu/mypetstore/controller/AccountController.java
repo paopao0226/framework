@@ -7,7 +7,6 @@ import org.csu.mypetstore.domain.CodeUtil;
 import org.csu.mypetstore.domain.SmsTool;
 import org.csu.mypetstore.service.AccountService;
 import org.csu.mypetstore.service.CatalogService;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.security.MessageDigest;
 import java.util.*;
 import java.util.List;
 
@@ -42,6 +39,8 @@ public class AccountController {
     private static final int wordsNumberInt = 4;
     private static final int lineNumberInt = 5;
     private static final long serialVersionUID = 3038623696184546092L;
+    //角色设置
+    public static String roleSetting;
     //新验证码的设置
 //    @Autowired
 //    private Producer kaptchaProducer;
@@ -67,7 +66,7 @@ public class AccountController {
         return "account/SignonForm";
     }
     @PostMapping("/sign")//登录
-    public String sign(String username, String password, String verifi, Model model){
+    public String sign(String username, String password, String verifi, Model model,HttpServletResponse response){
         //将输入的密码进行加密，并在之后与数据库中的加密密码进行比对
         password = KL(password);
         //验证码的验证
@@ -86,6 +85,8 @@ public class AccountController {
             return "account/signonForm";
         }
         else {
+            String role = accountService.findRoleByUsername(username).get(0).getRole();
+            roleSetting = role;
             //设置相关参数
             boolean isLogin = true;
 //            verifyIsFinished = true;
@@ -325,6 +326,7 @@ public class AccountController {
     }
     //md5密码加密函数
     public String KL(String password){
+        if(password.equals(null)){password = "";}
         String md5Password = DigestUtils.md5DigestAsHex(password.getBytes());
         System.out.println(password + " " + md5Password);
         return md5Password;

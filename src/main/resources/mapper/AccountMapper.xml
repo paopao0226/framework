@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.csu.mypetstore.persistence.AccountMapper">
+    <!--加入获取密码的语句-->
     <select id="getAccountByUsername" parameterType="string" resultType="Account">
         SELECT
           SIGNON.USERNAME,
+          SIGNON.PASSWORD,
           ACCOUNT.EMAIL,
           ACCOUNT.FIRSTNAME,
           ACCOUNT.LASTNAME,
@@ -88,6 +90,11 @@
             or lastname like #{value} or addr1 like #{value} or addr2 like #{value}
             or city like #{value} or country like #{value} or phone like #{value}
     </select>
+    <select id="findRoleByUsername" parameterType="string" resultType="Role">
+        select *
+        from role
+        where username = #{urname}
+    </select>
     <delete id="deleteAccount" parameterType="string">
         delete from ACCOUNT
         where ACCOUNT.USERID = #{value}
@@ -100,4 +107,5 @@
         delete from SIGNON
         where SIGNON.USERNAME = #{value}
     </delete>
+
 </mapper>

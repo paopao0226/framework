@@ -1,6 +1,7 @@
 package org.csu.mypetstore.service;
 
 import org.csu.mypetstore.domain.Account;
+import org.csu.mypetstore.domain.Role;
 import org.csu.mypetstore.persistence.AccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,10 @@ public class AccountService {
         Account account = this.getAccount(username);
         if(account != null)return true;
         else return false;
+    }
+    //用户鉴权用
+    public List<Role> findRoleByUsername(String username){
+        List<Role> role = accountMapper.findRoleByUsername(username);
+        return role;
     }
 }

@@ -7,6 +7,7 @@ import org.csu.mypetstore.service.AccountService;
 import org.csu.mypetstore.service.CatalogService;
 import org.csu.mypetstore.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,7 @@ import java.util.regex.Pattern;
 
 @Controller
 @Component
-@SessionAttributes(value = {"product","cart","order","isLogin","myAccount","controlAccount","orderList","msg","orderOfUpdate","productOfUpdate","itemOfUpdate","AllOrderList","AllAccountList","languageList","categoryList","mylanguagePreference","myfavouriteCategoryId","myListOpt","myBannerOpt"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
+@SessionAttributes(value = {"product","cart","order","isLogin","myAccount","controlAccount","orderList","msg","orderOfUpdate","productOfUpdate","itemOfUpdate","AllOrderList","AllAccountList","languageList","categoryList","mylanguagePreference","myfavouriteCategoryId","myListOpt","myBannerOpt","role"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
 @RequestMapping("/cms/")
 public class CmsController {
 
@@ -50,6 +51,10 @@ public class CmsController {
         categoryList.add("BIRDS");
         model.addAttribute("languageList",languageList);
         model.addAttribute("categoryList",categoryList);
+//        System.out.println(AccountController.roleSetting.toString());
+        if(!AccountController.roleSetting.toString().equals("manager")){
+            return "cms/failReading";
+        }
         return "cms/main";
     }
 

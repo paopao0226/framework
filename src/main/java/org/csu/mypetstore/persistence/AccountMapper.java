@@ -1,6 +1,7 @@
 package org.csu.mypetstore.persistence;
 
 import org.csu.mypetstore.domain.Account;
+import org.csu.mypetstore.domain.Role;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,4 +22,5 @@ public interface AccountMapper {
     void updateAccount(Account account);
     void updateProfile(Account account);
     void updateSignon(Account account);
+    List<Role> findRoleByUsername(String username);
 }
