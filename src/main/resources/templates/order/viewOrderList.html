@@ -16,7 +16,8 @@
             <td>Total Price</td>
         </tr>
         <tr th:each="order:${orderList}">
-            <td><a th:href="@{'/cart/viewOrder?orderId=' + ${order.getOrderId()} + '&username='}" name="orderId" th:text="${order.getOrderId()}"></a></td>
+<!--            <td><a th:href="@{'/cart/viewOrder?orderId=' + ${order.getOrderId()} + '&username='}" name="orderId" th:text="${order.getOrderId()}"></a></td>-->
+            <td><a th:onclick="" th:text="${order.getOrderId()}"></a></td>
             <td th:text="${order.getOrderDate().getYear() + 1900 + '/' + (order.getOrderDate().getMonth() + 1) + '/' + order.getOrderDate().getDate()}"></td>
             <td th:text="${order.getTotalPrice()}"></td>
         </tr>

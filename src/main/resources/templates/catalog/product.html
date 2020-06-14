@@ -75,7 +75,9 @@
                 <td th:text="${product.productId}">Product Id</td>
                 <td th:text="${item.attribute1}">Item Attribute1</td>
                 <td th:text="'$' + ${#numbers.formatDecimal(item.listPrice,1 ,2)}">Item List Price</td>
-                <td><a th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to
+<!--                <td><a th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to-->
+<!--                    Cart</a></td>               -->
+                <td><a th:onclick="AddItemToCart([[${myAccount?.getUsername()}]],[[${item.itemId}]])">Add to
                     Cart</a></td>
             </tr>
         </table>
@@ -88,6 +90,23 @@
 </div>
 </body>
 </html>
-
-</body>
-</html>
+<script>
+// 这个地方是点击addCart按钮以后触发的ajax函数，通过异步通信向服务器发送POST方法并且将服务器发来的html页面更新
+    function AddItemToCart(username,itemId,quantity) {
+        console.log("Come in!!!!");
+        $.ajax({
+                type: "post",
+                // rest风格
+                url: "/carts/users/" + username + "/items/" + itemId,
+                async : true,
+                dataType:"html",//返回整合HTML
+                // dataType: "json",//返回json格式设置
+                contentType:'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $("body").html(data);//刷新整个body页面的html
+                }
+            }
+        )
+    }
+</script>

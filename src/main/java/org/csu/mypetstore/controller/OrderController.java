@@ -31,11 +31,11 @@ import java.util.Date;
 import java.util.List;
 
 import static com.alipay.api.AlipayConstants.*;
-//import static org.apache.catalina.manager.Constants.CHARSET;
+import static org.apache.catalina.manager.Constants.CHARSET;
 
 @Controller
 @SessionAttributes(value = {"cart","order","isLogin","myAccount","orderList","msg","orderOfUpdate"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
-@RequestMapping("/order/")
+@RequestMapping("/orders/")
 public class OrderController {
 
     @Autowired
@@ -47,20 +47,21 @@ public class OrderController {
     @Autowired
     LineItemService lineItemService;
 
-    @GetMapping("newOrder")//点击购物车下方的checkOut访问的servlet
+    @GetMapping("null")//点击购物车下方的checkOut访问的servlet
     public String newOrder(){//方法里面的参数username可以自动匹配url的参数
         return "order/newOrder";
     }
 
-    @PostMapping("confirmOrder")//点击填写好订单提交后访问的servlet
+    @PostMapping("sessions")//点击填写好订单提交后访问的servlet
     public String confirmOrder(Order order, Model model){//方法里面的参数username可以自动匹配url的参数
         //在model中添加order对象
         model.addAttribute("order",order);
         return "order/confirmOrder";
     }
 
-    @GetMapping("viewOrder")//confirm订单后访问的servlet
-    public String viewOrder(Model model,String username,String orderId){
+//    @GetMapping("viewOrder")//confirm订单后访问的servlet
+    @PostMapping("{orderId}/users/{username}")
+    public String viewOrder(Model model,@PathVariable("username") String username,@PathVariable("orderId") String orderId){//点击confirm按钮后的方法
         //使用if-else语句实现order点击来源的判断
         //这个来源是购物车order
         if(orderId.equals("-1")) {
@@ -99,8 +100,9 @@ public class OrderController {
     }
 
     //查看当前用户的orderHistory
-    @GetMapping("viewOrderList")
-    public String viewOrderList(String userName,Model model){
+//    @GetMapping("viewOrderList")
+    @GetMapping(value = "all/users/{userName}")
+    public String viewOrderList(@PathVariable("userName") String userName,Model model){
         //通过userName在数据库中拿出orderList
         List<Order> orderList = orderService.getOrdersByUsername(userName);
         //将orderlist放入model，并且把作用域设置为session
@@ -109,8 +111,9 @@ public class OrderController {
     }
 
     //查看orderHistroy中特定的一个order以便进行操作
-    @GetMapping("viewUpdateOrder")
-    public String viewUpdateOrder(String userName,String orderId,Model model) throws AlipayApiException {//进入updateOrder的页面
+//    @GetMapping("viewUpdateOrder")
+    @GetMapping(value = "{orderId}/users/{userName}")
+    public String viewUpdateOrder(@PathVariable("userName") String userName,@PathVariable("orderId") String orderId,Model model) throws AlipayApiException {//进入updateOrder的页面
         //从数据库中拿出当前的order并且将其放入model中，方便前端进行阅览
         Order orderOfUpdate = orderService.getOrder(Integer.parseInt(orderId));
         model.addAttribute("orderOfUpdate",orderOfUpdate);
@@ -138,8 +141,9 @@ public class OrderController {
 
     }
 
-    @GetMapping("deleteOrder")
-    public String deleteOrder(String orderId, String userName, Model model){
+//    @GetMapping("deleteOrder")
+    @DeleteMapping(value = "{orderId}/users/{userName}")
+    public String deleteOrder(@PathVariable("orderId") String orderId, @PathVariable("userName") String userName, Model model){
         int id = Integer.parseInt(orderId);
         //删除数据库中的order，并且返回影响的行数
         int flag = orderService.deleteOrder(id);

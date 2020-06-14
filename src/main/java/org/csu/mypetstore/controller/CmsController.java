@@ -1,6 +1,7 @@
 package org.csu.mypetstore.controller;
 
 import com.alipay.api.AlipayApiException;
+import org.apache.tools.ant.taskdefs.Get;
 import org.bouncycastle.math.raw.Mod;
 import org.csu.mypetstore.domain.*;
 import org.csu.mypetstore.service.AccountService;
@@ -22,7 +23,7 @@ import java.util.regex.Pattern;
 
 @Controller
 @Component
-@SessionAttributes(value = {"product","cart","order","isLogin","myAccount","controlAccount","orderList","msg","orderOfUpdate","productOfUpdate","itemOfUpdate","AllOrderList","AllAccountList","languageList","categoryList","mylanguagePreference","myfavouriteCategoryId","myListOpt","myBannerOpt","role"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
+@SessionAttributes(value = {"product","cart","order","isLogin","myAccount","controlAccount","orderList","msg","orderOfUpdate","productOfUpdate","itemOfUpdate","AllOrderList","AllAccountList","languageList","categoryList","mylanguagePreference","myfavouriteCategoryId","myListOpt","myBannerOpt"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
 @RequestMapping("/cms/")
 public class CmsController {
 
@@ -58,15 +59,16 @@ public class CmsController {
         return "cms/main";
     }
 
-    @GetMapping("ViewManageOrder")//进入订单管理页面对应的方法
+    @GetMapping("orders")//进入订单管理页面对应的方法
     public String manageOrder(Model model){
         List<Order> AllOrderList = orderService.getAllOrders();
         model.addAttribute("AllOrderList",AllOrderList);
         return "cms/manageOrder";
     }
 
-    @GetMapping("viewUpdateOrder")
-    public String viewUpdateOrder(String userName,String orderId,Model model){//点击update后的方法
+//    @GetMapping("orders/{orderId}")
+    @GetMapping(value = "orders/{orderId}/users/{userName}")
+    public String viewUpdateOrder(@PathVariable("userName") String userName,@PathVariable("orderId") String orderId,Model model){//点击update后的方法
         //从数据库中拿出当前的order并且将其放入model中，方便前端进行阅览
         Order orderOfUpdate = orderService.getOrder(Integer.parseInt(orderId));
         model.addAttribute("orderOfUpdate",orderOfUpdate);
@@ -74,7 +76,7 @@ public class CmsController {
     }
 
     //点击修改订单按钮后访问的方法
-    @PostMapping("updateOrder")
+    @PostMapping("onlyOne")
     public String updateOrder(Order order,Model model){
         order.setOrderId(((Order)model.getAttribute("orderOfUpdate")).getOrderId());
         //更新数据库中的order并且返回影响的行数
@@ -91,8 +93,9 @@ public class CmsController {
     }
 
     //点击remove按钮后访问的方法
-    @GetMapping("deleteOrder")
-    public String deleteOrder(String orderId, String userName, Model model){
+//    @GetMapping("deleteOrder")
+    @DeleteMapping(value = "orders/{orderId}/users/{userName}")
+    public String deleteOrder(@PathVariable("orderId") String orderId,@PathVariable("userName")  String userName, Model model){
         int id = Integer.parseInt(orderId);
         //删除数据库中的order，并且返回影响的行数
         int flag = orderService.deleteOrder(id);

@@ -253,7 +253,10 @@
                 <span class="total-price">$190.00</span>
             </div>
             <div class="hamadryad-minicart-action">
-                <div class="btn-action-minicart viewcart"><a th:href="@{'/cart/viewCart?username=' + ${myAccount?.getUsername()}}">View Cart</a></div>
+                <div class="btn-action-minicart viewcart">
+<!--                    <a th:href="@{'/carts/viewCart?username=' + ${myAccount?.getUsername()}}">View Cart</a>-->
+                    <a th:href="@{'/carts/users/' + ${myAccount?.getUsername()}}">View Cart</a>
+                </div>
                 <div class="btn-action-minicart checkout">Checkout</div>
             </div>
         </div>
@@ -286,7 +289,7 @@
                     </div>
                 </li>
                 <li class="menu-item menu-item-has-children">
-                    <a href="List_ShopPageFullWidth.html">Shop</a>
+                    <a th:href="@{'/carts/viewCart?username=' + ${myAccount?.getUsername()}}">Shop</a>
                     <span class="toggle-submenu"></span>
                     <div class="submenu">
                         <div class="col-12 col-md-12 custom-col">
@@ -832,5 +835,20 @@
         // ret
         return ret;
     };
+</script>
+<script>
+    // function getCartByUsername(username){
+    //     $.ajax({
+    //             contentType:"application/json; charset=utf-8",
+    //             type:"GET",
+    //             url:"/users/" + username + "/carts",
+    //             asnnc:true,
+    //             dataType:"html",
+    //             success:function (result) {
+    //                 $("#allBody").html(data);
+    //             }
+    //         }
+    //     );
+    // }
 </script>
 </html>

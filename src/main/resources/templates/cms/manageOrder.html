@@ -49,11 +49,11 @@
                 <td th:text="${order.getStatus()}"></td>
                 <td>
                     <a class="Button"
-                       th:href="'/cms/viewUpdateOrder?userName='+ ${order.username} + '&orderId=' + ${order.getOrderId()}">Update</a>
+                       th:href="'/cms/orders/' + ${order.getOrderId()} + '/users/' +  ${order.username}">Update</a>
                 </td>
                 <td>
                     <a class="Button"
-                       th:href="'/cms/deleteOrder' + '?orderId=' + ${order.getOrderId()} + '&userName='+ ${order.username}">Remove</a>
+                      th:onclick="removeOrderByOrderid([[${order.getOrderId()}]],[[${order.username}]])">Remove</a>
                 </td>
             </tr>
         </table>
@@ -98,5 +98,25 @@
                 datalist.innerHTML = html;
             }
         });
+    }
+</script>
+
+<script>
+    function removeOrderByOrderid(orderId,username) {
+        console.log("Come in!!!!");
+        $.ajax({
+                type: "DELETE",
+                // rest风格
+                url: "/cms/orders/" + orderId + "/users/" + username,
+                async : true,
+                dataType:"html",//返回整合HTML
+                // dataType: "json",//返回json格式设置
+                contentType:'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $("body").html(data);//刷新整个body页面的html
+                }
+            }
+        )
     }
 </script>

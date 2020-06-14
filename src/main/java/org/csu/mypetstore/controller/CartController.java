@@ -7,6 +7,7 @@ import org.csu.mypetstore.service.LineItemService;
 import org.csu.mypetstore.service.OrderService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,7 +27,7 @@ import java.util.List;
 
 @Controller
 @SessionAttributes(value = {"cart","order","isLogin","myAccount","orderList","msg"})//model的attribution通过该注释将对象放在了session作用域中，以后通过model.getAttribute可以取出对象
-@RequestMapping("/cart/")
+@RequestMapping("/carts/")
 public class CartController {
 
     @Autowired
@@ -42,8 +43,8 @@ public class CartController {
     DailyService dailyService;
 
 
-    @GetMapping("viewCart")//点击购物车图标后访问的servlet
-    public String getCart(String username, Model model){//方法里面的参数username可以自动匹配url的参数
+    @GetMapping(value = "users/{username}")//点击购物车图标后访问的servlet
+    public String getCart(@PathVariable("username") String username, Model model){//方法里面的参数username可以自动匹配url的参数
         Cart cart = cartService.getCarByUsername(username);
         //在model中添加cart对象
         model.addAttribute("cart",cart);
@@ -52,9 +53,9 @@ public class CartController {
 
 
 
-    @GetMapping("changeInputQuantity")//前端修改购物车item的quantity的时候，负责处理ajax请求的servlet
+    @PutMapping(value = "users/{userName}/items/{itemName}/inputQuantity/{inputQuantity}/preQuantity/{preQuantity}")//前端修改购物车item的quantity的时候，负责处理ajax请求的servlet
     @ResponseBody//这个注释说明了方法的返回值是response的body里面的数据，从而不会被thymeleaf当作网页解析
-    public String changeInputQuantity(String inputQuantity, String userName, String itemName, String preQuantity, Model model) throws IOException {
+    public String changeInputQuantity(@PathVariable("inputQuantity") String inputQuantity,@PathVariable("userName") String userName,@PathVariable("itemName") String itemName,@PathVariable("preQuantity") String preQuantity, Model model) throws IOException {
         if(Integer.parseInt(preQuantity) !=  Integer.parseInt(inputQuantity)) {//需要进行库存和购物车的更新
             //进行购物车还有库存的更新，并且返回未更新前库存的剩余数量,方便当库存不足时，发送库存信息
             int remainQuantity = cartService.updateQuantity(itemName,userName,Integer.parseInt(inputQuantity),Integer.parseInt(preQuantity));
@@ -84,8 +85,9 @@ public class CartController {
         }
     }
 
-    @GetMapping("deleteCartItem")//在购物车点击remove item后访问的servlet
-    public String deleteCartItem(String userName,String itemId,Model model){
+//    @GetMapping("deleteCartItem")//在购物车点击remove item后访问的servlet
+    @DeleteMapping(value = "users/{userName}/items/{itemId}")//在购物车点击remove item后访问的servlet
+    public String deleteCartItem(@PathVariable("userName") String userName,@PathVariable("itemId") String itemId,Model model){
         cartService.deleteCartByUsernameAndItemid(userName,itemId);
         Cart cart;
         cart = cartService.getCarByUsername(userName);
@@ -94,8 +96,9 @@ public class CartController {
         return "cart/cart";
     }
 
-    @GetMapping("addItemToCart")
-    public String addItemToCart(String userName, String itemId, String quantity, Model model){
+    @PostMapping(value = "users/{username}/items/{itemId}")
+    public String addItemToCart(@PathVariable("username") String userName,@PathVariable("itemId") String itemId, Model model){
+        String quantity = "1";
         //获取是否登录参数
         boolean isLogin = (boolean) model.getAttribute("isLogin");
         //如果没有登录则转回main

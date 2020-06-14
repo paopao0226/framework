@@ -96,8 +96,9 @@
                 var total = document.getElementById("totalPriceOf" + parameter1);
                 $.ajax({
                     contentType: "application/json; charset=utf-8",
-                    type: "get",
-                    url: "/cart/changeInputQuantity?inputQuantity=" + inputQuantity + "&userName=" + parameter2 + "&itemName=" + parameter1 + "&preQuantity="+preQuantity,
+                    type: "PUT",
+                    // url: "/cart/changeInputQuantity?inputQuantity=" + inputQuantity + "&userName=" + parameter2 + "&itemName=" + parameter1 + "&preQuantity="+preQuantity,
+                    url: "/carts/users/" + parameter2 + "/items/" + parameter1 + "/inputQuantity/" + inputQuantity + "/preQuantity/" + preQuantity,
                     success: function (result) {
                         if(result.split(" ").length == 1){
                             console.log("response:" + result)
@@ -125,6 +126,25 @@
             }
         </script>
         <!-- TODO MyList -->
+        <script>
+            function deleteCartItem(userName , itemId) {
+                console.log("Come in!!!!");
+                $.ajax({
+                        type: "DELETE",
+                        // rest风格
+                        url: "/carts/users/" + userName + "/items/" + itemId,
+                        async : true,
+                        dataType:"html",//返回整合HTML
+                        // dataType: "json",//返回json格式设置
+                        contentType:'application/json; charset=utf-8',
+                        success: function (data) {
+                            console.log(data);
+                            $("body").html(data);//刷新整个body页面的html
+                        }
+                    }
+                )
+            }
+        </script>
 
     </div>
 </div>

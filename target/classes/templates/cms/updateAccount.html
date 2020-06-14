@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ControllerEditAccount</title>
+    <link rel="stylesheet" href="../css/jpetstore.css" type="text/css" media="screen">
+</head>
+<body>
+<div th:replace="common/top"></div>
+<div id="Content">
+    <div th:utext="${editMessage}"></div>
+    <div id="Catalog">
+        <form action="/cms/editAccount" method="post">
+            <h3>User Information</h3>
+            <table id="table-3">
+                <tr>
+                    <td>User ID:</td>
+                    <td><input type="text" name="username" th:value="${controlAccount?.getUsername()}" disabled="disabled"></td>
+<!--                    <td th:text="${myAccount?.getUsername()}"></td>-->
+                </tr>
+                <!--下面都删除了password的默认显示，因为已经加密不能再提醒了-->
+                <tr>
+
+                    <td>New password:</td>
+                    <td><input type="text" name="password"/>
+                </tr>
+                <tr>
+                    <td>Repeat password:</td>
+                    <td><input type="text" name="repeatedPassword"/>
+                </tr>
+            </table>
+            <div th:replace="cms/includeAccountField"></div>
+            <input style="text-align: center; font-size: 25px;color:#000000;background: #FFFFFF" type="submit" name="editAccount" value="Update Account"/>
+        </form>
+    </div>
+</div>
+<!--CMS的这里都改回了Bottom-->
+<div th:replace="common/bottom"></div>
+</body>
+</html>

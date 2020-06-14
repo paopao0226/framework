@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <title>Item</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Font family -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:400,500,700&display=swap" rel="stylesheet">
+
+    <!-- Libary -->
+    <link rel="stylesheet" href="../vendors/owlcarousel/assets/owl.carouselv2.2.css">
+    <link rel="stylesheet" href="../vendors/owlcarousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../vendors/slick/slick.css">
+    <link rel="stylesheet" href="../vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="../css/animate.min.css">
+    <link rel="stylesheet" href="../vendors/rangeslider/css/ion.rangeSlider.min.css"/>
+    <link rel="stylesheet" href="../vendors/rangeslider/css/theme.scss.css">
+    <link rel="stylesheet" href="../vendors/rangeslider/css/layout.min.css">
+
+    <!-- Font -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="../fonts/linearicons/style.css">
+    <link rel="stylesheet" href="../fonts/linea/styles.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<div id="Content">
+    <!--改正了头部与尾部的位置-->
+    <div th:replace="common/top"></div>
+    <div id="Catalog">
+        <!-- 新加图片效果 -->
+        <section class="slide-wrapper banner-title-project-header">
+            <div class="slide-bg">
+                <div class="overlay">
+                    <div class="st2-banner-content-child-page">
+                        <h2 class="banner-child-page-title" th:text="${product.name}"></h2>
+                        <div class="back-link align-items-center">
+                            <ul class="back-link-breadcrumb">
+                                <li class="breadcrumb-items"><a class="breadcrumb-item-link" href="/catalog/viewMain?isEnter=1">Home</a></li>
+                                <li class="breadcrumb-items"><a class="breadcrumb-item-link">Product</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <table id="table-3">
+            <thead>
+            <tr>
+                <th>Item ID</th>
+                <th>Product ID</th>
+                <th>Description</th>
+                <th>List Price</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+
+            <tr th:each="item:${itemList}">
+                <!--这里重新设置了url，方便记录日志-->
+                <td>
+<!--                    <a th:if="${isLogin eq true}" th:href="@{'/catalog/viewItem?itemId=' + ${item.itemId} + '&userId=' + ${myAccount?.getUsername()}}" th:text="${item.itemId}">Item Id</a>-->
+                    <!--这里用来判断是否登录，传回userId用来记日志，不要改-->
+                    <a th:href="@{'/catalog/viewItem?userId=' + ${myAccount?.getUsername()} + '&itemId=' + ${item.itemId}}" th:text="${item.itemId}">Item Id</a>
+                </td>
+                <!--这儿改了一下，之前我这没显示出来-->
+                <td th:text="${product.productId}">Product Id</td>
+                <td th:text="${item.attribute1}">Item Attribute1</td>
+                <td th:text="'$' + ${#numbers.formatDecimal(item.listPrice,1 ,2)}">Item List Price</td>
+<!--                <td><a th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to-->
+<!--                    Cart</a></td>               -->
+                <td><a th:onclick="AddItemToCart([[${myAccount?.getUsername()}]],[[${item.itemId}]])">Add to
+                    Cart</a></td>
+            </tr>
+        </table>
+
+    </div>
+    <!--改正了头部与尾部的位置-->
+    <div th:replace="common/bottom">
+    </div>
+</div>
+</body>
+</html>
+<script>
+// 这个地方是点击addCart按钮以后触发的ajax函数，通过异步通信向服务器发送POST方法并且将服务器发来的html页面更新
+    function AddItemToCart(username,itemId,quantity) {
+        console.log("Come in!!!!");
+        $.ajax({
+                type: "post",
+                // rest风格
+                url: "/carts/users/" + username + "/items/" + itemId,
+                async : true,
+                dataType:"html",//返回整合HTML
+                // dataType: "json",//返回json格式设置
+                contentType:'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $("body").html(data);//刷新整个body页面的html
+                }
+            }
+        )
+    }
+</script>

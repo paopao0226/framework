@@ -1,0 +1,42 @@
+.irs .irs-handle {
+    background-color: #000;
+    border-color: #000;
+}
+.irs .irs-bar, .irs .irs-line, .irs .irs-line span {
+    height: 3px;
+}
+
+.irs .irs-handle{
+    border-radius: 50%;
+    border: solid 1px transparent;
+    cursor: pointer;
+}
+.irs--flat .irs-handle>i:first-child {
+    background-color: #000;
+}
+.irs--flat .irs-handle:hover>i:first-child {
+    background-color: #748a53;
+}
+.irs--flat .irs-handle:hover{
+    background-color: #748a53;
+}
+.irs--flat .irs-bar{
+    background-color: #748a53;
+}
+.irs--flat .irs-from:before, .irs--flat .irs-to:before, .irs--flat .irs-single:before{
+    display: none;
+}
+.irs--flat .irs-from, .irs--flat .irs-to, .irs--flat .irs-single{
+    background: none;
+    color: #8a796d;
+}
+.irs-min, .irs-max{ display: none;}
+.irs--flat .irs-handle.state_hover>i:first-child{
+    background-color: #000;
+} 
+.irs--flat .irs-handle:hover>i:first-child{
+    background-color: #748a53;
+}
+.irs--flat .irs-from, .irs--flat .irs-to, .irs--flat .irs-single{
+    font-size: 14px;
+}

@@ -47,7 +47,7 @@
                     <td th:if="${order.getStatus()} eq '0'" th:text="未付款"></td>
                     <td th:if="${order.getStatus()} eq '1'" th:text="已付款"></td>
                     <td>
-                        <a class="Button" th:href="'/order/viewUpdateOrder?userName='+ ${myAccount?.getUsername()} + '&orderId=' + ${order.getOrderId()}">Update</a>
+                        <a class="Button" th:href="'/orders/'+  ${order.getOrderId()} + '/users/'+ ${myAccount?.getUsername()}">Update</a>
                     </td>
 <!--                    <td>-->
 <!--                        <a class="Button" th:href="'/order/deleteOrder' + '?orderId=' + ${order.getOrderId()} + '&userName='+ ${myAccount?.getUsername()}">Remove</a>-->
@@ -56,7 +56,7 @@
 <!--                            <form th:action="'/alipay/pay?orderId='${order.getOrderId()}" method="post">-->
 <!--                                <button type="submit">pay</button>-->
 <!--                            </form>-->
-                        <form action="#" th:action="@{/alipay/pay(orderId=${order.getOrderId()})}" method="post">
+                        <form action="#" onclick="warningInfo()" th:action="@{/alipay/pay(orderId=${order.getOrderId()})}" method="post">
                             <button type="submit">pay</button>
                         </form>
                     </td>
@@ -67,3 +67,27 @@
 <footer th:replace="common/bottom"></footer>
 </body>
 </html>
+<script>
+    function warningInfo() {
+        console.log(sessionStorage.getItem("order").orderId);
+    }
+</script>
+<script>
+    function removeOrderByOrderid(orderId,userName) {
+        console.log("Come in!!!!");
+        $.ajax({
+                type: "DELETE",
+                // rest风格
+                url: "/orders/" + orderId + "/users/" + userName,
+                async : true,
+                dataType:"html",//返回整合HTML
+                // dataType: "json",//返回json格式设置
+                contentType:'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $("body").html(data);//刷新整个body页面的html
+                }
+            }
+        )
+    }
+</script>

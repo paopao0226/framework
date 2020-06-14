@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mabatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.csu.mypetstore.persistence.ProductMapper">
+    <select id="getProductListByCategory" parameterType="String" resultType="Product">
+        select
+            productid,
+            category as categoryId,
+            name,
+            descn as description
+        from product
+        where category=#{categoryId}
+    </select>
+
+    <select id="getProduct" parameterType="String" resultType="Product">
+        select
+            productid,
+            name,
+            descn as description,
+            category as categoryid
+        from product
+        where productId=#{productId}
+    </select>
+
+    <select id="searchProductList" parameterType="String" resultType="Product">
+        select
+            productId,
+            name,
+            descn as description,
+            category as categoryId
+        from product
+        where name like #{value} or productId like #{value} or descn like  #{value}
+    </select>
+
+    <select id="getAllProducts" resultType="Product">
+        select
+            productId,
+            name,
+            descn as description,
+            category as categoryId
+        from product
+    </select>
+
+    <select id="deleteProduct" parameterType="String">
+        delete from product where productid = #{value}
+    </select>
+
+    <update id="updateProduct" parameterType="Product">
+        UPDATE product SET category = #{categoryId}, product.name = #{name}
+        WHERE productid = #{productId}
+    </update>
+
+    <insert id="addProduct" parameterType="Product">
+        insert into product(productid, category, name)
+        values (#{productId}, #{categoryId}, #{name})
+    </insert>
+</mapper>

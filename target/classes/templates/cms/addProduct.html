@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+    <div id="Catalog">
+        <form action="/cms/addProduct" method="post">
+            <table id="table-2">
+                <tr>
+                    <th colspan=2>Product Details</th>
+                </tr>
+                <tr>
+                    <td>Product Id:</td>
+                    <td><input type="text" name="productId" /></td>
+                </tr>
+                <tr>
+                    <td>Category Type:</td>
+                    <td>
+                        <select name="categoryType" id="categoryType">
+                            <option>Fish</option>
+                            <option>Dogs</option>
+                            <option>Reptiles</option>
+                            <option>Cats</option>
+                            <option>Birds</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Product Name:</td>
+                    <td><input type="text" name="productName" /></td>
+                </tr>
+                <!--                <tr>-->
+                <!--                    <td>Product Description:</td>-->
+                <!--                    <td>-->
+                <!--                        <input type="text" name="productDescn"-->
+                <!--                               th:value="${updatedProduct.getDescriptionText()}"/>-->
+                <!--                    </td>-->
+                <!--                </tr>-->
+            </table>
+            <input type="submit" name="addProduct" value="Add New Product"/>
+        </form>
+    </div>
+</div>
+
+<!--<script>-->
+<!--    if(sessionStorage.getItem("productOfUpdate").categoryId == "FISH"){-->
+<!--        document.getElementById("categoryType")[0].selected = true;-->
+<!--    }-->
+<!--    if(sessionStorage.getItem("productOfUpdate").categoryId == "DOGS"){-->
+<!--        document.getElementById("categoryType")[1].selected = true;-->
+
+<!--    }-->
+<!--    if(sessionStorage.getItem("productOfUpdate").categoryId == "REPTILES"){-->
+<!--        document.getElementById("categoryType")[2].selected = true;-->
+<!--    }-->
+<!--    if(sessionStorage.getItem("productOfUpdate").categoryId == "CATS"){-->
+<!--        document.getElementById("categoryType")[3].selected = true;-->
+
+<!--    }-->
+<!--    if(sessionStorage.getItem("productOfUpdate").categoryId == "BIRDS"){-->
+<!--        document.getElementById("categoryType")[4].selected = true;-->
+<!--    }-->
+<!--</script>-->
+
+<footer th:replace="common/bottom"></footer>
+</body>
+</html>

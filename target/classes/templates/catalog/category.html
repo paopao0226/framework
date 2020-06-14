@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Category</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Font family -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:400,500,700&display=swap" rel="stylesheet">
+    <!-- Libary -->
+    <link rel="stylesheet" href="../vendors/owlcarousel/assets/owl.carouselv2.2.css">
+    <link rel="stylesheet" href="../vendors/owlcarousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../vendors/slick/slick.css">
+    <link rel="stylesheet" href="../vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="../css/animate.min.css">
+    <link rel="stylesheet" href="../vendors/rangeslider/css/ion.rangeSlider.min.css"/>
+    <link rel="stylesheet" href="../vendors/rangeslider/css/theme.scss.css">
+    <link rel="stylesheet" href="../vendors/rangeslider/css/layout.min.css">
+    <!-- Font -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="../fonts/linearicons/style.css">
+    <link rel="stylesheet" href="../fonts/linea/styles.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<div id="Content">
+    <div th:replace="common/top"></div>
+    <div id="Catalog">
+        <!-- Slide -->
+        <section class="slide-wrapper banner-title-header">
+            <div class="slide-bg">
+                <div class="overlay">
+                    <div class="st2-banner-content-child-page">
+                        <h2 class="banner-child-page-title" th:text="${category.name}"></h2>
+                        <div class="back-link align-items-center">
+                            <ul class="back-link-breadcrumb">
+                                <li class="breadcrumb-items"><a class="breadcrumb-item-link" href="/catalog/viewMain?isEnter=1">Home</a></li>
+                                <li class="breadcrumb-items"><a class="breadcrumb-item-link">Category</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <table>
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+            </tr>
+            <tr th:each="product:${productList}">
+                <td><a th:href="@{/catalog/viewProduct?productId=}+${product.productId}" th:text="${product.productId}">Product
+                    ID</a></td>
+                <td th:text="${product.name}">Product Name</td>
+            </tr>
+        </table>
+    </div>
+    <div th:replace="common/bottom"></div>
+</div>
+<script src="../js/jquery-1.12.4.min.js"></script>
+<script src="../vendors/owlcarousel/owl.carouselv2.2.min.js"></script>
+<script src="../vendors/slick/slick.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../vendors/rangeslider/js/ion.rangeSlider.min.js"></script>
+<script src="../js/custom.js"></script>
+</body>
+</html>

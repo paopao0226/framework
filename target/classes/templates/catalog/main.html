@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mypetstore</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font family -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:400,500,700&display=swap" rel="stylesheet">
+
+    <!-- Libary -->
+    <link rel="stylesheet" href="/vendors/owlcarousel/assets/owl.carouselv2.2.css">
+    <link rel="stylesheet" href="/vendors/owlcarousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/vendors/slick/slick.css">
+    <link rel="stylesheet" href="/vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+    <link rel="stylesheet" href="/vendors/rangeslider/css/ion.rangeSlider.min.css"/>
+    <link rel="stylesheet" href="/vendors/rangeslider/css/theme.scss.css">
+    <link rel="stylesheet" href="/vendors/rangeslider/css/layout.min.css">
+
+    <!-- Font -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/fonts/linearicons/style.css">
+    <link rel="stylesheet" href="/fonts/linea/styles.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<!-- Header -->
+<!-- Header -->
+<header>
+    <!-- Menu -->
+    <div class="menu-st1">
+        <div class="container">
+            <!-- menu primary -->
+            <div class="row header-menu js-comparev1">
+                <div class="col-lg-10 col-md-3 col-3 menu-left js-dadv1">
+                    <nav>
+                        <ul class="menu-primary">
+                            <li class="li-primary hide-laptop">
+                                <a href="/catalog/viewMain?isEnter=1" class="item-primary">Home</a>
+                                <!-- Drop menu -->
+                                <div class="dropmenu-v2 st1-hamadryad-megamenu dropmenu-bg-active1">
+                                    <ul class="dropdown-menu-list">
+                                        <li class="level2"><a class="level2-link" title="Homepage v1"></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="li-primary hide-laptop">
+                                <a class="item-primary" href="List_ShopPageFullWidth.html">Shop</a>
+                                <!-- submenu home -->
+                                <div class="st2-hamadryad-megamenu st1-hamadryad-megamenu megamenu-home js-dropmenuv1 megamenu-bg-active1">
+                                    <section class="st2-hamadryad-megamenu-modal home">
+                                        <div class="container-fluid">
+                                            <div class="st2-hamadryad-submenu-wrapper">
+                                                <div class="row">
+                                                    <div class="st2-submenu-banner">
+                                                        <img src="../images/menu1.jpg" alt="Banner" class="img-width img-fluid">
+                                                    </div>
+                                                </div>
+<!--                                                <div class="row">-->
+<!--                                                    <div class="col-md-3">-->
+<!--                                                        <div class="st2-submenu-list-item">-->
+<!--                                                            <h2 class="st2-submenu-item-title">Shop</h2>-->
+<!--                                                            <ul class="st2-submenu-item-ul">-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a class="st2-submenu-item-link" href="List_ShopPageFullWidth.html">Shop Fullwidth</a>-->
+<!--                                                                </li>-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a class="st2-submenu-item-link" href="List_Shop_Sidebar-Left.html">Shop Sidebar Left</a>-->
+<!--                                                                </li>-->
+<!--                                                            </ul>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="col-md-3">-->
+<!--                                                        <div class="st2-submenu-list-item">-->
+<!--                                                            <h2 class="st2-submenu-item-title">Product Details</h2>-->
+<!--                                                            <ul class="st2-submenu-item-ul">-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a href="ProductDetail_v1.html" class="st2-submenu-item-link">Product detail v1</a>-->
+<!--                                                                </li>-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a href="ProductDetail_v2.html" class="st2-submenu-item-link">Product detail v2</a>-->
+<!--                                                                </li>-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a href="ProductDetail_v3.html" class="st2-submenu-item-link">Product detail v3</a>-->
+<!--                                                                </li>-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a href="ProductDetail_v4.html" class="st2-submenu-item-link">Product detail v4</a>-->
+<!--                                                                </li>-->
+<!--                                                            </ul>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="col-md-3">-->
+<!--                                                        <div class="st2-submenu-list-item">-->
+<!--                                                            <h2 class="st2-submenu-item-title">Pages</h2>-->
+<!--                                                            <ul class="st2-submenu-item-ul">-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a href="Hover&Active-v2.html" class="st2-submenu-item-link">Hover&Active v2</a>-->
+<!--                                                                </li>-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a href="Popup.html" class="st2-submenu-item-link">Popup</a>-->
+<!--                                                                </li>-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a href="ContactUs.html" class="st2-submenu-item-link">Contact us</a>-->
+<!--                                                                </li>-->
+<!--                                                            </ul>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="col-md-3">-->
+<!--                                                        <div class="st2-submenu-list-item">-->
+<!--                                                            <h2 class="st2-submenu-item-title">Table Tree Plant</h2>-->
+<!--                                                            <ul class="st2-submenu-item-ul">-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a href="" class="st2-submenu-item-link">New Arrivals</a>-->
+<!--                                                                </li>-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a href="" class="st2-submenu-item-link">Best Product</a>-->
+<!--                                                                </li>-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a href="" class="st2-submenu-item-link">Deal Of The Week</a>-->
+<!--                                                                </li>-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a href="" class="st2-submenu-item-link">Top Rated</a>-->
+<!--                                                                    <span class="st2-submenu-icon lnr lnr-chevron-right"></span>-->
+<!--                                                                </li>-->
+<!--                                                                <li class="st2-submenu-item-li">-->
+<!--                                                                    <a href="" class="st2-submenu-item-link">Our Product</a>-->
+<!--                                                                </li>-->
+<!--                                                            </ul>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <!-- end submenu home -->
+                            </li>
+                            <li class="li-primary hide-laptop" th:if="${isLogin eq false}" id="signin">
+                                <a class="item-primary" href="/account/signon" >Sign In</a>
+                            </li>
+                            <li class="li-primary hide-laptop" th:if="${isLogin eq true}" id="signout">
+                                <a class="item-primary" href="/account/signout" >Sign Out</a>
+                            </li>
+                            <li class="li-primary hide-laptop" th:if="${isLogin eq true}" id="myaccount">
+                                <a class="item-primary" href="/account/editAccountForm" >My Account</a>
+                            </li>
+                            <li class="li-primary hide-laptop"><a class="item-primary" href="/cms/viewMain">CMS</a></li>
+<!--                            <li class="li-primary hide-laptop">-->
+<!--                                <a class="item-primary" href="Blog&New_v1.html">Blog</a>-->
+<!--                                &lt;!&ndash; Drop menu &ndash;&gt;-->
+<!--                                <div class="dropmenu-v2 st1-hamadryad-megamenu dropmenu-bg-active1">-->
+<!--                                    <ul class="dropdown-menu-list">-->
+<!--                                        <li class="level2"><a href="Blog&New_v1.html" class="level2-link" title="Blog & New 1">Blog & New 1</a></li>-->
+<!--                                        <li class="level2"><a href="Blog&New_v2.html" class="level2-link" title="Blog & New 1">Blog & New 2</a></li>-->
+<!--                                        <li class="level2"><a href="Blog&NewPost.html" class="level2-link" title="Blog & New 1">Blog & New Post</a></li>-->
+<!--                                    </ul>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                            <li class="li-primary hide-laptop"><a class="item-primary" href="AboutUs.html">About Us </a></li>-->
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-2 col-md-9 col-9">
+                    <div class="controls-right">
+                        <div class="controls-block block-search">
+                            <div class="controls-icon block-search-icon js-search-box">
+                                <span class="lnr lnr-magnifier"></span>
+                            </div>
+                            <!-- Search -->
+                            <div class="st1-search-box">
+                                <div class="st1-search-box-bg"></div>
+                                <div class="search-box">
+                                    <div class="search-box-content">
+                                        <span class="ti-close close-search-box close-st"></span>
+                                            <form class="hd-search-form" action="/catalog/searchProducts" method="post">
+                                                <input type="text" id="keyword" name="keyword" placeholder="Search ...">
+                                                <script>
+                                                    $("#keyword").autocomplete("getdata.jsp");
+                                                </script>
+                                                <button type="submit" name="searchProducts"><i class="ti-search"></i></button>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Search -->
+                        </div>
+                        <div class="controls-block block-cart js-click-cart">
+                            <div class="controls-icon block-cart-icon">
+                                <span class="icon icon-ecommerce-basket"></span>
+                                <span class="cart-number">2</span>
+                            </div>
+                        </div>
+                        <div class="controls-block block-megamenu js-click-megamenu">
+                            <div class="controls-icon block-megamenu-icon">
+                                <span class="lnr lnr-menu"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end menu primary -->
+        </div>
+    </div>
+
+    <!-- Mini cart -->
+    <div class="hamadryad-minicart">
+        <div class="hamadryad-minicart-content">
+            <h3 class="hamadryad-minicart-title">Your cart</h3>
+            <span class="hamadryad-minicart-number">2</span>
+            <div class="hamadryad-minicart-close">
+                <i class="lnr lnr-cross"></i>
+            </div>
+            <div class="hamadryad-minicart-list-item">
+                <div class="list-item">
+                    <ol class="hamadryad-minicart-items">
+                        <li class="product-cart">
+                            <a href="" class="product-cart-thumb"><img src="../images/products/product-1.jpg" alt=""></a>
+                            <div class="product-detail">
+                                <div class="product-name"><a href="">Candle Bowl </a></div>
+                                <div class="product-detail-info">
+                                    <div class="product-quality">QTY : 1</div>
+                                    <div class="product-cost">$169.00</div>
+                                </div>
+                            </div>
+                            <div class="product-remove">
+                                <a href=""><i class="lnr lnr-cross"></i></a>
+                            </div>
+                        </li>
+                        <li class="product-cart">
+                            <a href="" class="product-cart-thumb"><img src="../images/products/product-2.jpg" alt=""></a>
+                            <div class="product-detail">
+                                <div class="product-name"><a href="">Candle Bowl </a></div>
+                                <div class="product-detail-info">
+                                    <div class="product-quality">QTY : 1</div>
+                                    <div class="product-cost">$169.00</div>
+                                </div>
+                            </div>
+                            <div class="product-remove">
+                                <a href=""><i class="lnr lnr-cross"></i></a>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="subtotal">
+                <span class="total-title">Total:</span>
+                <span class="total-price">$190.00</span>
+            </div>
+            <div class="hamadryad-minicart-action">
+                <div class="btn-action-minicart viewcart">
+<!--                    <a th:href="@{'/carts/viewCart?username=' + ${myAccount?.getUsername()}}">View Cart</a>-->
+                    <a th:href="@{'/carts/users/' + ${myAccount?.getUsername()}}">View Cart</a>
+                </div>
+                <div class="btn-action-minicart checkout">Checkout</div>
+            </div>
+        </div>
+    </div>
+    <div class="minicart-bg-overlay" style="display: none;"></div>
+
+    <!-- Menu mobie -->
+    <div class="box-mobile-menu">
+        <span class="box-title">Menu</span>
+        <a href="#" class="close-menu" id="pull-closemenu">
+            <i class="lnr lnr-cross"></i>
+        </a>
+        <div class="menu-clone">
+            <ul class="main-menu">
+                <li class="menu-item menu-item-has-children">
+                    <a href="Homepage01.html">Home</a>
+                    <span class="toggle-submenu"></span>
+                    <div class="submenu">
+                        <div class="col-12 col-md-12 custom-col">
+                            <div class="col-inner">
+                                <div class="col-wrapper-item">
+                                    <ul class="menu-shop-style">
+                                        <li class="style-item"><a class="afont200" href="Homepage01.html">Homepage v1</a></li>
+                                        <li class="style-item"><a class="afont200" href="Homepage02.html">Homepage v2</a></li>
+                                        <li class="style-item"><a class="afont200" href="Homepage03.html">Homepage v3</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-has-children">
+                    <a th:href="@{'/carts/viewCart?username=' + ${myAccount?.getUsername()}}">Shop</a>
+                    <span class="toggle-submenu"></span>
+                    <div class="submenu">
+                        <div class="col-12 col-md-12 custom-col">
+                            <div class="col-inner">
+                                <div class="col-wrapper-item">
+                                    <h2 class="widget-title">Shop</h2>
+                                    <ul class="menu-shop-style">
+                                        <li class="style-item"><a class="afont200" href="List_ShopPageFullWidth.html">Shop Fullwidth</a></li>
+                                        <li class="style-item"><a class="afont200" href="List_Shop_Sidebar-Left.html">Shop Sidebar Left</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-wrapper-item">
+                                    <h2 class="widget-title">Product Details</h2>
+                                    <ul class="menu-shop-style">
+                                        <li class="style-item"><a class="afont200" href="ProductDetail_v1.html">Product detail v1</a></li>
+                                        <li class="style-item"><a class="afont200" href="ProductDetail_v2.html">Product detail v2</a></li>
+                                        <li class="style-item"><a class="afont200" href="ProductDetail_v3.html">Product detail v3</a></li>
+                                        <li class="style-item"><a class="afont200" href="ProductDetail_v4.html">Product detail v4</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-wrapper-item">
+                                    <h2 class="widget-title">Pages</h2>
+                                    <ul class="menu-shop-style">
+                                        <li class="style-item"><a class="afont200" href="Hover&Active-v2.html">Hover&Active v2</a></li>
+                                        <li class="style-item"><a class="afont200" href="Popup.html">Popup</a></li>
+                                        <li class="style-item"><a class="afont200" href="ContactUs.html">Contact us</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-wrapper-item">
+                                    <h2 class="widget-title">Table Tree Plant</h2>
+                                    <ul class="menu-shop-style">
+                                        <li class="style-item"><a class="afont200" href="">New Arrivals</a></li>
+                                        <li class="style-item"><a class="afont200" href="">Best Product</a></li>
+                                        <li class="style-item"><a class="afont200" href="">Deal Of The Week</a></li>
+                                        <li class="style-item"><a class="afont200" href="">Top Rated</a></li>
+                                        <li class="style-item"><a class="afont200" href="">Our Product</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-has-children"><a href="">Features</a></li>
+                <li class="menu-item menu-item-has-children"><a href="">Portfolio</a></li>
+                <li class="menu-item menu-item-has-children">
+                    <a href="Blog&New_v1.html">Blog</a>
+                    <span class="toggle-submenu"></span>
+                    <div class="submenu">
+                        <div class="col-12 col-md-12 custom-col">
+                            <div class="col-inner">
+                                <div class="col-wrapper-item">
+                                    <ul class="menu-shop-style">
+                                        <li class="style-item"><a class="afont200" href="Blog&New_v1.html">Blog & New 1</a></li>
+                                        <li class="style-item"><a class="afont200" href="Blog&New_v2.html">Blog & New 1</a></li>
+                                        <li class="style-item"><a class="afont200" href="Blog&NewPost.html">Blog & New Post</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="menu-item menu-item-has-children"><a href="AboutUs.html">About Us</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="menu-overlay"></div>
+
+</header>
+
+<!-- Slide -->
+<div class="slide-page1">
+    <div class="js-bg-slide-homepage1">
+        <div>
+            <img src="../images/bg_cat.jpg" alt="Slide" class="img-fluid bg-st1 img-width">
+        </div>
+        <div>
+            <img src="../images/bg_dog.jpg" alt="Slide" class="img-fluid bg-st1 img-width">
+        </div>
+        <div>
+            <img src="../images/bg_bird.jpg" alt="Slide" class="img-fluid bg-st1 img-width">
+        </div>
+        <div>
+            <img src="../images/bg_fish.jpg" alt="Slide" class="img-fluid bg-st1 img-width">
+        </div>
+        <div>
+            <img src="../images/bg_reptile.jpg" alt="Slide" class="img-fluid bg-st1 img-width">
+        </div>
+    </div>
+    <div class="header-wrapper">
+        <div class="header-inner js-box-space">
+            <div class="container">
+                <div class="header-slider">
+                    <!-- slider -->
+                    <div class="slide-homepage">
+                        <!-- item 1 -->
+                        <div class="">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <div class="header-banner-left">
+                                        <div class="info-shop">Various Breeds</div>
+                                        <h2 class="info-shop-tilte">The Purchase<br> Of Cats.</h2>
+                                        <p class="info-shop-des">Perfect Animals Sale In There</p>
+                                        <button class="btn-discovery btn-custom">
+                                            <span class="btn-text"><a class="specialA" href="/catalog/viewCategory?categoryId=CATS">Shop Now</a></span>
+                                            <span class="icon-arrow-right">
+                            <i class="lnr lnr-arrow-right"></i>
+                          </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <div class="header-banner-right"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- item 1 -->
+                        <div class="">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <div class="header-banner-left">
+                                        <div class="info-shop">Various Breeds, Exotic Varieties</div>
+                                        <h2 class="info-shop-tilte">The Purchase<br> Of Dogs.</h2>
+                                        <p class="info-shop-des">Perfect Animals Sale In There</p>
+                                        <button class="btn-discovery btn-custom">
+                                            <span class="btn-text"><a class="specialA" href="/catalog/viewCategory?categoryId=DOGS">Shop Now</a></span>
+                                            <span class="icon-arrow-right">
+                            <i class="lnr lnr-arrow-right"></i>
+                          </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <div class="header-banner-right"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- item 1 -->
+                        <div class="">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <div class="header-banner-left">
+                                        <div class="info-shop">Exotic Varieties</div>
+                                        <h2 class="info-shop-tilte">The Purchase<br> Of Birds.</h2>
+                                        <p class="info-shop-des">Perfect Animals Sale In There</p>
+                                        <button class="btn-discovery btn-custom">
+                                            <span class="btn-text"><a class="specialA" href="/catalog/viewCategory?categoryId=BIRDS">Shop Now</a></span>
+                                            <span class="icon-arrow-right">
+                            <i class="lnr lnr-arrow-right"></i>
+                          </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <div class="header-banner-right"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- item 1 -->
+                        <div class="">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <div class="header-banner-left">
+                                        <div class="info-shop">Saltwater, Freshwater</div>
+                                        <h2 class="info-shop-tilte">The Purchase<br> Of Fish.</h2>
+                                        <p class="info-shop-des">Perfect Animals Sale In There</p>
+                                        <button class="btn-discovery btn-custom">
+                                            <span class="btn-text"><a class="specialA" href="/catalog/viewCategory?categoryId=FISH">Shop Now</a></span>
+                                            <span class="icon-arrow-right">
+                            <i class="lnr lnr-arrow-right"></i>
+                          </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <div class="header-banner-right"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- item 1 -->
+                        <div class="">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <div class="header-banner-left">
+                                        <div class="info-shop">Lizards, Turtles, Snakes</div>
+                                        <h2 class="info-shop-tilte">The Purchase<br> Of Reptiles.</h2>
+                                        <p class="info-shop-des">Perfect Animals Sale In There</p>
+                                        <button class="btn-discovery btn-custom">
+                                            <span class="btn-text"><a class="specialA" href="/catalog/viewCategory?categoryId=REPTILES">Shop Now</a></span>
+                                            <span class="icon-arrow-right">
+                            <i class="lnr lnr-arrow-right"></i>
+                          </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <div class="header-banner-right"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end slider -->
+                </div>
+            </div>
+            <div class="box-image-header col-xxl col-md-4 col-4 p-0 hide-laptop">
+                <div class="box-image">
+                    <div class="js-slide-avatar">
+                        <div>
+                            <a href="/catalog/viewCategory?categoryId=CATS"><img src="../images/top_cat.jpg" alt="Image"></a>
+                        </div>
+                        <div>
+                            <a href="/catalog/viewCategory?categoryId=DOGS"><img src="../images/top_dog.jpg" alt="Image"></a>
+                        </div>
+                        <div>
+                            <a href="/catalog/viewCategory?categoryId=BIRDS"><img src="../images/top_bird.jpg" alt="Image"></a>
+                        </div>
+                        <div>
+                            <a href="/catalog/viewCategory?categoryId=FISH"><img src="../images/top_fish.jpg" alt="Image"></a>
+                        </div>
+                        <div>
+                            <a href="/catalog/viewCategory?categoryId=REPTILES"><img src="../images/top_reptile.jpg" alt="Image"></a>
+                        </div>
+                    </div>
+                    <span class="box-text">Sale up to 35%</span>
+                </div>
+                <div class="row top-pagination homepage1-pagination justify-content-center">
+                    <a href="javscript:void(0)" class="btn-pg js-slide-previous">Back</a>
+                    <span class="line">|</span>
+                    <a href="javscript:void(0)" class="btn-pg js-slide-next">Next</a>
+                </div>
+            </div>
+        </div>
+        <div class="box-top-left js-box-bg"></div>
+        <div class="box-bottom-right hide-laptop pagingInfo">
+        </div>
+    </div>
+</div>
+
+<!-- Main content -->
+<div class="main-content">
+
+<!--    &lt;!&ndash; Quick view &ndash;&gt;-->
+<!--    <div class="product-quick-view">-->
+<!--        <div class="product-quick-view-overlay"></div>-->
+<!--        <div class="product-quick-view-box">-->
+<!--            <section class="product-detail-v1 product-quick-view-box-inner">-->
+<!--                <div class="container">-->
+<!--                    <div class="product-detail-v1-wrapper">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-6">-->
+<!--                                <div class="product-detail-v3-image">-->
+<!--                                    <div class="product-detail-v3-order row">-->
+<!--                                        <div class="order2-prodetail-v3 col-md-9 col-pd-quickview">-->
+<!--                                            <div class="slider slide-quickview-single">-->
+<!--                                                <div class="product-detail-v3-image">-->
+<!--                                                    <img src="../images/product-detail/xuat.png" alt="Product" class="img-fluid">-->
+<!--                                                </div>-->
+<!--                                                <div class="product-detail-v3-image">-->
+<!--                                                    <img src="../images/product-detail/product-3.png" alt="Product" class="img-fluid">-->
+<!--                                                </div>-->
+<!--                                                <div class="product-detail-v3-image">-->
+<!--                                                    <img src="../images/product-detail/product-2.png" alt="Product" class="img-fluid">-->
+<!--                                                </div>-->
+<!--                                                <div class="product-detail-v3-image">-->
+<!--                                                    <img src="../images/product-detail/product-1.png" alt="Product" class="img-fluid">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="order1-prodetail-v3 col-md-3 col-pd-quickview">-->
+<!--                                            <div class="slider slide-quickview-nav">-->
+<!--                                                <div class="product-detail-v3-image">-->
+<!--                                                    <img src="../images/product-detail/xuat.png" alt="Product" class="img-fluid">-->
+<!--                                                </div>-->
+<!--                                                <div class="product-detail-v3-image">-->
+<!--                                                    <img src="../images/product-detail/product-3.png" alt="Product" class="img-fluid">-->
+<!--                                                </div>-->
+<!--                                                <div class="product-detail-v3-image">-->
+<!--                                                    <img src="../images/product-detail/product-2.png" alt="Product" class="img-fluid">-->
+<!--                                                </div>-->
+<!--                                                <div class="product-detail-v3-image">-->
+<!--                                                    <img src="../images/product-detail/product-1.png" alt="Product" class="img-fluid">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6">-->
+<!--                                <div class="">-->
+<!--                                    <div class="col-md-12">-->
+<!--                                        <div class="product-detail-v1-info">-->
+<!--                                            <h1 class="product-detail-v1-title mb-0">Succulent Plant</h1>-->
+<!--                                            <div class="product-detail-v1-meta">-->
+<!--                                                <div class="product-detail-v1-price">-->
+<!--                                                    <div class="cost">$80.00</div>-->
+<!--                                                    <div class="sale">$60.00</div>-->
+<!--                                                </div>-->
+<!--                                                <div class="product-detail-v1-rating">-->
+<!--                                                    <div class="badge-starrating">-->
+<!--                                                        <i class="star-icon star-icon-color1 lnr lnr-star"></i>-->
+<!--                                                        <i class="star-icon star-icon-color1 lnr lnr-star"></i>-->
+<!--                                                        <i class="star-icon star-icon-color1 lnr lnr-star"></i>-->
+<!--                                                        <i class="star-icon star-icon-color1 lnr lnr-star"></i>-->
+<!--                                                        <i class="star-icon star-icon-color2 lnr lnr-star"></i>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <p class="mb-0">-->
+<!--                                                Aenean id ullamcorper libero. Vestibulum imperdiet nibh. Lorem ullamcorper volutpat. Vestibulum lacinia risus.-->
+<!--                                            </p>-->
+<!--                                            <div class="product-detail-v1-action">-->
+<!--                                                <div class="quanlity">-->
+<!--                                                    <button type="button" class="subtraction">-</button>-->
+<!--                                                    <input type="text" class="quanlity-num" pattern="[0-9]*" value="1">-->
+<!--                                                    <button type="button" class="addition">+</button>-->
+<!--                                                </div>-->
+<!--                                                <div class="add-product">-->
+<!--                                                    <button type="submit" class="btn-addproduct">Add to cart</button>-->
+<!--                                                </div>-->
+<!--                                                <button class="btn-addwhlist">-->
+<!--                                                    <span class="lnr lnr-heart"></span>-->
+<!--                                                </button>-->
+<!--                                            </div>-->
+<!--                                            <div class="product-detail-v1-attr">-->
+<!--                                                <p class="mb-0"><span >SKU:</span> PD 031</p>-->
+<!--                                                <p class="mb-0"><span>Categories:</span> Out Door Plant, Plant On Table, Potted.</p>-->
+<!--                                                <p class="mb-0"><span>Tags:</span> Cactus, Flower, Indoor.</p>-->
+<!--                                            </div>-->
+<!--                                            <div class="product-detail-v1-share">-->
+<!--                                                <span class="social-text">Share:</span>-->
+<!--                                                <div class="product-detail-v1-socials">-->
+<!--                                                    <a href="" class="product-detail-v1-icon"><i class="ti-facebook"></i></a>-->
+<!--                                                    <a href="" class="product-detail-v1-icon"><i class="ti-twitter-alt"></i></a>-->
+<!--                                                    <a href="" class="product-detail-v1-icon"><i class="ti-pinterest"></i></a>-->
+<!--                                                    <a href="" class="product-detail-v1-icon"><i class="ti-youtube"></i></a>-->
+<!--                                                    <a href="" class="product-detail-v1-icon"><i class="ti-instagram"></i></a>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </section>-->
+<!--            <a href="javascript:void(0);" class="close-quick-view close-st" id="pull">-->
+<!--                <i class="ti-close"></i>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <!-- Categories -->
+    <section class="categories padding-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 col-lg-12 cate-left">
+                    <div class="row clear">
+                        <div class="col-md-8 gutter">
+                            <a href="">
+                                <div class="categories-item">
+                                    <a href="/catalog/viewCategory?categoryId=CATS"><img src="../images/categories-1.jpg" alt=""></a>
+                                    <div class="categories-info">
+                                        <h4 class="categories-info-name">Cats</h4>
+<!--                                        <p class="categories-info-count">(50 Items)</p>-->
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4 gutter">
+                            <a href="">
+                                <div class="categories-item">
+                                    <a href="/catalog/viewCategory?categoryId=DOGS"><img src="../images/categories-2.jpg" alt=""></a>
+                                    <div class="categories-info">
+                                        <h4 class="categories-info-name">Dogs</h4>
+<!--                                        <p class="categories-info-count">(75 Items)</p>-->
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row clear">
+                        <div class="col-md-4 gutter">
+                            <a href="">
+                                <div class="categories-item">
+                                    <a href="/catalog/viewCategory?categoryId=FISH"><img src="../images/categories-4.jpg" alt=""></a>
+                                    <div class="categories-info">
+                                        <h4 class="categories-info-name">Fish</h4>
+<!--                                        <p class="categories-info-count">(55 Items)</p>-->
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-8 gutter">
+                            <a href="">
+                                <div class="categories-item">
+                                    <a href="/catalog/viewCategory?categoryId=REPTILES"><img src="../images/categories-5.jpg" alt=""></a>
+                                    <div class="categories-info">
+                                        <h4 class="categories-info-name">Reptiles</h4>
+<!--                                        <p class="categories-info-count">(50 Items)</p>-->
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 gutter d-none-19">
+                    <a href="">
+                        <div class="categories-item">
+                            <a href="/catalog/viewCategory?categoryId=BIRDS"><img src="../images/categories-3.jpg" alt=""></a>
+                            <div class="categories-info">
+                                <h4 class="categories-info-name">Birds</h4>
+<!--                                <p class="categories-info-count">(40 Items)</p>-->
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-wrapper">
+        <div class="footer footer-bg">
+            <div class="footer-info">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 cl-md-ipad-12 col-lg-6 col-xl-4 order-mobile-cp">
+                            <div class="info-copyright">
+                                <span>Copyright © 2020 All Rights Reserved</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 cl-md-ipad-12 col-lg-3 col-xl-4 order-mobile-pm">
+                            <div class="info-payment tx-center">
+                                <span class="payment-text">Payment Options:</span>
+                                <img src="../images/payment.png" alt="Payment">
+                            </div>
+                        </div>
+                        <div class="col-md-4 cl-md-ipad-12 col-lg-3 col-xl-4 order-mobile-sc">
+                            <div class="social-inner tx-center">
+                                <span class="social-text">Follow us:</span>
+                                <div class="socials">
+                                    <a href="" class="icon-social">
+                                        <i class="ti-facebook"></i>
+                                    </a>
+                                    <a href="" class="icon-social">
+                                        <i class="ti-twitter-alt"></i>
+                                    </a>
+                                    <a href="" class="icon-social">
+                                        <i class="ti-pinterest"></i>
+                                    </a>
+                                    <a href="" class="icon-social">
+                                        <i class="ti-youtube"></i>
+                                    </a>
+                                    <a href="" class="icon-social">
+                                        <i class="ti-instagram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="../js/jquery-1.12.4.min.js"></script>
+<script src="../vendors/owlcarousel/owl.carouselv2.2.min.js"></script>
+<script src="../vendors/slick/slick.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../vendors/rangeslider/js/ion.rangeSlider.min.js"></script>
+<script src="../js/custom.js"></script>
+
+
+</body>
+
+<!--&lt;!&ndash;<script src="../js/jquery-3.4.1.min.js" type="text/javascript"></script>&ndash;&gt;-->
+<script type="text/javascript">
+    $(function () {
+        $(".category").hover(function (){
+            //获取id
+            var categoryIdList = this.id.split("+");
+            var categoryId = categoryIdList[0];
+            if(categoryIdList[1] == 1) {
+                //获取相对坐标
+                var axisTop = this.offsetTop;
+                var axisLeft = this.offsetLeft;
+            }
+            else if(categoryIdList[1] > 1){
+                var axis = getMapAreaBox(this);
+                var axisTop = axis.top;
+                var axisLeft = axis.left;
+            }
+            var productInfo = "";
+            $.ajax({
+                type:"GET",
+                url:"showMainImage",
+                data:{categoryId:categoryId},
+                success:function (data) {
+                    var dataString = data.split(",");
+                    productInfo = "<label id='productImageId' style='top:" + (axisTop - 20) + "px;left:" + (axisLeft + 20) + "px;position: absolute;" +
+                        "background-color: white;width: 250px;border-color: #222222;font-size: small'>";
+                    productInfo += "The " + categoryId + " category includes ";
+                    for (var i = 0; i < dataString.length; i++) {
+                        if (i == 0) productInfo += dataString[i];
+                        else productInfo += "," + dataString[i];
+                    }
+                    productInfo += "</label>";
+                    $("body").append(productInfo);
+                    $("#productImageId").show();
+                }
+            })
+        },function () {
+            $("#productImageId").remove();
+        })
+    })
+    var getMapAreaBox = function (area) {
+        // parse
+        var ret = { left: 0, top: 0, width: 0, height: 0 };
+        var coords = area.coords.split(',');
+        for (var len = coords.length, i = 0; i < len; i++) { coords[i] = parseInt(coords[i], 10); }
+        // generate
+        ret.left = Math.min(coords[0], coords[2]);
+        ret.top = Math.min(coords[1], coords[3]);
+        ret.width = Math.abs(coords[2] - coords[0]);
+        ret.height = Math.abs(coords[3] - coords[1]);
+        // fix
+        var map = area.closest('map');
+        if (map.length > 0) {
+            var img = $('img[usemap~="#' + map.attr('name') + '"]');
+            if (img.length === 0) { img = $('img[usemap~="#' + map.attr('id') + '"]'); }
+            var pos = img.offset();
+            if (pos) {
+                ret.top += pos.top;
+                ret.left += pos.left;
+            }
+        }
+        ret.top += 200;
+        ret.left += 450;
+        // ret
+        return ret;
+    };
+</script>
+<script>
+    // function getCartByUsername(username){
+    //     $.ajax({
+    //             contentType:"application/json; charset=utf-8",
+    //             type:"GET",
+    //             url:"/users/" + username + "/carts",
+    //             asnnc:true,
+    //             dataType:"html",
+    //             success:function (result) {
+    //                 $("#allBody").html(data);
+    //             }
+    //         }
+    //     );
+    // }
+</script>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<div id="Content">
+    <header th:replace="common/top"></header>
+    <div id="Catalog">
+        <div>
+            <h2>Order Manager</h2>
+        </div>
+        <div id="SearchOrders">
+            <div id="SearchContent">
+                <form action="/cms/searchOrders" method="post">
+                    <input type="text" id="key"  name="key" size="20" onkeyup="searchOrdersByKey()" list="datalist"/>
+                    <datalist id="datalist"></datalist>
+                    <input type="submit" name="searchProducts" value="Search"/>
+                </form>
+            </div>
+        </div>
+        <table id="table-2">
+            <tr>
+                <th><b>Order ID</b></th>
+                <th><b>Order Date</b></th>
+                <th><b>shipAddress1</b></th>
+                <th><b>shipAddress2</b></th>
+                <th><b>shipCity</b></th>
+                <th><b>billAddress1</b></th>
+                <th><b>billAddress2</b></th>
+                <th><b>billCity</b></th>
+                <th><b>totalPrice</b></th>
+                <th><b>status</b></th>
+                <th><b></b></th>
+                <th><b></b></th>
+            </tr>
+            <tr th:each="order:${AllOrderList}">
+                <td th:text="${order.getOrderId()}"></td>
+                <td th:text="${order.getOrderDate()}"></td>
+                <td th:text="${order.getShipAddress1()}"></td>
+                <td th:text="${order.getShipAddress2()}"></td>
+                <td th:text="${order.getShipCity()}"></td>
+                <td th:text="${order.getBillAddress1()}"></td>
+                <td th:text="${order.getBillAddress2()}"></td>
+                <td th:text="${order.getBillCity()}"></td>
+                <td th:text="${order.getTotalPrice()}"></td>
+                <td th:text="${order.getStatus()}"></td>
+<!--                <td>-->
+<!--                    <a class="Button"-->
+<!--                       th:href="'/cms/viewUpdateOrder?userName='+ ${order.username} + '&orderId=' + ${order.getOrderId()}">Update</a>-->
+<!--                </td>-->
+                <td>
+                    <a class="Button"
+                       th:href="'/cms/orders/' + ${order.getOrderId()} + '/users/' +  ${order.username}">Update</a>
+                </td>
+<!--                <td>-->
+<!--                    <a class="Button"-->
+<!--                       th:href="'/cms/deleteOrder' + '?orderId=' + ${order.getOrderId()} + '&userName='+ ${order.username}">Remove</a>-->
+<!--                </td>-->
+                <td>
+                    <a class="Button"
+                      th:onclick="removeOrderByOrderid([[${order.getOrderId()}]],[[${order.username}]])">Remove</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!--CMS的这里都改回了Bottom-->
+<footer th:replace="common/bottom"></footer>
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js">
+
+</script>
+<script>
+    var datalist = document.getElementById("datalist");
+    function textOn(div) {
+        document.getElementById("key").value(div.innerText);
+        datalist.style.display = "none";
+    }
+    function changeBackColorOut(div) {
+        datalist.style.backgroundColor = "white";
+    }
+    function changeBackColorOver(div) {
+        datalist.style.backgroundColor = "#CCCCCC";
+    }
+
+    function searchOrdersByKey() {
+        key = $("#key").val();
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            type: "get",
+            url: "/cms/ajaxSearchOrders?keyword=" + key,
+            success: function (result) {
+                console.log(result);
+                resultSet = result.split(",");
+                var html = "";
+                for(var i=0;i < resultSet.length;i+=2){
+                    //每个div有鼠标移出，移入事件
+                    html += "<option onclick = 'textOn(this)' onmouseout = 'changeBackColorOut(this)' onmouseover = 'changeBackColorOver(this)'>" + resultSet[i] + "</option>";
+                    console.log(resultSet[i]);
+                }
+                datalist.innerHTML = html;
+            }
+        });
+    }
+</script>
+
+<script>
+    function removeOrderByOrderid(orderId,username) {
+        console.log("Come in!!!!");
+        $.ajax({
+                type: "DELETE",
+                // rest风格
+                url: "/cms/orders/" + orderId + "/users/" + username,
+                async : true,
+                dataType:"html",//返回整合HTML
+                // dataType: "json",//返回json格式设置
+                contentType:'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $("body").html(data);//刷新整个body页面的html
+                }
+            }
+        )
+    }
+</script>

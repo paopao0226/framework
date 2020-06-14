@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Font family -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:400,500,700&display=swap" rel="stylesheet">
+
+    <!-- Libary -->
+    <link rel="stylesheet" href="../vendors/owlcarousel/assets/owl.carouselv2.2.css">
+    <link rel="stylesheet" href="../vendors/owlcarousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../vendors/slick/slick.css">
+    <link rel="stylesheet" href="../vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="../css/animate.min.css">
+    <link rel="stylesheet" href="../vendors/rangeslider/css/ion.rangeSlider.min.css"/>
+    <link rel="stylesheet" href="../vendors/rangeslider/css/theme.scss.css">
+    <link rel="stylesheet" href="../vendors/rangeslider/css/layout.min.css">
+
+    <!-- Font -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="../fonts/linearicons/style.css">
+    <link rel="stylesheet" href="../fonts/linea/styles.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="../css/jpetstore.css" type="text/css" media="screen">
+</head>
+<body>
+<div id="Content">
+    <!--头部设置挪了位置-->
+    <div th:replace="common/top"></div>
+    <div id="Catalog">
+        <div th:utext="${loginMessage}"></div>
+        <form action="/account/sign" method="post">
+        <table id="table-3">
+            <tr>
+                <td>Username: </td>
+                <td><input type="name" name="username"/></td>
+            </tr>
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password"/></td>
+            </tr>
+            <tr>
+                <td>Tel Number:</td>
+                <td><input type="text" name="tel" id="tel"/></td>
+                <!--手机验证码判断-->
+                <td><a onclick="tel()">获取验证码</a></td>
+                <td><input type="text" name="verifyCode" id="verifyCode" value="请输入手机验证码" onblur="changedPhoneVerifyCode()"/></td>
+            </tr>
+            <tr>
+                <td><label for="verifi">Verificalion Code:</label></td>
+                <td><input type="text" name="verifi" id="verifi"></td>
+                <td><img src="bufferImage" alt="change" id="validateCodeImg" onclick="changeImg()"></td>
+                <td><a onclick="changeImg()">Change</a></td>
+                <td></td>
+            </tr>
+        </table>
+        <section class="instagram">
+            <button type="submit">
+                <div class="instagram-btn">
+                    <h4 class="icon-itgr mb-0">
+                        <i class="ti-instagram"></i>Login
+                    </h4>
+                </div>
+            </button>
+        </section>
+    </form>
+        <h4>Need a user name and password?<a href="/account/newAccountForm">Register Now!</a></h4>
+</div>
+</div>
+<div th:replace="common/bottom"></div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    var res;
+    var tips = document.getElementById("tips");
+    function changeImg() {
+        document.getElementById("validateCodeImg").src="bufferImage?"+Math.random();//在末尾加Math.random()的作用：<br>如果两次请求地址一样，服务器只会处理第一次请求，第二次请求返回内容和第一次一样。或者说如果地址相同，第一次请求时，将自动缓存，导致第二次不会重复请求了。Math.random()是调用javascript语法中的数学函数，能够产生随机数。<br>末尾加Math.random()使每次请求地址不相同，服务器每次都去做不同的响应。也可以使用new date()时间戳的形式作为参数传递。
+        //在末尾加Math.random()的作用：<br>如果两次请求地址一样，服务器只会处理第一次请求，第二次请求返回内容和第一次一样。或者说如果地址相同，第一次请求时，
+        //将自动缓存，导致第二次不会重复请求了。Math.random()是调用javascript语法中的数学函数，能够产生随机数。<br>末尾加Math.random()使每次请求地址不相同，服务器每次都去做不同的响应。也可以使用new date()时间戳的形式作为参数传递。
+    }
+    function tel() {
+        var phone = document.getElementById("tel").value;
+        tips.innerText = '获取中...';
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            type: "get",
+            url: "/account/smsXxs?phone=" + phone,
+            success: function (result) {
+                if(result["isOk"] == "OK") {
+                    res = result["verifyCode"];
+                    //不执行操作
+                    tips.innerText = '发送成功';
+                }
+                else{
+                }
+            },
+            error: function (e) {
+                tips.innerText = '获取失败';
+            }
+        });
+    }
+    function changedPhoneVerifyCode() {
+        var number = document.getElementById("verifyCode");
+        console.log(res);
+        if(number == parseInt(res)){
+            tips.innerText = '验证成功';
+        }
+    }
+</script>
+</html>
