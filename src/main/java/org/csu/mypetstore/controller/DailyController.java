@@ -23,12 +23,13 @@ public class DailyController {
     @Autowired
     private AccountService accountService;
 
-    @GetMapping("/selectDailyRecord")
+    @GetMapping("/selections")
     public String selectDailyRecord(Model model){
         return "daily/SelectDaily";
     }
-    @RequestMapping(value = "/showDailyRecord",method = RequestMethod.GET)
-    public String showDailyRecord(@RequestParam("kind") String kind,@RequestParam("username") String username,Model model){
+//    @RequestMapping(value = "/records",method = RequestMethod.GET)
+    @GetMapping("/records/kind/{kind}/username/{username}")
+    public String showDailyRecord(@PathVariable("kind") String kind,@PathVariable("username") String username,Model model){
         List<Daily> dailyList;
         if(kind.equals("all")){
             dailyList = dailyService.getDailyByUserId(username);

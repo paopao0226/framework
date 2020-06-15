@@ -37,7 +37,7 @@ public class CmsController {
     //暂时保存查看的用户名
     String username;
 
-    @GetMapping("viewMain")
+    @GetMapping("main")
     public String viewMain(Model model){
         //这里加了一个初始化列表
         //注册与编辑用户时两个列表的初始化
@@ -53,8 +53,10 @@ public class CmsController {
         model.addAttribute("languageList",languageList);
         model.addAttribute("categoryList",categoryList);
 //        System.out.println(AccountController.roleSetting.toString());
-        if(!AccountController.roleSetting.toString().equals("manager")){
-            return "cms/failReading";
+        if(!AccountController.roleSetting.toString().equals("")){
+            if(!AccountController.roleSetting.toString().equals("manager")){
+                return "cms/failReading";
+            }
         }
         return "cms/main";
     }
@@ -121,7 +123,7 @@ public class CmsController {
 
     @GetMapping("ajaxSearchOrders")
     @ResponseBody
-    public String ajaxSearchOrders( String keyword){//在搜索订单的输入框输入关键词时对应的异步对象的方法
+    public String ajaxSearchOrders(String keyword){//在搜索订单的输入框输入关键词时对应的异步对象的方法
         System.out.println("----------------服务器接受到请求------------------" + keyword);
         //获取input框的关键词，在数据库搜索出相似的订单
         List<Order> searchOrderList = orderService.getOrdersByKeyword('%'+ keyword+ '%');
@@ -142,7 +144,7 @@ public class CmsController {
         return result.toString();
     }
 
-    @GetMapping("ViewManageAccount")
+    @GetMapping("accounts")
     public String viewManageAccount(Model model){
         List<Account> AllAccountList = accountService.getAllAccount();
         int i = 0;
@@ -154,8 +156,8 @@ public class CmsController {
 //        return "catalog/main";
     }
 
-    @PostMapping("searchAccounts")
-    public String searchAccount(String keyword,Model model){
+    @PostMapping("searchaccounts")
+    public String searchAccount(@PathVariable("keyword") String keyword,Model model){
 //        //判断keyword指的是订单号还是用户名，这边默认用户名必须包含字母,所以如果keyword为纯数字的话指的就是订单号
 //        Pattern pattern = Pattern.compile("[0-9]{1,}");
 //        Matcher matcher = pattern.matcher((CharSequence)keyword);
@@ -175,15 +177,15 @@ public class CmsController {
             return "cms/manageAccount";
         }
     }
-    @GetMapping("deleteAccount")
-    public String deleteAccount(String username,Model model){
+    @DeleteMapping("deleteaccounts/{username}")
+    public String deleteAccount(@PathVariable("username") String username,Model model){
         accountService.deleteAccount(username);
         List<Account> AllAccountList = accountService.getAllAccount();
         model.addAttribute("AllAccountList",AllAccountList);
         return "cms/manageAccount";
     }
-    @GetMapping("viewUpdateAccount")
-    public String viewUpdateAccount(String userName,Model model){
+    @GetMapping("updateaccounts/{username}")
+    public String viewUpdateAccount(@PathVariable("username") String userName,Model model){
         //从数据库中拿出当前的order并且将其放入model中，方便前端进行阅览
 //        Order orderOfUpdate = orderService.getOrder(Integer.parseInt(orderId));
         Account controlAccount = accountService.getAccount(userName);
@@ -195,7 +197,7 @@ public class CmsController {
         model.addAttribute("myBannerOpt",controlAccount.isBannerOption());
         return "cms/updateAccount";
     }
-    @PostMapping("editAccount")//编辑
+    @PostMapping("editaccounts")//编辑
     public String editAccount(String password,String repeatedPassword,Account account,Model model){
         if(!password.equals(repeatedPassword)){
             String value = "<ui><li>Edit failed,Please check the password and repeatPassword</li></ui>";

@@ -10,25 +10,25 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CRoboto:400,500,700&display=swap" rel="stylesheet">
 
     <!-- Libary -->
-    <link rel="stylesheet" href="../vendors/owlcarousel/assets/owl.carouselv2.2.css">
-    <link rel="stylesheet" href="../vendors/owlcarousel/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../vendors/slick/slick.css">
-    <link rel="stylesheet" href="../vendors/slick/slick-theme.css">
-    <link rel="stylesheet" type="text/css" href="../css/animate.min.css">
-    <link rel="stylesheet" href="../vendors/rangeslider/css/ion.rangeSlider.min.css"/>
-    <link rel="stylesheet" href="../vendors/rangeslider/css/theme.scss.css">
-    <link rel="stylesheet" href="../vendors/rangeslider/css/layout.min.css">
+    <link rel="stylesheet" href="/vendors/owlcarousel/assets/owl.carouselv2.2.css">
+    <link rel="stylesheet" href="/vendors/owlcarousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/vendors/slick/slick.css">
+    <link rel="stylesheet" href="/vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+    <link rel="stylesheet" href="/vendors/rangeslider/css/ion.rangeSlider.min.css"/>
+    <link rel="stylesheet" href="/vendors/rangeslider/css/theme.scss.css">
+    <link rel="stylesheet" href="/vendors/rangeslider/css/layout.min.css">
 
     <!-- Font -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../fonts/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="../fonts/linearicons/style.css">
-    <link rel="stylesheet" href="../fonts/linea/styles.css">
+    <link rel="stylesheet" href="/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/fonts/linearicons/style.css">
+    <link rel="stylesheet" href="/fonts/linea/styles.css">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-<!--    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+<!--    <link rel="StyleSheet" href="/css/jpetstore.css" type="text/css" media="screen"/>-->
 </head>
 <body>
 <!-- Header -->
@@ -68,7 +68,7 @@
                     <div class="row js-compare">
                         <div class="col-lg-3 st2-col-lapt-3 col-md-3 col-3">
                             <div class="st2-header-logo">
-                                <img src="../images/homepage2/logo-footer.jpg" alt="Logo">
+                                <img src="/images/homepage2/logo-footer.jpg" alt="Logo">
                             </div>
                         </div>
                         <div class="col-lg-6 hide-reponsive js-dad">
@@ -77,7 +77,7 @@
                                 <nav>
                                     <ul class="st2-menu-primary">
                                         <li class="st2-li-primary">
-                                            <a href="/catalog/viewMain?isEnter=1" class="st2-item-link">Home</a>
+                                            <a href="/catalog/main/1" class="st2-item-link">Home</a>
                                         </li>
                                         <li class="st2-li-primary">
                                             <a class="st2-item-link" href="List_ShopPageFullWidth.html">Shop</a>
@@ -88,7 +88,7 @@
                                                         <div class="st2-hamadryad-submenu-wrapper">
                                                             <div class="row">
                                                                 <div class="st2-submenu-banner">
-                                                                    <img src="../images/menu1.jpg" alt="Banner">
+                                                                    <img src="/images/menu1.jpg" alt="Banner">
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -171,15 +171,15 @@
                                             <!-- end submenu home -->
                                         </li>
                                         <li class="st2-li-primary" th:if="${isLogin eq false}" id="signin">
-                                            <a class="st2-item-link" href="/account/signon" >Sign In</a>
+                                            <a class="st2-item-link" href="/accounts/signon" >Sign In</a>
                                         </li>
                                         <li class="st2-li-primary" th:if="${isLogin eq true}" id="signout">
-                                            <a class="st2-item-link" href="/account/signout" >Sign Out</a>
+                                            <a class="st2-item-link" href="/accounts/signoff" >Sign Out</a>
                                         </li>
                                         <li class="st2-li-primary" th:if="${isLogin eq true}" id="myaccount">
-                                            <a class="st2-item-link" href="/account/editAccountForm" >My Account</a>
+                                            <a class="st2-item-link" href="/accounts/editaccounts" >My Account</a>
                                         </li>
-                                        <li class="st2-li-primary"><a class="st2-item-link" href="/cms/viewMain">CMS</a></li>
+                                        <li class="st2-li-primary"><a class="st2-item-link" href="/cms/main">CMS</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -263,7 +263,7 @@
                 <div class="list-item">
                     <ol class="hamadryad-minicart-items">
                         <li class="product-cart">
-                            <a href="" class="product-cart-thumb"><img src="../images/products/product-1.jpg" alt=""></a>
+                            <a href="" class="product-cart-thumb"><img src="/images/products/product-1.jpg" alt=""></a>
                             <div class="product-detail">
                                 <div class="product-name"><a href="">Candle Bowl </a></div>
                                 <div class="product-detail-info">
@@ -276,7 +276,7 @@
                             </div>
                         </li>
                         <li class="product-cart">
-                            <a href="" class="product-cart-thumb"><img src="../images/products/product-2.jpg" alt=""></a>
+                            <a href="" class="product-cart-thumb"><img src="/images/products/product-2.jpg" alt=""></a>
                             <div class="product-detail">
                                 <div class="product-name"><a href="">Candle Bowl </a></div>
                                 <div class="product-detail-info">
@@ -399,30 +399,30 @@
     <div class="menu-overlay"></div>
 </header>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="../js/jquery-1.12.4.min.js"></script>
-<script src="../vendors/owlcarousel/owl.carouselv2.2.min.js"></script>
-<script src="../vendors/slick/slick.min.js"></script>
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../vendors/rangeslider/js/ion.rangeSlider.min.js"></script>
-<script src="../js/custom.js"></script>
+<script src="/js/jquery-1.12.4.min.js"></script>
+<script src="/vendors/owlcarousel/owl.carouselv2.2.min.js"></script>
+<script src="/vendors/slick/slick.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/vendors/rangeslider/js/ion.rangeSlider.min.js"></script>
+<script src="/js/custom.js"></script>
 <!--    <header th:fragment="header">-->
 <!--        <div id="Header">-->
 
 <!--            <div id="Menu">-->
 <!--                <div id="MenuContent">-->
-<!--                    <a th:href="@{'/cart/viewCart?username=' + ${myAccount?.getUsername()}}"><img align="middle" name="img_cart" src="../images/cart.gif" alt=""/></a>-->
-<!--                    <img align="middle" src="../images/separator.gif" alt=""/>-->
+<!--                    <a th:href="@{'/cart/viewCart?username=' + ${myAccount?.getUsername()}}"><img align="middle" name="img_cart" src="/images/cart.gif" alt=""/></a>-->
+<!--                    <img align="middle" src="/images/separator.gif" alt=""/>-->
 <!--                        <a th:if="${isLogin eq false}" href="/account/signon" name="checkIfSignon" id="signin">Sign In</a>-->
 <!--                        <a th:if="${isLogin eq true}" href="/account/signout">Sign Out</a>-->
-<!--                    <img th:if="${isLogin eq true}" align="middle" src="../images/separator.gif" alt=""/>-->
+<!--                    <img th:if="${isLogin eq true}" align="middle" src="/images/separator.gif" alt=""/>-->
 <!--                    <a th:if="${isLogin eq true}" href="/account/editAccountForm">My Account</a>-->
-<!--                    <img align="middle" src="../images/separator.gif" alt=""/>-->
+<!--                    <img align="middle" src="/images/separator.gif" alt=""/>-->
 <!--                    <a href="viewLog">Log</a>-->
 <!--                </div>-->
 <!--            </div>-->
 <!--            <div id="Logo">-->
 <!--                <div id="LogoContent">-->
-<!--                    <a href="/catalog/viewMain"><img src="../images/Logo.jpg" alt=""/></a>-->
+<!--                    <a href="/catalog/viewMain"><img src="/images/Logo.jpg" alt=""/></a>-->
 <!--                </div>-->
 <!--            </div>-->
 <!--            <div id="Search">-->
@@ -438,15 +438,15 @@
 <!--            </div>-->
 
 <!--            <div id="QuickLinks">-->
-<!--                <a href="/catalog/viewCategory?categoryId=FISH"><img src="../images/sm_fish.gif" alt=""/></a>-->
-<!--                <img src="../images/separator.gif" alt=""/>-->
-<!--                <a href="/catalog/viewCategory?categoryId=DOGS"><img src="../images/sm_dogs.gif" alt=""/></a>-->
-<!--                <img src="../images/separator.gif" alt=""/>-->
-<!--                <a href="/catalog/viewCategory?categoryId=REPTILES"><img src="../images/sm_reptiles.gif" alt=""/></a>-->
-<!--                <img src="../images/separator.gif" alt=""/>-->
-<!--                <a href="/catalog/viewCategory?categoryId=CATS"><img src="../images/sm_cats.gif" alt=""/></a>-->
-<!--                <img src="../images/separator.gif" alt=""/>-->
-<!--                <a href="/catalog/viewCategory?categoryId=BIRDS"><img src="../images/sm_birds.gif" alt=""/></a>-->
+<!--                <a href="/catalog/viewCategory?categoryId=FISH"><img src="/images/sm_fish.gif" alt=""/></a>-->
+<!--                <img src="/images/separator.gif" alt=""/>-->
+<!--                <a href="/catalog/viewCategory?categoryId=DOGS"><img src="/images/sm_dogs.gif" alt=""/></a>-->
+<!--                <img src="/images/separator.gif" alt=""/>-->
+<!--                <a href="/catalog/viewCategory?categoryId=REPTILES"><img src="/images/sm_reptiles.gif" alt=""/></a>-->
+<!--                <img src="/images/separator.gif" alt=""/>-->
+<!--                <a href="/catalog/viewCategory?categoryId=CATS"><img src="/images/sm_cats.gif" alt=""/></a>-->
+<!--                <img src="/images/separator.gif" alt=""/>-->
+<!--                <a href="/catalog/viewCategory?categoryId=BIRDS"><img src="/images/sm_birds.gif" alt=""/></a>-->
 <!--            </div>-->
 
 <!--        </div>-->

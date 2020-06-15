@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.csu.mypetstore.persistence.AccountMapper">
+    <!--加入获取密码的语句-->
     <select id="getAccountByUsername" parameterType="string" resultType="Account">
         SELECT
           SIGNON.USERNAME,
+          SIGNON.PASSWORD,
           ACCOUNT.EMAIL,
           ACCOUNT.FIRSTNAME,
           ACCOUNT.LASTNAME,
@@ -53,6 +55,9 @@
         INSERT INTO SIGNON (PASSWORD,USERNAME)
         VALUES (#{password}, #{username})
     </insert>
+    <insert id="insertRole" parameterType="Account">
+        insert into role(username,role) values (#{username},#{role})
+    </insert>
     <update id="updateAccount" parameterType="Account">
         UPDATE ACCOUNT SET
           EMAIL = #{email},
@@ -74,6 +79,11 @@
          FAVCATEGORY = #{favouriteCategoryId}
         WHERE USERID = #{username}
     </update>
+    <update id="updateRole" parameterType="Account">
+        update Role set
+        role = #{role}
+        where username = #{username}
+    </update>
     <update id="updateSignon" parameterType="Account">
         UPDATE SIGNON SET PASSWORD = #{password}
         WHERE USERNAME = #{username}
@@ -88,6 +98,11 @@
             or lastname like #{value} or addr1 like #{value} or addr2 like #{value}
             or city like #{value} or country like #{value} or phone like #{value}
     </select>
+    <select id="findRoleByUsername" parameterType="string" resultType="Role">
+        select *
+        from role
+        where username = #{urname}
+    </select>
     <delete id="deleteAccount" parameterType="string">
         delete from ACCOUNT
         where ACCOUNT.USERID = #{value}
@@ -99,5 +114,9 @@
     <delete id="deleteSignon" parameterType="string">
         delete from SIGNON
         where SIGNON.USERNAME = #{value}
+    </delete>
+    <delete id="deleteRole" parameterType="string">
+        delete from ROLE
+        where ROLE.USERNAME = #{value}
     </delete>
 </mapper>

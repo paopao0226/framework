@@ -16,11 +16,14 @@ public interface AccountMapper {
     void deleteAccount(String username);
     void deleteProfile(String username);
     void deleteSignon(String username);
+    void deleteRole(String username);
     void insertAccount(Account account);
     void insertProfile(Account account);
     void insertSignon(Account account);
     void updateAccount(Account account);
     void updateProfile(Account account);
     void updateSignon(Account account);
+    void updateRole(Account account);
+    void insertRole(Account account);
     List<Role> findRoleByUsername(String username);
 }

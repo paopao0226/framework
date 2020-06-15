@@ -47,18 +47,10 @@
                 <td th:text="${order.getBillCity()}"></td>
                 <td th:text="${order.getTotalPrice()}"></td>
                 <td th:text="${order.getStatus()}"></td>
-<!--                <td>-->
-<!--                    <a class="Button"-->
-<!--                       th:href="'/cms/viewUpdateOrder?userName='+ ${order.username} + '&orderId=' + ${order.getOrderId()}">Update</a>-->
-<!--                </td>-->
                 <td>
                     <a class="Button"
                        th:href="'/cms/orders/' + ${order.getOrderId()} + '/users/' +  ${order.username}">Update</a>
                 </td>
-<!--                <td>-->
-<!--                    <a class="Button"-->
-<!--                       th:href="'/cms/deleteOrder' + '?orderId=' + ${order.getOrderId()} + '&userName='+ ${order.username}">Remove</a>-->
-<!--                </td>-->
                 <td>
                     <a class="Button"
                       th:onclick="removeOrderByOrderid([[${order.getOrderId()}]],[[${order.username}]])">Remove</a>

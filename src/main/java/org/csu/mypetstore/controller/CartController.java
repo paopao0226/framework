@@ -122,8 +122,8 @@ public class CartController {
         }
     }
     //viewOrderList方法：用来查看order信息
-    @GetMapping("viewOrderList")
-    public String viewOrderList(String username,Model model){
+    @GetMapping("orderlists/{username}")
+    public String viewOrderList(@PathVariable("username") String username,Model model){
         List<Order> orderList = new ArrayList<>();
         orderList = orderService.getOrdersByUsername(username);
         model.addAttribute("orderList",orderList);

@@ -33,11 +33,13 @@ public class AccountService {
         accountMapper.deleteAccount(username);
         accountMapper.deleteProfile(username);
         accountMapper.deleteSignon(username);
+        accountMapper.deleteRole(username);
     }
     public void insertAccount(Account account){
         accountMapper.insertAccount(account);
         accountMapper.insertSignon(account);
         accountMapper.insertProfile(account);
+        accountMapper.insertRole(account);
     }
     public void updateAccount(Account account){
         accountMapper.updateAccount(account);
@@ -45,6 +47,7 @@ public class AccountService {
         if(account.getPassword() != null && account.getPassword().length() > 0){
             accountMapper.updateSignon(account);
         }
+        accountMapper.updateRole(account);
     }
     public boolean usernameIsExist(String username){
         Account account = this.getAccount(username);

@@ -15,7 +15,7 @@
         <!--searchAccount-->
         <div id="SearchAccount">
             <div id="SearchContent">
-                <form action="/cms/searchAccounts" method="post">
+                <form action="/cms/searchaccounts/" method="post">
                     <input type="text" id="keyword" name="keyword" size="20" onkeyup="searchAccountsByKeyword()" list="tips"/>
                     <datalist id="tips"></datalist>
                     <input type="submit" name="searchProducts" value="Search"/>
@@ -49,11 +49,11 @@
                 <td>
                     <!--viewUpdateAccount-->
                     <a class="Button"
-                       th:href="'/cms/viewUpdateAccount?userName='+ ${account.getUsername()}">Update</a>
+                       th:href="'/cms/updateaccounts/'+ ${account.getUsername()}">Update</a>
                 </td>
                 <td>
                     <a class="Button"
-                       th:href="'/cms/deleteAccount?username=' + ${account.getUsername()}">Remove</a>
+                       th:href="'/cms/deleteAccount/' + ${account.getUsername()}">Remove</a>
                 </td>
             </tr>
         </table>

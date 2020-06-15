@@ -10,7 +10,7 @@
     <div th:replace="common/top"></div>
 <div id="Catalog">
     <div style="color: red" th:utext="${editMessage}"></div>
-    <form action="/account/editAccount" method="post">
+    <form action="/accounts/editions" method="post">
     <table id="table-3">
         <h3>User Information</h3>
         <tr>
@@ -26,17 +26,21 @@
             <td>Repeat password:</td>
             <td><input type="text" name="repeatedPassword"/>
         </tr>
+        <tr>
+            <td>Role:</td>
+            <td><input type="text" name="role"/></td>
+        </tr>
         <div th:replace="account/IncludeAccountField"></div>
     </table>
         <section class="instagram">
-            <button type="submit">
+            <button>
                 <div class="instagram-btn">
                     <h4 class="icon-itgr mb-0">
-                        <i class="ti-instagram"></i>Save Account Information
+                        <i type="submit" class="ti-instagram"></i>Save Account Information
                         <br/>
-                        <a style="color: #1c7430" class="ti-instagram" th:href="@{'/cart/viewOrderList?username=' + ${myAccount?.getUsername()}}">My Orders</a>
+                        <a style="color: #1c7430" class="ti-instagram" th:href="@{'/carts/orderlists/'+ ${myAccount?.getUsername()}}">My Orders</a>
                         <br/>
-                        <a style="color: #1c7430" class="ti-instagram" href="/daily/selectDailyRecord">My DailyRecord</a>
+                        <a style="color: #1c7430" class="ti-instagram" href="/daily/selections">My DailyRecord</a>
                     </h4>
                 </div>
             </button>

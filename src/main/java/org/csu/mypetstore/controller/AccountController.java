@@ -28,7 +28,7 @@ import java.util.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/account")
+@RequestMapping("/accounts")
 @SessionAttributes(value = {"isLogin","myAccount","password","languageList","categoryList","mylanguagePreference","myfavouriteCategoryId","myListOpt","myBannerOpt","checkCode","kaptcha"})
 public class AccountController {
 
@@ -43,7 +43,7 @@ public class AccountController {
     private static final int lineNumberInt = 5;
     private static final long serialVersionUID = 3038623696184546092L;
     //角色设置
-    public static String roleSetting;
+    public static String roleSetting = "";
     //新验证码的设置
 //    @Autowired
 //    private Producer kaptchaProducer;
@@ -68,8 +68,9 @@ public class AccountController {
         model.addAttribute("categoryList",categoryList);
         return "account/SignonForm";
     }
-    @PostMapping("/sign")//登录
-    public String sign(String username, String password, String verifi, Model model,HttpServletResponse response){
+    //新增token用于验证是否登录
+    @PostMapping("/tokens")
+    public String sign(@RequestParam("username") String username, @RequestParam("password") String password,@RequestParam("verifi") String verifi,HttpServletResponse response,Model model){
         //将输入的密码进行加密，并在之后与数据库中的加密密码进行比对
         password = KL(password);
         //验证码的验证
@@ -106,12 +107,12 @@ public class AccountController {
             return "catalog/main";
         }
     }
-    @GetMapping("/newAccountForm")
+    @GetMapping("/newaccounts")
     public String newAccountForm(Model model){
         return "account/NewAccountForm";
     }
-    @PostMapping("/newAccount")//注册
-    public String newAcount(String password,String repeatedPassword,String verifi,Account account,Model model) {
+    @PostMapping("/users")//注册
+    public String newAcount(@RequestParam("role") String role,@RequestParam("password") String password,@RequestParam("repeatedPassword") String repeatedPassword,@RequestParam("verifi") String verifi,Account account,Model model) {
         //验证码的验证功能
         if(!verifiCode.equals(verifi)){
 //            verifyIsFinished = false;
@@ -142,18 +143,19 @@ public class AccountController {
             }
             else {
                 account.setPassword(KL(account.getPassword()));
+                account.setRole(role);
                 accountService.insertAccount(account);
                 model.addAttribute("username", account.getUsername());
                 return "account/signonForm";
             }
         }
     }
-    @GetMapping("/editAccountForm")//从main到编辑界面
+    @GetMapping("/editaccounts")//从main到编辑界面
     public String editAccountForm(Model model){
         return "account/EditAccountForm";
     }
-    @PostMapping("/editAccount")//编辑
-    public String editAccount(String password,String repeatedPassword,Account account,Model model){
+    @PostMapping("/editions")//编辑
+    public String editAccount(@RequestParam("password") String password,@RequestParam("repeatedPassword") String repeatedPassword,Account account,Model model){
         if(!password.equals(repeatedPassword)){
             String value = "<ui><li>Edit failed,Please check the password and repeatPassword</li></ui>";
             model.addAttribute("editMessage",value);
@@ -179,7 +181,7 @@ public class AccountController {
             }
         }
     }
-    @GetMapping("/signout")//登出，将session中有关用户的信息全部初始化
+    @GetMapping("/signoff")//登出，将session中有关用户的信息全部初始化
     public String signout(Model model){
         Account account = new Account();
         model.addAttribute("loginMessage","");
@@ -192,7 +194,7 @@ public class AccountController {
         model.addAttribute("password","");
         return "catalog/main";
     }
-    @GetMapping("/bufferImage")//验证码
+    @GetMapping("/bufferimages")//验证码
     public void buffer(HttpServletResponse response, Model model) {
         //使用Kaptcha生成验证码
         // 生成验证码
@@ -307,8 +309,8 @@ public class AccountController {
         }
         return sb.toString();
     }
-    @GetMapping("usernameIsExist")//判断是否存在用户，用于注册时在界面进行用户名是否存在的提示
-    public void usernameIsExist(HttpServletResponse response, @RequestParam("username") String username){
+    @GetMapping("/existences/{username}")//判断是否存在用户，用于注册时在界面进行用户名是否存在的提示
+    public void usernameIsExist(HttpServletResponse response, @PathVariable("username") String username){
         boolean result = accountService.usernameIsExist(username);
         response.setContentType("text/plain");
         PrintWriter out = null;

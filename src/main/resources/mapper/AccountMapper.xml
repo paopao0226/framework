@@ -55,6 +55,9 @@
         INSERT INTO SIGNON (PASSWORD,USERNAME)
         VALUES (#{password}, #{username})
     </insert>
+    <insert id="insertRole" parameterType="Account">
+        insert into role(username,role) values (#{username},#{role})
+    </insert>
     <update id="updateAccount" parameterType="Account">
         UPDATE ACCOUNT SET
           EMAIL = #{email},
@@ -75,6 +78,11 @@
          LANGPREF = #{languagePreference},
          FAVCATEGORY = #{favouriteCategoryId}
         WHERE USERID = #{username}
+    </update>
+    <update id="updateRole" parameterType="Account">
+        update Role set
+        role = #{role}
+        where username = #{username}
     </update>
     <update id="updateSignon" parameterType="Account">
         UPDATE SIGNON SET PASSWORD = #{password}
@@ -106,5 +114,9 @@
     <delete id="deleteSignon" parameterType="string">
         delete from SIGNON
         where SIGNON.USERNAME = #{value}
+    </delete>
+    <delete id="deleteRole" parameterType="string">
+        delete from ROLE
+        where ROLE.USERNAME = #{value}
     </delete>
 </mapper>

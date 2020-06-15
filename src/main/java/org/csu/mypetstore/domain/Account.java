@@ -25,6 +25,16 @@ public class Account implements Serializable {
     private boolean bannerOption;
     private String bannerName;
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    private String role;
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

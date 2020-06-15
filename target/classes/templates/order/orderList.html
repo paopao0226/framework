@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="StyleSheet" href="/css/jpetstore.css" type="text/css" media="screen"/>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
 </head>
 <body>
 <header th:replace="common/top"></header>
@@ -46,18 +46,12 @@
                     <td th:text="${order.getTotalPrice()}"></td>
                     <td th:if="${order.getStatus()} eq '0'" th:text="未付款"></td>
                     <td th:if="${order.getStatus()} eq '1'" th:text="已付款"></td>
-<!--                    <td>-->
-<!--                        <a class="Button" th:href="'/order/viewUpdateOrder?userName='+ ${myAccount?.getUsername()} + '&orderId=' + ${order.getOrderId()}">Update</a>-->
-<!--                    </td>-->
                     <td>
                         <a class="Button" th:href="'/orders/'+  ${order.getOrderId()} + '/users/'+ ${myAccount?.getUsername()}">Update</a>
                     </td>
 <!--                    <td>-->
 <!--                        <a class="Button" th:href="'/order/deleteOrder' + '?orderId=' + ${order.getOrderId()} + '&userName='+ ${myAccount?.getUsername()}">Remove</a>-->
 <!--                    </td>-->
-                    <td>
-                        <a class="Button" th:onclick="removeOrderByOrderid([[${order.getOrderId()}]],[[${myAccount?.getUsername()}]])">Remove</a>
-                    </td>
                     <td>
 <!--                            <form th:action="'/alipay/pay?orderId='${order.getOrderId()}" method="post">-->
 <!--                                <button type="submit">pay</button>-->
