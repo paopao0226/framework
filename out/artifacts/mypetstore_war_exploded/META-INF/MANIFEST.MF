@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: 姚文进
+Build-Jdk: 11.0.3
+Implementation-Title: mypetstore
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: org.csu
+Main-Class: ${start-class}
+
