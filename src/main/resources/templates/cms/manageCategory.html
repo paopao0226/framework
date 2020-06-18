@@ -38,7 +38,7 @@
 
                 <tr th:each="category:${AllCategoryList}">
                     <!--                <td><a th:href="" th:text="${product.getProductId()}">Product ID</a></td>-->
-                    <td><a th:href="@{/cms/ViewManageProduct?categoryId=}+${category.getCategoryId()}" th:text="${category.getCategoryId()}">Category ID</a></td>
+                    <td><a th:href="@{/cms/category/} + ${category.getCategoryId()}" th:text="${category.getCategoryId()}">Category ID</a></td>
 <!--                    th:href="@{/catalog/viewProduct?productId=}+${product.productId}"-->
                     <td th:text="${category.getName()}">Category Name</td>
                 </tr>

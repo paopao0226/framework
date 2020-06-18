@@ -8,7 +8,6 @@ import org.csu.mypetstore.service.AccountService;
 import org.csu.mypetstore.service.CatalogService;
 import org.csu.mypetstore.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,7 +51,7 @@ public class CmsController {
         categoryList.add("BIRDS");
         model.addAttribute("languageList",languageList);
         model.addAttribute("categoryList",categoryList);
-//        System.out.println(AccountController.roleSetting.toString());
+        //        System.out.println(AccountController.roleSetting.toString());
         if(!AccountController.roleSetting.toString().equals("")){
             if(!AccountController.roleSetting.toString().equals("manager")){
                 return "cms/failReading";
@@ -265,7 +264,7 @@ public class CmsController {
         return md5Password;
     }
 
-    @GetMapping("ViewManageCategory")
+    @GetMapping("category")
     public String manageCategory(Model model){
         List<Category> AllCategoryList = catalogService.getAllCategorys();
         model.addAttribute("AllCategoryList", AllCategoryList);
@@ -273,8 +272,8 @@ public class CmsController {
         return "cms/manageCategory";
     }
 
-    @GetMapping("ViewManageProduct")
-    public String manageProduct(String categoryId, Model model){
+    @GetMapping("category/{categoryId}")
+    public String manageProduct(@PathVariable("categoryId") String categoryId, Model model){
         if (categoryId != null) {
             Category category = catalogService.getCategory(categoryId);
             List<Product> productList = catalogService.getProductListByCategory(categoryId);
@@ -284,8 +283,8 @@ public class CmsController {
         return "cms/manageProduct";
     }
 
-    @GetMapping("ViewManageItem")
-    public String manageItem(String productId, Model model){
+    @GetMapping("product/{productId}")
+    public String manageItem(@PathVariable("productId") String productId, Model model){
         if (productId != null) {
             Product product = catalogService.getProduct(productId);
             List<Item> itemList = catalogService.getItemListByProduct(productId);
@@ -296,8 +295,8 @@ public class CmsController {
         return "cms/manageItem";
     }
 
-    @GetMapping("DeleteProduct")
-    public String deleteProduct(String deleteProductId, String productKeyword, String categoryId, Model model){
+    @DeleteMapping(value = "category/{categoryId}/product/{productId}")
+    public String deleteProduct(@PathVariable("productId") String deleteProductId, String productKeyword, @PathVariable("categoryId") String categoryId, Model model){
         if (deleteProductId != null) {
             if (categoryId != null) {
                 catalogService.deleteItemByProductId(deleteProductId);
@@ -333,8 +332,8 @@ public class CmsController {
         return "cms/manageProduct";
     }
 
-    @GetMapping("ViewUpdateProduct")
-    public String viewUpdateProduct(String updateProductId, Model model){
+    @GetMapping("product/{updateProductId}/updated")
+    public String viewUpdateProduct(@PathVariable("updateProductId") String updateProductId, Model model){
         if (updateProductId != null) {
             Product productOfUpdate = catalogService.getProduct(updateProductId);
             model.addAttribute("productOfUpdate", productOfUpdate);
@@ -342,7 +341,7 @@ public class CmsController {
         return "cms/updateProduct";
     }
 
-    @PostMapping("UpdateProduct")
+    @PostMapping("UpdatedProduct")
     public String updateProduct(String categoryType, String productName,Model model){
         Product product = (Product)model.getAttribute("productOfUpdate");
         product.setCategoryId(categoryType);
@@ -362,8 +361,8 @@ public class CmsController {
         }
     }
 
-    @GetMapping("ViewAddProduct")
-    public String viewAddProduct(String categoryId, Model model){
+    @GetMapping("added/category/{categoryId}")
+    public String viewAddProduct(@PathVariable("categoryId") String categoryId, Model model){
         if (categoryId != null) {
             Category category = catalogService.getCategory(categoryId);
             model.addAttribute("category", category);
@@ -371,7 +370,8 @@ public class CmsController {
         return "cms/addProduct";
     }
 
-    @PostMapping("addProduct")
+
+    @PostMapping("addedProduct")
     public String addProduct(String productId, String categoryType, String productName, Model model){
         Product product = new Product();
         product.setProductId(productId);
@@ -392,8 +392,8 @@ public class CmsController {
         }
     }
 
-    @GetMapping("DeleteItem")
-    public String deleteItem(String deleteItemId, String productId,String itemKeyword, Model model){
+    @DeleteMapping(value = "product/{productId}/item/{itemId}")
+    public String deleteItem(@PathVariable("itemId") String deleteItemId, @PathVariable("productId") String productId, String itemKeyword, Model model){
         if (deleteItemId != null) {
             if (productId != null) {
                 catalogService.deleteItem(deleteItemId);
@@ -416,8 +416,8 @@ public class CmsController {
         return "cms/manageItem";
     }
 
-    @GetMapping("ViewUpdateItem")
-    public String viewUpdateItem(String updateItemId, Model model){
+    @GetMapping("item/{updateItemId}/updated")
+    public String viewUpdateItem(@PathVariable("updateItemId") String updateItemId, Model model){
         if (updateItemId != null) {
             Item itemOfUpdate = catalogService.getItem(updateItemId);
             model.addAttribute("itemOfUpdate", itemOfUpdate);
@@ -425,7 +425,7 @@ public class CmsController {
         return "cms/updateItem";
     }
 
-    @PostMapping("UpdateItem")
+    @PostMapping("UpdatedItem")
     public String updateItem(String itemListPrice, String itemUnitCost,
                              String itemSupplier, String itemStatus,
                              String itemAttribute1, String itemAttribute2,
@@ -460,8 +460,9 @@ public class CmsController {
         }
     }
 
-    @GetMapping("ViewAddItem")
-    public String viewAddItem(String productId, Model model){
+    @GetMapping("added/product/{productId}")
+    public String viewAddItem(@PathVariable("productId") String productId, Model model){
+        System.out.println(productId);
         if (productId != null) {
             Product product = catalogService.getProduct(productId);
             model.addAttribute("product", product);
@@ -469,7 +470,16 @@ public class CmsController {
         return "cms/addItem";
     }
 
-    @PostMapping("addItem")
+//    @GetMapping("category/{categoryId}/product/added")
+//    public String viewAddProduct(@PathVariable("categoryId") String categoryId, Model model){
+//        if (categoryId != null) {
+//            Category category = catalogService.getCategory(categoryId);
+//            model.addAttribute("category", category);
+//        }
+//        return "cms/addProduct";
+//    }
+
+    @PostMapping("addedItem")
     public String addItem(String itemId, String itemListPrice, String itemUnitCost,
                           String itemSupplier, String itemStatus,
                           String itemAttribute1, String itemAttribute2,

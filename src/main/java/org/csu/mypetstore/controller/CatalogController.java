@@ -39,14 +39,17 @@ public class CatalogController {
         }
         return "catalog/main";
     }
+
     @GetMapping("/signon")
     public String signon(Model model) {
         //这里添了一句话
         isEnter = 1;
         return "account/SignonForm";
     }
-    @GetMapping("viewCategory")
-    public String viewCategory(String categoryId, Model model) {
+
+//    @GetMapping("viewCategory")
+    @GetMapping(value = "category/{categoryId}")
+    public String viewCategory(@PathVariable("categoryId") String categoryId, Model model) {
         if (categoryId != null) {
             Category category = catalogService.getCategory(categoryId);
             List<Product> productList = catalogService.getProductListByCategory(categoryId);
@@ -56,8 +59,8 @@ public class CatalogController {
         return "catalog/category";
     }
 
-    @GetMapping("viewProduct")
-    public String viewProduct(String productId, Model model) {
+    @GetMapping("product/{productId}")
+    public String viewProduct(@PathVariable("productId") String productId, Model model) {
 
         if (productId != null) {
             Product product = catalogService.getProduct(productId);
@@ -67,9 +70,11 @@ public class CatalogController {
         }
         return "catalog/product";
     }
+
     public void add(){
         System.out.println("成功记录");
     }
+
     //这里添加了Username便于进行日志的记录
     @GetMapping("viewItem")
     public String viewItem(String itemId, Model model,String userId){
