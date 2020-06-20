@@ -394,7 +394,7 @@
                                         <p class="info-shop-des">Perfect Animals Sale In There</p>
                                         <button class="btn-discovery btn-custom">
 <!--                                            <span class="btn-text"><a class="specialA" href="/catalog/viewCategory?categoryId=CATS">Shop Now</a></span>-->
-                                            <span class="btn-text"><a class="specialA" th:href="@{'category/' + ${'CATS'}}">Shop Now</a></span>
+                                            <span class="btn-text"><a class="specialA" th:href="@{'/catalog/category/' + ${'CATS'}}">Shop Now</a></span>
                                             <span class="icon-arrow-right">
                             <i class="lnr lnr-arrow-right"></i>
                           </span>
@@ -415,7 +415,7 @@
                                         <h2 class="info-shop-tilte">The Purchase<br> Of Dogs.</h2>
                                         <p class="info-shop-des">Perfect Animals Sale In There</p>
                                         <button class="btn-discovery btn-custom">
-                                            <span class="btn-text"><a class="specialA" th:href="@{'category/' + ${'DOGS'}}">Shop Now</a></span>
+                                            <span class="btn-text"><a class="specialA" th:href="@{'/catalog/category/' + ${'DOGS'}}">Shop Now</a></span>
                                             <span class="icon-arrow-right">
                             <i class="lnr lnr-arrow-right"></i>
                           </span>
@@ -436,7 +436,7 @@
                                         <h2 class="info-shop-tilte">The Purchase<br> Of Birds.</h2>
                                         <p class="info-shop-des">Perfect Animals Sale In There</p>
                                         <button class="btn-discovery btn-custom">
-                                            <span class="btn-text"><a class="specialA" th:href="@{'category/' + ${'BIRDS'}}">Shop Now</a></span>
+                                            <span class="btn-text"><a class="specialA" th:href="@{'/catalog/category/' + ${'BIRDS'}}">Shop Now</a></span>
                                             <span class="icon-arrow-right">
                             <i class="lnr lnr-arrow-right"></i>
                           </span>
@@ -457,7 +457,7 @@
                                         <h2 class="info-shop-tilte">The Purchase<br> Of Fish.</h2>
                                         <p class="info-shop-des">Perfect Animals Sale In There</p>
                                         <button class="btn-discovery btn-custom">
-                                            <span class="btn-text"><a class="specialA" th:href="@{'category/' + ${'FISH'}}">Shop Now</a></span>
+                                            <span class="btn-text"><a class="specialA" th:href="@{'/catalog/category/' + ${'FISH'}}">Shop Now</a></span>
                                             <span class="icon-arrow-right">
                             <i class="lnr lnr-arrow-right"></i>
                           </span>
@@ -478,7 +478,7 @@
                                         <h2 class="info-shop-tilte">The Purchase<br> Of Reptiles.</h2>
                                         <p class="info-shop-des">Perfect Animals Sale In There</p>
                                         <button class="btn-discovery btn-custom">
-                                            <span class="btn-text"><a class="specialA" th:href="@{'category/' + ${'REPTILES'}}">Shop Now</a></span>
+                                            <span class="btn-text"><a class="specialA" th:href="@{'/catalog/category/' + ${'REPTILES'}}">Shop Now</a></span>
                                             <span class="icon-arrow-right">
                             <i class="lnr lnr-arrow-right"></i>
                           </span>
@@ -499,19 +499,19 @@
                     <div class="js-slide-avatar">
                         <div>
 <!--                            <a href="/catalog/viewCategory?categoryId=CATS"><img src="../images/top_cat.jpg" alt="Image"></a>-->
-                            <a th:href="@{'category/' + ${'CATS'}}"><img src="../images/top_cat.jpg" alt="Image"></a>
+                            <a th:href="@{'/catalog/category/' + ${'CATS'}}"><img src="../images/top_cat.jpg" alt="Image"></a>
                         </div>
                         <div>
-                            <a th:href="@{'category/' + ${'DOGS'}}"><img src="../images/top_dog.jpg" alt="Image"></a>
+                            <a th:href="@{'/catalog/category/' + ${'DOGS'}}"><img src="../images/top_dog.jpg" alt="Image"></a>
                         </div>
                         <div>
-                            <a th:href="@{'category/' + ${'BIRDS'}}"><img src="../images/top_bird.jpg" alt="Image"></a>
+                            <a th:href="@{'/catalog/category/' + ${'BIRDS'}}"><img src="../images/top_bird.jpg" alt="Image"></a>
                         </div>
                         <div>
-                            <a th:href="@{'category/' + ${'FISH'}}"><img src="../images/top_fish.jpg" alt="Image"></a>
+                            <a th:href="@{'/catalog/category/' + ${'FISH'}}"><img src="../images/top_fish.jpg" alt="Image"></a>
                         </div>
                         <div>
-                            <a th:href="@{'category/' + ${'REPTILES'}}"><img src="../images/top_reptile.jpg" alt="Image"></a>
+                            <a th:href="@{'/catalog/category/' + ${'REPTILES'}}"><img src="../images/top_reptile.jpg" alt="Image"></a>
                         </div>
                     </div>
                     <span class="box-text">Sale up to 35%</span>
@@ -652,7 +652,7 @@
                         <div class="col-md-8 gutter">
                             <a href="">
                                 <div class="categories-item">
-                                    <a th:href="@{'category/' + ${'CATS'}}"><img src="../images/categories-1.jpg" alt=""></a>
+                                    <a th:href="@{'/catalog/category/' + ${'CATS'}}"><img src="../images/categories-1.jpg" alt=""></a>
                                     <div class="categories-info">
                                         <h4 class="categories-info-name">Cats</h4>
 <!--                                        <p class="categories-info-count">(50 Items)</p>-->
@@ -663,7 +663,7 @@
                         <div class="col-md-4 gutter">
                             <a href="">
                                 <div class="categories-item">
-                                    <a th:href="@{'category/' + ${'DOGS'}}"><img src="../images/categories-2.jpg" alt=""></a>
+                                    <a th:href="@{'/catalog/category/' + ${'DOGS'}}"><img src="../images/categories-2.jpg" alt=""></a>
                                     <div class="categories-info">
                                         <h4 class="categories-info-name">Dogs</h4>
 <!--                                        <p class="categories-info-count">(75 Items)</p>-->
@@ -676,7 +676,7 @@
                         <div class="col-md-4 gutter">
                             <a href="">
                                 <div class="categories-item">
-                                    <a th:href="@{'category/' + ${'FISH'}}"><img src="../images/categories-4.jpg" alt=""></a>
+                                    <a th:href="@{'/catalog/category/' + ${'FISH'}}"><img src="../images/categories-4.jpg" alt=""></a>
                                     <div class="categories-info">
                                         <h4 class="categories-info-name">Fish</h4>
 <!--                                        <p class="categories-info-count">(55 Items)</p>-->
@@ -687,7 +687,7 @@
                         <div class="col-md-8 gutter">
                             <a href="">
                                 <div class="categories-item">
-                                    <a th:href="@{'category/' + ${'REPTILES'}}"><img src="../images/categories-5.jpg" alt=""></a>
+                                    <a th:href="@{'/catalog/category/' + ${'REPTILES'}}"><img src="../images/categories-5.jpg" alt=""></a>
                                     <div class="categories-info">
                                         <h4 class="categories-info-name">Reptiles</h4>
 <!--                                        <p class="categories-info-count">(50 Items)</p>-->
@@ -700,7 +700,7 @@
                 <div class="col-xl-3 gutter d-none-19">
                     <a href="">
                         <div class="categories-item">
-                            <a th:href="@{'category/' + ${'BIRDS'}}"><img src="../images/categories-3.jpg" alt=""></a>
+                            <a th:href="@{'/catalog/category/' + ${'BIRDS'}}"><img src="../images/categories-3.jpg" alt=""></a>
                             <div class="categories-info">
                                 <h4 class="categories-info-name">Birds</h4>
 <!--                                <p class="categories-info-count">(40 Items)</p>-->
