@@ -50,7 +50,10 @@
                     <td th:id="'totalPriceOf' + ${cartItem.item.itemId}"
                         th:text="'$'+${#numbers.formatDecimal(cartItem.total,1,2)}"></td>
                     <td>
-                        <a class="Button" th:href="'/cart/deleteCartItem?userName='+ ${myAccount?.getUsername()} + '&itemId=' + ${cartItem.item.itemId}">Remove</a>
+<!--                        users/{userName}/items/{itemId-->
+<!--                        <a class="Button" th:href="'/cart/deleteCartItem?userName='+ ${myAccount?.getUsername()} + '&itemId=' + ${cartItem.item.itemId}">Remove</a>-->
+<!--                        <a class="Button" th:href="'/carts/users/' + ${myAccount?.getUsername()} + '/items/' + ${cartItem.item.itemId}">Remove</a>-->
+                        <a class="Button" th:onclick="deleteCartItem([[${myAccount?.getUsername()}]],[[${cartItem.item.itemId}]])">Remove</a>
                     </td>
                 </tr>
 
