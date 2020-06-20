@@ -45,6 +45,7 @@
             <tr>
                 <td>Password: </td>
                 <td><input type="password" name="password"/></td>
+                <td><label style="color: red" id="tips"></label></td>
             </tr>
             <tr>
                 <td>Tel Number:</td>
@@ -76,22 +77,23 @@
 </div>
 <div th:replace="common/bottom"></div>
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="../static/js/jquery-3.4.1.min.js"></script>
 <script>
     var res;
     var tips = document.getElementById("tips");
+    var phone;
     function changeImg() {
         document.getElementById("validateCodeImg").src="bufferimages?"+Math.random();//在末尾加Math.random()的作用：<br>如果两次请求地址一样，服务器只会处理第一次请求，第二次请求返回内容和第一次一样。或者说如果地址相同，第一次请求时，将自动缓存，导致第二次不会重复请求了。Math.random()是调用javascript语法中的数学函数，能够产生随机数。<br>末尾加Math.random()使每次请求地址不相同，服务器每次都去做不同的响应。也可以使用new date()时间戳的形式作为参数传递。
         //在末尾加Math.random()的作用：<br>如果两次请求地址一样，服务器只会处理第一次请求，第二次请求返回内容和第一次一样。或者说如果地址相同，第一次请求时，
         //将自动缓存，导致第二次不会重复请求了。Math.random()是调用javascript语法中的数学函数，能够产生随机数。<br>末尾加Math.random()使每次请求地址不相同，服务器每次都去做不同的响应。也可以使用new date()时间戳的形式作为参数传递。
     }
     function tel() {
-        var phone = document.getElementById("tel").value;
+        phone = document.getElementById("tel").value;
         tips.innerText = '获取中...';
         $.ajax({
             contentType: "application/json; charset=utf-8",
             type: "get",
-            url: "/account/smsXxs?phone=" + phone,
+            url: "/accounts/smsXxs/" + phone,
             success: function (result) {
                 if(result["isOk"] == "OK") {
                     res = result["verifyCode"];
@@ -107,11 +109,12 @@
         });
     }
     function changedPhoneVerifyCode() {
-        var number = document.getElementById("verifyCode");
-        console.log(res);
-        if(number == parseInt(res)){
+        var number = document.getElementById("verifyCode").value;
+        console.log(number);
+        if(number == res){
             tips.innerText = '验证成功';
         }
+        else tips.innerText = '验证失败';
     }
 </script>
 </html>

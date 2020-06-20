@@ -52,8 +52,8 @@
                        th:href="'/cms/updateaccounts/'+ ${account.getUsername()}">Update</a>
                 </td>
                 <td>
-                    <a class="Button"
-                       th:href="'/cms/deleteAccount/' + ${account.getUsername()}">Remove</a>
+                    <a class="Button" style="color: white"
+                       th:onclick="removeAccountByOrderid([[${account.getUsername()}]])">Remove</a>
                 </td>
             </tr>
         </table>
@@ -95,5 +95,22 @@
             }
         });
     }
-
+</script>
+<script>
+    function removeAccountByOrderid(username) {
+        $.ajax({
+                type: "DELETE",
+                // rest风格
+                url: "/cms/deleteaccounts/" + username,
+                async : true,
+                dataType:"html",//返回整合HTML
+                // dataType: "json",//返回json格式设置
+                contentType:'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $("body").html(data);//刷新整个body页面的html
+                }
+            }
+        )
+    }
 </script>

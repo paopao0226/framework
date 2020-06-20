@@ -176,6 +176,8 @@ public class AccountController {
                 account.setUsername(loginAccout.getUsername());
                 account.setPassword(KL(password));
                 accountService.updateAccount(account);
+                String role = accountService.findRoleByUsername(loginAccout.getUsername()).get(0).getRole();
+                roleSetting = role;
                 model.addAttribute("username", account.getUsername());
                 return "catalog/main";
             }
@@ -336,9 +338,9 @@ public class AccountController {
         return md5Password;
     }
     //验证码
-    @GetMapping("/smsXxs")
+    @GetMapping("/smsXxs/{phone}")
     @ResponseBody
-    public Map<String,Object> smsXxs(String phone, HttpServletRequest request) throws ClientException {
+    public Map<String,Object> smsXxs(@PathVariable("phone") String phone, HttpServletRequest request) throws ClientException {
         System.out.println("完成");
         Map<String,Object> map = new HashMap<>();
         // 验证码（指定长度的随机数）

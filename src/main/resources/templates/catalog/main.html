@@ -50,97 +50,6 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="li-primary hide-laptop">
-                                <a class="item-primary" href="List_ShopPageFullWidth.html">Shop</a>
-                                <!-- submenu home -->
-                                <div class="st2-hamadryad-megamenu st1-hamadryad-megamenu megamenu-home js-dropmenuv1 megamenu-bg-active1">
-                                    <section class="st2-hamadryad-megamenu-modal home">
-                                        <div class="container-fluid">
-                                            <div class="st2-hamadryad-submenu-wrapper">
-                                                <div class="row">
-                                                    <div class="st2-submenu-banner">
-                                                        <img src="/images/menu1.jpg" alt="Banner" class="img-width img-fluid">
-                                                    </div>
-                                                </div>
-<!--                                                <div class="row">-->
-<!--                                                    <div class="col-md-3">-->
-<!--                                                        <div class="st2-submenu-list-item">-->
-<!--                                                            <h2 class="st2-submenu-item-title">Shop</h2>-->
-<!--                                                            <ul class="st2-submenu-item-ul">-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a class="st2-submenu-item-link" href="List_ShopPageFullWidth.html">Shop Fullwidth</a>-->
-<!--                                                                </li>-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a class="st2-submenu-item-link" href="List_Shop_Sidebar-Left.html">Shop Sidebar Left</a>-->
-<!--                                                                </li>-->
-<!--                                                            </ul>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="col-md-3">-->
-<!--                                                        <div class="st2-submenu-list-item">-->
-<!--                                                            <h2 class="st2-submenu-item-title">Product Details</h2>-->
-<!--                                                            <ul class="st2-submenu-item-ul">-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a href="ProductDetail_v1.html" class="st2-submenu-item-link">Product detail v1</a>-->
-<!--                                                                </li>-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a href="ProductDetail_v2.html" class="st2-submenu-item-link">Product detail v2</a>-->
-<!--                                                                </li>-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a href="ProductDetail_v3.html" class="st2-submenu-item-link">Product detail v3</a>-->
-<!--                                                                </li>-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a href="ProductDetail_v4.html" class="st2-submenu-item-link">Product detail v4</a>-->
-<!--                                                                </li>-->
-<!--                                                            </ul>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="col-md-3">-->
-<!--                                                        <div class="st2-submenu-list-item">-->
-<!--                                                            <h2 class="st2-submenu-item-title">Pages</h2>-->
-<!--                                                            <ul class="st2-submenu-item-ul">-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a href="Hover&Active-v2.html" class="st2-submenu-item-link">Hover&Active v2</a>-->
-<!--                                                                </li>-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a href="Popup.html" class="st2-submenu-item-link">Popup</a>-->
-<!--                                                                </li>-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a href="ContactUs.html" class="st2-submenu-item-link">Contact us</a>-->
-<!--                                                                </li>-->
-<!--                                                            </ul>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="col-md-3">-->
-<!--                                                        <div class="st2-submenu-list-item">-->
-<!--                                                            <h2 class="st2-submenu-item-title">Table Tree Plant</h2>-->
-<!--                                                            <ul class="st2-submenu-item-ul">-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a href="" class="st2-submenu-item-link">New Arrivals</a>-->
-<!--                                                                </li>-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a href="" class="st2-submenu-item-link">Best Product</a>-->
-<!--                                                                </li>-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a href="" class="st2-submenu-item-link">Deal Of The Week</a>-->
-<!--                                                                </li>-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a href="" class="st2-submenu-item-link">Top Rated</a>-->
-<!--                                                                    <span class="st2-submenu-icon lnr lnr-chevron-right"></span>-->
-<!--                                                                </li>-->
-<!--                                                                <li class="st2-submenu-item-li">-->
-<!--                                                                    <a href="" class="st2-submenu-item-link">Our Product</a>-->
-<!--                                                                </li>-->
-<!--                                                            </ul>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
-                                <!-- end submenu home -->
-                            </li>
                             <li class="li-primary hide-laptop" th:if="${isLogin eq false}" id="signin">
                                 <a class="item-primary" href="/accounts/signon" >Sign In</a>
                             </li>
@@ -190,15 +99,9 @@
                             </div>
                             <!-- End Search -->
                         </div>
-                        <div class="controls-block block-cart js-click-cart">
+                        <div class="controls-block block-cart">
                             <div class="controls-icon block-cart-icon">
-                                <span class="icon icon-ecommerce-basket"></span>
-                                <span class="cart-number">2</span>
-                            </div>
-                        </div>
-                        <div class="controls-block block-megamenu js-click-megamenu">
-                            <div class="controls-icon block-megamenu-icon">
-                                <span class="lnr lnr-menu"></span>
+                                <span class="icon icon-ecommerce-basket" th:href="@{'/carts/users/' + ${myAccount?.getUsername()}}"></span>
                             </div>
                         </div>
                     </div>
@@ -208,154 +111,13 @@
         </div>
     </div>
 
-    <!-- Mini cart -->
-    <div class="hamadryad-minicart">
-        <div class="hamadryad-minicart-content">
-            <h3 class="hamadryad-minicart-title">Your cart</h3>
-            <span class="hamadryad-minicart-number">2</span>
-            <div class="hamadryad-minicart-close">
-                <i class="lnr lnr-cross"></i>
-            </div>
-            <div class="hamadryad-minicart-list-item">
-                <div class="list-item">
-                    <ol class="hamadryad-minicart-items">
-                        <li class="product-cart">
-                            <a href="" class="product-cart-thumb"><img src="/images/products/product-1.jpg" alt=""></a>
-                            <div class="product-detail">
-                                <div class="product-name"><a href="">Candle Bowl </a></div>
-                                <div class="product-detail-info">
-                                    <div class="product-quality">QTY : 1</div>
-                                    <div class="product-cost">$169.00</div>
-                                </div>
-                            </div>
-                            <div class="product-remove">
-                                <a href=""><i class="lnr lnr-cross"></i></a>
-                            </div>
-                        </li>
-                        <li class="product-cart">
-                            <a href="" class="product-cart-thumb"><img src="/images/products/product-2.jpg" alt=""></a>
-                            <div class="product-detail">
-                                <div class="product-name"><a href="">Candle Bowl </a></div>
-                                <div class="product-detail-info">
-                                    <div class="product-quality">QTY : 1</div>
-                                    <div class="product-cost">$169.00</div>
-                                </div>
-                            </div>
-                            <div class="product-remove">
-                                <a href=""><i class="lnr lnr-cross"></i></a>
-                            </div>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-            <div class="subtotal">
-                <span class="total-title">Total:</span>
-                <span class="total-price">$190.00</span>
-            </div>
-            <div class="hamadryad-minicart-action">
-                <div class="btn-action-minicart viewcart">
-<!--                    <a th:href="@{'/carts/viewCart?username=' + ${myAccount?.getUsername()}}">View Cart</a>-->
-                    <a th:href="@{'/carts/users/' + ${myAccount?.getUsername()}}">View Cart</a>
-                </div>
-                <div class="btn-action-minicart checkout">Checkout</div>
-            </div>
-        </div>
-    </div>
-    <div class="minicart-bg-overlay" style="display: none;"></div>
-
-    <!-- Menu mobie -->
-    <div class="box-mobile-menu">
-        <span class="box-title">Menu</span>
-        <a href="#" class="close-menu" id="pull-closemenu">
-            <i class="lnr lnr-cross"></i>
-        </a>
-        <div class="menu-clone">
-            <ul class="main-menu">
-                <li class="menu-item menu-item-has-children">
-                    <a href="Homepage01.html">Home</a>
-                    <span class="toggle-submenu"></span>
-                    <div class="submenu">
-                        <div class="col-12 col-md-12 custom-col">
-                            <div class="col-inner">
-                                <div class="col-wrapper-item">
-                                    <ul class="menu-shop-style">
-                                        <li class="style-item"><a class="afont200" href="Homepage01.html">Homepage v1</a></li>
-                                        <li class="style-item"><a class="afont200" href="Homepage02.html">Homepage v2</a></li>
-                                        <li class="style-item"><a class="afont200" href="Homepage03.html">Homepage v3</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="menu-item menu-item-has-children">
-                    <a th:href="@{'/carts/viewCart?username=' + ${myAccount?.getUsername()}}">Shop</a>
-                    <span class="toggle-submenu"></span>
-                    <div class="submenu">
-                        <div class="col-12 col-md-12 custom-col">
-                            <div class="col-inner">
-                                <div class="col-wrapper-item">
-                                    <h2 class="widget-title">Shop</h2>
-                                    <ul class="menu-shop-style">
-                                        <li class="style-item"><a class="afont200" href="List_ShopPageFullWidth.html">Shop Fullwidth</a></li>
-                                        <li class="style-item"><a class="afont200" href="List_Shop_Sidebar-Left.html">Shop Sidebar Left</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-wrapper-item">
-                                    <h2 class="widget-title">Product Details</h2>
-                                    <ul class="menu-shop-style">
-                                        <li class="style-item"><a class="afont200" href="ProductDetail_v1.html">Product detail v1</a></li>
-                                        <li class="style-item"><a class="afont200" href="ProductDetail_v2.html">Product detail v2</a></li>
-                                        <li class="style-item"><a class="afont200" href="ProductDetail_v3.html">Product detail v3</a></li>
-                                        <li class="style-item"><a class="afont200" href="ProductDetail_v4.html">Product detail v4</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-wrapper-item">
-                                    <h2 class="widget-title">Pages</h2>
-                                    <ul class="menu-shop-style">
-                                        <li class="style-item"><a class="afont200" href="Hover&Active-v2.html">Hover&Active v2</a></li>
-                                        <li class="style-item"><a class="afont200" href="Popup.html">Popup</a></li>
-                                        <li class="style-item"><a class="afont200" href="ContactUs.html">Contact us</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-wrapper-item">
-                                    <h2 class="widget-title">Table Tree Plant</h2>
-                                    <ul class="menu-shop-style">
-                                        <li class="style-item"><a class="afont200" href="">New Arrivals</a></li>
-                                        <li class="style-item"><a class="afont200" href="">Best Product</a></li>
-                                        <li class="style-item"><a class="afont200" href="">Deal Of The Week</a></li>
-                                        <li class="style-item"><a class="afont200" href="">Top Rated</a></li>
-                                        <li class="style-item"><a class="afont200" href="">Our Product</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="menu-item menu-item-has-children"><a href="">Features</a></li>
-                <li class="menu-item menu-item-has-children"><a href="">Portfolio</a></li>
-                <li class="menu-item menu-item-has-children">
-                    <a href="Blog&New_v1.html">Blog</a>
-                    <span class="toggle-submenu"></span>
-                    <div class="submenu">
-                        <div class="col-12 col-md-12 custom-col">
-                            <div class="col-inner">
-                                <div class="col-wrapper-item">
-                                    <ul class="menu-shop-style">
-                                        <li class="style-item"><a class="afont200" href="Blog&New_v1.html">Blog & New 1</a></li>
-                                        <li class="style-item"><a class="afont200" href="Blog&New_v2.html">Blog & New 1</a></li>
-                                        <li class="style-item"><a class="afont200" href="Blog&NewPost.html">Blog & New Post</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="menu-item menu-item-has-children"><a href="AboutUs.html">About Us</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="menu-overlay"></div>
+<!--    &lt;!&ndash; Mini cart &ndash;&gt;-->
+<!--    <div class="hamadryad-minicart">-->
+<!--        <div class="hamadryad-minicart-content">-->
+<!--            <h3  class="hamadryad-minicart-title">Your cart</h3>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="minicart-bg-overlay" style="display: none;"></div>-->
 
 </header>
 

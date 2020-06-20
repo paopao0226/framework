@@ -113,7 +113,7 @@
 <!--        <a style="text-align: center; font-size: 25px" th:href="@{'/order/viewOrder?username=' + ${myAccount?.getUsername()} + '&orderId=-1'}" name="confirmed" value="true">Confirm</a>-->
 <!--        <a style="text-align: center; font-size: 25px" th:onclick="confirm([[${myAccount?.getUsername()}]],[[-1]])" name="confirmed" value="true">Confirm</a>-->
         <form th:action="'/orders/-1/users/'+${myAccount?.getUsername()}" method="post">
-            <button type="submit">confirmed</button>
+            <input class="Button" value="confirmed" type="submit"></input>
         </form>
 
     </div>

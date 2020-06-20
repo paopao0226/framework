@@ -69,7 +69,7 @@
                 <td>
 <!--                    <a th:if="${isLogin eq true}" th:href="@{'/catalog/viewItem?itemId=' + ${item.itemId} + '&userId=' + ${myAccount?.getUsername()}}" th:text="${item.itemId}">Item Id</a>-->
                     <!--这里用来判断是否登录，传回userId用来记日志，不要改-->
-                    <a th:href="@{'/catalog/viewItem?userId=' + ${myAccount?.getUsername()} + '&itemId=' + ${item.itemId}}" th:text="${item.itemId}">Item Id</a>
+                    <a th:href="@{'/catalog/items/userId/' + ${myAccount?.getUsername()} + '/itemId/' + ${item.itemId}}" th:text="${item.itemId}">Item Id</a>
                 </td>
                 <!--这儿改了一下，之前我这没显示出来-->
                 <td th:text="${product.productId}">Product Id</td>
@@ -77,7 +77,7 @@
                 <td th:text="'$' + ${#numbers.formatDecimal(item.listPrice,1 ,2)}">Item List Price</td>
 <!--                <td><a th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to-->
 <!--                    Cart</a></td>               -->
-                <td><a th:onclick="AddItemToCart([[${myAccount?.getUsername()}]],[[${item.itemId}]])" class="Button">Add to
+                <td><a th:onclick="AddItemToCart([[${myAccount?.getUsername()}]],[[${item.itemId}]])" class="Button" style="color: white">Add to
                     Cart</a></td>
             </tr>
         </table>
