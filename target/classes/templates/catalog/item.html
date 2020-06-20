@@ -96,8 +96,10 @@
                                         </div>
                                         <div class="product-detail-v1-action">
                                             <div class="add-product">
-                                                <a class="Button" th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to Cart</a>
-                                                <!--                                                    <button type="submit" th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to cart</button>-->
+<!--                                                <a class="Button" th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to Cart</a>-->
+                                                <!--<button type="submit" th:href="@{'/cart/addItemToCart?userName=' + ${myAccount?.getUsername()} + '&itemId='+${item.itemId}+'&quantity=1'}">Add to cart</button>-->
+                                                <td><a th:onclick="AddItemToCart([[${myAccount?.getUsername()}]],[[${item.itemId}]])" class="Button">Add to
+                                                    Cart</a></td>
                                             </div>
                                         </div>
                                     </div>
@@ -153,6 +155,91 @@
 
 </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    var preQuantity;
+    function getPreQuantity(parameter1) {
+        preQuantity = document.getElementById("inputQuantityOf" + parameter1).value;
+        console.log(preQuantity)
+    }
+    function UpdateQuantity(parameter1, parameter2) {
+        var inputQuantity = document.getElementById("inputQuantityOf" + parameter1).value;
+        var msg = document.getElementById('msgOfQuantity');
+        var listPrice = document.getElementById("listPriceOf" + parameter1).getAttribute("value");
+        var total = document.getElementById("totalPriceOf" + parameter1);
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            type: "PUT",
+            // url: "/cart/changeInputQuantity?inputQuantity=" + inputQuantity + "&userName=" + parameter2 + "&itemName=" + parameter1 + "&preQuantity="+preQuantity,
+            url: "/carts/users/" + parameter2 + "/items/" + parameter1 + "/inputQuantity/" + inputQuantity + "/preQuantity/" + preQuantity,
+            success: function (result) {
+                if(result.split(" ").length == 1){
+                    console.log("response:" + result)
+                    var fmtNumber = null;
+                    total.innerHTML = null;
+                    total.innerText = "$" + (String)(listPrice * inputQuantity);
+                    msg.innerText = 'Updating quantity successfully!';
+                    var totalAll = document.getElementById("subTotal");
+                    totalAll.innerHTML = null;
+                    totalAll.innerText = "$" + result;
+                }
+                else if(result == null){
+                    //不需要进行操作
+                }
+                else {
+                    total.innerText = "0";
+                    msg.innerText = result;
+                }
+            },
+            error: function (e) {
+                total.innerText = "0";
+                msg.innerText = 'Updating quantity failure...Please check your input';
+            }
+        });
+    }
+</script>
+<!-- TODO MyList -->
+<script>
+    function deleteCartItem(userName , itemId) {
+        console.log("Come in!!!!");
+        $.ajax({
+                type: "DELETE",
+                // rest风格
+                url: "/carts/users/" + userName + "/items/" + itemId,
+                async : true,
+                dataType:"html",//返回整合HTML
+                // dataType: "json",//返回json格式设置
+                contentType:'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $("body").html(data);//刷新整个body页面的html
+                }
+            }
+        )
+    }
+</script>
+
+<script>
+    // 这个地方是点击addCart按钮以后触发的ajax函数，通过异步通信向服务器发送POST方法并且将服务器发来的html页面更新
+    function AddItemToCart(username,itemId,quantity) {
+        console.log("Come in!!!!");
+        $.ajax({
+                type: "post",
+                // rest风格
+                url: "/carts/users/" + username + "/items/" + itemId,
+                async : true,
+                dataType:"html",//返回整合HTML
+                // dataType: "json",//返回json格式设置
+                contentType:'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $("body").html(data);//刷新整个body页面的html
+                }
+            }
+        )
+    }
+</script>
 
 
 
