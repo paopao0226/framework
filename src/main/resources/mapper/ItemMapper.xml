@@ -94,4 +94,9 @@
              attr4 like  #{value} or attr5 like  #{value} or
              DESCN like #{value})
     </select>
+
+    <insert id="addInventory" parameterType="String">
+        insert into inventory
+        values (#{itemId}, 10000)
+    </insert>
 </mapper>

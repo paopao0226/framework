@@ -140,4 +140,11 @@ class MypetstoreApplicationTests {
         catalogService.deleteInventory("testI");
 
     }
+
+    @Test
+    public void testAddItem(){
+        Item item = new Item();
+
+        catalogService.addItem(item);
+    }
 }

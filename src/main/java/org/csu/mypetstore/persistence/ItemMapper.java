@@ -24,4 +24,6 @@ public interface ItemMapper {
     int addItem(Item item);
 
     List<Item> searchItemList(String keywords);
+
+    int addInventory(String itemId);
 }

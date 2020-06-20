@@ -81,4 +81,6 @@ public class CatalogService {
     public List<Item> searchItemList(String keywords) {
         return itemMapper.searchItemList( "%" + keywords + "%");
     }
+
+    public int addInventory(String itemId) { return itemMapper.addInventory(itemId); }
 }

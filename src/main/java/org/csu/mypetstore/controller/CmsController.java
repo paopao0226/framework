@@ -422,7 +422,9 @@ public class CmsController {
     @GetMapping("item/{updateItemId}/updated")
     public String viewUpdateItem(@PathVariable("updateItemId") String updateItemId, Model model){
         if (updateItemId != null) {
+            System.out.println(updateItemId);
             Item itemOfUpdate = catalogService.getItem(updateItemId);
+            System.out.println(itemOfUpdate.getItemId() + " " + itemOfUpdate.getProductId());
             model.addAttribute("itemOfUpdate", itemOfUpdate);
         }
         return "cms/updateItem";
@@ -501,6 +503,8 @@ public class CmsController {
         item.setAttribute5(itemAttribute5);
 
         int flag = catalogService.addItem(item);
+        int flag2 = catalogService.addInventory(itemId);
+        System.out.println("成功");
         if(flag == 0){
             model.addAttribute("msg","Add failed,please check again");
             return "common/error";
