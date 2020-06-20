@@ -337,15 +337,17 @@ public class CmsController {
         if (updateProductId != null) {
             Product productOfUpdate = catalogService.getProduct(updateProductId);
             model.addAttribute("productOfUpdate", productOfUpdate);
+            System.out.println("hahahahahahahahahaa"+productOfUpdate.getDescription());
         }
         return "cms/updateProduct";
     }
 
     @PostMapping("UpdatedProduct")
-    public String updateProduct(String categoryType, String productName,Model model){
+    public String updateProduct(String categoryType, String productName, String productDescn, Model model){
         Product product = (Product)model.getAttribute("productOfUpdate");
         product.setCategoryId(categoryType);
         product.setName(productName);
+        product.setDescription(productDescn);
 
         int flag = catalogService.updateProduct(product);
         if(flag == 0){
@@ -372,11 +374,12 @@ public class CmsController {
 
 
     @PostMapping("addedProduct")
-    public String addProduct(String productId, String categoryType, String productName, Model model){
+    public String addProduct(String productId, String categoryType, String productName, String productDescn, Model model){
         Product product = new Product();
         product.setProductId(productId);
         product.setCategoryId(categoryType);
         product.setName(productName);
+        product.setDescription(productDescn);
 
         int flag = catalogService.addProduct(product);
         if(flag == 0){
@@ -470,15 +473,6 @@ public class CmsController {
         return "cms/addItem";
     }
 
-//    @GetMapping("category/{categoryId}/product/added")
-//    public String viewAddProduct(@PathVariable("categoryId") String categoryId, Model model){
-//        if (categoryId != null) {
-//            Category category = catalogService.getCategory(categoryId);
-//            model.addAttribute("category", category);
-//        }
-//        return "cms/addProduct";
-//    }
-
     @PostMapping("addedItem")
     public String addItem(String itemId, String itemListPrice, String itemUnitCost,
                           String itemSupplier, String itemStatus,
@@ -522,7 +516,7 @@ public class CmsController {
 
     @PostMapping("searchProducts")
     public String searchProducts(String productKeyword,Model model){
-
+//        System.out.println(productKeyword);
         if (productKeyword == null || productKeyword.length() < 1) {
             String msg = "Please enter a keyword to search for, then press the search button.";
             model.addAttribute("msg", msg);
@@ -552,12 +546,12 @@ public class CmsController {
     }
 
     private void processProductDescription(Product product){
-        System.out.println(product.getDescription());
+//        System.out.println(product.getDescription());
         String [] temp = product.getDescription().split("\"");
         product.setDescriptionImage(temp[1]);
         product.setDescriptionText(temp[2].substring(1));
-        System.out.println(product.getDescriptionText());
-        System.out.println(product.getDescriptionImage());
+//        System.out.println(product.getDescriptionText());
+//        System.out.println(product.getDescriptionImage());
     }
     private void processProductDescription(List<Product> productList){
         for(Product product : productList) {
