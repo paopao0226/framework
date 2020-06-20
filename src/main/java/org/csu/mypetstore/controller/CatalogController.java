@@ -75,6 +75,18 @@ public class CatalogController {
         System.out.println("成功记录");
     }
 
+//    //这里添加了Username便于进行日志的记录
+//    @GetMapping("item/{itemId}/user/{userId}")
+//    public String viewItem(@PathVariable("itemId") String itemId, Model model, @PathVariable("userId") String userId){
+//        Item item = catalogService.getItem(itemId);
+//        Product product = item.getProduct();
+//        processProductDescription(product);
+//        model.addAttribute("item",item);
+//        model.addAttribute("product",product);
+//        //记录日志
+//        return "catalog/item";
+//    }
+
     //这里添加了Username便于进行日志的记录
     @GetMapping("viewItem")
     public String viewItem(String itemId, Model model,String userId){
@@ -87,18 +99,7 @@ public class CatalogController {
         return "catalog/item";
     }
 
-//    @GetMapping("viewItem")
-//    public String viewItem(String itemId, Model model) {
-//
-//        if (itemId != null) {
-//            Item item = catalogService.getItem(itemId);
-//            Product product = item.getProduct();
-//            processProductDescription(product);
-//            model.addAttribute("item", item);
-//            model.addAttribute("product", product);
-//        }
-//        return "catalog/item";
-//    }
+
 @PostMapping("searchProducts")
 public String searchProducts(String keyword, Model model) {
 
