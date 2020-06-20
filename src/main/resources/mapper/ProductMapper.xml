@@ -47,7 +47,7 @@
     </select>
 
     <update id="updateProduct" parameterType="Product">
-        UPDATE product SET category = #{categoryId}, product.name = #{name}
+        UPDATE product SET category = #{categoryId}, product.name = #{name}, product.descn = #{description}
         WHERE productid = #{productId}
     </update>
 

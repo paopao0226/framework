@@ -69,7 +69,9 @@
                 <td>
 <!--                    <a th:if="${isLogin eq true}" th:href="@{'/catalog/viewItem?itemId=' + ${item.itemId} + '&userId=' + ${myAccount?.getUsername()}}" th:text="${item.itemId}">Item Id</a>-->
                     <!--这里用来判断是否登录，传回userId用来记日志，不要改-->
-                    <a th:href="@{'/catalog/items/userId/' + ${myAccount?.getUsername()} + '/itemId/' + ${item.itemId}}" th:text="${item.itemId}">Item Id</a>
+<!--                    <a th:href="@{'/catalog/items/userId/' + ${myAccount?.getUsername()} + '/itemId/' + ${item.itemId}}" th:text="${item.itemId}">Item Id</a>-->
+<!--                    <a th:href="@{'/catalog/viewItem?userId=' + ${myAccount?.getUsername()} + '&itemId=' + ${item.itemId}}" th:text="${item.itemId}">Item Id</a>-->
+                    <a th:href="@{'/catalog/item/'+${item.itemId}+ '?userId=' + ${myAccount?.getUsername()}}" th:text="${item.itemId}">Item Id</a>
                 </td>
                 <!--这儿改了一下，之前我这没显示出来-->
                 <td th:text="${product.productId}">Product Id</td>

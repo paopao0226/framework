@@ -348,6 +348,7 @@ public class CmsController {
         product.setCategoryId(categoryType);
         product.setName(productName);
         product.setDescription(productDescn);
+        System.out.println(productDescn);
 
         int flag = catalogService.updateProduct(product);
         if(flag == 0){
