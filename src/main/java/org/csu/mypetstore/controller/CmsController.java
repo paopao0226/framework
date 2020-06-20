@@ -299,14 +299,16 @@ public class CmsController {
     public String deleteProduct(@PathVariable("productId") String deleteProductId, String productKeyword, @PathVariable("categoryId") String categoryId, Model model){
         if (deleteProductId != null) {
             if (categoryId != null) {
-                catalogService.deleteItemByProductId(deleteProductId);
-                catalogService.deleteProduct(deleteProductId);
+
                 List<Item> itemList = catalogService.getItemListByProduct(deleteProductId);
                 String tempItemId;
                 for(int i = 0; i < itemList.size(); i++){
                     tempItemId = itemList.get(i).getItemId();
                     catalogService.deleteInventory(tempItemId);
                 }
+                catalogService.deleteItemByProductId(deleteProductId);
+                catalogService.deleteProduct(deleteProductId);
+
                 Category category = catalogService.getCategory(categoryId);
                 List<Product> productList = catalogService.getProductListByCategory(categoryId);
                 model.addAttribute("category", category);
