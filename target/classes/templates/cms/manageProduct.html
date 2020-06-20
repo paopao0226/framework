@@ -32,21 +32,45 @@
             </tr>
 
             <tr th:each="product:${productList}">
-                <td><a th:href="@{/cms/ViewManageItem?productId=}+${product.productId}" th:text="${product.productId}">Product
+                <td><a th:href="@{/cms/product/} + ${product.productId}" th:text="${product.productId}">Product
                     ID</a></td>
                 <td th:text="${product.name}">Product Name</td>
 <!--                <td><input type="submit" value="Update"></td>-->
 <!--                <td><input type="submit" value="Delete"></td>-->
-                <td><a class="Button" th:href="@{'/cms/ViewUpdateProduct?updateProductId='+${product.productId}}">Update</a></td>
-                <td><a class="Button" th:href="@{'/cms/DeleteProduct?deleteProductId='+${product.productId}+'&categoryId='+${product.categoryId}}">Delete</a></td>
+                <td><a class="Button" th:href="@{'/cms/product/'+ ${product.productId} + '/updated'}">Update</a></td>
+<!--                <td><a class="Button" th:href="@{'/cms/category/'+${product.categoryId}+'/productId='+${product.productId}}">Delete</a></td>-->
+                <td>
+                    <a class="Button"
+                       th:onclick="removeProductByProductId([[${product.categoryId}]], [[${product.productId}]])">Delete</a>
+                </td>
             </tr>
 
         </table>
         <br>
-        <a class="Button" th:href="@{'/cms/ViewAddProduct?categoryId='+${category.categoryId}}">Add New Product</a>
+        <a class="Button" th:href="@{'/cms/added/category/'+ ${category.categoryId}}">Add New Product</a>
 
     </div>
 </div>
 <footer th:replace="common/bottom"></footer>
 </body>
 </html>
+
+<script>
+    function removeProductByProductId(categoryId, productId) {
+        console.log("Come in!!!!");
+        $.ajax({
+                type: "DELETE",
+                // rest风格
+                url: "/cms/category/" + categoryId + "/product/" + productId,
+                async : true,
+                dataType:"html",//返回整合HTML
+                // dataType: "json",//返回json格式设置
+                contentType:'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $("body").html(data);//刷新整个body页面的html
+                }
+            }
+        )
+    }
+</script>

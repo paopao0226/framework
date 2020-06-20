@@ -38,7 +38,7 @@
                         <h2 class="banner-child-page-title" th:text="${category.name}"></h2>
                         <div class="back-link align-items-center">
                             <ul class="back-link-breadcrumb">
-                                <li class="breadcrumb-items"><a class="breadcrumb-item-link" href="/catalog/viewMain?isEnter=1">Home</a></li>
+                                <li class="breadcrumb-items"><a class="breadcrumb-item-link" href="/catalog/main?isEnter=1">Home</a></li>
                                 <li class="breadcrumb-items"><a class="breadcrumb-item-link">Category</a></li>
                             </ul>
                         </div>
@@ -52,8 +52,9 @@
                 <th>Name</th>
             </tr>
             <tr th:each="product:${productList}">
-                <td><a th:href="@{/catalog/viewProduct?productId=}+${product.productId}" th:text="${product.productId}">Product
-                    ID</a></td>
+<!--                <td><a th:href="@{/catalog/viewProduct?productId=}+${product.productId}" th:text="${product.productId}">Product-->
+
+                <td><a th:href="@{/catalog/product/} + ${product.productId}" th:text="${product.productId}">Product ID</a></td>
                 <td th:text="${product.name}">Product Name</td>
             </tr>
         </table>

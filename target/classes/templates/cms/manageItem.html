@@ -40,15 +40,40 @@
 
                 <td th:text="${item.attribute1}">Item Attribute1</td>
                 <td th:text="'$' + ${#numbers.formatDecimal(item.listPrice,1 ,2)}">Item List Price</td>
-                <td><a class="Button" th:href="@{'/cms/ViewUpdateItem?updateItemId='+${item.itemId}}">Update</a></td>
-                <td><a class="Button" th:href="@{'/cms/DeleteItem?deleteItemId='+${item.itemId}+'&productId='+${product.productId}}">Delete</a></td>
+                <td><a class="Button" th:href="@{'/cms/item/'+${item.itemId} + '/updated'}">Update</a></td>
+<!--                <td><a class="Button" th:href="@{'/cms/DeleteItem?deleteItemId='+${item.itemId}+'&productId='+${product.productId}}">Delete</a></td>-->
+                <td>
+                    <a class="Button"
+                        th:onclick="removeItemByItemId([[${item.getItemId()}]], [[${product.getProductId()}]])">Delete</a>
+                </td>
             </tr>
         </table>
         <br>
-        <a class="Button" th:href="@{'/cms/ViewAddItem?productId='+${product.productId}}">Add New Item</a>
+        <a class="Button" th:href="@{'/cms/added/product/'+${product.productId}}">Add New Item</a>
+
 
     </div>
 </div>
 <footer th:replace="common/bottom"></footer>
 </body>
 </html>
+
+<script>
+    function removeItemByItemId(itemId, productId) {
+        console.log("Come in!!!!");
+        $.ajax({
+                type: "DELETE",
+                // rest风格
+                url: "/cms/product/" + productId + "/item/" + itemId,
+                async : true,
+                dataType:"html",//返回整合HTML
+                // dataType: "json",//返回json格式设置
+                contentType:'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $("body").html(data);//刷新整个body页面的html
+                }
+            }
+        )
+    }
+</script>
