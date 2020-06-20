@@ -31,6 +31,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/daily/records/kind/cart/**").addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/daily/records/kind/order/**").addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/daily/records/kind/all/**").addResourceLocations("classpath:/static/");
-
+        registry.addResourceHandler("/orders/all/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/orders/{orderId}/**").addResourceLocations("classpath:/static/");
     }
 }

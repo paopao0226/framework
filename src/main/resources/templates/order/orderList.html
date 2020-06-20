@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -15,7 +15,7 @@
     <div id="Catalog">
 
         <h2>Order Manager</h2>
-            <table>
+            <table id="table-2">
                 <tr>
                     <th><b>Order ID</b></th>
                     <th><b>Order Date</b></th>
@@ -57,7 +57,7 @@
 <!--                                <button type="submit">pay</button>-->
 <!--                            </form>-->
                         <form action="#" onclick="warningInfo()" th:action="@{/alipay/pay(orderId=${order.getOrderId()})}" method="post">
-                            <button type="submit">pay</button>
+                            <input class="Button" value="pay" type="submit">
                         </form>
                     </td>
                 </tr>

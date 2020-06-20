@@ -76,7 +76,7 @@ public class CatalogController {
     }
 
     //这里添加了Username便于进行日志的记录
-    @GetMapping("viewItem")
+    @GetMapping("items/userId/{userId}/itemId/{itemId}")
     public String viewItem(String itemId, Model model,String userId){
         Item item = catalogService.getItem(itemId);
         Product product = item.getProduct();

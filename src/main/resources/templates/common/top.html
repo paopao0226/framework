@@ -125,19 +125,11 @@
                                         </div>
                                     </div>
                                     <!-- cart -->
-                                    <div class="st2-cart-block st2-control-block js-click-cart">
+                                    <div class="st2-cart-block st2-control-block">
                                         <div class="st2-cart-icon">
-                                            <span class="icon-ecommerce-basket"></span>
-                                            <span class="st2-cart-number">2</span>
+                                            <a class="icon-ecommerce-basket" th:href="@{'/carts/users/' + ${myAccount?.getUsername()}}"></a>
                                         </div>
                                     </div>
-                                    <!-- mega menu -->
-                                    <div class="st2-megamenu-block st2-control-block js-click-megamenu">
-                                        <div class="st2-megamenu-icon">
-                                            <span class="lnr lnr-menu"></span>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -159,153 +151,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Mini cart -->
-    <div class="hamadryad-minicart">
-        <div class="hamadryad-minicart-content">
-            <h3 class="hamadryad-minicart-title">Your cart</h3>
-            <span class="hamadryad-minicart-number">2</span>
-            <div class="hamadryad-minicart-close">
-                <i class="lnr lnr-cross"></i>
-            </div>
-            <div class="hamadryad-minicart-list-item">
-                <div class="list-item">
-                    <ol class="hamadryad-minicart-items">
-                        <li class="product-cart">
-                            <a href="" class="product-cart-thumb"><img src="/images/products/product-1.jpg" alt=""></a>
-                            <div class="product-detail">
-                                <div class="product-name"><a href="">Candle Bowl </a></div>
-                                <div class="product-detail-info">
-                                    <div class="product-quality">QTY : 1</div>
-                                    <div class="product-cost">$169.00</div>
-                                </div>
-                            </div>
-                            <div class="product-remove">
-                                <a href=""><i class="lnr lnr-cross"></i></a>
-                            </div>
-                        </li>
-                        <li class="product-cart">
-                            <a href="" class="product-cart-thumb"><img src="/images/products/product-2.jpg" alt=""></a>
-                            <div class="product-detail">
-                                <div class="product-name"><a href="">Candle Bowl </a></div>
-                                <div class="product-detail-info">
-                                    <div class="product-quality">QTY : 1</div>
-                                    <div class="product-cost">$169.00</div>
-                                </div>
-                            </div>
-                            <div class="product-remove">
-                                <a href=""><i class="lnr lnr-cross"></i></a>
-                            </div>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-            <div class="subtotal">
-                <span class="total-title">Total:</span>
-                <span class="total-price">$190.00</span>
-            </div>
-            <div class="hamadryad-minicart-action">
-                <div class="btn-action-minicart viewcart">
-                    <a th:href="@{'/carts/users/' + ${myAccount?.getUsername()}}">Viewcart</a></div>
-                <div class="btn-action-minicart checkout">Checkout</div>
-            </div>
-        </div>
-    </div>
-    <div class="minicart-bg-overlay" style="display: none;"></div>
-
-    <!-- Menu mobie -->
-    <div class="box-mobile-menu">
-        <span class="box-title">Menu</span>
-        <a href="#" class="close-menu" id="pull-closemenu">
-            <i class="lnr lnr-cross"></i>
-        </a>
-        <div class="menu-clone">
-            <ul class="main-menu">
-                <li class="menu-item menu-item-has-children">
-                    <a href="Homepage01.html">Home</a>
-                    <span class="toggle-submenu"></span>
-                    <div class="submenu">
-                        <div class="col-12 col-md-12 custom-col">
-                            <div class="col-inner">
-                                <div class="col-wrapper-item">
-                                    <ul class="menu-shop-style">
-                                        <li class="style-item"><a class="afont200" href="Homepage01.html">Homepage v1</a></li>
-                                        <li class="style-item"><a class="afont200" href="Homepage02.html">Homepage v2</a></li>
-                                        <li class="style-item"><a class="afont200" href="Homepage03.html">Homepage v3</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="menu-item menu-item-has-children">
-                    <a href="List_ShopPageFullWidth.html">Shop</a>
-                    <span class="toggle-submenu"></span>
-                    <div class="submenu">
-                        <div class="col-12 col-md-12 custom-col">
-                            <div class="col-inner">
-                                <div class="col-wrapper-item">
-                                    <h2 class="widget-title">Shop</h2>
-                                    <ul class="menu-shop-style">
-                                        <li class="style-item"><a class="afont200" href="List_ShopPageFullWidth.html">Shop Fullwidth</a></li>
-                                        <li class="style-item"><a class="afont200" href="List_Shop_Sidebar-Left.html">Shop Sidebar Left</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-wrapper-item">
-                                    <h2 class="widget-title">Product Details</h2>
-                                    <ul class="menu-shop-style">
-                                        <li class="style-item"><a class="afont200" href="ProductDetail_v1.html">Product detail v1</a></li>
-                                        <li class="style-item"><a class="afont200" href="ProductDetail_v2.html">Product detail v2</a></li>
-                                        <li class="style-item"><a class="afont200" href="ProductDetail_v3.html">Product detail v3</a></li>
-                                        <li class="style-item"><a class="afont200" href="ProductDetail_v4.html">Product detail v4</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-wrapper-item">
-                                    <h2 class="widget-title">Pages</h2>
-                                    <ul class="menu-shop-style">
-                                        <li class="style-item"><a class="afont200" href="Hover&Active-v2.html">Hover&Active v2</a></li>
-                                        <li class="style-item"><a class="afont200" href="Popup.html">Popup</a></li>
-                                        <li class="style-item"><a class="afont200" href="ContactUs.html">Contact us</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-wrapper-item">
-                                    <h2 class="widget-title">Table Tree Plant</h2>
-                                    <ul class="menu-shop-style">
-                                        <li class="style-item"><a class="afont200" href="">New Arrivals</a></li>
-                                        <li class="style-item"><a class="afont200" href="">Best Product</a></li>
-                                        <li class="style-item"><a class="afont200" href="">Deal Of The Week</a></li>
-                                        <li class="style-item"><a class="afont200" href="">Top Rated</a></li>
-                                        <li class="style-item"><a class="afont200" href="">Our Product</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="menu-item menu-item-has-children"><a href="">Features</a></li>
-                <li class="menu-item menu-item-has-children"><a href="">Portfolio</a></li>
-                <li class="menu-item menu-item-has-children">
-                    <a href="Blog&New_v1.html">Blog</a>
-                    <span class="toggle-submenu"></span>
-                    <div class="submenu">
-                        <div class="col-12 col-md-12 custom-col">
-                            <div class="col-inner">
-                                <div class="col-wrapper-item">
-                                    <ul class="menu-shop-style">
-                                        <li class="style-item"><a class="afont200" href="Blog&New_v1.html">Blog & New 1</a></li>
-                                        <li class="style-item"><a class="afont200" href="Blog&New_v2.html">Blog & New 1</a></li>
-                                        <li class="style-item"><a class="afont200" href="Blog&NewPost.html">Blog & New Post</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="menu-item menu-item-has-children"><a href="AboutUs.html">About Us</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="menu-overlay"></div>
 </header>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="/js/jquery-1.12.4.min.js"></script>

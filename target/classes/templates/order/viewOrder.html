@@ -175,7 +175,7 @@
         </table>
         <div>
             <form th:action="@{/alipay/pay(orderId=${order.getOrderId()})}" method="post">
-                <button type="submit">pay</button>
+                <input class="Button" value="pay" type="submit"></input>
             </form>
         </div>
 

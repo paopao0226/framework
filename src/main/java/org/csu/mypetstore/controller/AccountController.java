@@ -176,6 +176,8 @@ public class AccountController {
                 account.setUsername(loginAccout.getUsername());
                 account.setPassword(KL(password));
                 accountService.updateAccount(account);
+                String role = accountService.findRoleByUsername(loginAccout.getUsername()).get(0).getRole();
+                roleSetting = role;
                 model.addAttribute("username", account.getUsername());
                 return "catalog/main";
             }
