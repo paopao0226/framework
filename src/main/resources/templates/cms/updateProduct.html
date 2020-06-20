@@ -37,13 +37,13 @@
                         <input type="text" name="productName" th:value="${productOfUpdate.getName()}"/>
                     </td>
                 </tr>
-<!--                <tr>-->
-<!--                    <td>Product Description:</td>-->
-<!--                    <td>-->
-<!--                        <input type="text" name="productDescn"-->
-<!--                               th:value="${updatedProduct.getDescriptionText()}"/>-->
-<!--                    </td>-->
-<!--                </tr>-->
+                <tr>
+                    <td>Product Description:</td>
+                    <td>
+                        <input type="text" name="productDescn"
+                               th:value="${productOfUpdate.getDescription()}"/>
+                    </td>
+                </tr>
             </table>
             <input type="submit" name="updateProduct" value="update"/>
         </form>

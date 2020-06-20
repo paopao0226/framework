@@ -27,7 +27,8 @@
                 <label style="font-size: 15px" th:text="${product.getDescriptionText()}"></label>
             </td>
             <td>
-                <a th:href="@{/catalog/viewProduct?productId=}+${product.productId}" th:text="${product.productId}">Product Id</a>
+<!--                <a th:href="@{/catalog/viewProduct?productId=}+${product.productId}" th:text="${product.productId}">Product Id</a>-->
+                <a th:href="@{/catalog/product/} + ${product.productId}" th:text="${product.productId}">Product Id</a>
             </td>
             <td th:text="${product.name}">Product Name</td>
         </tr>
