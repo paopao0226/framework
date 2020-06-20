@@ -52,7 +52,7 @@
                        th:href="'/cms/orders/' + ${order.getOrderId()} + '/users/' +  ${order.username}">Update</a>
                 </td>
                 <td>
-                    <a class="Button"
+                    <a class="Button" style="color: white"
                       th:onclick="removeOrderByOrderid([[${order.getOrderId()}]],[[${order.username}]])">Remove</a>
                 </td>
             </tr>

@@ -22,9 +22,9 @@ public class SmsTool {
     //产品域名,开发者无需替换
     static final String domain = "dysmsapi.aliyuncs.com";
     // 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
-    static final String accessKeyId = "LTAI4FqjtAn5CFYuV4mvQSNV";
-    static final String accessKeySecret = "IHnyFWnpUiZuNthY4hd5mLHGhKxNKg";
-
+    static final String accessKeyId = "LTAI4GGw9YYJ683JSXxAjt2t";
+    //这里改成真正的Key
+    static final String accessKeySecret = "1235464949";
     public static SendSmsResponse sendSms(String phone , String code) throws ClientException {
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");

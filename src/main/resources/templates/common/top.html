@@ -79,97 +79,6 @@
                                         <li class="st2-li-primary">
                                             <a href="/catalog/main/1" class="st2-item-link">Home</a>
                                         </li>
-                                        <li class="st2-li-primary">
-                                            <a class="st2-item-link" href="List_ShopPageFullWidth.html">Shop</a>
-                                            <!-- submenu home -->
-                                            <div class="st2-hamadryad-megamenu megamenu-home js-dropmenu megamenu-bg-active1">
-                                                <section class="st2-hamadryad-megamenu-modal home">
-                                                    <div class="container-fluid">
-                                                        <div class="st2-hamadryad-submenu-wrapper">
-                                                            <div class="row">
-                                                                <div class="st2-submenu-banner">
-                                                                    <img src="/images/menu1.jpg" alt="Banner">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-3">
-                                                                    <div class="st2-submenu-list-item">
-                                                                        <h2 class="st2-submenu-item-title">Shop</h2>
-                                                                        <ul class="st2-submenu-item-ul">
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a class="st2-submenu-item-link" href="List_ShopPageFullWidth.html">Shop Fullwidth</a>
-                                                                            </li>
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a class="st2-submenu-item-link" href="List_Shop_Sidebar-Left.html">Shop Sidebar Left</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <div class="st2-submenu-list-item">
-                                                                        <h2 class="st2-submenu-item-title">Product Details</h2>
-                                                                        <ul class="st2-submenu-item-ul">
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a href="ProductDetail_v1.html" class="st2-submenu-item-link">Product detail v1</a>
-                                                                            </li>
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a href="ProductDetail_v2.html" class="st2-submenu-item-link">Product detail v2</a>
-                                                                            </li>
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a href="ProductDetail_v3.html" class="st2-submenu-item-link">Product detail v3</a>
-                                                                            </li>
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a href="ProductDetail_v4.html" class="st2-submenu-item-link">Product detail v4</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <div class="st2-submenu-list-item">
-                                                                        <h2 class="st2-submenu-item-title">Pages</h2>
-                                                                        <ul class="st2-submenu-item-ul">
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a href="Hover&Active-v2.html" class="st2-submenu-item-link">Hover&Active v2</a>
-                                                                            </li>
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a href="Popup.html" class="st2-submenu-item-link">Popup</a>
-                                                                            </li>
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a href="ContactUs.html" class="st2-submenu-item-link">Contact us</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <div class="st2-submenu-list-item">
-                                                                        <h2 class="st2-submenu-item-title">Table Tree Plant</h2>
-                                                                        <ul class="st2-submenu-item-ul">
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a href="" class="st2-submenu-item-link">New Arrivals</a>
-                                                                            </li>
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a href="" class="st2-submenu-item-link">Best Product</a>
-                                                                            </li>
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a href="" class="st2-submenu-item-link">Deal Of The Week</a>
-                                                                            </li>
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a href="" class="st2-submenu-item-link">Top Rated</a>
-                                                                                <span class="st2-submenu-icon lnr lnr-chevron-right"></span>
-                                                                            </li>
-                                                                            <li class="st2-submenu-item-li">
-                                                                                <a href="" class="st2-submenu-item-link">Our Product</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </section>
-                                            </div>
-                                            <!-- end submenu home -->
-                                        </li>
                                         <li class="st2-li-primary" th:if="${isLogin eq false}" id="signin">
                                             <a class="st2-item-link" href="/accounts/signon" >Sign In</a>
                                         </li>
@@ -297,7 +206,7 @@
             </div>
             <div class="hamadryad-minicart-action">
                 <div class="btn-action-minicart viewcart">
-                    <a th:href="@{'/cart/viewCart?username=' + ${myAccount?.getUsername()}}">Viewcart</a></div>
+                    <a th:href="@{'/carts/users/' + ${myAccount?.getUsername()}}">Viewcart</a></div>
                 <div class="btn-action-minicart checkout">Checkout</div>
             </div>
         </div>

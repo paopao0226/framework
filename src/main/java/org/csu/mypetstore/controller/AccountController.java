@@ -336,9 +336,9 @@ public class AccountController {
         return md5Password;
     }
     //验证码
-    @GetMapping("/smsXxs")
+    @GetMapping("/smsXxs/{phone}")
     @ResponseBody
-    public Map<String,Object> smsXxs(String phone, HttpServletRequest request) throws ClientException {
+    public Map<String,Object> smsXxs(@PathVariable("phone") String phone, HttpServletRequest request) throws ClientException {
         System.out.println("完成");
         Map<String,Object> map = new HashMap<>();
         // 验证码（指定长度的随机数）
