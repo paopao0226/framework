@@ -9,7 +9,7 @@
 <header th:replace="common/top"></header>
 <div id="Content">
     <div id="BackLink">
-        <a href="/catalog/index">Return to Main Menu</a>
+<!--        <a href="/catalog/index">Return to Main Menu</a>-->
     </div>
 
     <div id="Catalog">
@@ -29,7 +29,7 @@
                     <th><b>status</b></th>
                     <th><b></b></th>
 <!--                    <th><b></b></th>-->
-                </tr>s
+                </tr>
                 <tr th:if="${orderList.size() == 0}">
                     <td colspan="8"><b>Your orders is empty.</b></td>
                 </tr>

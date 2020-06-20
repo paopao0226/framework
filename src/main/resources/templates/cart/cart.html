@@ -69,12 +69,12 @@
             <button type="submit">
                 <div class="instagram-btn">
                     <h4 class="icon-itgr mb-0">
-                        <a style="color: #1c7430" class="ti-instagram" th:if="${myAccount?.getUsername() != null}" th:href="'/order/viewOrderList' + '?userName=' + ${myAccount?.getUsername()}" th:align="left">
-                            Order History
+                        <a style="color: #1c7430" class="ti-instagram" th:if="${cart.numberOfItems > 0}" th:href="'/orders/null'" th:align="right">
+                            Proceed to Checkout
                         </a>
                         <br/>
-                        <a style="color: #1c7430" class="ti-instagram" th:if="${cart.numberOfItems > 0}" th:href="'/order/newOrder'" th:align="right">
-                            Proceed to Checkout
+                        <a style="color: #1c7430" class="ti-instagram" th:if="${myAccount?.getUsername() != null}" th:href="'/orders/all/users/' + ${myAccount?.getUsername()}" th:align="left">
+                            Order History
                         </a>
                     </h4>
                 </div>
